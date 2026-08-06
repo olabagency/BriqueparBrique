@@ -720,13 +720,19 @@ header.hud::before{
   0%{opacity:1;}75%{opacity:1;}100%{opacity:0;transform:translateX(-14px);}
 }
 .fx-live{
-  position:fixed;bottom:calc(70px + env(safe-area-inset-bottom));left:14px;
-  z-index:9100;max-width:230px;
+  position:fixed;bottom:calc(70px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
+  z-index:9100;max-width:260px;width:max-content;
   background:var(--surface);border:1px solid var(--border);border-radius:12px;
   padding:8px 12px;display:flex;align-items:center;gap:9px;
   box-shadow:0 4px 18px rgba(0,0,0,.12);
-  animation:liveIn .4s cubic-bezier(.22,1,.36,1) both, liveOut 4.5s .1s forwards;
+  animation:liveInCenter .4s cubic-bezier(.22,1,.36,1) both, liveOutCenter 4.5s .1s forwards;
 }
+@media (min-width:1200px){
+  .fx-live{left:auto;right:14px;transform:none;bottom:calc(20px + env(safe-area-inset-bottom));
+    animation:liveIn .4s cubic-bezier(.22,1,.36,1) both, liveOut 4.5s .1s forwards;}
+}
+@keyframes liveInCenter{0%{opacity:0;transform:translateX(-50%) translateY(12px);}100%{opacity:1;transform:translateX(-50%) translateY(0);}}
+@keyframes liveOutCenter{0%{opacity:1;}75%{opacity:1;}100%{opacity:0;transform:translateX(-50%) translateY(12px);}}
 .fx-live-avatar{
   width:28px;height:28px;border-radius:50%;flex-shrink:0;
   background:linear-gradient(135deg,var(--blue),var(--perso));

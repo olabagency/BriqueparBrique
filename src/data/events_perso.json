@@ -6921,5 +6921,267 @@
         "out": "Tu te paies enfin un peu — justice rendue."
       }
     ]
+  },
+  {
+    "title": "Un client te confie une mission de conseil ponctuelle",
+    "body": "Un entrepreneur de ton réseau a besoin d'un regard extérieur sur sa stratégie financière. Il propose une rémunération claire pour deux semaines de travail.",
+    "choices": [
+      {
+        "label": "Accepter et facturer au taux fort",
+        "tag": "risque",
+        "eff": { "cash": 28, "stress": 8 },
+        "out": "Deux semaines intenses, mais la facture est salée — dans le bon sens."
+      },
+      {
+        "label": "Accepter à tarif raisonnable pour construire la relation",
+        "tag": "prudent",
+        "eff": { "cash": 15, "stress": 3 },
+        "out": "Moins sur le coup, mais une relation durable se construit."
+      },
+      {
+        "label": "Décliner poliment — trop chargé",
+        "tag": "creatif",
+        "eff": { "stress": -5 },
+        "out": "Tu préserves ton énergie. Une autre opportunité viendra."
+      }
+    ]
+  },
+  {
+    "title": "L'administration fiscale te rembourse un trop-perçu",
+    "body": "Une régularisation fiscale sur tes revenus fonciers des deux dernières années se traduit par un remboursement inattendu.",
+    "minYear": 2,
+    "choices": [
+      {
+        "label": "Réinjecter en trésorerie d'exploitation",
+        "tag": "prudent",
+        "eff": { "cash": 22 },
+        "out": "Un coup de pouce bienvenu pour la trésorerie."
+      },
+      {
+        "label": "Placer en épargne de sécurité",
+        "tag": "creatif",
+        "eff": { "personalCash": 22 },
+        "out": "Le matelas de sécurité s'épaissit."
+      }
+    ]
+  },
+  {
+    "title": "Un ancien associé te reverse des bénéfices différés",
+    "body": "Une structure dans laquelle tu avais investi il y a deux ans distribue enfin ses premiers bénéfices. Le montant est plus élevé que prévu.",
+    "minYear": 3,
+    "choices": [
+      {
+        "label": "Encaisser et réinvestir",
+        "tag": "risque",
+        "eff": { "cash": 35, "stress": 5 },
+        "out": "L'argent rentre et repart aussitôt vers de nouveaux projets."
+      },
+      {
+        "label": "Encaisser et souffler",
+        "tag": "prudent",
+        "eff": { "cash": 35, "stress": -5 },
+        "out": "Pour une fois, tu profites du fruit de tes efforts."
+      }
+    ]
+  },
+  {
+    "title": "Tu remportes un appel d'offres inattendu",
+    "body": "Un dossier que tu avais soumis presque par hasard revient avec une réponse positive. Le contrat est conséquent.",
+    "minYear": 2,
+    "choices": [
+      {
+        "label": "Signer et mobiliser ton équipe",
+        "tag": "risque",
+        "eff": { "cash": 40, "stress": 12 },
+        "out": "Le contrat est signé. L'argent rentre, la pression aussi."
+      },
+      {
+        "label": "Négocier un périmètre plus réduit pour rester serein",
+        "tag": "prudent",
+        "eff": { "cash": 20, "stress": 4 },
+        "out": "Moins ambitieux, mais exécuté proprement."
+      },
+      {
+        "label": "Sous-traiter une partie et encaisser la marge",
+        "tag": "creatif",
+        "eff": { "cash": 28, "stress": 7 },
+        "out": "Tu délègues, tu marges, tu dors mieux."
+      }
+    ]
+  },
+  {
+    "title": "Une prime annuelle exceptionnelle tombe",
+    "body": "Ton activité a dépassé les objectifs fixés en début d'année. La rémunération variable est conséquente.",
+    "choices": [
+      {
+        "label": "Tout encaisser en trésorerie",
+        "tag": "prudent",
+        "eff": { "cash": 30 },
+        "out": "La trésorerie prend un beau coup de pouce."
+      },
+      {
+        "label": "Te verser une partie et garder le reste dans la structure",
+        "tag": "creatif",
+        "eff": { "cash": 18, "personalCash": 12 },
+        "out": "Un équilibre entre toi et ta structure."
+      },
+      {
+        "label": "Tout réinvestir dans le projet",
+        "tag": "risque",
+        "eff": { "val": 8, "stress": 5 },
+        "out": "Tu renonces au plaisir immédiat pour le long terme."
+      }
+    ]
+  },
+  {
+    "title": "Un partenariat commercial te verse des royalties",
+    "body": "Une licence que tu avais accordée il y a quelques années commence à générer des revenus réguliers. Le premier virement vient d'arriver.",
+    "minYear": 3,
+    "choices": [
+      {
+        "label": "Encaisser et continuer",
+        "tag": "prudent",
+        "eff": { "cash": 18 },
+        "out": "De l'argent qui rentre sans effort — le meilleur genre."
+      },
+      {
+        "label": "Réinvestir dans un autre actif",
+        "tag": "risque",
+        "eff": { "cash": 5, "val": 15, "stress": 6 },
+        "out": "Tu fais travailler cet argent immédiatement."
+      }
+    ]
+  },
+  {
+    "title": "Tu récupères une caution impayée par voie légale",
+    "body": "Un ancien locataire ne t'avait pas restitué ta caution. Après plusieurs mois de procédure, le tribunal te donne raison.",
+    "minYear": 2,
+    "choices": [
+      {
+        "label": "Encaisser le remboursement avec intérêts",
+        "tag": "prudent",
+        "eff": { "cash": 12, "stress": -5 },
+        "out": "La justice a rendu son verdict. Tu récupères ton dû."
+      },
+      {
+        "label": "Faire un don caritatif avec une partie",
+        "tag": "creatif",
+        "eff": { "cash": 6, "stress": -10 },
+        "out": "Tu gagnes sur les deux tableaux — argent et sérénité."
+      }
+    ]
+  },
+  {
+    "title": "Un dividende d'une participation minoritaire arrive",
+    "body": "Tu avais investi une petite somme dans la boîte d'un ami il y a trois ans. Elle distribue aujourd'hui ses premiers dividendes.",
+    "minYear": 4,
+    "choices": [
+      {
+        "label": "Encaisser la distribution",
+        "tag": "prudent",
+        "eff": { "cash": 16 },
+        "out": "Un retour sur investissement appréciable."
+      },
+      {
+        "label": "Réinvestir dans la même boîte",
+        "tag": "risque",
+        "eff": { "stress": 5, "val": 20 },
+        "out": "Tu paries sur la croissance future."
+      }
+    ]
+  },
+  {
+    "title": "Une expertise immobilière te génère des honoraires",
+    "body": "Un notaire de ta connaissance t'a recommandé comme expert auprès d'un tribunal pour évaluer un bien en litige.",
+    "minYear": 2,
+    "choices": [
+      {
+        "label": "Accepter la mission",
+        "tag": "prudent",
+        "eff": { "cash": 20, "stress": 5 },
+        "out": "Les honoraires d'expert sont tombés. Travail propre, rémunération nette."
+      },
+      {
+        "label": "Refuser — trop chronophage",
+        "tag": "creatif",
+        "eff": { "stress": -3 },
+        "out": "Tu préserves ton temps. D'autres opportunités viendront."
+      }
+    ]
+  },
+  {
+    "title": "Une conférence te propulse comme speaker rémunéré",
+    "body": "Ton intervention lors d'un salon immobilier a été remarquée. On te propose d'animer trois sessions l'année prochaine contre rémunération.",
+    "minYear": 3,
+    "choices": [
+      {
+        "label": "Accepter le contrat de speaker",
+        "tag": "risque",
+        "eff": { "cash": 24, "stress": 8 },
+        "out": "Exigeant mais gratifiant — et rémunérateur."
+      },
+      {
+        "label": "Négocier une seule session pour tester",
+        "tag": "prudent",
+        "eff": { "cash": 10, "stress": 3 },
+        "out": "Un pied dans la porte, sans surcharger l'agenda."
+      }
+    ]
+  },
+  {
+    "title": "Tu reçois un bonus de parrainage pour un client apporté",
+    "body": "Un ami que tu as orienté vers un promoteur immobilier a finalisé son achat. La commission de parrainage te revient.",
+    "choices": [
+      {
+        "label": "Encaisser le bonus",
+        "tag": "prudent",
+        "eff": { "cash": 8 },
+        "out": "Un petit extra inattendu — le réseau paie."
+      },
+      {
+        "label": "Partager avec ton ami",
+        "tag": "creatif",
+        "eff": { "cash": 4, "stress": -4 },
+        "out": "Tu renforces la relation. Le réseau s'en souviendra."
+      }
+    ]
+  },
+  {
+    "title": "Un remboursement d'assurance arrive enfin",
+    "body": "Suite à un sinistre déclaré l'année passée, ton assureur te rembourse finalement — plus vite que prévu.",
+    "minYear": 2,
+    "choices": [
+      {
+        "label": "Encaisser le chèque",
+        "tag": "prudent",
+        "eff": { "cash": 14 },
+        "out": "L'assurance joue son rôle. La trésorerie respire."
+      },
+      {
+        "label": "Réinvestir dans une amélioration du bien",
+        "tag": "creatif",
+        "eff": { "cash": -2, "val": 18, "stress": 3 },
+        "out": "Tu profites du remboursement pour upgrader."
+      }
+    ]
+  },
+  {
+    "title": "Un contrat de maintenance immobilière devient rentable",
+    "body": "Le forfait de gestion que tu avais externalisé est rénégocié à ta faveur. L'écart tarifaire représente une économie nette annualisée.",
+    "minYear": 3,
+    "choices": [
+      {
+        "label": "Prendre l'économie en trésorerie",
+        "tag": "prudent",
+        "eff": { "cash": 12 },
+        "out": "Les coûts baissent, la marge monte."
+      },
+      {
+        "label": "Réinvestir dans un service premium",
+        "tag": "risque",
+        "eff": { "val": 10, "stress": -4 },
+        "out": "Meilleure qualité, valeur patrimoniale en hausse."
+      }
+    ]
   }
 ]

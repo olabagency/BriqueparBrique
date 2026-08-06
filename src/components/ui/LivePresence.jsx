@@ -7,16 +7,24 @@ import { subscribeLiveNotifications } from '../../engine/liveNotifications.js';
 import globalBoard from '../../data/global_leaderboard.json';
 import { fmtCash } from '../../engine/utils.js';
 
-// ─── Simulated presence (fallback when Firebase is not configured) ─────────────
+// ─── Simulated presence ───────────────────────────────────────────────────────
 
 const SIM_ACTIONS = [
-  () => `vient d'acheter un bien`,
-  () => `a mis son bien en location`,
-  () => `a renégocié son crédit`,
-  () => `a débloqué un nouveau succès`,
-  () => `vient de démarrer une nouvelle partie`,
-  () => `a revendu avec plus-value`,
-  () => `traverse une période de stress élevé`,
+  `vient d'acheter un bien`,
+  `a mis son bien en location`,
+  `a renégocié son crédit`,
+  `a débloqué un nouveau succès`,
+  `vient de démarrer une nouvelle partie`,
+  `a revendu avec plus-value`,
+  `traverse une période de stress élevé`,
+  `a rénové un appartement`,
+  `a perdu plus de 100k€ sur un investissement`,
+  `est passé à 0 de stress — zen total`,
+  `vient d'acheter son 3ème bien`,
+  `a remboursé son crédit en avance`,
+  `a débloqué le succès "Propriétaire"`,
+  `vient de passer à la retraite à 45 ans`,
+  `a subi un impayé de loyer`,
 ];
 
 function pickSimPlayers() {
@@ -34,7 +42,7 @@ function useSimPresence(emit) {
     function scheduleNext() {
       timerRef.current = setTimeout(() => {
         const p = SIM_PLAYERS[Math.floor(Math.random() * SIM_PLAYERS.length)];
-        const action = SIM_ACTIONS[Math.floor(Math.random() * SIM_ACTIONS.length)]();
+        const action = SIM_ACTIONS[Math.floor(Math.random() * SIM_ACTIONS.length)];
         emit({ type: 'live', player: p, action });
         scheduleNext();
       }, 22000 + Math.random() * 28000);
@@ -53,6 +61,8 @@ function useRealPresence(emit) {
   const { state } = useGame();
   const [players, setPlayers] = useState([]);
   const prevPlayersRef = useRef([]);
+  const lastRealNotifRef = useRef(Date.now());
+  const simTimerRef = useRef(null);
 
   // Push our own presence every 90s and on state changes
   useEffect(() => {
@@ -93,6 +103,7 @@ function useRealPresence(emit) {
         .filter(n => n.ts > lastSeenTsRef.current && n.sessionId !== SESSION_ID);
       if (newOnes.length === 0) return;
       lastSeenTsRef.current = Math.max(...newOnes.map(n => n.ts));
+      lastRealNotifRef.current = Date.now();
       for (const n of newOnes) {
         emit({ type: 'live', player: { name: n.name }, action: n.action });
       }
@@ -100,7 +111,24 @@ function useRealPresence(emit) {
     return unsub;
   }, [emit]);
 
-  return { players, count: players.length };
+  // Fallback simulated notifications when no real activity for 60s
+  useEffect(() => {
+    function scheduleSim() {
+      simTimerRef.current = setTimeout(() => {
+        const silentMs = Date.now() - lastRealNotifRef.current;
+        if (silentMs > 60000) {
+          const p = SIM_PLAYERS[Math.floor(Math.random() * SIM_PLAYERS.length)];
+          const action = SIM_ACTIONS[Math.floor(Math.random() * SIM_ACTIONS.length)];
+          emit({ type: 'live', player: p, action });
+        }
+        scheduleSim();
+      }, 28000 + Math.random() * 32000);
+    }
+    const firstDelay = setTimeout(scheduleSim, 20000 + Math.random() * 20000);
+    return () => { clearTimeout(firstDelay); clearTimeout(simTimerRef.current); };
+  }, [emit]);
+
+  return { players, count: Math.max(players.length, SIM_PLAYERS.length) };
 }
 
 // ─── Component ───────────────────────────────────────────────────────────────

@@ -128,12 +128,24 @@ function pickEvents(state, count = 3) {
     }
   }
 
-  // 70% immo, 30% perso — better balance between property events and life/business events
+  // Split perso into "positive cash" vs "other" to guarantee at least 1 positive event per year
   const immoPool  = eligible.filter(e => e._pool === 'immo' || e._pool === 'reno' || e._pool === 'tenant');
+  const persoPos  = eligible.filter(e => e._pool === 'perso' && e.choices?.some(c => (c.eff?.cash ?? 0) > 0 || (c.eff?.personalCash ?? 0) > 0));
+  const persoOther= eligible.filter(e => e._pool === 'perso' && !e.choices?.some(c => (c.eff?.cash ?? 0) > 0 || (c.eff?.personalCash ?? 0) > 0));
   const persoPool = eligible.filter(e => e._pool === 'perso');
   const result = [];
-  for (let i = 0; i < count; i++) {
-    const wantImmo = immoPool.length > 0 && (persoPool.length === 0 || Math.random() < 0.70);
+
+  // Guarantee 1 positive-cash perso event per batch (if any available)
+  if (persoPos.length > 0) {
+    const idx = Math.floor(Math.random() * persoPos.length);
+    result.push(persoPos[idx]);
+    persoPool.splice(persoPool.indexOf(persoPos[idx]), 1);
+    persoPos.splice(idx, 1);
+  }
+
+  // Fill remaining slots: 60% immo, 40% perso
+  for (let i = result.length; i < count; i++) {
+    const wantImmo = immoPool.length > 0 && (persoPool.length === 0 || Math.random() < 0.60);
     const pool = wantImmo ? immoPool : (persoPool.length > 0 ? persoPool : immoPool);
     if (pool.length === 0) break;
     const idx = Math.floor(Math.random() * pool.length);
@@ -228,6 +240,12 @@ function reducer(state, action) {
 
       // Track year finances
       if (eff.cash) s.currentYearFinance = { ...s.currentYearFinance, evenements: (s.currentYearFinance?.evenements ?? 0) + (eff.cash ?? 0) };
+
+      // Push live notification for big cash swings
+      if (s.name && eff.cash) {
+        if (eff.cash >= 25) pushLiveNotification({ name: s.name, action: `vient de gagner ${eff.cash}k€ en trésorerie` });
+        else if (eff.cash <= -50) pushLiveNotification({ name: s.name, action: `a perdu ${Math.abs(eff.cash)}k€ sur un événement` });
+      }
 
       if (costPct !== undefined && gainPct !== undefined && targetProperty) {
         const props = [...(s.propertyList ?? [])];
@@ -371,6 +389,7 @@ function reducer(state, action) {
       s.propertyList = props;
       s.valuation = props.reduce((sum, p) => sum + (p.value ?? 0), 0);
       s.achievements = checkAchievements(s);
+      if (s.name && !keepUnrenovated) pushLiveNotification({ name: s.name, action: `a rénové son ${prop.type ?? 'bien'}` });
       return s;
     }
 
