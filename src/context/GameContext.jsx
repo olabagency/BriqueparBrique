@@ -128,12 +128,12 @@ function pickEvents(state, count = 3) {
     }
   }
 
-  // 83% immo, 17% perso bias (matching original); tenant events in immo pool
+  // 70% immo, 30% perso — better balance between property events and life/business events
   const immoPool  = eligible.filter(e => e._pool === 'immo' || e._pool === 'reno' || e._pool === 'tenant');
   const persoPool = eligible.filter(e => e._pool === 'perso');
   const result = [];
   for (let i = 0; i < count; i++) {
-    const wantImmo = immoPool.length > 0 && (persoPool.length === 0 || Math.random() < 0.83);
+    const wantImmo = immoPool.length > 0 && (persoPool.length === 0 || Math.random() < 0.70);
     const pool = wantImmo ? immoPool : (persoPool.length > 0 ? persoPool : immoPool);
     if (pool.length === 0) break;
     const idx = Math.floor(Math.random() * pool.length);
@@ -198,6 +198,7 @@ function reducer(state, action) {
       if (eff.cash)         s.cash         = (s.cash ?? 0) + eff.cash;
       if (eff.personalCash) s.personalCash = Math.max(0, (s.personalCash ?? 0) + eff.personalCash);
       if (eff.stress)       s.stress       = clamp((s.stress ?? 0) + eff.stress, 0, STRESS_MAX);
+      if (eff.setSalary)    s.salary       = eff.setSalary;
       if (eff.val !== undefined) {
         s.valuation = Math.max(0, (s.valuation ?? 0) + eff.val);
         // Distribute val change across properties proportionally (unless properties eff handles it)
@@ -545,6 +546,16 @@ function advanceYear(state) {
   const rentedCount = (s.propertyList ?? []).filter(p => p.rented).length;
   const mgmtStress  = Math.min(rentedCount, 8);
   if (mgmtStress > 0) s.stress = clamp((s.stress ?? 0) + mgmtStress, 0, STRESS_MAX);
+
+  // Debt stress: negative cash adds stress every year
+  const cashAfterRent = s.cash ?? 0;
+  if (cashAfterRent < -500) {
+    s.stress = clamp((s.stress ?? 0) + 18, 0, STRESS_MAX);
+  } else if (cashAfterRent < -200) {
+    s.stress = clamp((s.stress ?? 0) + 10, 0, STRESS_MAX);
+  } else if (cashAfterRent < 0) {
+    s.stress = clamp((s.stress ?? 0) + 5, 0, STRESS_MAX);
+  }
 
   const { loans, cashDelta } = amortizeLoans(s.loans ?? [], s.cash);
   s.loans = loans;
