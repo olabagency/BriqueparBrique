@@ -99,7 +99,7 @@ export default function EventCard() {
   }
 
   return (
-    <div className="event-card event-card-enter" id="eventCard">
+    <div className={`event-card event-card-enter${(state.stress ?? 0) >= 90 ? ' event-card-danger' : ''}`} id="eventCard">
       <div className={`category-badge ${catCfg.cls}`} id="categoryBadge">{catCfg.text}</div>
       <div className="eyebrow" id="eyEvent">
         Année {state.year ?? 1} · {state.age ?? 18} ans
