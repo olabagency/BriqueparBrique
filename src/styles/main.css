@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* ========== BRIQUE PAR BRIQUE — main.css ========== */
 
 :root{
@@ -961,6 +963,49 @@ body:has(.landing-root) #root{
 }
 .l-btn-ghost:hover{color:var(--text);border-color:var(--accent);}
 .l-btn-large{font-size:16px;padding:14px 30px;border-radius:12px;}
+
+/* ── Hero banner (shader wrapper) ── */
+.l-hero-banner{
+  position:relative;
+  overflow:hidden;
+  width:100%;
+}
+.l-hero-shader{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+}
+.l-hero-overlay{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  /* Fade from opaque page-bg on the left to transparent on the right */
+  background:
+    linear-gradient(
+      105deg,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 82%, transparent) 38%,
+      color-mix(in srgb, var(--bg) 45%, transparent) 62%,
+      color-mix(in srgb, var(--bg) 18%, transparent) 100%
+    );
+}
+/* In dark mode, the overlay stays the same logic but dark-bg covers dark shader edges */
+[data-theme="dark"] .l-hero-overlay{
+  background:
+    linear-gradient(
+      105deg,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 86%, transparent) 38%,
+      color-mix(in srgb, var(--bg) 52%, transparent) 62%,
+      color-mix(in srgb, var(--bg) 22%, transparent) 100%
+    );
+}
+.l-hero-banner .l-hero{
+  position:relative;
+  z-index:2;
+}
 
 /* ── Hero ── */
 .l-hero{

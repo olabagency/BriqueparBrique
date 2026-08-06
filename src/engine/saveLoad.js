@@ -121,9 +121,5 @@ export function loadTheme() {
   } catch {
     // ignore
   }
-  // System preference fallback
-  if (typeof window !== 'undefined' && window.matchMedia) {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
   return 'light';
 }

@@ -8,6 +8,7 @@ import achievementsDef from '../data/achievements.json';
 import globalBoard from '../data/global_leaderboard.json';
 import { FIREBASE_ENABLED } from '../engine/firebaseConfig.js';
 import { fetchCombinedLeaderboard } from '../engine/firebaseGame.js';
+import { ShaderBackground } from './ui/shader-r.tsx';
 
 const ENDINGS = {
   burnout:     { emoji: '😵', title: 'Épuisement total',  color: 'var(--red)' },
@@ -391,6 +392,9 @@ export default function Landing() {
       </nav>
 
       {/* ── Hero ── */}
+      <div className="l-hero-banner">
+        <ShaderBackground className="l-hero-shader" />
+        <div className="l-hero-overlay" />
       <section className="l-hero">
         <div className="l-hero-left">
           <div className="l-hero-eyebrow">🏆 Simulateur d'empire immobilier</div>
@@ -446,6 +450,7 @@ export default function Landing() {
 
         </div>
       </section>
+      </div>
 
       {/* ── Leaderboard ── */}
       <section className="l-board">
