@@ -35,11 +35,11 @@ export async function pushGlobalScore(summary) {
 
 /**
  * Fetch top N scores from Firebase global leaderboard.
- * Returns [] if Firebase is not configured.
+ * Returns null on error (distinguish from empty []).
  */
 export async function fetchGlobalScores(limit = 50) {
   const db = getDb();
-  if (!db) return [];
+  if (!db) return null;
   try {
     const q = query(ref(db, 'leaderboard'), orderByChild('finalVal'), limitToLast(limit));
     const snap = await get(q);
@@ -49,6 +49,6 @@ export async function fetchGlobalScores(limit = 50) {
     return entries.sort((a, b) => (b.finalVal ?? 0) - (a.finalVal ?? 0));
   } catch (e) {
     console.warn('fetchGlobalScores failed', e);
-    return [];
+    return null;
   }
 }

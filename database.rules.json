@@ -1,0 +1,15 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "leaderboard": {
+      ".indexOn": ["finalVal"]
+    },
+    "notifications": {
+      ".indexOn": ["ts"]
+    },
+    "presence": {
+      ".indexOn": ["ts"]
+    }
+  }
+}

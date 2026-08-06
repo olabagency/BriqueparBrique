@@ -116,7 +116,7 @@ export default function Landing() {
   useEffect(() => {
     if (!FIREBASE_ENABLED) return;
     fetchGlobalScores(50).then(scores => {
-      setLiveScores(scores);
+      setLiveScores(scores);  // null = error, [] = empty, [...] = results
       setLoadingScores(false);
     });
   }, []);
@@ -126,10 +126,22 @@ export default function Landing() {
     if (saved) loadSave(saved);
   };
 
-  // When Firebase is enabled, use only real scores (never fake seeded data)
-  const baseGlobal = FIREBASE_ENABLED ? (liveScores ?? []) : globalBoard;
+  // Merge strategy:
+  // - Firebase returned real scores → use them + local history
+  // - Firebase returned empty [] (no runs finished yet) → fall back to static seed + local history
+  // - Firebase failed (null) or disabled → use static seed + local history
+  const firebaseScores = liveScores && liveScores.length > 0 ? liveScores : null;
+  const baseGlobal = firebaseScores ?? globalBoard;
   const merged = [...baseGlobal, ...history].sort((a, b) => (b.finalVal ?? 0) - (a.finalVal ?? 0));
-  const top10 = merged.slice(0, 10);
+  // Deduplicate by name+finalVal in case local history already appears in Firebase
+  const seen = new Set();
+  const deduped = merged.filter(r => {
+    const key = `${r.name}|${r.finalVal}|${r.date ?? ''}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  const top10 = deduped.slice(0, 10);
   const last5 = [...history].slice(-5).reverse();
 
   return (
@@ -181,8 +193,11 @@ export default function Landing() {
           <div className="past-lives" id="leaderboardSection">
             <div className="past-lives-title">
               🏆 Top 10 — Meilleurs scores
-              {FIREBASE_ENABLED && !loadingScores && (
+              {FIREBASE_ENABLED && !loadingScores && firebaseScores && (
                 <span style={{ fontSize: 10, color: 'var(--accent)', marginLeft: 8, fontWeight: 400 }}>● live</span>
+              )}
+              {FIREBASE_ENABLED && !loadingScores && !firebaseScores && (
+                <span style={{ fontSize: 10, color: 'var(--muted)', marginLeft: 8, fontWeight: 400 }}>seed</span>
               )}
             </div>
             {loadingScores ? (
