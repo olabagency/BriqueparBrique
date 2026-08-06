@@ -45,13 +45,25 @@ export default function LeftSidebar({ onOpenModal }) {
             ))}
           </div>
         )}
-        <button
-          className="btn-ghost"
-          style={{ marginTop: 10, width: '100%', fontSize: 12 }}
-          onClick={() => onOpenModal('portfolio')}
-        >
-          📋 Gérer mon parc
-        </button>
+        <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
+          <button
+            className="btn-ghost"
+            style={{ flex: 1, fontSize: 12 }}
+            onClick={() => onOpenModal('portfolio')}
+          >
+            📋 Gérer
+          </button>
+          <button
+            style={{
+              flex: 1, fontSize: 12, fontWeight: 700, padding: '6px 0',
+              background: 'var(--accent-soft)', border: '1px solid var(--accent)',
+              borderRadius: 8, color: 'var(--accent)', cursor: 'pointer',
+            }}
+            onClick={() => onOpenModal('market')}
+          >
+            🛒 Acheter
+          </button>
+        </div>
       </div>
 
       {/* Patrimoine + boutique */}
