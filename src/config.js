@@ -5,7 +5,7 @@
 
 export const GAME_CONFIG = {
   // --- Économie de départ ---
-  STARTING_CASH: 10,
+  STARTING_CASH: 25,
   STARTING_AGE: 18,
   STARTING_STRESS: 20,
   STARTING_VALUATION: 0,
@@ -38,7 +38,7 @@ export const GAME_CONFIG = {
   PROPERTY_CONDITION_VALUES: { 'aRenover': 0.55, 'bonEtat': 0.85, 'renove': 1.05 },
   PROPERTY_LOAN_RATE: 0.35,
   PROPERTY_LOAN_INTEREST: 0.02,
-  PROPERTY_RENT_RATIO: 0.07,
+  PROPERTY_RENT_RATIO: 0.09,
 
   // --- Finances ---
   GOLD_INGOT_PRICE: 60,

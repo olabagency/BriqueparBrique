@@ -129,10 +129,10 @@ function pickEvents(state, count = 3) {
     }
   }
 
-  // Split perso into "positive cash" vs "other" to guarantee at least 1 positive event per year
+  // Split pools by cash polarity
   const immoPool  = eligible.filter(e => e._pool === 'immo' || e._pool === 'reno' || e._pool === 'tenant');
+  const immoPos   = immoPool.filter(e => e.choices?.some(c => (c.eff?.cash ?? 0) > 0));
   const persoPos  = eligible.filter(e => e._pool === 'perso' && e.choices?.some(c => (c.eff?.cash ?? 0) > 0 || (c.eff?.personalCash ?? 0) > 0));
-  const persoOther= eligible.filter(e => e._pool === 'perso' && !e.choices?.some(c => (c.eff?.cash ?? 0) > 0 || (c.eff?.personalCash ?? 0) > 0));
   const persoPool = eligible.filter(e => e._pool === 'perso');
   const result = [];
 
@@ -141,7 +141,14 @@ function pickEvents(state, count = 3) {
     const idx = Math.floor(Math.random() * persoPos.length);
     result.push(persoPos[idx]);
     persoPool.splice(persoPool.indexOf(persoPos[idx]), 1);
-    persoPos.splice(idx, 1);
+  }
+
+  // Guarantee 1 positive-cash immo event per batch when player owns at least 1 property
+  const hasProperties = (state.propertyList ?? []).length > 0;
+  if (hasProperties && immoPos.length > 0) {
+    const idx = Math.floor(Math.random() * immoPos.length);
+    result.push(immoPos[idx]);
+    immoPool.splice(immoPool.indexOf(immoPos[idx]), 1);
   }
 
   // Fill remaining slots: 60% immo, 40% perso
