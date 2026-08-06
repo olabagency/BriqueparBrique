@@ -34,12 +34,18 @@ export default function LuxuryShopModal({ onClose }) {
             const val = estimateValue(item);
             const drift = item.yearlyDrift ?? 0;
             const driftLabel = drift > 0 ? `+${(drift * 100).toFixed(0)}%/an` : drift < 0 ? `${(drift * 100).toFixed(0)}%/an` : '';
+            const pctChange = item.price > 0 ? Math.round(((val - item.price) / item.price) * 100) : 0;
+            const pctLabel = pctChange > 0 ? `+${pctChange}%` : pctChange < 0 ? `${pctChange}%` : '0%';
+            const pctColor = pctChange > 0 ? 'var(--accent)' : pctChange < 0 ? 'var(--red)' : 'var(--muted)';
             return (
               <div className="wealth-asset-row" key={item.id}>
                 <div className="wealth-asset-info">
                   <span className="wealth-asset-name">{item.icon} {item.name}</span>
                   <span className="wealth-asset-value">
-                    {fmtCash(val)} (acheté {fmtCash(item.price)}) {driftLabel && `· ${driftLabel}`}
+                    {fmtCash(val)} (acheté {fmtCash(item.price)})
+                    {' · '}
+                    <span style={{ color: pctColor, fontWeight: 700 }}>{pctLabel}</span>
+                    {driftLabel && ` · ${driftLabel}`}
                   </span>
                 </div>
                 <button

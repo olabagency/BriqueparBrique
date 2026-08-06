@@ -1,7 +1,7 @@
 const SAVE_KEY   = 'bpb_save';
 const THEME_KEY  = 'bpb_theme';
 const HISTORY_KEY = 'bpb_history';
-const MAX_HISTORY = 5;
+const MAX_HISTORY = 10;
 
 // ─── Save / Load ────────────────────────────────────────────────────────────
 

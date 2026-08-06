@@ -277,9 +277,11 @@ function reducer(state, action) {
 
     case 'TOGGLE_RENT': {
       const { propertyId } = action.payload;
-      const props = (state.propertyList ?? []).map(p =>
-        p.id === propertyId ? { ...p, rented: !p.rented } : p
-      );
+      const props = (state.propertyList ?? []).map(p => {
+        if (p.id !== propertyId) return p;
+        if (p.lastRentToggleYear === state.year) return p;
+        return { ...p, rented: !p.rented, lastRentToggleYear: state.year };
+      });
       return { ...state, propertyList: props };
     }
 
