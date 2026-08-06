@@ -89,10 +89,10 @@ function PurchaseConfigurator({ listing, effectivePrice, cash, onConfirm, onCanc
           <>
             <div style={{ background: 'var(--surface2)', borderRadius: 10, padding: '10px 12px' }}>
               <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.04em', marginBottom: 4 }}>
-                Mensualité
+                Annuité
               </div>
               <div style={{ fontSize: 16, fontWeight: 800, fontFamily: 'monospace', color: 'var(--red)' }}>
-                −{fmtCash(loanInfo.monthlyPayment)}/mois
+                −{fmtCash(loanInfo.annualPayment)}/an
               </div>
             </div>
             <div style={{ background: 'var(--surface2)', borderRadius: 10, padding: '10px 12px' }}>

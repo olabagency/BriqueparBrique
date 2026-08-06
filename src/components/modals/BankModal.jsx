@@ -83,7 +83,7 @@ export default function BankModal({ onClose }) {
   };
 
   return (
-    <Modal title="🏦 Compte" onClose={onClose}>
+    <Modal title="🏦 Compte" onClose={onClose} wide>
 
       {/* Balance cards */}
       <div style={{ display: 'flex', gap: 10 }}>

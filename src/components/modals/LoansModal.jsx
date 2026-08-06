@@ -68,7 +68,7 @@ export default function LoansModal({ onClose }) {
 
   if (loans.length === 0) {
     return (
-      <Modal title="💳 Mes crédits" onClose={onClose}>
+      <Modal title="💳 Mes crédits" onClose={onClose} wide>
         <div style={{ textAlign: 'center', padding: '28px 0', color: 'var(--muted)', fontSize: 13 }}>
           <div style={{ fontSize: 32, marginBottom: 10 }}>🎉</div>
           Aucun crédit en cours — tous tes biens sont financés en fonds propres.
@@ -78,7 +78,7 @@ export default function LoansModal({ onClose }) {
   }
 
   return (
-    <Modal title={`💳 Mes crédits (${loans.length})`} onClose={onClose}>
+    <Modal title={`💳 Mes crédits (${loans.length})`} onClose={onClose} wide>
 
       {/* Result banner */}
       {resultBanner && (
