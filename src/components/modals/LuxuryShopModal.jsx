@@ -48,7 +48,9 @@ export default function LuxuryShopModal({ onClose }) {
           <div className="luxury-grid">
             {owned.map(item => (
               <div className="luxury-card" key={item.id}>
-                <div className="luxury-card-icon">{item.icon}</div>
+                {item.image
+                  ? <img src={item.image} alt={item.name} className="luxury-card-img" />
+                  : <div className="luxury-card-icon">{item.icon}</div>}
                 <div className="luxury-card-name">{item.name}</div>
                 <div className="luxury-card-brand">{item.brand}</div>
                 <div className="luxury-card-desc">{item.description}</div>
@@ -87,7 +89,9 @@ export default function LuxuryShopModal({ onClose }) {
               const canBuy = !isOwned && personalCash >= item.price;
               return (
                 <div className={`luxury-card${isOwned ? ' luxury-card--owned' : ''}`} key={item.id}>
-                  <div className="luxury-card-icon">{item.icon}</div>
+                  {item.image
+                  ? <img src={item.image} alt={item.name} className="luxury-card-img" />
+                  : <div className="luxury-card-icon">{item.icon}</div>}
                   <div className="luxury-card-name">{item.name}</div>
                   <div className="luxury-card-brand">{item.brand}</div>
                   <div className="luxury-card-desc">{item.description}</div>
