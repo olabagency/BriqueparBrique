@@ -32,6 +32,7 @@ function genPropertyRecord(value) {
 import persoEvents from '../data/events_perso.json';
 import immoEvents  from '../data/events_immo.json';
 import renovationEvents from '../data/renovation_events.json';
+import tenantEvents from '../data/tenant_events.json';
 import achievements from '../data/achievements.json';
 
 const GameContext = createContext(null);
@@ -103,8 +104,20 @@ function pickEvents(state, count = 3) {
     }
   }
 
-  // 83% immo, 17% perso bias (matching original)
-  const immoPool  = eligible.filter(e => e._pool === 'immo' || e._pool === 'reno');
+  // Tenant events — only when there are rented properties
+  const rentedProps = props.filter(p => p.rented);
+  if (rentedProps.length > 0) {
+    for (const e of tenantEvents) {
+      eligible.push({
+        ...e,
+        _pool: 'tenant',
+        _targetProperty: rentedProps[Math.floor(Math.random() * rentedProps.length)],
+      });
+    }
+  }
+
+  // 83% immo, 17% perso bias (matching original); tenant events in immo pool
+  const immoPool  = eligible.filter(e => e._pool === 'immo' || e._pool === 'reno' || e._pool === 'tenant');
   const persoPool = eligible.filter(e => e._pool === 'perso');
   const result = [];
   for (let i = 0; i < count; i++) {
@@ -265,7 +278,10 @@ function reducer(state, action) {
       if (!sold) return s;
 
       const loanToRepay = (s.loans ?? []).find(l => l.propertyId === propertyId);
-      let cashGain = sold.value ?? 0;
+      // Rented property: 5% penalty (tenant in place = buyer discount)
+      const baseValue = sold.value ?? 0;
+      const saleValue = sold.rented ? Math.round(baseValue * 0.95) : baseValue;
+      let cashGain = saleValue;
       if (loanToRepay) cashGain -= loanToRepay.balance;
 
       const loans = (s.loans ?? []).filter(l => l.propertyId !== propertyId);
@@ -462,6 +478,11 @@ function advanceYear(state) {
   const rentIncome = collectRents(s.propertyList ?? []);
   s.cash = (s.cash ?? 0) + rentIncome;
   if (rentIncome > 0) s.currentYearFinance.loyers += rentIncome;
+
+  // Management stress: 1 point per rented property (capped at 8)
+  const rentedCount = (s.propertyList ?? []).filter(p => p.rented).length;
+  const mgmtStress  = Math.min(rentedCount, 8);
+  if (mgmtStress > 0) s.stress = clamp((s.stress ?? 0) + mgmtStress, 0, STRESS_MAX);
 
   const { loans, cashDelta } = amortizeLoans(s.loans ?? [], s.cash);
   s.loans = loans;
