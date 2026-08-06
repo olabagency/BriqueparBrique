@@ -72,6 +72,7 @@ export async function pushFinishedGame(summary) {
     companyName:     summary.companyName ?? '',
     sector:          summary.sector ?? null,
     traitId:         summary.traitId ?? null,
+    score:           summary.score ?? 0,
     finalVal:        summary.finalVal ?? 0,
     finalCash:       summary.finalCash ?? 0,
     personalCash:    summary.personalCash ?? 0,
@@ -150,7 +151,7 @@ export async function fetchCombinedLeaderboard() {
     }
 
     return [...bySession.values()]
-      .sort((a, b) => (b.finalVal ?? b.valuation ?? 0) - (a.finalVal ?? a.valuation ?? 0));
+      .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
   } catch (e) {
     console.warn('fetchCombinedLeaderboard failed:', e.message);
     return null;

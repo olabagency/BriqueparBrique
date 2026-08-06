@@ -3,6 +3,7 @@ import { useGame } from '../context/GameContext.jsx';
 import { loadGame, hasSave, loadHistory } from '../engine/saveLoad.js';
 import ThemeToggle from './ui/ThemeToggle.jsx';
 import { fmtCash } from '../engine/utils.js';
+import { computeScore, scoreGrade } from '../engine/gameState.js';
 import achievementsDef from '../data/achievements.json';
 import globalBoard from '../data/global_leaderboard.json';
 import { FIREBASE_ENABLED } from '../engine/firebaseConfig.js';
@@ -230,6 +231,8 @@ function PodiumCard({ run, rank, onClick }) {
   const color = MEDAL_COLORS[rank];
   const bg = MEDAL_BG[rank];
   const isActive = run._source === 'active';
+  const score = run.score ?? computeScore(run);
+  const grade = scoreGrade(score);
   return (
     <button
       onClick={onClick}
@@ -242,7 +245,20 @@ function PodiumCard({ run, rank, onClick }) {
       <div className="l-podium-ending">{ending.emoji}</div>
       <div className="l-podium-name">{run.name ?? run.pseudo}</div>
       {run.companyName && <div className="l-podium-company">{run.companyName}</div>}
-      <div className="l-podium-val">{fmtCash(run.finalVal ?? run.valuation ?? 0)}</div>
+      {/* Score + grade */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, margin: '4px 0 2px' }}>
+        <span
+          style={{
+            fontSize: 11, fontWeight: 800, padding: '2px 7px', borderRadius: 20,
+            background: grade.color + '22', color: grade.color, letterSpacing: '.04em',
+          }}
+        >{grade.label}</span>
+        <span className="l-podium-val" style={{ margin: 0 }}>{score.toLocaleString('fr-FR')} pts</span>
+      </div>
+      {/* Wealth secondary */}
+      <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 2 }}>
+        {fmtCash((run.finalVal ?? 0) + (run.finalCash ?? 0) + (run.personalCash ?? 0))} total
+      </div>
       <div className="l-podium-meta">
         {isActive
           ? `An ${run.year ?? '?'} · ${run.age ?? '?'} ans`
@@ -261,6 +277,8 @@ function PodiumCard({ run, rank, onClick }) {
 function ListRow({ run, rank, onClick }) {
   const ending = ENDINGS[run.endingKind] ?? ENDINGS.age_limit;
   const isActive = run._source === 'active';
+  const score = run.score ?? computeScore(run);
+  const grade = scoreGrade(score);
   return (
     <button onClick={onClick} className="l-list-row">
       <span className="l-list-rank">#{rank + 1}</span>
@@ -271,11 +289,16 @@ function ListRow({ run, rank, onClick }) {
         {isActive && <span className="l-live-badge">● live</span>}
       </span>
       <span className="l-list-meta">
-        {isActive ? `An ${run.year ?? '?'}` : `${run.years ?? '?'} ans joués`}
-        {' · '}
-        {(run.achievements ?? []).length} 🏆
+        {isActive ? `An ${run.year ?? '?'}` : `${run.years ?? '?'} ans`}
+        {' · '}{(run.achievements ?? []).length} 🏆
       </span>
-      <span className="l-list-val">{fmtCash(run.finalVal ?? run.valuation ?? 0)}</span>
+      <span style={{ display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0 }}>
+        <span style={{
+          fontSize: 10, fontWeight: 800, padding: '1px 6px', borderRadius: 20,
+          background: grade.color + '22', color: grade.color,
+        }}>{grade.label}</span>
+        <span className="l-list-val">{score.toLocaleString('fr-FR')}</span>
+      </span>
     </button>
   );
 }
@@ -286,6 +309,8 @@ function PastRow({ run, rank, onClick }) {
   const dateStr = run.date
     ? new Date(run.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
     : '—';
+  const score = run.score ?? computeScore(run);
+  const grade = scoreGrade(score);
   return (
     <button onClick={onClick} className="l-list-row">
       <span className="l-list-ending">{ending.emoji}</span>
@@ -294,7 +319,13 @@ function PastRow({ run, rank, onClick }) {
         {run.companyName && <span className="l-list-company"> · {run.companyName}</span>}
       </span>
       <span className="l-list-meta">{dateStr} · {run.years ?? '?'} ans · {(run.achievements ?? []).length} 🏆</span>
-      <span className="l-list-val">{fmtCash(run.finalVal ?? 0)}</span>
+      <span style={{ display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0 }}>
+        <span style={{
+          fontSize: 10, fontWeight: 800, padding: '1px 6px', borderRadius: 20,
+          background: grade.color + '22', color: grade.color,
+        }}>{grade.label}</span>
+        <span className="l-list-val">{score.toLocaleString('fr-FR')}</span>
+      </span>
     </button>
   );
 }
@@ -324,7 +355,8 @@ export default function Landing() {
 
   const firebaseScores = liveScores && liveScores.length > 0 ? liveScores : null;
   const baseGlobal = firebaseScores ?? globalBoard;
-  const merged = [...baseGlobal, ...history].sort((a, b) => (b.finalVal ?? b.valuation ?? 0) - (a.finalVal ?? a.valuation ?? 0));
+  const withScore = (r) => r.score ?? computeScore(r);
+  const merged = [...baseGlobal, ...history].sort((a, b) => withScore(b) - withScore(a));
   const seen = new Set();
   const deduped = merged.filter(r => {
     const key = r.sessionId ?? `${r.name}|${r.finalVal ?? r.valuation}|${r.date ?? ''}`;

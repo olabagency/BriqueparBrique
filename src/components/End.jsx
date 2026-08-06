@@ -4,6 +4,7 @@ import { fmtCash } from '../engine/utils.js';
 import { loadHistory } from '../engine/saveLoad.js';
 import ThemeToggle from './ui/ThemeToggle.jsx';
 import achievementsDef from '../data/achievements.json';
+import { computeScore, scoreGrade } from '../engine/gameState.js';
 
 const ENDINGS = {
   burnout: {
@@ -47,7 +48,8 @@ export default function End() {
   const achievementCount = achievements.length;
   const totalAchievements = achievementsDef.length;
 
-  const isGoodEnding = endingId === 'retirement';
+  const score = computeScore({ finalVal: valuation, finalCash: cash, personalCash, years: year, achievements, propertiesOwned: propertiesCount, endingKind: endingId });
+  const grade = scoreGrade(score);
 
   return (
     <div className="app">
@@ -57,6 +59,21 @@ export default function End() {
         <span className="eyebrow-pill">{pseudo} · {age} ans · An {year}</span>
         <h2>{ending.title}</h2>
         <p className="desc">{ending.desc}</p>
+
+        {/* Score principal */}
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 10, margin: '4px 0 8px',
+          padding: '12px 20px', borderRadius: 16,
+          background: grade.color + '15', border: `1px solid ${grade.color}44`,
+        }}>
+          <span style={{ fontSize: 28, fontWeight: 900, fontFamily: 'monospace', color: grade.color }}>
+            {score.toLocaleString('fr-FR')}
+          </span>
+          <div>
+            <div style={{ fontSize: 11, color: 'var(--muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.04em' }}>Score</div>
+            <div style={{ fontSize: 22, fontWeight: 900, color: grade.color, lineHeight: 1 }}>{grade.label}</div>
+          </div>
+        </div>
 
         <div className="final-stats">
           <div className="stat-box">

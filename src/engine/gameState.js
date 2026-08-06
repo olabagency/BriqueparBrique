@@ -69,8 +69,49 @@ export function freshState({ name, companyName, gender, sector, traitId, challen
   };
 }
 
+const ENDING_MULT = {
+  retirement:  1.30,
+  age_limit:   1.00,
+  fatal_event: 0.90,
+  burnout:     0.85,
+  insolvency:  0.70,
+};
+
+/**
+ * Multi-dimensional game score:
+ *  - Wealth (sqrt scaling so money doesn't dominate)
+ *  - Efficiency (wealth per year played)
+ *  - Achievements (mastery)
+ *  - Portfolio size (diversification)
+ *  - Ending multiplier (retirement rewarded, bankruptcy penalised)
+ */
+export function computeScore({ finalVal = 0, finalCash = 0, personalCash = 0,
+                               years = 1, achievements = [], propertiesOwned = 0,
+                               endingKind = 'age_limit' }) {
+  const W   = Math.max(0, finalVal + finalCash + personalCash);
+  const yrs = Math.max(1, years);
+
+  const wealthScore     = Math.sqrt(W)           * 100;
+  const efficiencyScore = Math.sqrt(W / yrs)     * 50;
+  const achievementScore = (achievements?.length ?? 0) * 400;
+  const portfolioScore  = (propertiesOwned ?? 0) * 120;
+
+  const mult = ENDING_MULT[endingKind] ?? 1.0;
+  return Math.max(0, Math.round((wealthScore + efficiencyScore + achievementScore + portfolioScore) * mult));
+}
+
+export function scoreGrade(score) {
+  if (score >= 15000) return { label: 'S+', color: '#C084FC' };
+  if (score >= 10000) return { label: 'S',  color: '#F59E0B' };
+  if (score >=  7500) return { label: 'A+', color: '#34D399' };
+  if (score >=  5000) return { label: 'A',  color: '#60A5FA' };
+  if (score >=  3000) return { label: 'B',  color: '#94A3B8' };
+  if (score >=  1500) return { label: 'C',  color: '#9CA3AF' };
+  return                       { label: 'D',  color: '#6B7280' };
+}
+
 export function buildRunSummary(state) {
-  return {
+  const summary = {
     name:         state.name,
     companyName:  state.companyName,
     sector:       state.sector,
@@ -87,4 +128,6 @@ export function buildRunSummary(state) {
     durationMs:   state.sessionStart ? Date.now() - state.sessionStart : null,
     runId:        state.runId ?? crypto.randomUUID(),
   };
+  summary.score = computeScore(summary);
+  return summary;
 }
