@@ -10,12 +10,23 @@ import {
   calcLoanPayment,
 } from '../engine/market.js';
 import { applyTraitEffect } from '../engine/traitEffect.js';
-import { clamp, shuffleArray } from '../engine/utils.js';
+import { clamp, shuffleArray, stageFor, stageMultiplier } from '../engine/utils.js';
 import {
   STRESS_MAX,
   GAME_OVER_MAX_AGE,
   RETIREMENT_MIN_AGE,
+  STAGE_MULTIPLIERS,
 } from '../config.js';
+
+const PROPERTY_TYPES  = ['Studio','Appartement T2','Appartement T3','Duplex','Maison','Loft','Immeuble de rapport','Local commercial','Terrain','Parking'];
+const PROPERTY_PLACES = ['rue des Lilas','avenue de la République','quartier des Tanneurs','impasse Voltaire','rue du Vieux-Port','allée des Platanes','quartier de la Gare','rue Saint-Michel','chemin des Vignes','boulevard Gambetta','rue des Acacias','place du Marché'];
+const SALARY_AMOUNTS  = { none: 0, modest: 8, comfortable: 20, high: 45 };
+
+function genPropertyRecord(value) {
+  const type  = PROPERTY_TYPES[Math.floor(Math.random() * PROPERTY_TYPES.length)];
+  const place = PROPERTY_PLACES[Math.floor(Math.random() * PROPERTY_PLACES.length)];
+  return { id: crypto.randomUUID(), type, place, value: Math.max(1, Math.round(value || 35)), condition: 'bonEtat', rented: false };
+}
 import persoEvents from '../data/events_perso.json';
 import immoEvents  from '../data/events_immo.json';
 import renovationEvents from '../data/renovation_events.json';
@@ -60,21 +71,26 @@ function checkAchievements(state) {
 
 // ─── Event picking ────────────────────────────────────────────────────────────
 
-function pickEvents(state, count = 2) {
+function pickEvents(state, count = 3) {
   const eligible = [];
   const props = state.propertyList ?? [];
 
   for (const e of persoEvents) {
-    if (e.minAge && state.age < e.minAge) continue;
-    if (e.minYear && state.year < e.minYear) continue;
-    if (e.requireFlag && !state.flags?.[e.requireFlag]) continue;
-    if (e.excludeFlag && state.flags?.[e.excludeFlag]) continue;
+    if (e.minAge          && state.age < e.minAge) continue;
+    if (e.minYear         && state.year < e.minYear) continue;
+    if (e.minPersonalCash && (state.personalCash ?? 0) < e.minPersonalCash) continue;
+    if (e.requireFlag     && !state.flags?.[e.requireFlag]) continue;
+    if (e.excludeFlag     && state.flags?.[e.excludeFlag]) continue;
     eligible.push({ ...e, _pool: 'perso' });
   }
 
   for (const e of immoEvents) {
-    if (e.minProperties && props.length < e.minProperties) continue;
-    if (e.minValuation && state.valuation < e.minValuation) continue;
+    if (e.minProperties   && props.length < e.minProperties) continue;
+    if (e.minValuation    && state.valuation < e.minValuation) continue;
+    if (e.minAge          && state.age < e.minAge) continue;
+    if (e.minYear         && state.year < e.minYear) continue;
+    if (e.minPersonalCash && (state.personalCash ?? 0) < e.minPersonalCash) continue;
+    if (e.requireFlag     && !state.flags?.[e.requireFlag]) continue;
     eligible.push({ ...e, _pool: 'immo' });
   }
 
@@ -85,8 +101,19 @@ function pickEvents(state, count = 2) {
     }
   }
 
-  shuffleArray(eligible);
-  return eligible.slice(0, count);
+  // 83% immo, 17% perso bias (matching original)
+  const immoPool  = eligible.filter(e => e._pool === 'immo' || e._pool === 'reno');
+  const persoPool = eligible.filter(e => e._pool === 'perso');
+  const result = [];
+  for (let i = 0; i < count; i++) {
+    const wantImmo = immoPool.length > 0 && (persoPool.length === 0 || Math.random() < 0.83);
+    const pool = wantImmo ? immoPool : (persoPool.length > 0 ? persoPool : immoPool);
+    if (pool.length === 0) break;
+    const idx = Math.floor(Math.random() * pool.length);
+    result.push(pool[idx]);
+    pool.splice(idx, 1);
+  }
+  return result;
 }
 
 // ─── Reducer ─────────────────────────────────────────────────────────────────
@@ -97,7 +124,7 @@ function reducer(state, action) {
     case 'START_GAME': {
       const init = freshState(action.payload);
       const marketListings = generateMarketListings(init.economicCycle, 6);
-      const events = pickEvents(init, 2);
+      const events = pickEvents(init, init.eventsPerYear ?? 3);
       return { ...init, marketListings, pendingEvents: events, currentEventIndex: 0, screen: 'game' };
     }
 
@@ -106,15 +133,41 @@ function reducer(state, action) {
     }
 
     case 'RESOLVE_EVENT': {
-      const { eff = {}, flag, fatal, keepUnrenovated, costPct, gainPct, targetProperty } = action.payload;
+      const { eff = {}, flag, unsetFlag, fatal, keepUnrenovated, costPct, gainPct, targetProperty } = action.payload;
       let s = { ...state };
 
-      if (flag) s.flags = { ...s.flags, [flag]: true };
+      if (flag)      s.flags = { ...s.flags, [flag]: true };
+      if (unsetFlag) { const f = { ...s.flags }; delete f[unsetFlag]; s.flags = f; }
 
       if (eff.cash)         s.cash         = (s.cash ?? 0) + eff.cash;
-      if (eff.personalCash) s.personalCash = (s.personalCash ?? 0) + eff.personalCash;
+      if (eff.personalCash) s.personalCash = Math.max(0, (s.personalCash ?? 0) + eff.personalCash);
       if (eff.stress)       s.stress       = clamp((s.stress ?? 0) + eff.stress, 0, STRESS_MAX);
-      if (eff.val !== undefined) s.valuation = Math.max(0, (s.valuation ?? 0) + eff.val);
+      if (eff.val !== undefined) {
+        s.valuation = Math.max(0, (s.valuation ?? 0) + eff.val);
+        // Distribute val change across properties proportionally (unless properties eff handles it)
+        if (!eff.properties && (s.propertyList ?? []).length > 0 && eff.val !== 0) {
+          const total = (s.propertyList ?? []).reduce((sum, p) => sum + (p.value ?? 0), 0) || 1;
+          s.propertyList = (s.propertyList ?? []).map(p => ({
+            ...p,
+            value: Math.max(1, Math.round((p.value ?? 0) + eff.val * ((p.value ?? 0) / total))),
+          }));
+        }
+      }
+
+      // Handle eff.properties — add/remove property records
+      if (eff.properties) {
+        const props = [...(s.propertyList ?? [])];
+        if (eff.properties > 0) {
+          const perUnit = eff.val && eff.val > 0 ? Math.max(10, Math.round(eff.val / eff.properties)) : 35;
+          for (let k = 0; k < eff.properties; k++) props.push(genPropertyRecord(perUnit));
+        } else {
+          const removeCount = Math.min(-eff.properties, props.length);
+          for (let k = 0; k < removeCount; k++) props.splice(Math.floor(Math.random() * props.length), 1);
+        }
+        s.propertyList = props;
+        s.propertiesOwned = Math.max(0, (s.propertiesOwned ?? 0) + eff.properties);
+        s.valuation = props.reduce((sum, p) => sum + (p.value ?? 0), 0);
+      }
 
       // Track year finances
       if (eff.cash) s.currentYearFinance = { ...s.currentYearFinance, evenements: (s.currentYearFinance?.evenements ?? 0) + (eff.cash ?? 0) };
@@ -140,8 +193,13 @@ function reducer(state, action) {
       }
 
       if (fatal) {
+        const summary = buildRunSummary({ ...s, endingKind: 'fatal_event', over: true });
+        appendHistory(summary);
+        deleteSave();
         return { ...s, over: true, endingKind: 'fatal_event', screen: 'end' };
       }
+
+      s.achievements = checkAchievements(s);
 
       const nextIndex = (s.currentEventIndex ?? 0) + 1;
       if (nextIndex >= (s.pendingEvents ?? []).length) {
@@ -291,6 +349,31 @@ function reducer(state, action) {
       };
     }
 
+    case 'RENEGOTIATE_LOAN': {
+      const { loanId } = action.payload;
+      const loans = (state.loans ?? []).map(l => {
+        if (l.id !== loanId || l.lastNegotiatedYear === state.year) return l;
+        const reduction = 0.003 + Math.random() * 0.002;
+        const newRate = Math.max(0.005, l.rate - reduction);
+        const yrs = Math.max(1, l.yearsRemaining ?? 1);
+        const newAnnual = Math.round(l.balance * (newRate / (1 - Math.pow(1 + newRate, -yrs))));
+        return { ...l, rate: newRate, annualPayment: newAnnual, totalYearly: newAnnual, lastNegotiatedYear: state.year };
+      });
+      return { ...state, loans };
+    }
+
+    case 'MASS_REPAY_LOANS': {
+      const totalDebt = (state.loans ?? []).reduce((s, l) => s + Math.round((l.balance ?? 0) * 1.03), 0);
+      if ((state.cash ?? 0) < totalDebt) return state;
+      return {
+        ...state,
+        cash: (state.cash ?? 0) - totalDebt,
+        loans: [],
+        flags: { ...state.flags, everPaidOffLoan: true },
+        currentYearFinance: { ...state.currentYearFinance, credits: (state.currentYearFinance?.credits ?? 0) - totalDebt },
+      };
+    }
+
     case 'REPAY_LOAN': {
       const { loanId } = action.payload;
       const s = { ...state };
@@ -355,8 +438,18 @@ function advanceYear(state) {
   s.year += 1;
   s.age  += 1;
   s.bankOpsThisYear = 0;
+  s.eventsPerYear = 3 + Math.floor(Math.random() * 3);
 
   s.economicCycle = nextEconomicCycle(s.economicCycle);
+
+  // Salary draw (cash → personalCash), scaled by stage
+  const salaryBase  = SALARY_AMOUNTS[s.salary ?? s.salaryLevel ?? 'none'] ?? 0;
+  const stageScale  = STAGE_MULTIPLIERS[stageFor(s.year)] ?? 1;
+  const salaryDraw  = Math.round(salaryBase * stageScale);
+  if (salaryDraw > 0) {
+    s.cash        = (s.cash ?? 0) - salaryDraw;
+    s.personalCash = (s.personalCash ?? 0) + salaryDraw;
+  }
 
   const rentIncome = collectRents(s.propertyList ?? []);
   s.cash = (s.cash ?? 0) + rentIncome;
@@ -390,7 +483,7 @@ function advanceYear(state) {
 
   s.achievements = checkAchievements(s);
   s.marketListings = generateMarketListings(s.economicCycle, 6);
-  s.pendingEvents = pickEvents(s, 2);
+  s.pendingEvents = pickEvents(s, s.eventsPerYear ?? 3);
   s.currentEventIndex = 0;
 
   if (s.stress >= STRESS_MAX) {
@@ -424,7 +517,9 @@ export function GameProvider({ children }) {
   const buyLuxury    = useCallback((item) => dispatch({ type: 'BUY_LUXURY',    payload: { item } }), []);
   const sellLuxury   = useCallback((id)   => dispatch({ type: 'SELL_LUXURY',   payload: { itemId: id } }), []);
   const retire       = useCallback(()     => dispatch({ type: 'RETIRE' }), []);
-  const repayLoan    = useCallback((id)   => dispatch({ type: 'REPAY_LOAN',    payload: { loanId: id } }), []);
+  const repayLoan       = useCallback((id)  => dispatch({ type: 'REPAY_LOAN',        payload: { loanId: id } }), []);
+  const renegotiateLoan = useCallback((id)  => dispatch({ type: 'RENEGOTIATE_LOAN',  payload: { loanId: id } }), []);
+  const massRepayLoans  = useCallback(()    => dispatch({ type: 'MASS_REPAY_LOANS' }), []);
   const bankWithdraw = useCallback((pct)  => dispatch({ type: 'BANK_WITHDRAW', payload: { pct } }), []);
   const bankInject   = useCallback((pct)  => dispatch({ type: 'BANK_INJECT',   payload: { pct } }), []);
   const refreshMarket= useCallback(()     => dispatch({ type: 'REFRESH_MARKET' }), []);
@@ -436,7 +531,7 @@ export function GameProvider({ children }) {
     startGame, loadSave, resolveEvent,
     buyProperty, sellProperty, toggleRent,
     buyLuxury, sellLuxury,
-    retire, repayLoan,
+    retire, repayLoan, renegotiateLoan, massRepayLoans,
     bankWithdraw, bankInject,
     refreshMarket, setScreen, resetGame,
   };

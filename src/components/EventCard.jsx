@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import { useGame } from '../context/GameContext.jsx';
-import { fmtCash } from '../engine/utils.js';
+import { fmtCash, stageFor, stageMultiplier } from '../engine/utils.js';
 import { modifyEffByTrait } from '../engine/traitEffect.js';
 
-const CATEGORY_ICONS = {
-  perso:   '👤',
-  immo:    '🏘️',
-  reno:    '🔨',
-  business:'💼',
-  sector:  '🏢',
+const CATEGORY_CONFIG = {
+  perso:   { cls: 'cat-perso',   text: '💜 Vie personnelle' },
+  immo:    { cls: 'cat-sector',  text: '🏘️ Immobilier' },
+  reno:    { cls: 'cat-sector',  text: '🔨 Rénovation' },
+  business:{ cls: 'cat-business',text: '💼 Vie professionnelle' },
+  sector:  { cls: 'cat-sector',  text: '🏘️ Immobilier' },
 };
-const CATEGORY_LABELS = {
-  perso:   'Vie personnelle',
-  immo:    'Immobilier',
-  reno:    'Rénovation',
-  business:'Vie professionnelle',
-  sector:  'Secteur',
-};
+
+function applyStageScale(eff, year) {
+  if (!eff) return {};
+  const scale = stageMultiplier(stageFor(year ?? 1));
+  const out = { ...eff };
+  if (out.cash !== undefined)         out.cash         = Math.round(out.cash * scale);
+  if (out.val  !== undefined)         out.val          = Math.round(out.val  * scale);
+  if (out.personalCash !== undefined) out.personalCash = Math.round(out.personalCash * scale);
+  return out;
+}
 
 export default function EventCard() {
   const { state, resolveEvent } = useGame();
@@ -26,11 +29,12 @@ export default function EventCard() {
   if (!event) return null;
 
   const pool = event._pool ?? event.category ?? 'perso';
-  const icon  = CATEGORY_ICONS[pool]  ?? '💼';
-  const label = CATEGORY_LABELS[pool] ?? pool;
+  const catCfg = CATEGORY_CONFIG[pool] ?? CATEGORY_CONFIG.immo;
 
   const handleChoice = (choice) => {
-    const eff = modifyEffByTrait(state.traitId, choice.eff ?? {});
+    const rawEff   = choice.eff ?? {};
+    const scaled   = applyStageScale(rawEff, state.year);
+    const eff      = modifyEffByTrait(state.traitId, scaled);
     setOutcome({
       text: choice.out,
       eff,
@@ -41,10 +45,20 @@ export default function EventCard() {
 
   const handleContinue = () => {
     const { eff, choice, targetProperty } = outcome;
+
+    // Fatal probability roll — only trigger if dice says so
+    let fatal = false;
+    if (choice.fatal && typeof choice.fatal === 'object') {
+      fatal = Math.random() < (choice.fatal.chance ?? 0);
+    } else if (choice.fatal === true) {
+      fatal = true;
+    }
+
     resolveEvent({
       eff,
       flag:            choice.flag,
-      fatal:           choice.fatal ?? false,
+      unsetFlag:       choice.unsetFlag,
+      fatal,
       keepUnrenovated: choice.keepUnrenovated ?? false,
       costPct:         choice.costPct,
       gainPct:         choice.gainPct,
@@ -55,11 +69,11 @@ export default function EventCard() {
 
   if (outcome) {
     const deltas = buildDeltas(outcome.eff, outcome.choice);
+    const netScore = (outcome.eff?.cash ?? 0) * 0.5 + (outcome.eff?.val ?? 0) * 0.5 - (outcome.eff?.stress ?? 0) * 1.5;
+    const icon = netScore > 10 ? '🎉' : netScore >= 0 ? '👍' : netScore > -15 ? '😬' : '💥';
     return (
-      <div className="outcome" id="outcome">
-        <div className="outcome-icon" id="outcomeIcon">
-          {deltas.some(d => d.positive) && deltas.every(d => d.positive) ? '✅' : deltas.some(d => !d.positive) && deltas.every(d => !d.positive) ? '⚠️' : '💡'}
-        </div>
+      <div className={`outcome outcome-animated ${netScore >= 0 ? 'outcome-positive' : 'outcome-negative'}`} id="outcome">
+        <div className="outcome-icon" id="outcomeIcon">{icon}</div>
         <div id="outcomeText">{outcome.text}</div>
         {deltas.length > 0 && (
           <div className="deltas" id="outcomeDeltas">
@@ -68,8 +82,6 @@ export default function EventCard() {
             ))}
           </div>
         )}
-        <div className="near-miss-banner" id="nearMissBanner" style={{ display: 'none' }} />
-        <div className="trait-line" id="traitLine" style={{ display: 'none' }} />
         <button className="continue-btn" id="continueBtn" onClick={handleContinue}>
           Continuer →
         </button>
@@ -78,13 +90,10 @@ export default function EventCard() {
   }
 
   return (
-    <div className="event-card" id="eventCard">
-      <div className="category-badge" id="categoryBadge">{icon} {label}</div>
+    <div className="event-card event-card-enter" id="eventCard">
+      <div className={`category-badge ${catCfg.cls}`} id="categoryBadge">{catCfg.text}</div>
       <div className="eyebrow" id="eyEvent">
         Année {state.year ?? 1} · {state.age ?? 18} ans
-      </div>
-      <div className="milestone-teaser" id="milestoneTeaser" style={{ display: 'none' }}>
-        ⚡ Un grand moment approche d'ici quelques années...
       </div>
       <h2 id="evTitle">{event.title}</h2>
       <p className="body-text" id="evBody">{event.body}</p>
@@ -92,7 +101,7 @@ export default function EventCard() {
         {(event.choices ?? []).map((choice, i) => (
           <button
             key={i}
-            className="choice-card"
+            className="choice-card choice-card-animated"
             style={{ animationDelay: `${i * 80}ms` }}
             onClick={() => handleChoice(choice)}
           >
@@ -107,10 +116,11 @@ export default function EventCard() {
 function buildDeltas(eff, choice) {
   if (!eff) return [];
   const deltas = [];
-  if (eff.cash)         deltas.push({ label: `Tréso ${eff.cash > 0 ? '+' : ''}${fmtCash(eff.cash)}`,             positive: eff.cash > 0 });
-  if (eff.personalCash) deltas.push({ label: `Perso ${eff.personalCash > 0 ? '+' : ''}${fmtCash(eff.personalCash)}`, positive: eff.personalCash > 0 });
-  if (eff.val !== undefined) deltas.push({ label: `Valeur ${eff.val > 0 ? '+' : ''}${fmtCash(eff.val)}`,         positive: eff.val > 0 });
-  if (eff.stress)       deltas.push({ label: `Stress ${eff.stress > 0 ? '+' : ''}${eff.stress}`,                positive: eff.stress < 0 });
+  if (eff.cash)         deltas.push({ label: `💰 ${eff.cash > 0 ? '+' : ''}${eff.cash} k€`,          positive: eff.cash > 0 });
+  if (eff.personalCash) deltas.push({ label: `💶 ${eff.personalCash > 0 ? '+' : ''}${eff.personalCash} k€`, positive: eff.personalCash > 0 });
+  if (eff.val !== undefined && eff.val !== 0) deltas.push({ label: `📈 ${eff.val > 0 ? '+' : ''}${eff.val} k€`, positive: eff.val > 0 });
+  if (eff.stress)       deltas.push({ label: `😰 ${eff.stress > 0 ? '+' : ''}${eff.stress}`,           positive: eff.stress < 0 });
+  if (eff.properties && eff.properties !== 0) deltas.push({ label: `🏠 ${eff.properties > 0 ? '+' : ''}${eff.properties} bien${Math.abs(eff.properties) > 1 ? 's' : ''}`, positive: eff.properties > 0 });
   if (choice.costPct !== undefined) {
     deltas.push({ label: 'Coût travaux', positive: false });
     if (choice.gainPct > 0) deltas.push({ label: '+Valorisation', positive: true });

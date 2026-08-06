@@ -57,6 +57,9 @@ export function freshState({ name, companyName, gender, sector, traitId, challen
     over:       false,
     endingKind: null,
 
+    // Events per year (randomized each year)
+    eventsPerYear: 3 + Math.floor(Math.random() * 3),
+
     // UI helpers
     maxAge: GAME_OVER_MAX_AGE,
   };

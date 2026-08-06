@@ -55,10 +55,7 @@ export function clamp(val, min, max) {
  * Return the number of events to show for a given year (1–3).
  */
 export function randomEventsPerYear() {
-  const r = Math.random();
-  if (r < 0.2) return 1;
-  if (r < 0.7) return 2;
-  return 3;
+  return 3 + Math.floor(Math.random() * 3); // 3, 4 ou 5
 }
 
 /**
