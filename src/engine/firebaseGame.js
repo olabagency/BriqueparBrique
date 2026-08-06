@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from 'firebase/app';
-import { getDatabase, ref, set, remove, get, limitToLast, query as fbQuery } from 'firebase/database';
+import { getDatabase, ref, set, remove, get, push, limitToLast, query as fbQuery, orderByChild } from 'firebase/database';
 import { FIREBASE_CONFIG, FIREBASE_ENABLED } from './firebaseConfig.js';
 import { SESSION_ID } from './presence.js';
 
@@ -55,31 +55,46 @@ export async function removeActiveGame() {
 // ─── Leaderboard ──────────────────────────────────────────────────────────────
 
 /**
- * Push a finished run to the leaderboard.
+ * Push a finished run to the leaderboard AND to the permanent runs archive.
+ * - leaderboard/{SESSION_ID}: overwritten each time (keeps best/last per session for scoreboard)
+ * - runs/{pushId}: one entry per finished game, never overwritten — the full archive
  */
 export async function pushFinishedGame(summary) {
   const db = getDb();
   if (!db) return;
+
+  const payload = {
+    sessionId:       SESSION_ID,
+    name:            summary.name ?? 'Joueur',
+    companyName:     summary.companyName ?? '',
+    sector:          summary.sector ?? null,
+    traitId:         summary.traitId ?? null,
+    finalVal:        summary.finalVal ?? 0,
+    finalCash:       summary.finalCash ?? 0,
+    personalCash:    summary.personalCash ?? 0,
+    years:           summary.years ?? 0,
+    age:             summary.age ?? 18,
+    propertiesOwned: summary.propertiesOwned ?? 0,
+    achievements:    summary.achievements ?? [],
+    endingKind:      summary.endingKind ?? 'age_limit',
+    durationMs:      summary.durationMs ?? null,
+    over:            true,
+    date:            new Date().toISOString(),
+    updatedAt:       Date.now(),
+  };
+
   try {
-    // Write under leaderboard/{SESSION_ID} so the same run overwrites itself
-    await set(ref(db, `leaderboard/${SESSION_ID}`), {
-      sessionId:      SESSION_ID,
-      name:           summary.name ?? 'Joueur',
-      companyName:    summary.companyName ?? '',
-      finalVal:       summary.finalVal ?? 0,
-      finalCash:      summary.finalCash ?? 0,
-      personalCash:   summary.personalCash ?? 0,
-      years:          summary.years ?? 0,
-      age:            summary.age ?? 18,
-      propertiesOwned: summary.propertiesOwned ?? 0,
-      achievements:   summary.achievements ?? [],
-      endingKind:     summary.endingKind ?? 'age_limit',
-      over:           true,
-      date:           new Date().toISOString(),
-      updatedAt:      Date.now(),
-    });
+    // Leaderboard: one entry per session (upsert — fast scoreboard reads)
+    await set(ref(db, `leaderboard/${SESSION_ID}`), payload);
   } catch (e) {
-    console.warn('pushFinishedGame failed', e);
+    console.warn('pushFinishedGame (leaderboard) failed', e);
+  }
+
+  try {
+    // Archive: push() generates a unique key → every run is preserved forever
+    await push(ref(db, 'runs'), payload);
+  } catch (e) {
+    console.warn('pushFinishedGame (runs archive) failed', e);
   }
 }
 

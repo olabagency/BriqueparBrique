@@ -13,6 +13,9 @@
     },
     "presence": {
       ".indexOn": ["lastSeen"]
+    },
+    "runs": {
+      ".indexOn": ["updatedAt", "finalVal", "sessionId"]
     }
   }
 }
