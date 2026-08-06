@@ -295,6 +295,30 @@ function reducer(state, action) {
       };
     }
 
+    case 'RENOVATE_PROPERTY': {
+      const { propertyId, costPct, gainPct, keepUnrenovated, stress: renoStress } = action.payload;
+      const s = { ...state };
+      const props = [...(s.propertyList ?? [])];
+      const idx = props.findIndex(p => p.id === propertyId);
+      if (idx === -1) return s;
+      const prop = { ...props[idx] };
+      const cost = Math.round((prop.value ?? prop.baseValue ?? 0) * costPct);
+      const gain = Math.round((prop.value ?? prop.baseValue ?? 0) * gainPct);
+      s.cash = (s.cash ?? 0) - cost;
+      s.currentYearFinance = { ...s.currentYearFinance, renovations: (s.currentYearFinance?.renovations ?? 0) - cost };
+      if (!keepUnrenovated) {
+        prop.value = (prop.value ?? prop.baseValue ?? 0) + gain;
+        prop.condition = 'renove';
+        s.flags = { ...s.flags, everRenovated: true };
+      }
+      if (renoStress) s.stress = clamp((s.stress ?? 0) + renoStress, 0, STRESS_MAX);
+      props[idx] = prop;
+      s.propertyList = props;
+      s.valuation = props.reduce((sum, p) => sum + (p.value ?? 0), 0);
+      s.achievements = checkAchievements(s);
+      return s;
+    }
+
     case 'TOGGLE_RENT': {
       const { propertyId } = action.payload;
       const props = (state.propertyList ?? []).map(p => {
@@ -546,7 +570,8 @@ export function GameProvider({ children }) {
   const resolveEvent = useCallback((p)    => dispatch({ type: 'RESOLVE_EVENT', payload: p }),    []);
   const buyProperty  = useCallback((l)    => dispatch({ type: 'BUY_PROPERTY',  payload: { listing: l } }), []);
   const sellProperty = useCallback((id)   => dispatch({ type: 'SELL_PROPERTY', payload: { propertyId: id } }), []);
-  const toggleRent   = useCallback((id)   => dispatch({ type: 'TOGGLE_RENT',   payload: { propertyId: id } }), []);
+  const toggleRent       = useCallback((id)   => dispatch({ type: 'TOGGLE_RENT',       payload: { propertyId: id } }), []);
+  const renovateProperty = useCallback((p)    => dispatch({ type: 'RENOVATE_PROPERTY', payload: p }), []);
   const buyLuxury    = useCallback((item) => dispatch({ type: 'BUY_LUXURY',    payload: { item } }), []);
   const sellLuxury   = useCallback((id)   => dispatch({ type: 'SELL_LUXURY',   payload: { itemId: id } }), []);
   const retire       = useCallback(()     => dispatch({ type: 'RETIRE' }), []);
@@ -562,7 +587,7 @@ export function GameProvider({ children }) {
   const value = {
     state, dispatch,
     startGame, loadSave, resolveEvent,
-    buyProperty, sellProperty, toggleRent,
+    buyProperty, sellProperty, toggleRent, renovateProperty,
     buyLuxury, sellLuxury,
     retire, repayLoan, renegotiateLoan, massRepayLoans,
     bankWithdraw, bankInject,

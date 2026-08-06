@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from '../ui/Modal.jsx';
 import { useGame } from '../../context/GameContext.jsx';
 import { fmtCash } from '../../engine/utils.js';
 import { calcRent as calcRentEngine } from '../../engine/market.js';
 import propertyData from '../../data/property_data.json';
+import RenovationModal from './RenovationModal.jsx';
 
 export default function PortfolioModal({ onClose }) {
   const { state, sellProperty, toggleRent } = useGame();
+  const [renovatingProp, setRenovatingProp] = useState(null);
   const properties = state.propertyList ?? [];
   const currentYear = state.year ?? 1;
 
@@ -107,6 +109,16 @@ export default function PortfolioModal({ onClose }) {
                   )}
                 </div>
                 <div className="portfolio-row-actions">
+                  {prop.condition === 'aRenover' && (
+                    <button
+                      className="portfolio-renovate-btn"
+                      onClick={() => setRenovatingProp(prop)}
+                      title="Rénover ce bien"
+                      style={{ background: 'var(--amber)', color: '#fff' }}
+                    >
+                      🔨
+                    </button>
+                  )}
                   <button
                     className="portfolio-renovate-btn"
                     onClick={() => toggleRent(prop.id)}
@@ -134,6 +146,13 @@ export default function PortfolioModal({ onClose }) {
             );
           })}
         </div>
+      )}
+
+      {renovatingProp && (
+        <RenovationModal
+          property={renovatingProp}
+          onClose={() => setRenovatingProp(null)}
+        />
       )}
     </Modal>
   );

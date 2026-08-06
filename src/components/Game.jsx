@@ -13,6 +13,8 @@ import AchievementsModal from './modals/AchievementsModal.jsx';
 import LuxuryShopModal   from './modals/LuxuryShopModal.jsx';
 import BankModal         from './modals/BankModal.jsx';
 import achievementsDef from '../data/achievements.json';
+import LeftSidebar from './LeftSidebar.jsx';
+import RightSidebar from './RightSidebar.jsx';
 
 const MODALS = {
   portfolio:    PortfolioModal,
@@ -124,6 +126,8 @@ export default function Game() {
   return (
     <div className="app">
       <ThemeToggle />
+      <LeftSidebar onOpenModal={openModal} />
+      <RightSidebar onOpenModal={openModal} />
       <div className="react-screen game">
         <HUD onOpenModal={openModal} stress={stress} />
         <LivePresence />
