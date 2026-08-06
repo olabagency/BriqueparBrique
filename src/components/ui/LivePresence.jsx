@@ -1,68 +1,128 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useGame } from '../../context/GameContext.jsx';
 import { useEffects } from '../../context/EffectsContext.jsx';
+import { FIREBASE_ENABLED } from '../../engine/firebaseConfig.js';
+import { updatePresence, subscribePresence } from '../../engine/presence.js';
 import globalBoard from '../../data/global_leaderboard.json';
+import { fmtCash } from '../../engine/utils.js';
 
-const PROPERTY_TYPES = ['Studio', 'Appartement T2', 'Appartement T3', 'Duplex', 'Maison', 'Loft', 'Local commercial'];
-const ACTIONS = [
-  p => `vient d'acheter un ${PROPERTY_TYPES[Math.floor(Math.random() * PROPERTY_TYPES.length)]}`,
-  p => `a mis son bien en location`,
-  p => `a renégocié son crédit`,
-  p => `a atteint ${Math.floor(Math.random() * 30 + 5) * 100} k€ de patrimoine`,
-  p => `vient de démarrer une nouvelle partie`,
-  p => `a revendu un bien avec plus-value`,
-  p => `a débloqué un nouveau succès`,
-  p => `traverse une période de stress élevé`,
-  p => `a réalisé sa meilleure année`,
-  p => `vient de rembourser un crédit`,
+// ─── Simulated presence (fallback when Firebase is not configured) ─────────────
+
+const SIM_ACTIONS = [
+  () => `vient d'acheter un bien`,
+  () => `a mis son bien en location`,
+  () => `a renégocié son crédit`,
+  () => `a débloqué un nouveau succès`,
+  () => `vient de démarrer une nouvelle partie`,
+  () => `a revendu avec plus-value`,
+  () => `traverse une période de stress élevé`,
 ];
 
-function pickOnlinePlayers() {
+function pickSimPlayers() {
   const seed = Math.floor(Date.now() / (1000 * 60 * 60 * 4));
-  const shuffled = [...globalBoard].sort(() => {
-    const h = ((seed * 2654435761) >>> 0);
-    return (h % 3) - 1;
-  });
-  const count = 3 + (seed % 3);
-  return shuffled.slice(0, count);
+  const count = 3 + (seed % 4);
+  return [...globalBoard].slice(0, count);
 }
 
-const ONLINE_PLAYERS = pickOnlinePlayers();
+const SIM_PLAYERS = pickSimPlayers();
 
-export default function LivePresence() {
-  const { emit } = useEffects();
+function useSimPresence(emit) {
   const timerRef = useRef(null);
-  const [onlineCount] = useState(() => 8 + Math.floor(Math.random() * 18));
 
   useEffect(() => {
     function scheduleNext() {
-      const delay = 20000 + Math.random() * 25000;
       timerRef.current = setTimeout(() => {
-        const player = ONLINE_PLAYERS[Math.floor(Math.random() * ONLINE_PLAYERS.length)];
-        const actionFn = ACTIONS[Math.floor(Math.random() * ACTIONS.length)];
-        emit({ type: 'live', player, action: actionFn(player) });
+        const p = SIM_PLAYERS[Math.floor(Math.random() * SIM_PLAYERS.length)];
+        const action = SIM_ACTIONS[Math.floor(Math.random() * SIM_ACTIONS.length)]();
+        emit({ type: 'live', player: p, action });
         scheduleNext();
-      }, delay);
+      }, 22000 + Math.random() * 28000);
     }
-
-    const initialDelay = 8000 + Math.random() * 12000;
-    timerRef.current = setTimeout(() => {
-      scheduleNext();
-    }, initialDelay);
-
+    const delay = 10000 + Math.random() * 15000;
+    timerRef.current = setTimeout(scheduleNext, delay);
     return () => clearTimeout(timerRef.current);
   }, [emit]);
 
+  return { players: SIM_PLAYERS, count: 8 + Math.floor(Math.random() * 18) };
+}
+
+// ─── Real Firebase presence ──────────────────────────────────────────────────
+
+function useRealPresence(emit) {
+  const { state } = useGame();
+  const [players, setPlayers] = useState([]);
+  const prevPlayersRef = useRef([]);
+
+  // Push our own presence every 90s and on state changes
+  useEffect(() => {
+    if (!state.name) return;
+    updatePresence({ name: state.name, year: state.year, valuation: state.valuation, stress: state.stress });
+  }, [state.year, state.valuation, state.stress, state.name]);
+
+  useEffect(() => {
+    if (!state.name) return;
+    const interval = setInterval(() => {
+      updatePresence({ name: state.name, year: state.year, valuation: state.valuation, stress: state.stress });
+    }, 90000);
+    return () => clearInterval(interval);
+  }, [state.name, state.year, state.valuation, state.stress]);
+
+  // Subscribe to other players
+  useEffect(() => {
+    const unsub = subscribePresence((live) => {
+      const prev = prevPlayersRef.current;
+
+      // Detect newly joined players and emit notification
+      live.forEach(p => {
+        const wasPresent = prev.some(q => q.name === p.name);
+        if (!wasPresent && p.name) {
+          const valStr = p.valuation > 0 ? ` · ${fmtCash(p.valuation)} de patrimoine` : '';
+          emit({ type: 'live', player: p, action: `est en ligne${valStr}` });
+        }
+      });
+
+      prevPlayersRef.current = live;
+      setPlayers(live);
+    });
+    return unsub;
+  }, [emit]);
+
+  return { players, count: players.length };
+}
+
+// ─── Component ───────────────────────────────────────────────────────────────
+
+export default function LivePresence() {
+  const { emit } = useEffects();
+
+  const real = FIREBASE_ENABLED ? useRealPresence(emit) : null;
+  const sim  = !FIREBASE_ENABLED ? useSimPresence(emit) : null;
+
+  const { players, count } = real ?? sim ?? { players: [], count: 0 };
+  const displayCount = FIREBASE_ENABLED ? count : count;
+
+  if (displayCount === 0 && FIREBASE_ENABLED) return null;
+
+  const shownAvatars = players.slice(0, 4);
+
   return (
-    <div className="live-presence">
+    <div className="live-presence" title={FIREBASE_ENABLED ? 'Joueurs en ligne maintenant' : 'Joueurs actifs aujourd\'hui'}>
       <span className="live-dot" />
-      <span className="live-count">{onlineCount} en ligne</span>
+      <span className="live-count">{displayCount} en ligne</span>
       <div className="live-avatars">
-        {ONLINE_PLAYERS.slice(0, 4).map((p, i) => (
-          <span key={i} className="live-avatar-chip" title={p.name}>
-            {p.name[0]}
+        {shownAvatars.map((p, i) => (
+          <span
+            key={i}
+            className="live-avatar-chip"
+            title={`${p.name}${p.year ? ` · An ${p.year}` : ''}${p.valuation ? ` · ${fmtCash(p.valuation)}` : ''}`}
+          >
+            {(p.name ?? '?')[0].toUpperCase()}
           </span>
         ))}
       </div>
+      {!FIREBASE_ENABLED && (
+        <span style={{ fontSize: 9, color: 'var(--muted)', opacity: .6 }}>sim.</span>
+      )}
     </div>
   );
 }

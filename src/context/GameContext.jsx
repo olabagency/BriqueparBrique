@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useReducer, useCallback } from 'react';
 import { freshState, buildRunSummary } from '../engine/gameState.js';
 import { saveGame, loadGame, deleteSave, appendHistory } from '../engine/saveLoad.js';
+import { pushGlobalScore } from '../engine/globalScores.js';
+import { removePresence } from '../engine/presence.js';
 import {
   generateMarketListings,
   collectRents,
@@ -195,6 +197,8 @@ function reducer(state, action) {
       if (fatal) {
         const summary = buildRunSummary({ ...s, endingKind: 'fatal_event', over: true });
         appendHistory(summary);
+        pushGlobalScore(summary);
+        removePresence();
         deleteSave();
         return { ...s, over: true, endingKind: 'fatal_event', screen: 'end' };
       }
@@ -399,6 +403,8 @@ function reducer(state, action) {
       newState.achievements = checkAchievements(newState);
       const summary = buildRunSummary(newState);
       appendHistory(summary);
+      pushGlobalScore(summary);
+      removePresence();
       deleteSave();
       return { ...newState, screen: 'end' };
     }
@@ -491,12 +497,16 @@ function advanceYear(state) {
   if (s.stress >= STRESS_MAX) {
     const summary = buildRunSummary({ ...s, endingKind: 'burnout', over: true });
     appendHistory(summary);
+    pushGlobalScore(summary);
+    removePresence();
     deleteSave();
     return { ...s, over: true, endingKind: 'burnout', screen: 'end' };
   }
   if (s.age >= GAME_OVER_MAX_AGE) {
     const summary = buildRunSummary({ ...s, endingKind: 'age_limit', over: true });
     appendHistory(summary);
+    pushGlobalScore(summary);
+    removePresence();
     deleteSave();
     return { ...s, over: true, endingKind: 'age_limit', screen: 'end' };
   }

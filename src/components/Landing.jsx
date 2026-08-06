@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext.jsx';
 import { loadGame, hasSave, loadHistory } from '../engine/saveLoad.js';
 import ThemeToggle from './ui/ThemeToggle.jsx';
 import { fmtCash } from '../engine/utils.js';
 import achievementsDef from '../data/achievements.json';
 import globalBoard from '../data/global_leaderboard.json';
+import { FIREBASE_ENABLED } from '../engine/firebaseConfig.js';
+import { fetchGlobalScores } from '../engine/globalScores.js';
 
 const CHALLENGES = [
   { id: 'no_funding',    label: "Termine sans jamais lever de fonds" },
@@ -108,13 +110,22 @@ export default function Landing() {
   const [saveExists] = useState(() => hasSave());
   const [history]    = useState(() => loadHistory() ?? []);
   const [selectedRun, setSelectedRun] = useState(null);
+  const [liveScores, setLiveScores] = useState(null);
+
+  useEffect(() => {
+    if (!FIREBASE_ENABLED) return;
+    fetchGlobalScores(50).then(scores => {
+      if (scores.length > 0) setLiveScores(scores);
+    });
+  }, []);
 
   const handleResume = () => {
     const saved = loadGame();
     if (saved) loadSave(saved);
   };
 
-  const merged = [...globalBoard, ...history].sort((a, b) => (b.finalVal ?? 0) - (a.finalVal ?? 0));
+  const baseGlobal = liveScores ?? globalBoard;
+  const merged = [...baseGlobal, ...history].sort((a, b) => (b.finalVal ?? 0) - (a.finalVal ?? 0));
   const top10 = merged.slice(0, 10);
   const last5 = [...history].slice(-5).reverse();
 
@@ -165,7 +176,12 @@ export default function Landing() {
 
         {top10.length > 0 && (
           <div className="past-lives" id="leaderboardSection">
-            <div className="past-lives-title">🏆 Top 10 — Meilleurs scores</div>
+            <div className="past-lives-title">
+              🏆 Top 10 — Meilleurs scores
+              {FIREBASE_ENABLED && liveScores && (
+                <span style={{ fontSize: 10, color: 'var(--accent)', marginLeft: 8, fontWeight: 400 }}>● live</span>
+              )}
+            </div>
             <div style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center', marginBottom: 8 }}>
               Clique sur une ligne pour voir le détail complet
             </div>
