@@ -27,22 +27,25 @@ function useRealPresence(emit) {
     return () => clearInterval(interval);
   }, [state.name, state.year, state.valuation, state.stress]);
 
-  // Subscribe to other players' presence (own SESSION_ID already excluded in presence.js)
+  // Subscribe to other players' presence
+  // Exclude own SESSION_ID (done in presence.js) AND own name (stale entries from old tabs)
   useEffect(() => {
     const unsub = subscribePresence((live) => {
+      const myName = state.name?.trim().toLowerCase();
+      const others = live.filter(p => p.name?.trim().toLowerCase() !== myName);
       const prev = prevPlayersRef.current;
-      live.forEach(p => {
+      others.forEach(p => {
         const wasPresent = prev.some(q => q.name === p.name);
         if (!wasPresent && p.name) {
           const valStr = p.valuation > 0 ? ` · ${fmtCash(p.valuation)} de patrimoine` : '';
           emit({ type: 'live', player: p, action: `est en ligne${valStr}` });
         }
       });
-      prevPlayersRef.current = live;
-      setPlayers(live);
+      prevPlayersRef.current = others;
+      setPlayers(others);
     });
     return unsub;
-  }, [emit]);
+  }, [emit, state.name]);
 
   // Subscribe to real game-event notifications
   const lastSeenTsRef = useRef(Date.now());
