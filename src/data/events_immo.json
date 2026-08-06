@@ -18696,5 +18696,3280 @@
         "out": "Tu choisis la paix. Certains se demandent qui tu es vraiment."
       }
     ]
+  },
+  {
+    "title": "Un locataire refuse de payer son loyer",
+    "body": "Ton locataire est en difficulté financière et te demande un délai de paiement de trois mois.",
+    "minYear": 1,
+    "choices": [
+      {
+        "label": "Accepter le délai avec un accord écrit",
+        "tag": "prudent",
+        "eff": {
+          "cash": 8,
+          "stress": 5
+        },
+        "out": "Un geste humain qui préserve la relation et évite une procédure longue."
+      },
+      {
+        "label": "Lancer une procédure d'expulsion immédiatement",
+        "tag": "risque",
+        "eff": {
+          "cash": -15,
+          "stress": 15,
+          "val": -5
+        },
+        "out": "Procédure longue et coûteuse, mais tu t'imposes comme propriétaire ferme."
+      },
+      {
+        "label": "Négocier un plan d'apurement sur 6 mois",
+        "tag": "creatif",
+        "eff": {
+          "cash": 12,
+          "stress": 3
+        },
+        "out": "Un compromis équilibré qui limite les pertes."
+      }
+    ]
+  },
+  {
+    "title": "Une fuite d'eau détériore ton appartement",
+    "body": "Une canalisation cède dans la nuit. Le sol est trempé, le plafond du voisin du dessous endommagé.",
+    "minYear": 1,
+    "choices": [
+      {
+        "label": "Faire appel à un plombier d'urgence et tout réparer vite",
+        "tag": "prudent",
+        "eff": {
+          "cash": -18,
+          "stress": 8
+        },
+        "out": "Réparation rapide, charges importantes mais dossier sinistre clos."
+      },
+      {
+        "label": "Déclarer à l'assurance et attendre leur expert",
+        "tag": "creatif",
+        "eff": {
+          "cash": 5,
+          "stress": 12
+        },
+        "out": "L'assurance prend en charge l'essentiel, mais les délais sont longs."
+      },
+      {
+        "label": "Réparer soi-même l'essentiel pour limiter les frais",
+        "tag": "risque",
+        "eff": {
+          "cash": -8,
+          "stress": 10,
+          "val": -8
+        },
+        "out": "Économies immédiates, mais le travail bâclé ressortira plus tard."
+      }
+    ]
+  },
+  {
+    "title": "Ton syndic augmente les charges de copropriété de 20%",
+    "body": "L'assemblée générale a voté des travaux de ravalement. Les charges vont exploser cette année.",
+    "minYear": 2,
+    "choices": [
+      {
+        "label": "Voter contre et proposer un prestataire moins cher",
+        "tag": "risque",
+        "eff": {
+          "cash": 10,
+          "stress": 12
+        },
+        "out": "Tu gagnes le vote mais tu te fais des ennemis dans la copro."
+      },
+      {
+        "label": "Accepter et répercuter sur le loyer à la prochaine révision",
+        "tag": "prudent",
+        "eff": {
+          "cash": -12,
+          "stress": 4,
+          "val": 10
+        },
+        "out": "Logique économique saine, le bien sera mieux entretenu."
+      },
+      {
+        "label": "Vendre le bien avant les travaux",
+        "tag": "creatif",
+        "eff": {
+          "cash": 45,
+          "val": -40,
+          "stress": 8
+        },
+        "out": "Tu évites les charges mais tu perds une partie de la plus-value future."
+      }
+    ]
+  },
+  {
+    "title": "Un promoteur propose de racheter ton immeuble",
+    "body": "Un grand promoteur immobilier frappe à ta porte avec une offre attractive mais bien en dessous du potentiel réel.",
+    "minYear": 3,
+    "choices": [
+      {
+        "label": "Refuser et attendre une meilleure offre",
+        "tag": "risque",
+        "eff": {
+          "cash": 10,
+          "stress": 6
+        },
+        "out": "Tu paries sur l'avenir. L'offre monte six mois plus tard."
+      },
+      {
+        "label": "Accepter l'offre et sécuriser le gain",
+        "tag": "prudent",
+        "eff": {
+          "cash": 120,
+          "val": -90,
+          "stress": -10
+        },
+        "out": "Moins que le potentiel théorique, mais cash immédiat et stress en moins."
+      },
+      {
+        "label": "Négocier une contre-offre 25% plus haute",
+        "tag": "creatif",
+        "eff": {
+          "cash": 90,
+          "val": -80,
+          "stress": 8
+        },
+        "out": "Négociation serrée qui paye, mais le promoteur met du temps à répondre."
+      }
+    ]
+  },
+  {
+    "title": "Ton locataire veut sous-louer l'appartement",
+    "body": "Il part travailler à l'étranger 8 mois et propose de sous-louer à sa sœur sans changer le bail.",
+    "minYear": 2,
+    "choices": [
+      {
+        "label": "Accepter officieusement — ça simplifie tout",
+        "tag": "risque",
+        "eff": {
+          "cash": 5,
+          "stress": 5
+        },
+        "out": "Pratique, mais tu n'es pas couvert si quelque chose tourne mal."
+      },
+      {
+        "label": "Refuser catégoriquement : c'est interdit par le bail",
+        "tag": "prudent",
+        "eff": {
+          "cash": 8,
+          "stress": 8
+        },
+        "out": "Tu te protèges légalement, mais le locataire résilie à son retour."
+      },
+      {
+        "label": "Rédiger un avenant officiel de sous-location",
+        "tag": "creatif",
+        "eff": {
+          "cash": 10,
+          "stress": 3
+        },
+        "out": "Solution propre et sécurisée pour les deux parties."
+      }
+    ]
+  },
+  {
+    "title": "Une opportunité de rachat à la barre du tribunal",
+    "body": "Un appartement saisi passe en vente judiciaire. Prix de départ 40% sous le marché, mais dans un état inconnu.",
+    "minYear": 3,
+    "choices": [
+      {
+        "label": "Enchérir prudemment jusqu'à -25% du marché",
+        "tag": "prudent",
+        "eff": {
+          "cash": -55,
+          "val": 75,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Tu payes un peu plus mais tu limites les surprises."
+      },
+      {
+        "label": "Enchérir agressivement pour décrocher le bien",
+        "tag": "risque",
+        "eff": {
+          "cash": -40,
+          "val": 80,
+          "stress": 15,
+          "properties": 1
+        },
+        "out": "Tu l'emportes au meilleur prix mais les travaux sont lourds."
+      },
+      {
+        "label": "Passer ton tour — trop d'inconnues",
+        "tag": "creatif",
+        "eff": {
+          "cash": 12,
+          "stress": -5
+        },
+        "out": "Prudence payante : le bien avait des vices cachés importants."
+      }
+    ]
+  },
+  {
+    "title": "Ton bien est classé en passoire énergétique DPE F",
+    "body": "Nouveau diagnostic : ton appartement est classé F. La mise en location sera interdite dans 2 ans si tu ne rénoves pas.",
+    "minYear": 2,
+    "choices": [
+      {
+        "label": "Engager immédiatement les travaux d'isolation",
+        "tag": "prudent",
+        "eff": {
+          "cash": -35,
+          "val": 50,
+          "stress": 10
+        },
+        "out": "Investissement lourd mais le bien passe en classe C et sa valeur grimpe."
+      },
+      {
+        "label": "Vendre avant l'entrée en vigueur de la loi",
+        "tag": "risque",
+        "eff": {
+          "cash": 60,
+          "val": -55,
+          "stress": 8
+        },
+        "out": "Tu cèdes à bon prix aujourd'hui avant que la décote ne s'installe."
+      },
+      {
+        "label": "Attendre et voir si la loi est assouplie",
+        "tag": "creatif",
+        "eff": {
+          "cash": 8,
+          "stress": 5,
+          "val": -10
+        },
+        "out": "Pari risqué : la loi est confirmée et la décote commence à mordre."
+      }
+    ]
+  },
+  {
+    "title": "Un incendie partiel touche ta résidence",
+    "body": "Un court-circuit dans une cage d'escalier provoque des dégâts sur les parties communes et deux appartements.",
+    "minYear": 1,
+    "choices": [
+      {
+        "label": "Mobiliser immédiatement ton assurance propriétaire",
+        "tag": "prudent",
+        "eff": {
+          "cash": 20,
+          "stress": 12,
+          "val": -5
+        },
+        "out": "L'assurance couvre l'essentiel, mais la franchise et les délais font mal."
+      },
+      {
+        "label": "Négocier directement avec les autres copropriétaires",
+        "tag": "creatif",
+        "eff": {
+          "cash": -10,
+          "stress": 15,
+          "val": 5
+        },
+        "out": "Plus rapide que l'assurance, mais tu portes une partie des frais."
+      },
+      {
+        "label": "Laisser le syndic gérer entièrement",
+        "tag": "risque",
+        "eff": {
+          "cash": -5,
+          "stress": 5,
+          "val": -8
+        },
+        "out": "Pratique mais le syndic facture cher et les réparations sont bâclées."
+      }
+    ]
+  },
+  {
+    "title": "Tu discovers un marché de niche : les parkings",
+    "body": "Un agent te présente un lot de 8 parkings en sous-sol à céder groupé. Rendement net attendu : 7%.",
+    "minYear": 2,
+    "choices": [
+      {
+        "label": "Acheter le lot complet",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -45,
+          "val": 60,
+          "stress": 8,
+          "properties": 2
+        },
+        "out": "Excellent rendement et faible gestion. Un vrai coup."
+      },
+      {
+        "label": "N'en prendre que 4 pour tester",
+        "tag": "prudent",
+        "eff": {
+          "cash": -22,
+          "val": 28,
+          "stress": 4,
+          "properties": 1
+        },
+        "out": "Approche raisonnée qui te laisse de la marge."
+      },
+      {
+        "label": "Passer — tu préfères les appartements",
+        "tag": "creatif",
+        "eff": {
+          "cash": 10,
+          "stress": -3
+        },
+        "out": "Stratégie cohérente, mais tu rates un bon rendement."
+      }
+    ]
+  },
+  {
+    "title": "Ton locataire veut acheter le bien qu'il loue",
+    "body": "Après 5 ans dans ton appartement, il te propose un prix légèrement inférieur au marché mais payé comptant.",
+    "minYear": 4,
+    "choices": [
+      {
+        "label": "Accepter — cash immédiat et zéro frais d'agence",
+        "tag": "prudent",
+        "eff": {
+          "cash": 95,
+          "val": -80,
+          "stress": -8
+        },
+        "out": "Transaction rapide, simple et sans frais. Un soulagement."
+      },
+      {
+        "label": "Refuser et mettre sur le marché au prix plein",
+        "tag": "risque",
+        "eff": {
+          "cash": 110,
+          "val": -85,
+          "stress": 10
+        },
+        "out": "Tu obtiens mieux mais tu perds un bon locataire en attendant."
+      },
+      {
+        "label": "Contre-proposer au prix du marché avec facilités",
+        "tag": "creatif",
+        "eff": {
+          "cash": 100,
+          "val": -82,
+          "stress": 5
+        },
+        "out": "Compromis honnête accepté au bout de deux semaines de négociation."
+      }
+    ]
+  },
+  {
+    "title": "Un fonds de colocation propose de louer tout ton immeuble",
+    "body": "Une startup spécialisée en colocation propose de louer l'intégralité de tes appartements avec un bail commercial sur 5 ans.",
+    "minYear": 6,
+    "choices": [
+      {
+        "label": "Signer le bail commercial — revenus garantis 5 ans",
+        "tag": "prudent",
+        "eff": {
+          "cash": 80,
+          "stress": -12,
+          "val": 20
+        },
+        "out": "Visibilité totale sur tes revenus locatifs pour les 5 prochaines années."
+      },
+      {
+        "label": "Refuser et garder la gestion en direct",
+        "tag": "risque",
+        "eff": {
+          "cash": 50,
+          "stress": 8,
+          "val": 10
+        },
+        "out": "Plus de marge potentielle, mais aussi plus de gestion au quotidien."
+      },
+      {
+        "label": "Négocier un loyer indexé sur l'inflation",
+        "tag": "creatif",
+        "eff": {
+          "cash": 70,
+          "stress": -8,
+          "val": 25
+        },
+        "out": "Contrat avantageux et protégé contre l'inflation sur la durée."
+      }
+    ]
+  },
+  {
+    "title": "La mairie préempte un de tes biens",
+    "body": "La ville exerce son droit de préemption sur ton studio dans un quartier en rénovation. Prix fixé par l'administration.",
+    "minYear": 5,
+    "choices": [
+      {
+        "label": "Accepter le prix proposé",
+        "tag": "prudent",
+        "eff": {
+          "cash": 55,
+          "val": -45,
+          "stress": 6
+        },
+        "out": "Moins que le marché, mais vente certaine et rapide."
+      },
+      {
+        "label": "Contester l'évaluation et demander une expertise",
+        "tag": "risque",
+        "eff": {
+          "cash": 70,
+          "val": -50,
+          "stress": 18
+        },
+        "out": "Long mais tu obtiens 15% de plus après expertise contradictoire."
+      },
+      {
+        "label": "Chercher un accord amiable avec la mairie",
+        "tag": "creatif",
+        "eff": {
+          "cash": 62,
+          "val": -48,
+          "stress": 10
+        },
+        "out": "Compromis acceptable obtenu en six semaines de discussions."
+      }
+    ]
+  },
+  {
+    "title": "Un de tes immeubles est concerné par un PPR inondation",
+    "body": "Un plan de prévention des risques inondation vient d'être approuvé. Ton immeuble est en zone bleue.",
+    "minYear": 6,
+    "choices": [
+      {
+        "label": "Vendre avant que la décote ne s'installe",
+        "tag": "risque",
+        "eff": {
+          "cash": 90,
+          "val": -75,
+          "stress": 10
+        },
+        "out": "Tu sors avant que le marché n'intègre pleinement le risque."
+      },
+      {
+        "label": "Investir dans des travaux de mise hors d'eau",
+        "tag": "prudent",
+        "eff": {
+          "cash": -40,
+          "val": 35,
+          "stress": 12
+        },
+        "out": "Coûteux mais le bien reste valorisable et louable sans problème."
+      },
+      {
+        "label": "Garder et baisser légèrement le loyer pour attirer",
+        "tag": "creatif",
+        "eff": {
+          "cash": 15,
+          "stress": 5,
+          "val": -15
+        },
+        "out": "Tu maintiens l'occupation mais la valeur recule doucement."
+      }
+    ]
+  },
+  {
+    "title": "Tu reçois une proposition de SCPI",
+    "body": "Une société de gestion te propose d'apporter tes biens à une SCPI en échange de parts. Tu délègues tout mais perds le contrôle direct.",
+    "minYear": 8,
+    "choices": [
+      {
+        "label": "Apporter une partie de ton parc à la SCPI",
+        "tag": "prudent",
+        "eff": {
+          "cash": 60,
+          "stress": -20,
+          "val": 10
+        },
+        "out": "Revenus réguliers sans aucune gestion. La sérénité a un prix."
+      },
+      {
+        "label": "Refuser — tu veux garder la main",
+        "tag": "risque",
+        "eff": {
+          "cash": 15,
+          "stress": 5,
+          "val": 15
+        },
+        "out": "Plus de potentiel de gains, mais aussi plus de charge mentale."
+      },
+      {
+        "label": "Demander une expertise comparative avant de décider",
+        "tag": "creatif",
+        "eff": {
+          "cash": 12,
+          "stress": -5,
+          "val": 12
+        },
+        "out": "Tu prends ta décision en pleine connaissance de cause."
+      }
+    ]
+  },
+  {
+    "title": "Un promoteur veut diviser ton terrain en deux lots",
+    "body": "Tu possèdes un terrain avec une maison ancienne. Un promoteur veut racheter la moitié pour y construire une résidence.",
+    "minYear": 7,
+    "choices": [
+      {
+        "label": "Vendre la moitié du terrain",
+        "tag": "prudent",
+        "eff": {
+          "cash": 150,
+          "stress": -5,
+          "val": -20
+        },
+        "out": "Cash immédiat significatif sans perdre la totalité de ton bien."
+      },
+      {
+        "label": "Refuser et construire toi-même",
+        "tag": "risque",
+        "eff": {
+          "cash": -80,
+          "val": 200,
+          "stress": 20,
+          "properties": 1
+        },
+        "out": "Énorme prise de risque mais valeur créée considérable si tout se passe bien."
+      },
+      {
+        "label": "Négocier une participation dans le projet immobilier",
+        "tag": "creatif",
+        "eff": {
+          "cash": 80,
+          "val": 60,
+          "stress": 12
+        },
+        "out": "Tu entres dans le projet avec une moindre liquidité mais un beau potentiel."
+      }
+    ]
+  },
+  {
+    "title": "Les taux montent et ton crédit variable s'emballe",
+    "body": "Ta mensualité vient d'augmenter de 30% suite à la hausse des taux. Le coût total du crédit explose.",
+    "minYear": 5,
+    "choices": [
+      {
+        "label": "Renégocier en taux fixe immédiatement",
+        "tag": "prudent",
+        "eff": {
+          "cash": -20,
+          "stress": 8,
+          "val": 5
+        },
+        "out": "Frais de renégociation mais sécurité totale pour les années à venir."
+      },
+      {
+        "label": "Vendre un bien pour rembourser anticipativement",
+        "tag": "risque",
+        "eff": {
+          "cash": 80,
+          "val": -70,
+          "stress": 10
+        },
+        "out": "Tu sors du crédit toxique au prix d'un bien, mais le cash flow s'améliore."
+      },
+      {
+        "label": "Absorber la hausse en espérant une baisse prochaine",
+        "tag": "creatif",
+        "eff": {
+          "cash": -30,
+          "stress": 15
+        },
+        "out": "Pari sur les taux qui tarde à payer. Le stress monte."
+      }
+    ]
+  },
+  {
+    "title": "Ton gestionnaire locatif démissionne",
+    "body": "Ton administrateur de biens qui gérait 6 de tes appartements démissionne du jour au lendemain. Tu dois trouver une solution vite.",
+    "minYear": 7,
+    "choices": [
+      {
+        "label": "Tout reprendre en direct en urgence",
+        "tag": "risque",
+        "eff": {
+          "cash": 25,
+          "stress": 20
+        },
+        "out": "Tu économises les frais mais c'est chronophage et épuisant."
+      },
+      {
+        "label": "Recruter un nouveau gestionnaire en une semaine",
+        "tag": "prudent",
+        "eff": {
+          "cash": -10,
+          "stress": 10
+        },
+        "out": "Transition rapide, tu perds peu de loyers et le service reprend vite."
+      },
+      {
+        "label": "Profiter de l'occasion pour vendre les biens les moins rentables",
+        "tag": "creatif",
+        "eff": {
+          "cash": 120,
+          "val": -90,
+          "stress": 5
+        },
+        "out": "Tu alléges ton parc et simplifies ta gestion en une seule décision."
+      }
+    ]
+  },
+  {
+    "title": "Un promoteur t'offre une loge dans sa nouvelle résidence",
+    "body": "En échange d'un partenariat, un promoteur te propose d'investir dans sa prochaine opération avec un ticket d'entrée réduit.",
+    "minYear": 8,
+    "choices": [
+      {
+        "label": "Saisir l'opportunité de co-investissement",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -60,
+          "val": 100,
+          "stress": 12,
+          "properties": 1
+        },
+        "out": "Belle plus-value à la livraison si le projet se passe bien."
+      },
+      {
+        "label": "Demander une garantie de rachat",
+        "tag": "prudent",
+        "eff": {
+          "cash": -45,
+          "val": 75,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Plus sécurisé mais moins lucratif. Bon équilibre risque/rendement."
+      },
+      {
+        "label": "Refuser — trop d'inconnues sur ce promoteur",
+        "tag": "creatif",
+        "eff": {
+          "cash": 12,
+          "stress": -3
+        },
+        "out": "Prudence justifiée : le promoteur rencontre des difficultés 18 mois plus tard."
+      }
+    ]
+  },
+  {
+    "title": "Tes immeubles ont besoin d'une mise aux normes électriques",
+    "body": "Un contrôle révèle que plusieurs de tes logements ont des installations électriques vétustes dangereuses.",
+    "minYear": 6,
+    "choices": [
+      {
+        "label": "Tout mettre aux normes immédiatement",
+        "tag": "prudent",
+        "eff": {
+          "cash": -50,
+          "val": 40,
+          "stress": 10
+        },
+        "out": "Investissement important mais le parc est sécurisé et valorisé."
+      },
+      {
+        "label": "Faire le minimum légal requis pour chaque logement",
+        "tag": "risque",
+        "eff": {
+          "cash": -20,
+          "stress": 8,
+          "val": 10
+        },
+        "out": "Tu restes en conformité sans dépenser plus que nécessaire."
+      },
+      {
+        "label": "Répercuter une partie sur les loyers à la prochaine révision",
+        "tag": "creatif",
+        "eff": {
+          "cash": -15,
+          "stress": 5,
+          "val": 20
+        },
+        "out": "Équilibre économique trouvé, les locataires comprennent."
+      }
+    ]
+  },
+  {
+    "title": "Un viager se présente — une vieille dame vend son appartement",
+    "body": "Une veuve de 78 ans propose son appartement en viager. Bouquet réduit, rente mensuelle à verser jusqu'à son décès.",
+    "minYear": 6,
+    "choices": [
+      {
+        "label": "Accepter le viager — pari sur la durée",
+        "tag": "risque",
+        "eff": {
+          "cash": -30,
+          "val": 80,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Potentiellement très rentable si la dame est âgée. Moralement discutable."
+      },
+      {
+        "label": "Proposer un prix de vente classique à la place",
+        "tag": "prudent",
+        "eff": {
+          "cash": -70,
+          "val": 85,
+          "stress": 5,
+          "properties": 1
+        },
+        "out": "Acquisition classique, plus chère mais sans aléa moral ni financier."
+      },
+      {
+        "label": "Passer — ce type de montage ne te convient pas",
+        "tag": "creatif",
+        "eff": {
+          "cash": 10,
+          "stress": -5
+        },
+        "out": "Décision éthique assumée. Tu trouves autre chose."
+      }
+    ]
+  },
+  {
+    "title": "Tu découvres qu'un de tes locataires fait de l'Airbnb illégal",
+    "body": "Ton locataire sous-loue ton appartement sur les plateformes de courte durée sans ton accord. Il touche deux fois le loyer.",
+    "minYear": 5,
+    "choices": [
+      {
+        "label": "Mettre en demeure de cesser immédiatement",
+        "tag": "prudent",
+        "eff": {
+          "cash": 8,
+          "stress": 8
+        },
+        "out": "Il cesse, mais la relation est définitivement rompue."
+      },
+      {
+        "label": "Proposer un avenant avec partage des revenus",
+        "tag": "creatif",
+        "eff": {
+          "cash": 30,
+          "stress": 5
+        },
+        "out": "Tu monétises la situation et gardes un bon locataire."
+      },
+      {
+        "label": "Lancer la résiliation du bail pour violation des clauses",
+        "tag": "risque",
+        "eff": {
+          "cash": -15,
+          "stress": 18
+        },
+        "out": "Procédure longue mais tu récupères le bien pour le louer toi-même."
+      }
+    ]
+  },
+  {
+    "title": "Un investisseur étranger veut entrer dans ton capital",
+    "body": "Un family office basé à Dubaï propose de co-investir dans ton parc immobilier en échange de 30% du capital.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Accepter le partenariat — croissance accélérée",
+        "tag": "audacieux",
+        "eff": {
+          "cash": 200,
+          "val": 150,
+          "stress": 15
+        },
+        "flag": "raisedFunding",
+        "out": "Financement massif qui te permet de doubler ton parc en 3 ans."
+      },
+      {
+        "label": "Refuser pour garder l'indépendance totale",
+        "tag": "prudent",
+        "eff": {
+          "cash": 20,
+          "stress": -5
+        },
+        "out": "Tu restes seul maître à bord. La croissance sera plus lente mais la tienne."
+      },
+      {
+        "label": "Négocier une minorité de blocage à 20%",
+        "tag": "creatif",
+        "eff": {
+          "cash": 120,
+          "val": 80,
+          "stress": 10
+        },
+        "out": "Tu prends l'argent tout en gardant le contrôle opérationnel."
+      }
+    ]
+  },
+  {
+    "title": "La ville classe ton quartier en zone de revitalisation",
+    "body": "Une ZRR est créée autour de tes immeubles. Avantages fiscaux énormes mais obligation de travaux de réhabilitation.",
+    "minYear": 9,
+    "choices": [
+      {
+        "label": "Engager les travaux pour profiter des avantages fiscaux",
+        "tag": "prudent",
+        "eff": {
+          "cash": -80,
+          "val": 140,
+          "stress": 12
+        },
+        "out": "Investissement amorti en 4 ans grâce aux réductions fiscales."
+      },
+      {
+        "label": "Revendre avant d'être contraint aux travaux",
+        "tag": "risque",
+        "eff": {
+          "cash": 130,
+          "val": -100,
+          "stress": 8
+        },
+        "out": "Plus-value belle mais tu rates les avantages fiscaux futurs."
+      },
+      {
+        "label": "Louer à une association qui bénéficiera des aides",
+        "tag": "creatif",
+        "eff": {
+          "cash": 40,
+          "stress": -8,
+          "val": 20
+        },
+        "out": "Solution élégante qui te libère des travaux tout en gardant le bien."
+      }
+    ]
+  },
+  {
+    "title": "Un de tes immeubles est retenu dans un documentaire sur la gentrification",
+    "body": "Une journaliste souhaite filmer ton immeuble pour un reportage sur la hausse des loyers dans ce quartier.",
+    "minYear": 8,
+    "choices": [
+      {
+        "label": "Accepter — la publicité peut attirer des acheteurs",
+        "tag": "risque",
+        "eff": {
+          "cash": 15,
+          "stress": 12
+        },
+        "out": "Le reportage est équilibré mais quelques locataires militant contre toi."
+      },
+      {
+        "label": "Refuser poliment et préserver ta discrétion",
+        "tag": "prudent",
+        "eff": {
+          "cash": 5,
+          "stress": 3
+        },
+        "out": "Pas d'exposition, pas de polémique. Tu continues tranquillement."
+      },
+      {
+        "label": "Accepter sous condition de droit de regard",
+        "tag": "creatif",
+        "eff": {
+          "cash": 10,
+          "stress": 6
+        },
+        "out": "Reportage favorable qui valorise ta démarche de rénovation."
+      }
+    ]
+  },
+  {
+    "title": "Tu peux acquérir un hôtel particulier en déshérence",
+    "body": "Un immeuble classé XIXe siècle, propriété d'une succession bloquée depuis 8 ans, est mis en vente par le tribunal.",
+    "minYear": 12,
+    "choices": [
+      {
+        "label": "Acquérir et rénover en résidence haut de gamme",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -200,
+          "val": 350,
+          "stress": 20,
+          "properties": 2
+        },
+        "out": "Chantier titanesque mais valeur créée considérable à terme."
+      },
+      {
+        "label": "Acquérir et revendre à un promoteur spécialisé",
+        "tag": "prudent",
+        "eff": {
+          "cash": 80,
+          "val": 0,
+          "stress": 8
+        },
+        "out": "Marge rapide sans risque de chantier. Une opération propre."
+      },
+      {
+        "label": "S'associer avec un architecte des monuments historiques",
+        "tag": "creatif",
+        "eff": {
+          "cash": -80,
+          "val": 200,
+          "stress": 12,
+          "properties": 1
+        },
+        "out": "Partenariat intelligent qui partage les risques et les compétences."
+      }
+    ]
+  },
+  {
+    "title": "Ton parc est ciblé par une association de locataires",
+    "body": "Une association monte au créneau contre tes loyers jugés trop élevés dans ce quartier populaire. Pétition en cours.",
+    "minYear": 9,
+    "choices": [
+      {
+        "label": "Geler les loyers volontairement pendant 2 ans",
+        "tag": "prudent",
+        "eff": {
+          "cash": -20,
+          "stress": -10,
+          "val": 5
+        },
+        "out": "Geste bien reçu qui apaise la tension et préserve ta réputation."
+      },
+      {
+        "label": "Engager un avocat et défendre tes droits",
+        "tag": "risque",
+        "eff": {
+          "cash": -15,
+          "stress": 18
+        },
+        "out": "Tu gagnes juridiquement mais l'image publique en prend un coup."
+      },
+      {
+        "label": "Proposer une médiation avec la mairie",
+        "tag": "creatif",
+        "eff": {
+          "cash": -5,
+          "stress": 5
+        },
+        "out": "Processus long mais qui aboutit à un accord apprécié de toutes les parties."
+      }
+    ]
+  },
+  {
+    "title": "Un lotissement entier est proposé à la vente groupée",
+    "body": "Un promoteur en liquidation cède 12 maisons individuelles dans un lotissement récent. Prix global très inférieur au marché.",
+    "minYear": 11,
+    "choices": [
+      {
+        "label": "Racheter le lot entier avec un crédit syndiqué",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -150,
+          "val": 280,
+          "stress": 20,
+          "properties": 4
+        },
+        "out": "Opération d'envergure qui propulse ton parc mais mobilise tout ton crédit."
+      },
+      {
+        "label": "S'associer avec deux autres investisseurs",
+        "tag": "prudent",
+        "eff": {
+          "cash": -50,
+          "val": 90,
+          "stress": 10,
+          "properties": 1
+        },
+        "out": "Risque dilué, rendement partagé mais opération plus sereine."
+      },
+      {
+        "label": "Acheter seulement les 3 meilleures maisons",
+        "tag": "creatif",
+        "eff": {
+          "cash": -75,
+          "val": 120,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Sélection rigoureuse qui maximise la rentabilité par euro investi."
+      }
+    ]
+  },
+  {
+    "title": "Un incubateur startup veut louer tes bureaux",
+    "body": "Une structure d'accompagnement de startups cherche 800m² pour 5 ans. Loyer inférieur au marché mais bail béton.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Signer le bail commercial longue durée",
+        "tag": "prudent",
+        "eff": {
+          "cash": 60,
+          "stress": -8,
+          "val": 20
+        },
+        "out": "Sécurité locative totale pendant 5 ans avec un locataire fiable."
+      },
+      {
+        "label": "Mettre sur le marché classique pour maximiser",
+        "tag": "risque",
+        "eff": {
+          "cash": 80,
+          "stress": 8,
+          "val": 15
+        },
+        "out": "Meilleur loyer mais davantage de rotation et de gestion."
+      },
+      {
+        "label": "Proposer un loyer progressif indexé sur leur croissance",
+        "tag": "creatif",
+        "eff": {
+          "cash": 50,
+          "stress": -5,
+          "val": 30
+        },
+        "out": "Montage innovant : si la startup explose, ton loyer suit."
+      }
+    ]
+  },
+  {
+    "title": "Un cabinet d'architectes propose une surélévation",
+    "body": "En ajoutant deux étages à ton immeuble haussmannien, tu peux créer 4 nouveaux appartements. Travaux lourds.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Lancer le projet de surélévation complet",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -180,
+          "val": 320,
+          "stress": 20,
+          "properties": 2
+        },
+        "out": "Chantier de 18 mois mais création de valeur spectaculaire."
+      },
+      {
+        "label": "Vendre les droits à bâtir à un promoteur",
+        "tag": "prudent",
+        "eff": {
+          "cash": 90,
+          "stress": -5,
+          "val": 20
+        },
+        "out": "Cash immédiat sans risque de chantier. Une solution simple."
+      },
+      {
+        "label": "N'ajouter qu'un étage pour limiter les risques",
+        "tag": "creatif",
+        "eff": {
+          "cash": -80,
+          "val": 130,
+          "stress": 12,
+          "properties": 1
+        },
+        "out": "Équilibre entre ambition et prudence. Travaux plus courts."
+      }
+    ]
+  },
+  {
+    "title": "Une clinique privée veut t'acheter ton immeuble",
+    "body": "Une clinique en expansion cherche des locaux. Elle propose 40% au-dessus du marché pour ton immeuble bien situé.",
+    "minYear": 11,
+    "choices": [
+      {
+        "label": "Vendre au prix proposé — opportunité unique",
+        "tag": "prudent",
+        "eff": {
+          "cash": 250,
+          "val": -160,
+          "stress": -10
+        },
+        "out": "Transaction exceptionnelle qui dégage un cash considérable."
+      },
+      {
+        "label": "Refuser — les perspectives futures valent plus",
+        "tag": "risque",
+        "eff": {
+          "cash": 20,
+          "stress": 5,
+          "val": 30
+        },
+        "out": "Tu paries sur la valorisation future. Le marché te donne raison 3 ans plus tard."
+      },
+      {
+        "label": "Vendre et proposer de racheter d'autres biens de la clinique",
+        "tag": "creatif",
+        "eff": {
+          "cash": 180,
+          "val": -100,
+          "stress": 5
+        },
+        "out": "Tu vends haut et tu réinvestis dans un autre bien à bon prix."
+      }
+    ]
+  },
+  {
+    "title": "Une startup PropTech veut tester son outil de gestion sur ton parc",
+    "body": "Une jeune société propose de gérer ton parc gratuitement pendant 1 an en échange d'être ton cas d'usage marketing.",
+    "minYear": 8,
+    "choices": [
+      {
+        "label": "Accepter — ça te libère de la gestion",
+        "tag": "creatif",
+        "eff": {
+          "cash": 25,
+          "stress": -15
+        },
+        "out": "L'outil fonctionne bien et tu gagnes du temps précieux."
+      },
+      {
+        "label": "Refuser — tu ne veux pas être un cobaye",
+        "tag": "prudent",
+        "eff": {
+          "cash": 8,
+          "stress": 3
+        },
+        "out": "Décision raisonnable. Leurs premiers clients essuient quelques bugs."
+      },
+      {
+        "label": "Accepter avec un contrat de confidentialité strict",
+        "tag": "risque",
+        "eff": {
+          "cash": 20,
+          "stress": -10
+        },
+        "out": "Protection assurée et service gratuit. Bon compromis."
+      }
+    ]
+  },
+  {
+    "title": "Ton empire immobilier est valorisé par une banque d'affaires",
+    "body": "Une banque d'affaires sollicitée évalue ton parc à 15M€. Elle propose de t'aider à structurer une holding.",
+    "minYear": 13,
+    "choices": [
+      {
+        "label": "Créer la holding pour optimiser la fiscalité",
+        "tag": "prudent",
+        "eff": {
+          "cash": -30,
+          "val": 200,
+          "stress": 10
+        },
+        "out": "Structure plus lourde mais optimisation fiscale significative sur 5 ans."
+      },
+      {
+        "label": "Vendre une partie du parc pour cristalliser les gains",
+        "tag": "risque",
+        "eff": {
+          "cash": 400,
+          "val": -300,
+          "stress": -15
+        },
+        "out": "Réalisation de plus-value importante. Tu diversifies hors immobilier."
+      },
+      {
+        "label": "Garder la structure actuelle — simple et efficace",
+        "tag": "creatif",
+        "eff": {
+          "cash": 30,
+          "stress": -8,
+          "val": 50
+        },
+        "out": "La simplicité a de la valeur. Tu continues à te concentrer sur les acquisitions."
+      }
+    ]
+  },
+  {
+    "title": "Un fonds souverain propose de co-investir dans ton projet phare",
+    "body": "Un fonds du Golfe souhaite prendre 25% dans ton projet de résidence étudiante de 200 logements.",
+    "minYear": 14,
+    "choices": [
+      {
+        "label": "Accepter le partenariat — accélérateur de croissance",
+        "tag": "audacieux",
+        "eff": {
+          "cash": 300,
+          "val": 250,
+          "stress": 18,
+          "properties": 3
+        },
+        "flag": "raisedFunding",
+        "out": "Le projet se réalise en 2 ans. Rendement exceptionnel."
+      },
+      {
+        "label": "Garder 100% du projet même en ralentissant",
+        "tag": "prudent",
+        "eff": {
+          "cash": -100,
+          "val": 150,
+          "stress": 15,
+          "properties": 2
+        },
+        "out": "Plus long, plus risqué seul, mais la totalité des gains t'appartient."
+      },
+      {
+        "label": "Vendre 50% au fonds avec option de rachat dans 5 ans",
+        "tag": "creatif",
+        "eff": {
+          "cash": 150,
+          "val": 100,
+          "stress": 12,
+          "properties": 1
+        },
+        "out": "Structure hybride qui te donne les moyens d'agir et te laisse une porte de sortie."
+      }
+    ]
+  },
+  {
+    "title": "Un groupe hôtelier veut reprendre tes locations courte durée",
+    "body": "Marriott propose de passer sous sa marque tes 10 appartements de prestige en mode hôtelier, avec garantie de taux d'occupation.",
+    "minYear": 13,
+    "choices": [
+      {
+        "label": "Signer le contrat de franchise hôtelière",
+        "tag": "prudent",
+        "eff": {
+          "cash": 120,
+          "stress": -15,
+          "val": 50
+        },
+        "out": "Revenus boostés, image renforcée et gestion déléguée. Idéal."
+      },
+      {
+        "label": "Refuser et continuer en indépendant",
+        "tag": "risque",
+        "eff": {
+          "cash": 80,
+          "stress": 5,
+          "val": 20
+        },
+        "out": "Plus de marge de manœuvre mais aussi plus de travail commercial."
+      },
+      {
+        "label": "Créer ta propre marque de résidences hôtelières",
+        "tag": "creatif",
+        "eff": {
+          "cash": -40,
+          "val": 120,
+          "stress": 18
+        },
+        "out": "Pari audacieux qui prend du temps mais crée une vraie valeur de marque."
+      }
+    ]
+  },
+  {
+    "title": "La presse économique te consacre un article",
+    "body": "Les Echos veulent te profiler dans leur rubrique 'Bâtisseurs'. Visibilité massive mais exposition personnelle.",
+    "minYear": 12,
+    "choices": [
+      {
+        "label": "Accepter l'interview et raconter ton parcours",
+        "tag": "risque",
+        "eff": {
+          "cash": 20,
+          "stress": 8,
+          "val": 30
+        },
+        "out": "L'article attire des partenaires et des opportunités inattendues."
+      },
+      {
+        "label": "Refuser — tu préfères la discrétion",
+        "tag": "prudent",
+        "eff": {
+          "cash": 8,
+          "stress": -5
+        },
+        "out": "Décision confortable. Ta croissance se passe loin des projecteurs."
+      },
+      {
+        "label": "Accepter mais n'évoquer que les aspects business, pas le perso",
+        "tag": "creatif",
+        "eff": {
+          "cash": 15,
+          "stress": 3,
+          "val": 20
+        },
+        "out": "Exposition contrôlée qui attire les bons partenaires sans exposer ta vie privée."
+      }
+    ]
+  },
+  {
+    "title": "Une ville moyenne te propose un partenariat de réhabilitation",
+    "body": "La mairie de Châteauroux propose de co-financer la réhabilitation de 30 logements vacants en échange d'une gestion sociale pendant 10 ans.",
+    "minYear": 14,
+    "choices": [
+      {
+        "label": "Signer le partenariat public-privé",
+        "tag": "prudent",
+        "eff": {
+          "cash": 100,
+          "val": 180,
+          "stress": 12,
+          "properties": 2
+        },
+        "out": "Financement public massif et impact social positif. Belle opération."
+      },
+      {
+        "label": "Refuser — les loyers plafonnés ne t'intéressent pas",
+        "tag": "risque",
+        "eff": {
+          "cash": 20,
+          "stress": 3
+        },
+        "out": "Tu passes ton tour mais tu évites 10 ans de contraintes locatives."
+      },
+      {
+        "label": "Négocier une sortie du dispositif après 5 ans",
+        "tag": "creatif",
+        "eff": {
+          "cash": 80,
+          "val": 120,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Flexibilité obtenue qui rend le deal beaucoup plus attractif."
+      }
+    ]
+  },
+  {
+    "title": "Ton parc est convoité par un REIT coté en bourse",
+    "body": "Une foncière cotée te propose de t'acquérir ton parc en échange de parts de sa REIT valorisées à 20% de prime.",
+    "minYear": 15,
+    "choices": [
+      {
+        "label": "Vendre contre des parts — tu entres en bourse indirectement",
+        "tag": "audacieux",
+        "eff": {
+          "cash": 0,
+          "val": 400,
+          "stress": -20
+        },
+        "out": "Tu deviens actionnaire d'une foncière cotée. Liquidité et diversification."
+      },
+      {
+        "label": "Vendre contre du cash uniquement",
+        "tag": "prudent",
+        "eff": {
+          "cash": 500,
+          "val": -400,
+          "stress": -15
+        },
+        "out": "Réalisation totale de ton patrimoine. Liberté absolue."
+      },
+      {
+        "label": "Refuser — tu gardes le contrôle opérationnel",
+        "tag": "creatif",
+        "eff": {
+          "cash": 40,
+          "stress": 5,
+          "val": 60
+        },
+        "out": "Tu déclines et continues à développer en indépendant."
+      }
+    ]
+  },
+  {
+    "title": "Ton quartier phare est inscrit au patrimoine UNESCO",
+    "body": "Le classement UNESCO va attirer les touristes mais aussi contraindre les rénovations futures. Valeur en hausse, liberté en baisse.",
+    "minYear": 14,
+    "choices": [
+      {
+        "label": "Valoriser immédiatement l'effet classement",
+        "tag": "prudent",
+        "eff": {
+          "cash": 50,
+          "val": 200,
+          "stress": 5
+        },
+        "out": "Tu repositionnes tes biens sur le segment premium international."
+      },
+      {
+        "label": "Vendre avant les nouvelles contraintes architecturales",
+        "tag": "risque",
+        "eff": {
+          "cash": 200,
+          "val": -140,
+          "stress": 5
+        },
+        "out": "Tu monétises la hausse anticipée avant d'être bridé par les nouvelles règles."
+      },
+      {
+        "label": "Louer en résidences d'exception à une clientèle internationale",
+        "tag": "creatif",
+        "eff": {
+          "cash": 80,
+          "val": 120,
+          "stress": 8
+        },
+        "out": "Repositionnement haut de gamme qui multiplie les loyers par 3."
+      }
+    ]
+  },
+  {
+    "title": "Le gouvernement annonce un grand plan de rénovation thermique",
+    "body": "Le plan France Rénov 2030 propose des subventions allant jusqu'à 80% pour les travaux d'isolation. Tu as 10 biens éligibles.",
+    "minYear": 12,
+    "choices": [
+      {
+        "label": "Tout rénover en profitant des aides maximales",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -60,
+          "val": 250,
+          "stress": 15
+        },
+        "out": "Investissement net très faible pour une valorisation considérable."
+      },
+      {
+        "label": "Rénover seulement les 3 biens les moins performants",
+        "tag": "prudent",
+        "eff": {
+          "cash": -20,
+          "val": 80,
+          "stress": 8
+        },
+        "out": "Priorité bien choisie pour les biens qui en avaient le plus besoin."
+      },
+      {
+        "label": "Attendre que les subventions soient confirmées avant d'engager",
+        "tag": "creatif",
+        "eff": {
+          "cash": 10,
+          "stress": 3,
+          "val": 10
+        },
+        "out": "Prudence justifiée : certaines aides sont revues à la baisse 6 mois plus tard."
+      }
+    ]
+  },
+  {
+    "title": "Un de tes associés veut sortir du capital de votre SCI",
+    "body": "Ton associé historique dans votre SCI commune veut racheter ses parts. Il propose un prix inférieur à la valeur réelle.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Racheter ses parts à la valeur réelle — seul aux commandes",
+        "tag": "prudent",
+        "eff": {
+          "cash": -80,
+          "val": 100,
+          "stress": 8
+        },
+        "out": "Tu deviens seul propriétaire. Investissement juste qui te donne la pleine maîtrise."
+      },
+      {
+        "label": "Accepter son prix pour clore rapidement",
+        "tag": "risque",
+        "eff": {
+          "cash": -55,
+          "val": 80,
+          "stress": 5
+        },
+        "out": "Tu surpayes un peu mais tu évites des mois de négociation fastidieuse."
+      },
+      {
+        "label": "Proposer une valorisation par expert indépendant",
+        "tag": "creatif",
+        "eff": {
+          "cash": -70,
+          "val": 90,
+          "stress": 10
+        },
+        "out": "Processus juste et transparent qui satisfait les deux parties."
+      }
+    ]
+  },
+  {
+    "title": "Tu reçois une succession immobilière imprévue",
+    "body": "Un cousin éloigné décède sans héritiers directs. Un notaire te contacte : tu hérites d'une maison de campagne dans le Périgord.",
+    "minYear": 8,
+    "choices": [
+      {
+        "label": "Rénover et louer en gîte rural",
+        "tag": "prudent",
+        "eff": {
+          "cash": -30,
+          "val": 80,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Investissement modéré et revenus touristiques réguliers. Bonne surprise."
+      },
+      {
+        "label": "Vendre rapidement pour récupérer le cash",
+        "tag": "risque",
+        "eff": {
+          "cash": 55,
+          "stress": 3
+        },
+        "out": "Liquidité immédiate. La maison était trop loin pour être bien gérée."
+      },
+      {
+        "label": "Garder pour les vacances familiales et louer l'été",
+        "tag": "creatif",
+        "eff": {
+          "cash": 20,
+          "stress": -10,
+          "val": 60,
+          "properties": 1
+        },
+        "out": "Plaisir et rendement conciliés. Une belle acquisition à coût nul."
+      }
+    ]
+  },
+  {
+    "title": "Un audit révèle des problèmes d'amiante dans ton immeuble",
+    "body": "Un diagnostic obligatoire révèle la présence d'amiante dans les faux-plafonds de trois appartements anciens.",
+    "minYear": 5,
+    "choices": [
+      {
+        "label": "Désamiantage complet et immédiat",
+        "tag": "prudent",
+        "eff": {
+          "cash": -45,
+          "val": 40,
+          "stress": 12
+        },
+        "out": "Coûteux mais le bien est désormais sain et valorisé."
+      },
+      {
+        "label": "Encapsuler l'amiante — solution moins chère",
+        "tag": "creatif",
+        "eff": {
+          "cash": -15,
+          "val": 15,
+          "stress": 8
+        },
+        "out": "Légalement conforme et moins cher, à condition de le surveiller régulièrement."
+      },
+      {
+        "label": "Vendre en l'état avec diagnostic fourni",
+        "tag": "risque",
+        "eff": {
+          "cash": 35,
+          "val": -30,
+          "stress": 10
+        },
+        "out": "Décote importante mais tu te débarasses du problème immédiatement."
+      }
+    ]
+  },
+  {
+    "title": "Les impôts fonciers de ta commune triplent",
+    "body": "Suite à une délibération du conseil municipal, la taxe foncière triple dans ta commune. Choc fiscal inattendu.",
+    "minYear": 4,
+    "choices": [
+      {
+        "label": "Répercuter 50% de la hausse sur les loyers",
+        "tag": "prudent",
+        "eff": {
+          "cash": -10,
+          "stress": 6,
+          "val": 5
+        },
+        "out": "Équilibre préservé, les locataires acceptent avec réticence."
+      },
+      {
+        "label": "Vendre les biens dans cette commune",
+        "tag": "risque",
+        "eff": {
+          "cash": 80,
+          "val": -70,
+          "stress": 8
+        },
+        "out": "Bonne décision : la commune continue de taxer lourdement les années suivantes."
+      },
+      {
+        "label": "Contester la délibération devant le tribunal administratif",
+        "tag": "creatif",
+        "eff": {
+          "cash": -8,
+          "stress": 15
+        },
+        "out": "Procédure longue mais tu obtiens partiellement gain de cause."
+      }
+    ]
+  },
+  {
+    "title": "Tu peux acquérir un château à restaurer",
+    "body": "Un château XVIIIe en Bourgogne est vendu aux enchères. Magnifique mais l'état de conservation est catastrophique.",
+    "minYear": 15,
+    "choices": [
+      {
+        "label": "Acheter et restaurer en lieu de réception",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -300,
+          "val": 600,
+          "stress": 25,
+          "properties": 2
+        },
+        "out": "Chantier de 3 ans mais création d'un actif unique et rentable en événementiel."
+      },
+      {
+        "label": "Acheter et vendre les droits de rénovation",
+        "tag": "prudent",
+        "eff": {
+          "cash": 80,
+          "stress": 5
+        },
+        "out": "Tu réalises une plus-value rapide sans t'embarquer dans un chantier titanesque."
+      },
+      {
+        "label": "Passer — trop complexe et trop coûteux",
+        "tag": "creatif",
+        "eff": {
+          "cash": 12,
+          "stress": -5
+        },
+        "out": "Sage décision. Le projet attire finalement un groupe hôtelier 2 ans plus tard."
+      }
+    ]
+  },
+  {
+    "title": "Un constructeur te propose un programme de sale & leaseback",
+    "body": "Il achète tes locaux commerciaux et te les loue immédiatement sur 9 ans. Tu récupères du cash tout en gardant l'usage.",
+    "minYear": 9,
+    "choices": [
+      {
+        "label": "Accepter le sale and leaseback",
+        "tag": "prudent",
+        "eff": {
+          "cash": 180,
+          "val": -120,
+          "stress": -10
+        },
+        "out": "Cash immédiat et continuité d'exploitation. Solution intelligente."
+      },
+      {
+        "label": "Refuser — tu veux garder la propriété",
+        "tag": "risque",
+        "eff": {
+          "cash": 20,
+          "stress": 5,
+          "val": 30
+        },
+        "out": "Tu préserves l'actif mais tu rates une fenêtre de liquidité."
+      },
+      {
+        "label": "Négocier une option de rachat dans 5 ans",
+        "tag": "creatif",
+        "eff": {
+          "cash": 150,
+          "val": -90,
+          "stress": -5
+        },
+        "out": "Flexibilité maximale : cash maintenant, rachat possible plus tard."
+      }
+    ]
+  },
+  {
+    "title": "Ton bien le plus ancien nécessite un ravalement complet",
+    "body": "Construit en 1928, ton immeuble de rapport doit être ravalé. La façade est classée. Travaux estimés à 150k€.",
+    "minYear": 7,
+    "choices": [
+      {
+        "label": "Engager le ravalement classé avec architecte DRAC",
+        "tag": "prudent",
+        "eff": {
+          "cash": -90,
+          "val": 120,
+          "stress": 12
+        },
+        "out": "Coûteux mais le bien est magnifié et sa valeur patrimoniale explose."
+      },
+      {
+        "label": "Demander une subvention DRAC et attendre sa réponse",
+        "tag": "creatif",
+        "eff": {
+          "cash": -20,
+          "val": 60,
+          "stress": 8
+        },
+        "out": "Subvention obtenue à 40%. Excellent rapport coût/valeur créée."
+      },
+      {
+        "label": "Vendre avant les travaux avec une décote",
+        "tag": "risque",
+        "eff": {
+          "cash": 75,
+          "val": -65,
+          "stress": 6
+        },
+        "out": "Tu évites les travaux mais l'acheteur fera une bonne affaire."
+      }
+    ]
+  },
+  {
+    "title": "Tes locataires forment un collectif de défense",
+    "body": "Suite à des travaux bruyants prolongés, tes locataires forment un collectif et exigent des compensations de loyer.",
+    "minYear": 6,
+    "choices": [
+      {
+        "label": "Accorder une remise de 15% pendant les travaux",
+        "tag": "prudent",
+        "eff": {
+          "cash": -15,
+          "stress": 3
+        },
+        "out": "Geste apprécié qui évite l'escalade et maintient la confiance."
+      },
+      {
+        "label": "Refuser toute remise — les travaux améliorent le bien",
+        "tag": "risque",
+        "eff": {
+          "cash": 8,
+          "stress": 20
+        },
+        "out": "Tension maximale. Deux locataires rompent leur bail et tu as du mal à relouer."
+      },
+      {
+        "label": "Proposer une compensation ponctuelle en nature",
+        "tag": "creatif",
+        "eff": {
+          "cash": -5,
+          "stress": -5
+        },
+        "out": "Chèque cadeau, parking gratuit… Les locataires apprécient l'attention."
+      }
+    ]
+  },
+  {
+    "title": "Un terrain agricole adjacent à ta résidence est mis en vente",
+    "body": "Un fermier en retraite vend son terrain de 2 hectares à côté de ta résidence principale. Constructible dans 5 ans.",
+    "minYear": 8,
+    "choices": [
+      {
+        "label": "Acheter pour sécuriser et attendre le constructible",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -80,
+          "val": 200,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Pari long terme payant : le terrain est constructible comme prévu."
+      },
+      {
+        "label": "Ne pas acheter — trop spéculatif",
+        "tag": "prudent",
+        "eff": {
+          "cash": 15,
+          "stress": -3
+        },
+        "out": "Prudence assumée. Le terrain est revendu 4 fois son prix à un promoteur 6 ans plus tard."
+      },
+      {
+        "label": "Acheter avec un associé pour partager le risque",
+        "tag": "creatif",
+        "eff": {
+          "cash": -40,
+          "val": 100,
+          "stress": 5,
+          "properties": 1
+        },
+        "out": "Risque dilué. Plus-value partagée mais appréciable."
+      }
+    ]
+  },
+  {
+    "title": "Une plateforme de crowdfunding immobilier t'approche",
+    "body": "Homunity veut que tu participes à leur prochaine levée de fonds pour un projet de résidence senior.",
+    "minYear": 9,
+    "choices": [
+      {
+        "label": "Investir 50k€ sur la plateforme",
+        "tag": "prudent",
+        "eff": {
+          "cash": -50,
+          "val": 65,
+          "stress": 3
+        },
+        "out": "Rendement de 8% sur 24 mois. Une bonne diversification."
+      },
+      {
+        "label": "Investir 200k€ pour maximiser le rendement",
+        "tag": "risque",
+        "eff": {
+          "cash": -200,
+          "val": 260,
+          "stress": 8
+        },
+        "out": "Rendement maximal mais concentration du risque sur un seul projet."
+      },
+      {
+        "label": "Refuser — tu préfères les actifs que tu contrôles",
+        "tag": "creatif",
+        "eff": {
+          "cash": 10,
+          "stress": -3
+        },
+        "out": "Stratégie cohérente. Le projet de la plateforme subit un retard de 18 mois."
+      }
+    ]
+  },
+  {
+    "title": "Un incubateur immobilier te propose de coacher des jeunes investisseurs",
+    "body": "En échange de 2h par mois de mentoring, tu reçois des opportunités d'investissement en avant-première.",
+    "minYear": 11,
+    "choices": [
+      {
+        "label": "Accepter le rôle de mentor",
+        "tag": "creatif",
+        "eff": {
+          "cash": 30,
+          "stress": 5,
+          "val": 20
+        },
+        "out": "Réseau enrichi et opportunités concrètes. Un investissement en temps rentable."
+      },
+      {
+        "label": "Refuser — tu protèges tes stratégies",
+        "tag": "prudent",
+        "eff": {
+          "cash": 10,
+          "stress": -3
+        },
+        "out": "Décision compréhensible. Ton avantage compétitif reste confidentiel."
+      },
+      {
+        "label": "Accepter en échange de co-investissements obligatoires",
+        "tag": "risque",
+        "eff": {
+          "cash": 50,
+          "val": 40,
+          "stress": 10
+        },
+        "out": "Partenariats fructueux avec des investisseurs motivés et bien formés."
+      }
+    ]
+  },
+  {
+    "title": "Un fonds d'infrastructure veut racheter tes parkings",
+    "body": "Ton portefeuille de parkings intéresse un fonds d'infrastructure qui paie 35% au-dessus de la valeur comptable.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Vendre l'intégralité des parkings",
+        "tag": "prudent",
+        "eff": {
+          "cash": 120,
+          "val": -80,
+          "stress": -8
+        },
+        "out": "Excellent prix et cash libéré pour de nouvelles acquisitions."
+      },
+      {
+        "label": "Garder les plus rentables, vendre les autres",
+        "tag": "creatif",
+        "eff": {
+          "cash": 70,
+          "val": -40,
+          "stress": -3
+        },
+        "out": "Sélection judicieuse. Tu vends ce qui rapporte moins et gardes les pépites."
+      },
+      {
+        "label": "Refuser — les parkings sont sous-valorisés sur le long terme",
+        "tag": "risque",
+        "eff": {
+          "cash": 20,
+          "stress": 5,
+          "val": 30
+        },
+        "out": "Pari sur la valorisation future. L'arrivée des voitures autonomes change la donne."
+      }
+    ]
+  },
+  {
+    "title": "Tu reçois une proposition d'acquisition d'un data center",
+    "body": "Un promoteur spécialisé te propose d'investir dans la transformation d'un ancien entrepôt en data center. Secteur en boom.",
+    "minYear": 13,
+    "choices": [
+      {
+        "label": "Saisir l'opportunité de diversification",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -120,
+          "val": 200,
+          "stress": 15
+        },
+        "out": "Secteur en plein essor. Rendement exceptionnel à 3 ans."
+      },
+      {
+        "label": "Refuser — tu te concentres sur le résidentiel",
+        "tag": "prudent",
+        "eff": {
+          "cash": 15,
+          "stress": -5
+        },
+        "out": "Cohérence stratégique assumée. Le data center se valorise bien mais sans toi."
+      },
+      {
+        "label": "Prendre une petite participation pour tester",
+        "tag": "creatif",
+        "eff": {
+          "cash": -40,
+          "val": 70,
+          "stress": 8
+        },
+        "out": "Exposition mesurée à un nouveau secteur. Bonne diversification à faible risque."
+      }
+    ]
+  },
+  {
+    "title": "Une foncière cotée fait une OPA sur ton parc",
+    "body": "Une grande foncière cotée propose une OPA amicale sur l'ensemble de tes actifs immobiliers. Prime de 30% sur la valeur estimée.",
+    "minYear": 16,
+    "choices": [
+      {
+        "label": "Accepter l'OPA et devenir actionnaire minoritaire",
+        "tag": "prudent",
+        "eff": {
+          "cash": 200,
+          "val": 100,
+          "stress": -20
+        },
+        "out": "Belle sortie partielle et entrée dans un véhicule coté diversifié."
+      },
+      {
+        "label": "Refuser et contre-attaquer avec une levée de fonds",
+        "tag": "risque",
+        "eff": {
+          "cash": 100,
+          "val": 150,
+          "stress": 20
+        },
+        "flag": "raisedFunding",
+        "out": "Tu repousses l'OPA et tu lèves des fonds pour accélérer seul."
+      },
+      {
+        "label": "Négocier une cession partielle à 50%",
+        "tag": "creatif",
+        "eff": {
+          "cash": 300,
+          "val": 0,
+          "stress": -10
+        },
+        "out": "Liquidité partielle tout en restant aux commandes de la moitié du parc."
+      }
+    ]
+  },
+  {
+    "title": "Ton bien principal bénéficie d'une vue mer exceptionnelle",
+    "body": "Un architecte te propose de valoriser cette vue avec une terrasse panoramique. Permis de construire en cours.",
+    "minYear": 7,
+    "choices": [
+      {
+        "label": "Financer les travaux de terrasse",
+        "tag": "prudent",
+        "eff": {
+          "cash": -35,
+          "val": 90,
+          "stress": 6
+        },
+        "out": "La terrasse multiplie par deux la valeur locative de l'appartement."
+      },
+      {
+        "label": "Attendre le permis pour valoriser et vendre",
+        "tag": "creatif",
+        "eff": {
+          "cash": 80,
+          "val": -50,
+          "stress": 4
+        },
+        "out": "Tu vends avec le permis en poche. L'acheteur réalise les travaux lui-même."
+      },
+      {
+        "label": "Refuser les travaux — trop d'incertitudes réglementaires",
+        "tag": "risque",
+        "eff": {
+          "cash": 10,
+          "stress": 3
+        },
+        "out": "Prudence justifiée : le recours d'un voisin bloque le permis 2 ans."
+      }
+    ]
+  },
+  {
+    "title": "Tu es approché par une agence de relocation internationale",
+    "body": "Une agence qui loge des expatriés cherche des biens haut de gamme. Loyers 40% supérieurs mais locataires très exigeants.",
+    "minYear": 9,
+    "choices": [
+      {
+        "label": "Intégrer ton parc dans leur catalogue premium",
+        "tag": "prudent",
+        "eff": {
+          "cash": 70,
+          "stress": 5,
+          "val": 20
+        },
+        "out": "Revenus boostés et locataires solvables. Excellente décision."
+      },
+      {
+        "label": "Refuser — trop d'exigences de standing",
+        "tag": "risque",
+        "eff": {
+          "cash": 20,
+          "stress": 3
+        },
+        "out": "Tu passes ton tour mais tu évites des rénovations coûteuses."
+      },
+      {
+        "label": "Sélectionner seulement tes 2 meilleurs biens",
+        "tag": "creatif",
+        "eff": {
+          "cash": 40,
+          "stress": 3,
+          "val": 15
+        },
+        "out": "Test réussi. Tu intègres progressivement plus de biens dans leur réseau."
+      }
+    ]
+  },
+  {
+    "title": "Un nouveau métro va déservir ton quartier dans 3 ans",
+    "body": "L'annonce du Grand Paris Express place une station à 200m de ton immeuble. Les prix commencent déjà à monter.",
+    "minYear": 8,
+    "choices": [
+      {
+        "label": "Acheter maintenant avant la hausse",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -100,
+          "val": 180,
+          "stress": 10,
+          "properties": 1
+        },
+        "out": "Tu bénéficies de la totalité de la hausse anticipée. Excellent timing."
+      },
+      {
+        "label": "Vendre avant que les travaux ne gênent les locataires",
+        "tag": "risque",
+        "eff": {
+          "cash": 90,
+          "val": -65,
+          "stress": 5
+        },
+        "out": "Plus-value déjà présente et tu évites 3 ans de nuisances de chantier."
+      },
+      {
+        "label": "Garder et louer à des travailleurs du chantier",
+        "tag": "creatif",
+        "eff": {
+          "cash": 30,
+          "stress": 3,
+          "val": 40
+        },
+        "out": "Demande locative forte pendant le chantier et valeur en hausse après."
+      }
+    ]
+  },
+  {
+    "title": "Un programme de rénovation urbaine cible ton quartier",
+    "body": "L'ANRU lance un programme de renouvellement urbain. Tes biens sont en zone d'intervention. Contraintes et opportunités.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Coopérer avec l'ANRU pour bénéficier des aides",
+        "tag": "prudent",
+        "eff": {
+          "cash": 60,
+          "val": 100,
+          "stress": 8
+        },
+        "out": "Partenariat fructueux. Tes biens sont rénovés avec 60% d'aide publique."
+      },
+      {
+        "label": "Vendre avant la zone d'intervention",
+        "tag": "risque",
+        "eff": {
+          "cash": 90,
+          "val": -75,
+          "stress": 6
+        },
+        "out": "Tu sors avant d'être contraint à quoi que ce soit."
+      },
+      {
+        "label": "Attendre la revalorisation post-rénovation pour vendre",
+        "tag": "creatif",
+        "eff": {
+          "cash": 20,
+          "val": 80,
+          "stress": 5
+        },
+        "out": "Stratégie de patience qui porte ses fruits 4 ans plus tard."
+      }
+    ]
+  },
+  {
+    "title": "Tu dois choisir entre deux opportunités simultanées",
+    "body": "Un appartement boulevard Haussmann ET une maison en Bretagne se libèrent le même jour. Tu ne peux financer qu'un seul.",
+    "minYear": 6,
+    "choices": [
+      {
+        "label": "L'appartement parisien — rendement locatif sûr",
+        "tag": "prudent",
+        "eff": {
+          "cash": -90,
+          "val": 110,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Excellent rendement en milieu urbain. Choix classique et sage."
+      },
+      {
+        "label": "La maison bretonne — plus-value potentielle",
+        "tag": "risque",
+        "eff": {
+          "cash": -55,
+          "val": 85,
+          "stress": 5,
+          "properties": 1
+        },
+        "out": "Moins de rendement immédiat mais la valeur monte fortement en 5 ans."
+      },
+      {
+        "label": "Négocier un délai pour trouver un co-investisseur",
+        "tag": "creatif",
+        "eff": {
+          "cash": -45,
+          "val": 60,
+          "stress": 10,
+          "properties": 1
+        },
+        "out": "Tu t'associes pour prendre les deux biens. Risque partagé, gains partagés."
+      }
+    ]
+  },
+  {
+    "title": "Ton immeuble est choisi pour une série Netflix",
+    "body": "Une production Netflix veut tourner dans ton immeuble haussmannien pendant 6 semaines. Loyer de tournage : 80k€.",
+    "minYear": 9,
+    "choices": [
+      {
+        "label": "Accepter et négocier les conditions de tournage",
+        "tag": "creatif",
+        "eff": {
+          "cash": 70,
+          "stress": 8,
+          "val": 20
+        },
+        "out": "Cash exceptionnel et notoriété pour le bien. Les locataires apprécient l'animation."
+      },
+      {
+        "label": "Refuser — trop de perturbations pour les locataires",
+        "tag": "prudent",
+        "eff": {
+          "cash": 10,
+          "stress": -5
+        },
+        "out": "Bonne décision pour la paix des résidents. Tu proposes le tournage à un voisin."
+      },
+      {
+        "label": "Accepter à condition de reloger les locataires pendant le tournage",
+        "tag": "risque",
+        "eff": {
+          "cash": 50,
+          "stress": 12
+        },
+        "out": "Organisation complexe mais les locataires reviennent ravis de leur hébergement."
+      }
+    ]
+  },
+  {
+    "title": "Un architecte propose de transformer tes bureaux en lofts",
+    "body": "Tes 600m² de bureaux sont difficiles à louer depuis le télétravail. La conversion en lofts résidentiels est autorisée.",
+    "minYear": 11,
+    "choices": [
+      {
+        "label": "Lancer la transformation en lofts premium",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -120,
+          "val": 220,
+          "stress": 15,
+          "properties": 2
+        },
+        "out": "Chantier de 10 mois. Les lofts se louent en 48h à des prix premium."
+      },
+      {
+        "label": "Louer les bureaux à un prix cassé pour ne pas avoir de vacance",
+        "tag": "prudent",
+        "eff": {
+          "cash": 20,
+          "stress": 5
+        },
+        "out": "Loyers réduits mais pas de vacance locative. Stratégie prudente."
+      },
+      {
+        "label": "Mettre en coliving temporaire en attendant la conversion",
+        "tag": "creatif",
+        "eff": {
+          "cash": 35,
+          "stress": 8,
+          "val": 10
+        },
+        "out": "Revenus intermédiaires qui financent une partie des futurs travaux."
+      }
+    ]
+  },
+  {
+    "title": "Le marché local se retourne brutalement",
+    "body": "Les prix chutent de 15% dans ta zone de concentration. Tes biens perdent de la valeur mais les loyers tiennent.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Acheter massivement — opportunité de marché bas",
+        "tag": "risque",
+        "eff": {
+          "cash": -150,
+          "val": 250,
+          "stress": 20,
+          "properties": 2
+        },
+        "out": "Achat au creux du marché. Rebond de 25% en 3 ans."
+      },
+      {
+        "label": "Ne rien faire et attendre le rebond",
+        "tag": "prudent",
+        "eff": {
+          "cash": 15,
+          "stress": 5,
+          "val": -20
+        },
+        "out": "Patience récompensée. Le marché remonte sans que tu aies pris de risque."
+      },
+      {
+        "label": "Vendre les biens les moins rentables pour consolider",
+        "tag": "creatif",
+        "eff": {
+          "cash": 80,
+          "val": -100,
+          "stress": -8
+        },
+        "out": "Tu allèges ton parc et renforces ta situation financière en période difficile."
+      }
+    ]
+  },
+  {
+    "title": "Une filiale d'un grand groupe veut tes entrepôts",
+    "body": "Amazon Logistique te propose un bail de 10 ans sur tes deux entrepôts à la périphérie. Loyer garanti indexé.",
+    "minYear": 12,
+    "choices": [
+      {
+        "label": "Signer le bail 10 ans — sécurité maximale",
+        "tag": "prudent",
+        "eff": {
+          "cash": 100,
+          "stress": -15,
+          "val": 40
+        },
+        "out": "Dix ans de revenus garantis. Tu dors tranquille."
+      },
+      {
+        "label": "Négocier 15 ans avec indexation plus favorable",
+        "tag": "creatif",
+        "eff": {
+          "cash": 120,
+          "stress": -10,
+          "val": 60
+        },
+        "out": "Meilleurs termes obtenus après deux rounds de négociation."
+      },
+      {
+        "label": "Refuser — tu veux garder la flexibilité",
+        "tag": "risque",
+        "eff": {
+          "cash": 30,
+          "stress": 5,
+          "val": 20
+        },
+        "out": "Liberté préservée mais un bail si long aurait été plus rentable."
+      }
+    ]
+  },
+  {
+    "title": "Un collectif d'artistes veut squatter ton entrepôt désaffecté",
+    "body": "Trente artistes demandent l'autorisation d'occuper ton entrepôt vide pendant 18 mois en échange de l'entretien.",
+    "minYear": 7,
+    "choices": [
+      {
+        "label": "Accepter — c'est utile et ça entretient le bien",
+        "tag": "creatif",
+        "eff": {
+          "cash": 10,
+          "stress": -8,
+          "val": 10
+        },
+        "out": "Belle image publique et bien entretenu. L'entrepôt attire ensuite de meilleurs locataires."
+      },
+      {
+        "label": "Refuser — risques juridiques trop importants",
+        "tag": "prudent",
+        "eff": {
+          "cash": 5,
+          "stress": 3
+        },
+        "out": "Sécurité juridique préservée. Tu trouves un locataire commercial 3 mois plus tard."
+      },
+      {
+        "label": "Proposer un bail précaire officiel à 1€ symbolique",
+        "tag": "risque",
+        "eff": {
+          "cash": 8,
+          "stress": -5,
+          "val": 5
+        },
+        "out": "Cadre légal rassurant. Les artistes font même des travaux d'amélioration."
+      }
+    ]
+  },
+  {
+    "title": "Tu peux co-investir dans une résidence étudiante",
+    "body": "Un gestionnaire de résidences étudiantes te propose d'investir dans 10 studios à loyers modérés mais garantis.",
+    "minYear": 7,
+    "choices": [
+      {
+        "label": "Investir dans les 10 studios",
+        "tag": "prudent",
+        "eff": {
+          "cash": -80,
+          "val": 110,
+          "stress": 5,
+          "properties": 2
+        },
+        "out": "Faible gestion et loyers garantis. Rendement de 5% net."
+      },
+      {
+        "label": "Investir dans 5 studios pour tester",
+        "tag": "creatif",
+        "eff": {
+          "cash": -40,
+          "val": 55,
+          "stress": 3,
+          "properties": 1
+        },
+        "out": "Test concluant. Tu investis dans les 5 autres l'année suivante."
+      },
+      {
+        "label": "Refuser — les loyers étudiants sont trop bas",
+        "tag": "risque",
+        "eff": {
+          "cash": 12,
+          "stress": -3
+        },
+        "out": "Décision stratégique assumée. Tu préfères les surfaces plus grandes."
+      }
+    ]
+  },
+  {
+    "title": "Un diagnostic révèle des termites dans ta maison de rapport",
+    "body": "Un expert constate une infestation de termites dans la charpente d'une de tes maisons. Déclaration obligatoire.",
+    "minYear": 4,
+    "choices": [
+      {
+        "label": "Traitement complet et remplacement de la charpente",
+        "tag": "prudent",
+        "eff": {
+          "cash": -30,
+          "val": 25,
+          "stress": 10
+        },
+        "out": "Travaux lourds mais le bien est sain et la déclaration est faite dans les règles."
+      },
+      {
+        "label": "Traitement préventif minimal et surveillance",
+        "tag": "creatif",
+        "eff": {
+          "cash": -8,
+          "stress": 8,
+          "val": 5
+        },
+        "out": "Moins cher mais nécessite un suivi rigoureux annuel."
+      },
+      {
+        "label": "Vendre en déclarant le problème",
+        "tag": "risque",
+        "eff": {
+          "cash": 30,
+          "val": -25,
+          "stress": 12
+        },
+        "out": "Décote importante mais tu te débarasses du problème légalement."
+      }
+    ]
+  },
+  {
+    "title": "Ton gestionnaire de patrimoine te recommande de diversifier",
+    "body": "Après 10 ans de croissance, ton conseiller estime que tu es trop concentré sur l'immobilier. Il suggère 20% en actions.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Vendre des biens et diversifier en bourse",
+        "tag": "creatif",
+        "eff": {
+          "cash": 80,
+          "val": -70,
+          "stress": -8
+        },
+        "out": "Diversification bienvenue. Ton patrimoine global devient moins volatile."
+      },
+      {
+        "label": "Rester 100% immobilier — c'est ce que tu maîtrises",
+        "tag": "prudent",
+        "eff": {
+          "cash": 15,
+          "stress": -5,
+          "val": 20
+        },
+        "out": "Cohérence stratégique. Tu t'en tiens à ce que tu sais faire."
+      },
+      {
+        "label": "Investir en SCPI pour garder le pied dans l'immobilier",
+        "tag": "risque",
+        "eff": {
+          "cash": -60,
+          "val": 75,
+          "stress": 3
+        },
+        "out": "Exposition maintenue mais diversifiée géographiquement."
+      }
+    ]
+  },
+  {
+    "title": "Un voisin envahissant menace la valeur de ton immeuble",
+    "body": "Ton voisin transforme son jardin en casse automobile. Nuisances visuelles et olfactives qui font fuir les locataires.",
+    "minYear": 5,
+    "choices": [
+      {
+        "label": "Porter plainte et engager une procédure judiciaire",
+        "tag": "risque",
+        "eff": {
+          "cash": -10,
+          "stress": 18
+        },
+        "out": "Victoire après 18 mois. Le voisin doit tout déplacer."
+      },
+      {
+        "label": "Proposer de racheter sa parcelle pour contrôler",
+        "tag": "creatif",
+        "eff": {
+          "cash": -80,
+          "val": 120,
+          "stress": 5
+        },
+        "out": "Tu règles le problème élégamment et tu valorises l'ensemble."
+      },
+      {
+        "label": "Vendre avant que la situation n'empire",
+        "tag": "prudent",
+        "eff": {
+          "cash": 50,
+          "val": -45,
+          "stress": 8
+        },
+        "out": "Tu sors avant que la décote ne soit trop importante."
+      }
+    ]
+  },
+  {
+    "title": "Un investisseur américain veut ton portefeuille résidentiel",
+    "body": "Un family office américain spécialisé en immobilier européen propose de racheter ton parc résidentiel parisien.",
+    "minYear": 14,
+    "choices": [
+      {
+        "label": "Vendre le portefeuille entier",
+        "tag": "prudent",
+        "eff": {
+          "cash": 500,
+          "val": -380,
+          "stress": -20
+        },
+        "out": "Réalisation colossale de plus-values. Tu te repositionnes sur d'autres marchés."
+      },
+      {
+        "label": "Vendre 60% et garder les meilleurs biens",
+        "tag": "creatif",
+        "eff": {
+          "cash": 280,
+          "val": -180,
+          "stress": -10
+        },
+        "out": "Liquidité partielle tout en restant dans le marché avec les actifs premium."
+      },
+      {
+        "label": "Refuser — les prix montent encore",
+        "tag": "risque",
+        "eff": {
+          "cash": 30,
+          "val": 80,
+          "stress": 5
+        },
+        "out": "Pari gagnant à 3 ans : les prix parisiens reprennent 18% supplémentaires."
+      }
+    ]
+  },
+  {
+    "title": "Tu peux acquérir un immeuble de rapport complet",
+    "body": "Un immeuble entier de 8 appartements est en vente. Le vendeur en veut moins que la valeur locative nette.",
+    "minYear": 9,
+    "choices": [
+      {
+        "label": "Acquérir l'immeuble entier avec un crédit portefeuille",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -120,
+          "val": 250,
+          "stress": 18,
+          "properties": 3
+        },
+        "out": "Acquisition majeure qui consolide ton parc. Rendement net de 7%."
+      },
+      {
+        "label": "Acheter seulement les 4 appartements les mieux situés",
+        "tag": "prudent",
+        "eff": {
+          "cash": -60,
+          "val": 120,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Sélection rigoureuse des meilleurs actifs à l'intérieur de l'immeuble."
+      },
+      {
+        "label": "Proposer un achat en démembrement",
+        "tag": "creatif",
+        "eff": {
+          "cash": -40,
+          "val": 90,
+          "stress": 5,
+          "properties": 1
+        },
+        "out": "Montage fiscal intelligent qui réduit le coût d'acquisition réel."
+      }
+    ]
+  },
+  {
+    "title": "Ton quartier devient le nouveau hot spot gastronomique",
+    "body": "Cinq restaurants étoilés s'installent dans ta rue. Ton local commercial vaut soudainement trois fois plus.",
+    "minYear": 11,
+    "choices": [
+      {
+        "label": "Revendre le local à son nouveau prix de marché",
+        "tag": "prudent",
+        "eff": {
+          "cash": 180,
+          "val": -120,
+          "stress": -5
+        },
+        "out": "Plus-value exceptionnelle cristallisée au bon moment."
+      },
+      {
+        "label": "Louer au meilleur restaurant candidat",
+        "tag": "creatif",
+        "eff": {
+          "cash": 60,
+          "val": 50,
+          "stress": 3
+        },
+        "out": "Loyer multiplié par 2,5 avec un locataire de prestige et solvable."
+      },
+      {
+        "label": "Ouvrir toi-même un bar à vins dans le local",
+        "tag": "risque",
+        "eff": {
+          "cash": -30,
+          "val": 40,
+          "stress": 20
+        },
+        "out": "Aventure entrepreneuriale risquée mais ton local devient la référence du quartier."
+      }
+    ]
+  },
+  {
+    "title": "Un de tes biens est endommagé par une tempête exceptionnelle",
+    "body": "Une tempête centennale arrache la toiture de ta maison individuelle. Dégâts estimés à 80k€.",
+    "minYear": 5,
+    "choices": [
+      {
+        "label": "Déclarer à l'assurance et attendre l'expert",
+        "tag": "prudent",
+        "eff": {
+          "cash": 25,
+          "stress": 10,
+          "val": -5
+        },
+        "out": "L'assurance prend en charge 85% des dégâts. Délais longs mais couverts."
+      },
+      {
+        "label": "Engager un couvreur d'urgence et facturer à l'assurance",
+        "tag": "creatif",
+        "eff": {
+          "cash": 5,
+          "stress": 8
+        },
+        "out": "Réparation rapide, le locataire reste. L'assurance rembourse avec un léger délai."
+      },
+      {
+        "label": "Vendre en l'état post-sinistre avec décote",
+        "tag": "risque",
+        "eff": {
+          "cash": 30,
+          "val": -25,
+          "stress": 12
+        },
+        "out": "Vente rapide mais à prix cassé. Tu évites des mois de gestion de sinistre."
+      }
+    ]
+  },
+  {
+    "title": "Un notaire te propose un groupement foncier agricole",
+    "body": "Un GFA viticole en Bourgogne cherche des investisseurs. Rendement faible mais avantages fiscaux importants et prestige.",
+    "minYear": 12,
+    "choices": [
+      {
+        "label": "Investir dans le GFA viticole",
+        "tag": "creatif",
+        "eff": {
+          "cash": -60,
+          "val": 80,
+          "stress": -5
+        },
+        "out": "Investissement prestige et optimisation fiscale. Tu bois ton vin en prime."
+      },
+      {
+        "label": "Refuser — hors de ton coeur de métier",
+        "tag": "prudent",
+        "eff": {
+          "cash": 10,
+          "stress": -3
+        },
+        "out": "Cohérence stratégique. Tu préfères les actifs que tu comprends vraiment."
+      },
+      {
+        "label": "Investir une petite part pour la diversification fiscale",
+        "tag": "risque",
+        "eff": {
+          "cash": -25,
+          "val": 30,
+          "stress": 3
+        },
+        "out": "Exposition mesurée à un nouveau type d'actif. Bon complément de portefeuille."
+      }
+    ]
+  },
+  {
+    "title": "Tu peux transformer un presbytère abandonné en gîtes",
+    "body": "La commune vend son ancien presbytère pour 1 euro symbolique à condition d'en faire des gîtes ruraux et de l'ouvrir 6 mois par an.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Accepter et rénover en gîtes de charme",
+        "tag": "creatif",
+        "eff": {
+          "cash": -70,
+          "val": 130,
+          "stress": 12,
+          "properties": 1
+        },
+        "out": "Coût de rénovation amorti en 4 ans grâce à l'emplacement unique et au foncier nul."
+      },
+      {
+        "label": "Refuser — trop de contraintes d'exploitation",
+        "tag": "prudent",
+        "eff": {
+          "cash": 8,
+          "stress": -3
+        },
+        "out": "Sage décision. Les contraintes auraient lourdement pesé sur ta gestion."
+      },
+      {
+        "label": "Accepter avec un gestionnaire de gîtes professionnel",
+        "tag": "risque",
+        "eff": {
+          "cash": -40,
+          "val": 90,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Délégation totale. Le gestionnaire fait un excellent travail."
+      }
+    ]
+  },
+  {
+    "title": "Ton bien phare est photographié pour un magazine d'architecture",
+    "body": "AD Architecture & Design veut photographier ton appartement réhabilité comme exemple de rénovation réussie.",
+    "minYear": 9,
+    "choices": [
+      {
+        "label": "Accepter et profiter de la publicité gratuite",
+        "tag": "creatif",
+        "eff": {
+          "cash": 15,
+          "val": 30,
+          "stress": 3
+        },
+        "out": "L'article attire des acquéreurs potentiels et valorise le bien en quelques semaines."
+      },
+      {
+        "label": "Refuser pour ne pas révéler l'intérieur du bien",
+        "tag": "prudent",
+        "eff": {
+          "cash": 5,
+          "stress": -3
+        },
+        "out": "Discrétion préservée. Pas de problème mais pas d'opportunité non plus."
+      },
+      {
+        "label": "Accepter si le magazine couvre les frais de mise en scène",
+        "tag": "risque",
+        "eff": {
+          "cash": 20,
+          "val": 25,
+          "stress": 5
+        },
+        "out": "Négociation réussie. Le magazine couvre tout et le résultat est magnifique."
+      }
+    ]
+  },
+  {
+    "title": "Une entreprise demande des bureaux flex pour ses équipes",
+    "body": "Une scale-up de 60 personnes cherche des bureaux flexibles 3 jours par semaine. Loyer mensuel intéressant.",
+    "minYear": 8,
+    "choices": [
+      {
+        "label": "Aménager et louer en flex office",
+        "tag": "creatif",
+        "eff": {
+          "cash": 45,
+          "val": 20,
+          "stress": 5
+        },
+        "out": "Nouveau segment porteur. La scale-up renouvelle et prend plus d'espace."
+      },
+      {
+        "label": "Louer en bail classique à un cabinet traditionnel",
+        "tag": "prudent",
+        "eff": {
+          "cash": 35,
+          "stress": 3,
+          "val": 15
+        },
+        "out": "Loyer plus faible mais bail stable sur 3-6-9. Sécurité totale."
+      },
+      {
+        "label": "Refuser et attendre un locataire longue durée",
+        "tag": "risque",
+        "eff": {
+          "cash": -5,
+          "stress": 5
+        },
+        "out": "Vacance de 4 mois. La prochaine locataire signe un bail 3-6-9 favorable."
+      }
+    ]
+  },
+  {
+    "title": "Une plateforme de NFT immobilier veut tokeniser ton parc",
+    "body": "Une startup web3 propose de tokeniser ton portefeuille immobilier sur blockchain pour permettre à des petits investisseurs de co-détenir.",
+    "minYear": 13,
+    "choices": [
+      {
+        "label": "Tenter l'aventure blockchain immobilier",
+        "tag": "risque",
+        "eff": {
+          "cash": 80,
+          "val": 30,
+          "stress": 15
+        },
+        "out": "Buzz médiatique et liquidité partielle. Le marché des tokens immobiliers reste volatile."
+      },
+      {
+        "label": "Refuser — trop spéculatif et peu réglementé",
+        "tag": "prudent",
+        "eff": {
+          "cash": 10,
+          "stress": -3
+        },
+        "out": "Sage décision. La réglementation tarde à venir et plusieurs projets similaires échouent."
+      },
+      {
+        "label": "Demander l'avis d'un avocat spécialisé avant de décider",
+        "tag": "creatif",
+        "eff": {
+          "cash": 8,
+          "stress": 3
+        },
+        "out": "Due diligence sérieuse qui révèle des risques juridiques importants. Tu passes."
+      }
+    ]
+  },
+  {
+    "title": "Un bailleur social veut t'acheter 5 de tes logements",
+    "body": "Paris Habitat propose de racheter 5 de tes logements à des prix légèrement sous-marché pour en faire du logement social.",
+    "minYear": 11,
+    "choices": [
+      {
+        "label": "Accepter la vente groupée",
+        "tag": "prudent",
+        "eff": {
+          "cash": 200,
+          "val": -170,
+          "stress": -10
+        },
+        "out": "Transaction simple et rapide. Cash important, gestion allégée."
+      },
+      {
+        "label": "Refuser et conserver pour la plus-value",
+        "tag": "risque",
+        "eff": {
+          "cash": 20,
+          "val": 30,
+          "stress": 5
+        },
+        "out": "Tu préserves tes actifs et tu bénéficies de la hausse future."
+      },
+      {
+        "label": "Accepter seulement 3 logements sur les 5",
+        "tag": "creatif",
+        "eff": {
+          "cash": 120,
+          "val": -90,
+          "stress": -5
+        },
+        "out": "Compromis raisonnable. Tu gardes les 2 mieux situés et tu vends les autres."
+      }
+    ]
+  },
+  {
+    "title": "Tu peux acquérir une résidence secondaire avec potentiel locatif",
+    "body": "Une belle villa en Corse à 2h de l'aéroport est à vendre. Fort potentiel de location saisonnière : 2000€/semaine.",
+    "minYear": 11,
+    "choices": [
+      {
+        "label": "Acheter et louer en haute saison",
+        "tag": "creatif",
+        "eff": {
+          "cash": -120,
+          "val": 160,
+          "stress": 8,
+          "properties": 1
+        },
+        "out": "Rendement estival de 15%. Un actif plaisir qui rapporte."
+      },
+      {
+        "label": "Acheter uniquement pour en profiter en famille",
+        "tag": "prudent",
+        "eff": {
+          "cash": -120,
+          "val": 130,
+          "stress": -15,
+          "properties": 1
+        },
+        "out": "Investissement plaisir assumé. Le bien prend de la valeur tranquillement."
+      },
+      {
+        "label": "Refuser — la gestion saisonnière est trop chronophage",
+        "tag": "risque",
+        "eff": {
+          "cash": 12,
+          "stress": -3
+        },
+        "out": "Décision raisonnable. Tu te concentres sur ton parc existant."
+      }
+    ]
+  },
+  {
+    "title": "Ton immeuble est intégré dans un plan de rénovation de façades",
+    "body": "La ville finance 50% du ravalement si tu acceptes les couleurs imposées par le plan local d'urbanisme.",
+    "minYear": 7,
+    "choices": [
+      {
+        "label": "Accepter l'aide et rénover",
+        "tag": "prudent",
+        "eff": {
+          "cash": -20,
+          "val": 50,
+          "stress": 5
+        },
+        "out": "50% de subvention : excellent rapport coût/bénéfice."
+      },
+      {
+        "label": "Rénover seul avec tes propres couleurs",
+        "tag": "risque",
+        "eff": {
+          "cash": -40,
+          "val": 55,
+          "stress": 8
+        },
+        "out": "Liberté totale mais tu rates la moitié du financement public."
+      },
+      {
+        "label": "Attendre une prochaine tranche de financement",
+        "tag": "creatif",
+        "eff": {
+          "cash": 5,
+          "stress": 3,
+          "val": -5
+        },
+        "out": "Patience récompensée en partie : la prochaine tranche est moins généreuse."
+      }
+    ]
+  },
+  {
+    "title": "Un office du tourisme veut classer ton bien en meublé de tourisme 5 étoiles",
+    "body": "Ton appartement de prestige peut être classé 5 étoiles meublé de tourisme. Loyers multipliés par 3 mais contraintes de qualité.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Investir dans le classement 5 étoiles",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -25,
+          "val": 60,
+          "stress": 8
+        },
+        "out": "Loyer triplé et taux de remplissage de 85%. Un excellent investissement."
+      },
+      {
+        "label": "Garder en location classique — moins de contraintes",
+        "tag": "prudent",
+        "eff": {
+          "cash": 20,
+          "stress": 3,
+          "val": 10
+        },
+        "out": "Moins rentable mais zéro gestion saisonnière. Décision de confort."
+      },
+      {
+        "label": "Déléguer la gestion à une conciergerie haut de gamme",
+        "tag": "creatif",
+        "eff": {
+          "cash": 35,
+          "stress": -8,
+          "val": 40
+        },
+        "out": "Revenus élevés sans gestion directe. Commission de 20% mais ça vaut le coup."
+      }
+    ]
+  },
+  {
+    "title": "Une coopérative de locataires veut racheter ton immeuble",
+    "body": "Tes locataires se constituent en coopérative et proposent de racheter l'immeuble collectivement. Prix légèrement sous-marché.",
+    "minYear": 12,
+    "choices": [
+      {
+        "label": "Vendre à la coopérative — un acte militant et pragmatique",
+        "tag": "creatif",
+        "eff": {
+          "cash": 180,
+          "val": -150,
+          "stress": -15
+        },
+        "out": "Opération valorisante humainement. Tu en parles encore fièrement des années après."
+      },
+      {
+        "label": "Refuser et mettre sur le marché au prix plein",
+        "tag": "risque",
+        "eff": {
+          "cash": 220,
+          "val": -160,
+          "stress": 8
+        },
+        "out": "Tu obtiens mieux mais tu perds des locataires fidèles depuis des années."
+      },
+      {
+        "label": "Accepter avec un droit de premier refus si la coopérative veut revendre",
+        "tag": "prudent",
+        "eff": {
+          "cash": 185,
+          "val": -152,
+          "stress": -8
+        },
+        "out": "Vente éthique avec une protection future. Excellent compromis."
+      }
+    ]
+  },
+  {
+    "title": "Tu dois gérer un conflit de voisinage sur une servitude de passage",
+    "body": "Ton voisin conteste une servitude de passage qui traverse son terrain vers ton immeuble. Procès en cours.",
+    "minYear": 5,
+    "choices": [
+      {
+        "label": "Engager un géomètre et défendre la servitude",
+        "tag": "prudent",
+        "eff": {
+          "cash": -12,
+          "stress": 12
+        },
+        "out": "La servitude est confirmée par le tribunal. Frais récupérés sur l'adversaire."
+      },
+      {
+        "label": "Négocier une indemnité pour abandonner la servitude",
+        "tag": "creatif",
+        "eff": {
+          "cash": 20,
+          "stress": -8
+        },
+        "out": "Le voisin paie 20k€ pour supprimer la servitude. Bon deal."
+      },
+      {
+        "label": "Acheter la parcelle du voisin pour supprimer le problème",
+        "tag": "risque",
+        "eff": {
+          "cash": -55,
+          "val": 70,
+          "stress": 5,
+          "properties": 1
+        },
+        "out": "Solution radicale et coûteuse mais définitivement efficace."
+      }
+    ]
+  },
+  {
+    "title": "Le marché de la colocation explose dans ta ville",
+    "body": "La demande de colocation triple en 18 mois. Tes grands appartements pourraient être reconvertis avec des rendements de 9% net.",
+    "minYear": 7,
+    "choices": [
+      {
+        "label": "Reconvertir en colocation avec création de chambres supplémentaires",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -35,
+          "val": 60,
+          "stress": 10
+        },
+        "out": "Rendement boosté. La demande est forte et les chambres se louent en 48h."
+      },
+      {
+        "label": "Louer en colocation sans travaux préalables",
+        "tag": "creatif",
+        "eff": {
+          "cash": 25,
+          "stress": 5,
+          "val": 15
+        },
+        "out": "Moins rentable sans travaux mais investissement nul immédiat."
+      },
+      {
+        "label": "Garder en location classique — moins de gestion",
+        "tag": "prudent",
+        "eff": {
+          "cash": 18,
+          "stress": 3,
+          "val": 5
+        },
+        "out": "Choix de tranquillité. La colocation attire des locataires plus volatiles."
+      }
+    ]
+  },
+  {
+    "title": "Ton parc est audité par un fonds ESG",
+    "body": "Un fonds ESG (Environnement Social Gouvernance) veut certifier ton parc. Certification payante mais prime de loyer de 15%.",
+    "minYear": 11,
+    "choices": [
+      {
+        "label": "Payer la certification et profiter de la prime locative",
+        "tag": "prudent",
+        "eff": {
+          "cash": -20,
+          "val": 80,
+          "stress": 5
+        },
+        "out": "Coût rapidement amorti par la prime de loyer. Image de marque renforcée."
+      },
+      {
+        "label": "Refuser — coût élevé pour un bénéfice incertain",
+        "tag": "risque",
+        "eff": {
+          "cash": 10,
+          "stress": -3
+        },
+        "out": "Prudence. Les locataires ESG sont plus exigeants que prévu."
+      },
+      {
+        "label": "Réaliser les travaux nécessaires pour décrocher la certification",
+        "tag": "creatif",
+        "eff": {
+          "cash": -50,
+          "val": 120,
+          "stress": 8
+        },
+        "out": "Investissement de rénovation qui ouvre l'accès aux fonds institutionnels."
+      }
+    ]
+  },
+  {
+    "title": "Un promoteur propose un bail emphytéotique de 99 ans",
+    "body": "Pour ton terrain à fort potentiel, un promoteur propose un bail emphytéotique. Tu gardes la propriété mais il construit et exploite.",
+    "minYear": 13,
+    "choices": [
+      {
+        "label": "Signer le bail emphytéotique — revenus sur 99 ans",
+        "tag": "prudent",
+        "eff": {
+          "cash": 80,
+          "val": 200,
+          "stress": -10
+        },
+        "out": "Revenus garantis pendant 99 ans et récupération du bien à terme. Magnifique."
+      },
+      {
+        "label": "Vendre le terrain au prix du marché",
+        "tag": "risque",
+        "eff": {
+          "cash": 150,
+          "val": -100,
+          "stress": -5
+        },
+        "out": "Cash immédiat mais tu perds un actif très long terme."
+      },
+      {
+        "label": "Négocier un bail plus court avec révision à 30 ans",
+        "tag": "creatif",
+        "eff": {
+          "cash": 60,
+          "val": 120,
+          "stress": -3
+        },
+        "out": "Flexibilité assurée avec révision de loyer tous les 30 ans. Bon équilibre."
+      }
+    ]
+  },
+  {
+    "title": "Un accident de chantier chez ton voisin endommage ton bien",
+    "body": "Un échafaudage s'effondre et deteriore la facade de ton immeuble. La responsabilité du voisin est engagée.",
+    "minYear": 6,
+    "choices": [
+      {
+        "label": "Engager un avocat pour obtenir réparation",
+        "tag": "prudent",
+        "eff": {
+          "cash": 25,
+          "stress": 10
+        },
+        "out": "Procédure de 8 mois mais tu récupères l'intégralité des dommages."
+      },
+      {
+        "label": "Négocier directement avec le voisin",
+        "tag": "creatif",
+        "eff": {
+          "cash": 18,
+          "stress": 5
+        },
+        "out": "Accord à l'amiable en 3 semaines. Moins que le judiciaire mais zéro stress prolongé."
+      },
+      {
+        "label": "Laisser l'assurance multirisque gérer",
+        "tag": "risque",
+        "eff": {
+          "cash": 10,
+          "stress": 3
+        },
+        "out": "L'assurance règle rapidement mais avec une franchise et des délais."
+      }
+    ]
+  },
+  {
+    "title": "Tu peux investir dans un projet de résidence senior",
+    "body": "Un exploitant de résidences services cherche des investisseurs pour 20 appartements avec services. Loyer garanti 20 ans.",
+    "minYear": 10,
+    "choices": [
+      {
+        "label": "Investir dans 5 appartements de la résidence",
+        "tag": "prudent",
+        "eff": {
+          "cash": -80,
+          "val": 110,
+          "stress": 3,
+          "properties": 1
+        },
+        "out": "Rendement net de 4,5% garanti et pas de gestion. Idéal."
+      },
+      {
+        "label": "Investir dans 15 appartements pour maximiser",
+        "tag": "risque",
+        "eff": {
+          "cash": -240,
+          "val": 330,
+          "stress": 10,
+          "properties": 2
+        },
+        "out": "Excellent rendement total. Mais forte concentration sur un seul exploitant."
+      },
+      {
+        "label": "Demander une garantie bancaire de l'exploitant avant",
+        "tag": "creatif",
+        "eff": {
+          "cash": -80,
+          "val": 115,
+          "stress": 3,
+          "properties": 1
+        },
+        "out": "Due diligence sérieuse qui te protège et te donne confiance dans l'investissement."
+      }
+    ]
+  },
+  {
+    "title": "Ton locataire commercial fait faillite",
+    "body": "La boutique qui occupait ton local commercial dépose le bilan. 4 mois de loyers impayés et un local en mauvais état.",
+    "minYear": 6,
+    "choices": [
+      {
+        "label": "Se déclarer créancier dans la procédure collective",
+        "tag": "prudent",
+        "eff": {
+          "cash": -5,
+          "stress": 10
+        },
+        "out": "Tu récupères 60% des loyers impayés. La procédure dure 6 mois."
+      },
+      {
+        "label": "Rénover et relouer rapidement à un autre commerçant",
+        "tag": "creatif",
+        "eff": {
+          "cash": -20,
+          "val": 25,
+          "stress": 8
+        },
+        "out": "Vacancy locative courte grâce à la rénovation rapide et au loyer attractif."
+      },
+      {
+        "label": "Convertir le local en appartement",
+        "tag": "risque",
+        "eff": {
+          "cash": -40,
+          "val": 60,
+          "stress": 12,
+          "properties": 1
+        },
+        "out": "Travaux importants mais plus-value significative et loyer résidentiel garanti."
+      }
+    ]
+  },
+  {
+    "title": "Une agence immobilière te propose de gérer tout ton parc",
+    "body": "Un grand réseau d'agences propose de prendre en gestion l'intégralité de ton parc contre 7% de frais de gestion.",
+    "minYear": 9,
+    "choices": [
+      {
+        "label": "Accepter la gestion complète déléguée",
+        "tag": "prudent",
+        "eff": {
+          "cash": -15,
+          "stress": -20
+        },
+        "out": "Tu te libères de toute gestion quotidienne. La qualité de vie s'améliore."
+      },
+      {
+        "label": "Garder la gestion directe de tes meilleurs biens",
+        "tag": "creatif",
+        "eff": {
+          "cash": -8,
+          "stress": -10
+        },
+        "out": "Délégation partielle intelligente. Tu gardes la main sur ce qui compte vraiment."
+      },
+      {
+        "label": "Refuser et embaucher un salarié à mi-temps",
+        "tag": "risque",
+        "eff": {
+          "cash": -20,
+          "stress": -12
+        },
+        "out": "Salarié efficace mais recrutement difficile et coût proche du prestataire."
+      }
+    ]
   }
 ]

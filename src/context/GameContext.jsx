@@ -417,10 +417,13 @@ function reducer(state, action) {
       const { item } = action.payload;
       const s = { ...state };
       if ((s.personalCash ?? 0) < item.price) return s;
+      // Stress relief proportional to price: sqrt(price) * 1.5, capped at 20
+      const stressRelief = Math.min(20, Math.round(Math.sqrt(item.price) * 1.5));
       const newItems = [...(s.luxuryItems ?? []), { ...item, purchasePrice: item.price, currentValue: item.price, boughtYear: s.year }];
       const newState = {
         ...s,
         personalCash: (s.personalCash ?? 0) - item.price,
+        stress: clamp((s.stress ?? 0) - stressRelief, 0, STRESS_MAX),
         luxuryItems: newItems,
         currentYearFinance: { ...s.currentYearFinance, patrimoine: (s.currentYearFinance?.patrimoine ?? 0) - item.price },
       };

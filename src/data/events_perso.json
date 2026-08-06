@@ -7502,5 +7502,1685 @@
         "out": "Meilleure qualité, valeur patrimoniale en hausse."
       }
     ]
+  },
+  {
+    "title": "Un coup de foudre au fond du bar",
+    "body": "Tu croises quelqu'un d'extraordinaire lors d'une soirée impromptue. Le courant passe immédiatement, mais ça demande du temps et de la disponibilité.",
+    "choices": [
+      {
+        "label": "Te rendre disponible et lui consacrer du temps",
+        "tag": "prudent",
+        "eff": {
+          "stress": -10,
+          "val": -3
+        },
+        "out": "Une belle histoire commence. Le bonheur a son prix.",
+        "flag": "hasPartner"
+      },
+      {
+        "label": "Donner un numéro mais sans t'engager",
+        "tag": "creatif",
+        "eff": {
+          "stress": -3
+        },
+        "out": "On se reverra peut-être. Ça reste léger."
+      },
+      {
+        "label": "Poliment décliner — trop de boulot en ce moment",
+        "tag": "risque",
+        "eff": {
+          "stress": 4
+        },
+        "out": "La chance passe. Mais tu te concentres sur l'essentiel."
+      }
+    ]
+  },
+  {
+    "title": "Elle veut qu'on se définisse",
+    "body": "Après quelques mois ensemble, ton/ta partenaire demande une conversation sérieuse sur vos intentions.",
+    "requires": [
+      "hasPartner"
+    ],
+    "choices": [
+      {
+        "label": "Officialiser la relation",
+        "tag": "prudent",
+        "eff": {
+          "stress": -12,
+          "cash": 5
+        },
+        "out": "Vous êtes officiellement ensemble. La stabilité fait du bien.",
+        "flag": "coupleOfficiel"
+      },
+      {
+        "label": "Demander plus de temps",
+        "tag": "creatif",
+        "eff": {
+          "stress": 5
+        },
+        "out": "Iel accepte, mais une légère tension s'installe."
+      },
+      {
+        "label": "Préférer garder ta liberté",
+        "tag": "risque",
+        "eff": {
+          "stress": 8
+        },
+        "out": "La relation s'essouffle. Retour à la solitude."
+      }
+    ]
+  },
+  {
+    "title": "Premier voyage en amoureux",
+    "body": "Tu décides d'inviter ton/ta partenaire pour un voyage surprise. Une façon de renforcer votre lien.",
+    "requires": [
+      "hasPartner"
+    ],
+    "choices": [
+      {
+        "label": "Un week-end romantique à Paris (2k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -2,
+          "stress": -15
+        },
+        "out": "Deux jours magiques. Le lien se renforce vraiment."
+      },
+      {
+        "label": "Un séjour de rêve en Italie (8k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -8,
+          "stress": -20
+        },
+        "out": "Inoubliable. Votre relation entre dans une autre dimension."
+      },
+      {
+        "label": "Un camping nature pas cher",
+        "tag": "risque",
+        "eff": {
+          "cash": -1,
+          "stress": -8
+        },
+        "out": "Dépaysant et authentique. Pas de fioriture, mais vous rigolé bien."
+      }
+    ]
+  },
+  {
+    "title": "Une dispute qui dégénère",
+    "body": "Une tension monte entre vous depuis quelques semaines. Ce soir, ça explose.",
+    "requires": [
+      "coupleOfficiel"
+    ],
+    "choices": [
+      {
+        "label": "Prendre le temps d'écouter et de t'excuser",
+        "tag": "prudent",
+        "eff": {
+          "stress": -6
+        },
+        "out": "La crise est dépassée. La relation sort renforcée."
+      },
+      {
+        "label": "Tenir bon sur tes positions",
+        "tag": "risque",
+        "eff": {
+          "stress": 15
+        },
+        "out": "Nuit blanche, relation fragilisée."
+      },
+      {
+        "label": "Proposer une médiation avec un couple de potes",
+        "tag": "creatif",
+        "eff": {
+          "stress": -3,
+          "cash": -1
+        },
+        "out": "Un peu bizarre, mais ça a désamorcé la bombe."
+      }
+    ]
+  },
+  {
+    "title": "Ta/Ton ex refait surface",
+    "body": "Un message inattendu dans ta boîte. Ton/ta ex voudrait prendre un café et 'rattraper le temps perdu'.",
+    "choices": [
+      {
+        "label": "Ignorer le message",
+        "tag": "prudent",
+        "eff": {
+          "stress": 3
+        },
+        "out": "Quelques regrets, mais tu avances."
+      },
+      {
+        "label": "Accepter le café, juste pour tourner la page",
+        "tag": "creatif",
+        "eff": {
+          "stress": -4
+        },
+        "out": "Une vraie fermeture propre. Ça fait du bien."
+      },
+      {
+        "label": "Te laisser emporter par les souvenirs",
+        "tag": "risque",
+        "eff": {
+          "stress": 12,
+          "cash": -3
+        },
+        "out": "Une belle catastrophe. Tu savais pourtant que c'était une mauvaise idée."
+      }
+    ]
+  },
+  {
+    "title": "On emménage ensemble ?",
+    "body": "Après plusieurs mois de relation sérieuse, l'idée de partager un appartement fait son chemin.",
+    "requires": [
+      "coupleOfficiel"
+    ],
+    "choices": [
+      {
+        "label": "Trouver un appartement commun (loyer partagé)",
+        "tag": "prudent",
+        "eff": {
+          "cash": 6,
+          "stress": -10
+        },
+        "out": "Moins de charges, plus de lien. Vous avancez ensemble.",
+        "flag": "vieTogether"
+      },
+      {
+        "label": "L'accueillir chez toi",
+        "tag": "creatif",
+        "eff": {
+          "stress": -5,
+          "cash": 3
+        },
+        "out": "Pratique mais parfois à l'étroit. L'espace de vie demande adaptation.",
+        "flag": "vieTogether"
+      },
+      {
+        "label": "Garder chacun son chez-soi encore un moment",
+        "tag": "risque",
+        "eff": {
+          "stress": 5
+        },
+        "out": "Sage, mais iel commence à se poser des questions."
+      }
+    ]
+  },
+  {
+    "title": "La déco, c'est pas si simple",
+    "body": "Emménager ensemble, c'est choisir une déco ensemble. Et les goûts divergent fortement.",
+    "requires": [
+      "vieTogether"
+    ],
+    "choices": [
+      {
+        "label": "Investir dans un vrai appartement bien meublé (12k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -12,
+          "stress": -8
+        },
+        "out": "L'appart est superbe. Vous êtes fiers de votre chez-vous."
+      },
+      {
+        "label": "Faire des compromis et y aller progressivement",
+        "tag": "prudent",
+        "eff": {
+          "cash": -4,
+          "stress": -5
+        },
+        "out": "Petit à petit, le nid se construit."
+      },
+      {
+        "label": "Engager un décorateur d'intérieur (5k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -5,
+          "stress": -10
+        },
+        "out": "Résultat bluffant. Plus de disputes sur le canapé."
+      }
+    ]
+  },
+  {
+    "title": "La belle-famille débarque",
+    "body": "Les parents de ton/ta partenaire veulent vous rendre visite pour le week-end. La pression est réelle.",
+    "requires": [
+      "vieTogether"
+    ],
+    "choices": [
+      {
+        "label": "Préparer un beau repas, faire bonne impression",
+        "tag": "prudent",
+        "eff": {
+          "cash": -2,
+          "stress": 8
+        },
+        "out": "Tout s'est bien passé. Tu gagnes des points."
+      },
+      {
+        "label": "Réserver un restaurant gastronomique (4k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -4,
+          "stress": -5
+        },
+        "out": "WOW. Ils adorent. Tu es officiellement béni(e)."
+      },
+      {
+        "label": "Court-circuiter poliment et écourter la visite",
+        "tag": "risque",
+        "eff": {
+          "stress": 12
+        },
+        "out": "Gêne familiale. Ton/ta partenaire n'est pas content(e)."
+      }
+    ]
+  },
+  {
+    "title": "Question de chien ou de chat",
+    "body": "Ton/ta partenaire veut adopter un animal. Tu n'en avais pas prévu dans ton budget.",
+    "requires": [
+      "vieTogether"
+    ],
+    "choices": [
+      {
+        "label": "Adopter un chien (budget annuel +2k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -2,
+          "stress": -12
+        },
+        "out": "Le chien apporte une énergie folle. La vie à deux prend un autre sens."
+      },
+      {
+        "label": "Adopter un chat (budget annuel +1k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -1,
+          "stress": -8
+        },
+        "out": "Calme et ronronnement garanti. Parfait pour équilibrer le stress."
+      },
+      {
+        "label": "Proposer de commencer par une plante",
+        "tag": "creatif",
+        "eff": {
+          "stress": -3
+        },
+        "out": "Un cactus prénommé Fernand. La famille s'agrandit doucement."
+      }
+    ]
+  },
+  {
+    "title": "La grande question",
+    "body": "Tu envisages sérieusement de demander ton/ta partenaire en mariage. L'anneau, les mots, le moment parfait.",
+    "requires": [
+      "vieTogether"
+    ],
+    "choices": [
+      {
+        "label": "Demande en mariage, bague sobre (3k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -3,
+          "stress": -18
+        },
+        "out": "Oui ! La plus belle soirée de ta vie.",
+        "flag": "engaged"
+      },
+      {
+        "label": "Demande épique avec bague de 15k€",
+        "tag": "risque",
+        "eff": {
+          "cash": -15,
+          "stress": -25
+        },
+        "out": "Le genre de moment qu'on raconte aux petits-enfants.",
+        "flag": "engaged"
+      },
+      {
+        "label": "Attendre encore un peu",
+        "tag": "creatif",
+        "eff": {
+          "stress": 4
+        },
+        "out": "Tu procrastines. Mais le timing compte."
+      }
+    ]
+  },
+  {
+    "title": "Organisation du mariage",
+    "body": "Vous êtes fiancé(e)s ! Maintenant il faut planifier la cérémonie. Budget, invités, lieu… c'est un projet à part entière.",
+    "requires": [
+      "engaged"
+    ],
+    "choices": [
+      {
+        "label": "Mariage intime et simple (8k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -8,
+          "stress": 5
+        },
+        "out": "Une fête authentique avec vos proches. Parfait."
+      },
+      {
+        "label": "Grand mariage mémorable (35k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -35,
+          "stress": 15
+        },
+        "out": "Une folie, mais ça sera dans les albums photo pour toujours.",
+        "flag": "married"
+      },
+      {
+        "label": "Mariage civil + soirée entre amis (3k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -3,
+          "stress": -5
+        },
+        "out": "Simple, vrai, sincère. Vous êtes mariés.",
+        "flag": "married"
+      }
+    ]
+  },
+  {
+    "title": "On essaie d'avoir un bébé ?",
+    "body": "La question flotte dans l'air depuis quelques mois. Votre vie à deux est stable. Peut-être que le moment est venu.",
+    "requires": [
+      "vieTogether"
+    ],
+    "choices": [
+      {
+        "label": "On se lance !",
+        "tag": "risque",
+        "eff": {
+          "stress": 8
+        },
+        "out": "La décision est prise. L'attente commence. Avec joie et un peu de frayeur.",
+        "flag": "tryingBaby"
+      },
+      {
+        "label": "Attendre encore quelques années",
+        "tag": "prudent",
+        "eff": {
+          "stress": 3
+        },
+        "out": "Pas encore. Vous voulez profiter encore de votre liberté."
+      },
+      {
+        "label": "En parler à votre médecin pour anticiper",
+        "tag": "creatif",
+        "eff": {
+          "stress": -2,
+          "cash": -1
+        },
+        "out": "Un bilan de fertilité rassure et prépare mieux la décision."
+      }
+    ]
+  },
+  {
+    "title": "Test de grossesse positif",
+    "body": "Vous regardez ensemble le résultat. Deux traits. La vie bascule doucement.",
+    "requires": [
+      "tryingBaby"
+    ],
+    "choices": [
+      {
+        "label": "Fêter ça en amoureux ce soir",
+        "tag": "prudent",
+        "eff": {
+          "stress": -15,
+          "cash": -3
+        },
+        "out": "La nuit la plus belle depuis longtemps.",
+        "flag": "hasChild"
+      },
+      {
+        "label": "Rester discret, attendre 3 mois",
+        "tag": "creatif",
+        "eff": {
+          "stress": 5
+        },
+        "out": "Sage. Vous portez un secret partagé. Beau et pesant à la fois.",
+        "flag": "hasChild"
+      },
+      {
+        "label": "Annoncer immédiatement à toute la famille",
+        "tag": "risque",
+        "eff": {
+          "stress": 10
+        },
+        "out": "L'excitation déborde. Espérons que tout se passe bien.",
+        "flag": "hasChild"
+      }
+    ]
+  },
+  {
+    "title": "La naissance : jour J",
+    "body": "Les premières contractions. L'hôpital. Le cri. Ton enfant est là.",
+    "requires": [
+      "hasChild"
+    ],
+    "choices": [
+      {
+        "label": "Accouchement naturel, à la clinique privée (4k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -4,
+          "stress": -5
+        },
+        "out": "Tout s'est bien passé. La joie est immense."
+      },
+      {
+        "label": "Maternité publique de qualité",
+        "tag": "creatif",
+        "eff": {
+          "stress": -3
+        },
+        "out": "Un personnel formidable. Aucune différence en pratique."
+      },
+      {
+        "label": "Accouchement à domicile avec sage-femme (6k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -6,
+          "stress": -8
+        },
+        "out": "Une expérience hors du commun. Tout s'est bien passé."
+      }
+    ]
+  },
+  {
+    "title": "Les nuits sans sommeil",
+    "body": "Le bébé pleure toutes les deux heures. Tu fonctionnes à l'adrénaline et au café.",
+    "requires": [
+      "hasChild"
+    ],
+    "choices": [
+      {
+        "label": "Alterner les nuits avec ton/ta partenaire",
+        "tag": "prudent",
+        "eff": {
+          "stress": 10
+        },
+        "out": "Fatigant, mais équilibré. Le couple tient."
+      },
+      {
+        "label": "Engager une nurse de nuit (3k€ le mois)",
+        "tag": "risque",
+        "eff": {
+          "cash": -3,
+          "stress": -15
+        },
+        "out": "Enfin quelques nuits complètes. Le luxe absolu."
+      },
+      {
+        "label": "Tenir vaillamment, ça passera",
+        "tag": "creatif",
+        "eff": {
+          "stress": 18
+        },
+        "out": "Épuisé(e), mais la fierté est là. Ça ne dure qu'un temps."
+      }
+    ]
+  },
+  {
+    "title": "La crèche ou la nounou ?",
+    "body": "Retour au travail : il faut organiser la garde du bébé. Plusieurs options s'offrent à toi.",
+    "requires": [
+      "hasChild"
+    ],
+    "choices": [
+      {
+        "label": "Crèche municipale (moins cher)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -2,
+          "stress": 5
+        },
+        "out": "Socialisation précoce. Liste d'attente mais ça marche."
+      },
+      {
+        "label": "Nounou à domicile (5k€/mois)",
+        "tag": "risque",
+        "eff": {
+          "cash": -5,
+          "stress": -10
+        },
+        "out": "Confort maximal et tranquillité d'esprit."
+      },
+      {
+        "label": "Congé parental prolongé",
+        "tag": "creatif",
+        "eff": {
+          "val": -5,
+          "stress": -12
+        },
+        "out": "Tu sacrifies un peu de progression pro mais tu profites de chaque moment."
+      }
+    ]
+  },
+  {
+    "title": "L'anniversaire du gamin",
+    "body": "Ton enfant a 5 ans. Qu'est-ce qu'on lui prépare comme fête ?",
+    "requires": [
+      "hasChild"
+    ],
+    "choices": [
+      {
+        "label": "Fête en famille avec gâteau maison",
+        "tag": "prudent",
+        "eff": {
+          "cash": -1,
+          "stress": -8
+        },
+        "out": "Simple et chaleureux. Les enfants adorent, les adultes aussi."
+      },
+      {
+        "label": "Parc d'attractions privatisé (8k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -8,
+          "stress": -15
+        },
+        "out": "Mémorable. Le petit en parle encore six mois plus tard."
+      },
+      {
+        "label": "Goûter pirates avec les copains de classe",
+        "tag": "creatif",
+        "eff": {
+          "cash": -2,
+          "stress": -12
+        },
+        "out": "Parfait. Des souvenirs impayables."
+      }
+    ]
+  },
+  {
+    "title": "Un grand voyage pour recharger les batteries",
+    "body": "Le stress s'accumule. Tu envisages un vrai voyage, pas juste un week-end.",
+    "choices": [
+      {
+        "label": "10 jours au Japon (5k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -5,
+          "stress": -20
+        },
+        "out": "Un dépaysement total. Tu reviens transformé(e)."
+      },
+      {
+        "label": "3 semaines en Amérique du Sud (12k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -12,
+          "stress": -28
+        },
+        "out": "L'aventure de ta vie. Ça remet les choses en perspective."
+      },
+      {
+        "label": "Semaine de randonnée dans les Alpes (2k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -2,
+          "stress": -15
+        },
+        "out": "La nature, le silence, les sommets. Ressourçant."
+      }
+    ]
+  },
+  {
+    "title": "Offrir un voyage à ton/ta partenaire",
+    "body": "Pour son anniversaire, tu veux faire quelque chose de mémorable. Un voyage surprise, peut-être.",
+    "requires": [
+      "hasPartner"
+    ],
+    "choices": [
+      {
+        "label": "Week-end à Venise ou Barcelone (3k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -3,
+          "stress": -12
+        },
+        "out": "Une surprise magnifique. Tu marques des points définitifs."
+      },
+      {
+        "label": "Safari au Kenya (20k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -20,
+          "stress": -25
+        },
+        "out": "Un rêve devenu réalité. Ce voyage restera dans vos mémoires à jamais."
+      },
+      {
+        "label": "Séjour wellness dans un spa 5 étoiles (8k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -8,
+          "stress": -20
+        },
+        "out": "Total relâchement. Vous rentrez rayonnant(e)s."
+      }
+    ]
+  },
+  {
+    "title": "Voyage en famille avec les enfants",
+    "body": "Première grande vacances en famille. Les enfants sont grands assez maintenant.",
+    "requires": [
+      "hasChild"
+    ],
+    "choices": [
+      {
+        "label": "Location de gîte en Bretagne (3k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -3,
+          "stress": -12
+        },
+        "out": "Crêpes, bateaux et châteaux de sable. Parfait."
+      },
+      {
+        "label": "Disney (6k€ pour toute la famille)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -6,
+          "stress": -18
+        },
+        "out": "Les yeux des enfants valaient tous les euros."
+      },
+      {
+        "label": "Road trip aux États-Unis (18k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -18,
+          "stress": -22
+        },
+        "out": "Une aventure légendaire qui forge les liens familiaux."
+      }
+    ]
+  },
+  {
+    "title": "Voyager seul(e) pour te retrouver",
+    "body": "Une envie de prendre l'air solo, te retrouver, sans agenda ni obligation.",
+    "choices": [
+      {
+        "label": "Retraite méditation au Portugal (2k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -2,
+          "stress": -18
+        },
+        "out": "5 jours de silence et de reconnexion. Une renaissance."
+      },
+      {
+        "label": "Backpacking en Asie du Sud-Est (5k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -5,
+          "stress": -22
+        },
+        "out": "Tu reviens différent(e), prêt(e) pour tout."
+      },
+      {
+        "label": "Semaine dans un chalet montagne (3k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -3,
+          "stress": -15
+        },
+        "out": "Ski, livres, feu de cheminée. Le luxe de la lenteur."
+      }
+    ]
+  },
+  {
+    "title": "Le médecin te prescrit du repos",
+    "body": "Suite à un bilan annuel, ton médecin te conseille fortement de ralentir. Ton corps envoie des signaux.",
+    "choices": [
+      {
+        "label": "Prendre une semaine off immédiatement",
+        "tag": "prudent",
+        "eff": {
+          "stress": -20,
+          "val": -3
+        },
+        "out": "Tu reviens en forme et avec une tête plus claire."
+      },
+      {
+        "label": "Trouver un compromis : mi-temps temporaire",
+        "tag": "creatif",
+        "eff": {
+          "stress": -10,
+          "val": -5
+        },
+        "out": "Ça demande de l'organisation, mais tu t'en sors bien."
+      },
+      {
+        "label": "Ignorer et continuer à fond",
+        "tag": "risque",
+        "eff": {
+          "stress": 15
+        },
+        "out": "Mauvaise idée. Le corps garde le score."
+      }
+    ]
+  },
+  {
+    "title": "Burn-out imminent",
+    "body": "Tu te réveilles épuisé(e), sans motivation, avec une boule au ventre. Un psy te dirait que c'est un signal d'alarme.",
+    "choices": [
+      {
+        "label": "Consulter un thérapeute (1k€ sur 6 mois)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -1,
+          "stress": -22
+        },
+        "out": "Ça aide vraiment. Un espace pour poser les choses."
+      },
+      {
+        "label": "Prendre des vacances longues durée (3k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -3,
+          "stress": -18
+        },
+        "out": "Le break nécessaire. La distance change la perspective."
+      },
+      {
+        "label": "Pousser encore, c'est juste une mauvaise passe",
+        "tag": "risque",
+        "eff": {
+          "stress": 20
+        },
+        "out": "Ça empire. Le burnout ne prévient plus."
+      }
+    ]
+  },
+  {
+    "title": "Se (re)mettre au sport",
+    "body": "Tu prends conscience que tu es sédentaire depuis trop longtemps. L'occasion de changer ça.",
+    "choices": [
+      {
+        "label": "Abonnement salle de sport (100€/mois)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -1,
+          "stress": -10
+        },
+        "out": "Tu y vas vraiment. La discipline paye."
+      },
+      {
+        "label": "Coach sportif personnel (5k€/an)",
+        "tag": "risque",
+        "eff": {
+          "cash": -5,
+          "stress": -18
+        },
+        "out": "Résultats bluffants. Tu te sens 10 ans de moins."
+      },
+      {
+        "label": "Running en plein air, gratuit",
+        "tag": "creatif",
+        "eff": {
+          "stress": -12
+        },
+        "out": "Simple, efficace, et les endorphines font le reste."
+      }
+    ]
+  },
+  {
+    "title": "Un psy pour tenir la route",
+    "body": "Tu envisages sérieusement de commencer un suivi psychologique pour mieux gérer la pression.",
+    "choices": [
+      {
+        "label": "Commencer un suivi hebdomadaire (2k€/an)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -2,
+          "stress": -15
+        },
+        "out": "Transformateur sur le long terme. Les décisions deviennent plus claires."
+      },
+      {
+        "label": "Rejoindre un groupe de parole",
+        "tag": "creatif",
+        "eff": {
+          "cash": -1,
+          "stress": -10
+        },
+        "out": "Moins intense, mais le sentiment de ne plus être seul(e) est précieux."
+      },
+      {
+        "label": "Essayer en solo avec des podcasts et des livres",
+        "tag": "risque",
+        "eff": {
+          "stress": -5
+        },
+        "out": "Utile mais limité. Le vrai travail se fait en profondeur."
+      }
+    ]
+  },
+  {
+    "title": "La mort d'un proche",
+    "body": "Un membre de ta famille s'éteint après une longue maladie. Le deuil frappe là où on ne s'y attend pas.",
+    "choices": [
+      {
+        "label": "Prendre le temps d'être présent pour tes proches",
+        "tag": "prudent",
+        "eff": {
+          "stress": 12,
+          "val": -3
+        },
+        "out": "Le deuil est long, mais vous traversez ça ensemble."
+      },
+      {
+        "label": "Absorber le choc en continuant à travailler",
+        "tag": "risque",
+        "eff": {
+          "stress": 20
+        },
+        "out": "L'émotion resurgit plus tard, plus forte encore."
+      },
+      {
+        "label": "Poser une semaine et organiser les obsèques",
+        "tag": "creatif",
+        "eff": {
+          "stress": 8,
+          "cash": -3
+        },
+        "out": "Une rupture douloureuse mais nécessaire."
+      }
+    ]
+  },
+  {
+    "title": "Un héritage inattendu",
+    "body": "Un(e) grand-parent t'a laissé une somme ou un bien. Une surprise qui vient avec une charge émotionnelle.",
+    "choices": [
+      {
+        "label": "Investir l'héritage dans de l'immobilier",
+        "tag": "risque",
+        "eff": {
+          "cash": -5,
+          "val": 30
+        },
+        "out": "Un beau levier patrimonial. Tu honores sa mémoire."
+      },
+      {
+        "label": "Placer l'argent en sécurité",
+        "tag": "prudent",
+        "eff": {
+          "cash": 20
+        },
+        "out": "Sage. Tu laisses cet argent fructifier à ton rythme."
+      },
+      {
+        "label": "Partager avec le reste de la famille",
+        "tag": "creatif",
+        "eff": {
+          "cash": 8,
+          "stress": -10
+        },
+        "out": "Un geste généreux. La famille le reconnaît."
+      }
+    ]
+  },
+  {
+    "title": "Aider tes parents financièrement",
+    "body": "Tes parents ont des difficultés. Ils n'osent pas demander directement, mais tu lis entre les lignes.",
+    "choices": [
+      {
+        "label": "Leur virer un vrai coup de pouce mensuel (1k€/mois)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -12,
+          "stress": -8
+        },
+        "out": "Ils sont soulagés. Tu te sens utile."
+      },
+      {
+        "label": "Leur prêter une grosse somme (30k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -30,
+          "stress": 10
+        },
+        "out": "Gros effort. On ne sait jamais si on le reverra."
+      },
+      {
+        "label": "Les aider à trouver des aides sociales plutôt",
+        "tag": "creatif",
+        "eff": {
+          "stress": -5,
+          "cash": -1
+        },
+        "out": "Malin. Et ça les responsabilise aussi."
+      }
+    ]
+  },
+  {
+    "title": "Un ami te demande d'être son témoin",
+    "body": "Ton meilleur ami se marie. Il veut que tu sois son témoin. C'est un honneur, mais aussi une organisation.",
+    "choices": [
+      {
+        "label": "Accepter avec enthousiasme et t'investir à fond",
+        "tag": "prudent",
+        "eff": {
+          "cash": -4,
+          "stress": -8
+        },
+        "out": "Un rôle assumé avec brio. Une amitié renforcée."
+      },
+      {
+        "label": "Accepter mais garder ça minimal",
+        "tag": "creatif",
+        "eff": {
+          "cash": -2,
+          "stress": -3
+        },
+        "out": "Tu fais l'essentiel. Ce n'est pas ta priorité, mais tu es là."
+      },
+      {
+        "label": "Décliner poliment",
+        "tag": "risque",
+        "eff": {
+          "stress": 6
+        },
+        "out": "Il est déçu. La relation prend un coup."
+      }
+    ]
+  },
+  {
+    "title": "Ton cercle d'amis se disperse",
+    "body": "Avec le temps, les amis d'enfance partent vivre ailleurs. Le réseau se fragilise.",
+    "choices": [
+      {
+        "label": "Organiser un grand week-end annuel de retrouvailles",
+        "tag": "prudent",
+        "eff": {
+          "cash": -3,
+          "stress": -10
+        },
+        "out": "Le lien tient. C'est ça, l'amitié durable."
+      },
+      {
+        "label": "Investir dans de nouvelles relations locales",
+        "tag": "creatif",
+        "eff": {
+          "stress": -5,
+          "cash": -1
+        },
+        "out": "Un réseau qui se renouvelle. Ça ouvre des portes."
+      },
+      {
+        "label": "Accepter la solitude, ça fait partie de la vie",
+        "tag": "risque",
+        "eff": {
+          "stress": 10
+        },
+        "out": "Vrai, mais difficile. L'isolement pèse avec le temps."
+      }
+    ]
+  },
+  {
+    "title": "Une offre d'emploi rêvée mais risquée",
+    "body": "Un chasseur de tête te contacte pour un poste qui te fait vibrer. Mais ça implique de tout quitter.",
+    "choices": [
+      {
+        "label": "Foncer, tu n'auras peut-être pas deux fois cette chance",
+        "tag": "risque",
+        "eff": {
+          "val": 25,
+          "stress": 15
+        },
+        "out": "Un pari audacieux qui pourrait tout changer."
+      },
+      {
+        "label": "Négocier les conditions avant de décider",
+        "tag": "prudent",
+        "eff": {
+          "val": 10,
+          "stress": 5
+        },
+        "out": "Tu obtiens des garanties. Une transition maîtrisée."
+      },
+      {
+        "label": "Refuser et rester dans ta zone de confort",
+        "tag": "creatif",
+        "eff": {
+          "stress": -5
+        },
+        "out": "Stabilité conservée, mais le regret rôde parfois."
+      }
+    ]
+  },
+  {
+    "title": "Lancer un side project",
+    "body": "Une idée te trotte dans la tête depuis des mois. Et si tu la concrétisais en dehors du boulot ?",
+    "choices": [
+      {
+        "label": "Y consacrer tes week-ends (budget initial 3k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -3,
+          "stress": 8
+        },
+        "out": "Un projet qui démarre doucement, mais qui avance."
+      },
+      {
+        "label": "Lever des fonds et se lancer à mi-temps",
+        "tag": "risque",
+        "eff": {
+          "val": 20,
+          "stress": 18
+        },
+        "out": "Ça prend de l'ampleur. Risqué mais prometteur."
+      },
+      {
+        "label": "Documenter l'idée et la garder dans un tiroir",
+        "tag": "creatif",
+        "eff": {
+          "stress": -2
+        },
+        "out": "Un jour peut-être. Pour l'instant, tu n'es pas prêt(e)."
+      }
+    ]
+  },
+  {
+    "title": "Prendre une sabbatique",
+    "body": "Après des années intenses, tu envisages de prendre 3 à 6 mois de pause totale.",
+    "choices": [
+      {
+        "label": "3 mois sabbatiques pour voyager et réfléchir",
+        "tag": "creatif",
+        "eff": {
+          "cash": -8,
+          "val": -5,
+          "stress": -25
+        },
+        "out": "Un reset complet. Tu reviens avec une nouvelle vision."
+      },
+      {
+        "label": "6 mois pour développer un projet perso",
+        "tag": "risque",
+        "eff": {
+          "cash": -15,
+          "val": 15
+        },
+        "out": "Ambitieux et créatif. Ça peut déboucher sur quelque chose de grand."
+      },
+      {
+        "label": "Réduire à 1 mois, plus raisonnable",
+        "tag": "prudent",
+        "eff": {
+          "cash": -4,
+          "stress": -15
+        },
+        "out": "Un bon équilibre entre recharge et continuité."
+      }
+    ]
+  },
+  {
+    "title": "Une formation pour monter en compétences",
+    "body": "Tu sens que le marché évolue et qu'il faudrait te former à de nouvelles compétences.",
+    "choices": [
+      {
+        "label": "Formation courte en ligne (500€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -1,
+          "val": 8
+        },
+        "out": "Rapide et efficace. Tu restes dans la course."
+      },
+      {
+        "label": "MBA ou Executive Education (20k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -20,
+          "val": 35
+        },
+        "out": "Un investissement qui paie sur le long terme."
+      },
+      {
+        "label": "Mentorat avec un expert du secteur",
+        "tag": "creatif",
+        "eff": {
+          "cash": -3,
+          "val": 12,
+          "stress": -5
+        },
+        "out": "Apprentissage ciblé et concret. Très efficace."
+      }
+    ]
+  },
+  {
+    "title": "La passion pour un hobby",
+    "body": "Tu commences à t'intéresser sérieusement à un loisir : photographie, golf, cuisine gastronomique...",
+    "choices": [
+      {
+        "label": "Investir dans du bon matériel (5k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -5,
+          "stress": -15
+        },
+        "out": "Un hobby sérieux est une vraie soupape de décompression."
+      },
+      {
+        "label": "Commencer modestement et voir si ça dure",
+        "tag": "prudent",
+        "eff": {
+          "cash": -1,
+          "stress": -8
+        },
+        "out": "Sage. Tu découvres sans te ruiner."
+      },
+      {
+        "label": "Rejoindre un club ou une association",
+        "tag": "creatif",
+        "eff": {
+          "cash": -1,
+          "stress": -12
+        },
+        "out": "Un nouveau réseau et une vraie communauté. Excellent pour le moral."
+      }
+    ]
+  },
+  {
+    "title": "Soirée événement : concert, gala ou match",
+    "body": "Des billets pour un événement exceptionnel sont disponibles. C'est le genre de soirée dont on parle longtemps.",
+    "choices": [
+      {
+        "label": "Places en tribune normale (500€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -1,
+          "stress": -10
+        },
+        "out": "Une belle soirée. Des souvenirs plein les yeux."
+      },
+      {
+        "label": "Loges VIP ou carré or (5k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -5,
+          "stress": -18
+        },
+        "out": "Une expérience de luxe. Tu te souviens de chaque détail."
+      },
+      {
+        "label": "Regarder en streaming avec des amis",
+        "tag": "creatif",
+        "eff": {
+          "cash": 0,
+          "stress": -6
+        },
+        "out": "Moins de glam, mais plus de rires."
+      }
+    ]
+  },
+  {
+    "title": "Décorer ton bureau perso",
+    "body": "Tu travailles beaucoup depuis chez toi. Un bureau mieux aménagé changerait vraiment la donne.",
+    "choices": [
+      {
+        "label": "Investir dans un vrai setup (3k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -3,
+          "val": 5,
+          "stress": -8
+        },
+        "out": "Productivité et confort en hausse. Chaque journée est meilleure."
+      },
+      {
+        "label": "DIY avec des achats malins (500€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -1,
+          "stress": -5
+        },
+        "out": "Résultat honorable pour un budget modeste."
+      },
+      {
+        "label": "Louer un espace de coworking premium",
+        "tag": "risque",
+        "eff": {
+          "cash": -4,
+          "stress": -10
+        },
+        "out": "Séparation travail/maison réussie. Très bénéfique sur le long terme."
+      }
+    ]
+  },
+  {
+    "title": "Changer de voiture",
+    "body": "Ta vieille voiture commence à donner des signes. Quelle direction prendre ?",
+    "choices": [
+      {
+        "label": "Voiture électrique neuve (35k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -35,
+          "stress": -8
+        },
+        "out": "Silence, confort, économies à long terme. Un vrai plaisir."
+      },
+      {
+        "label": "Bonne occasion récente (15k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -15,
+          "stress": -5
+        },
+        "out": "Rapport qualité-prix imbattable."
+      },
+      {
+        "label": "Autopartage ou transports en commun",
+        "tag": "creatif",
+        "eff": {
+          "cash": 6,
+          "stress": -3
+        },
+        "out": "Tu économises et tu décarbonatises. Cohérent avec tes valeurs."
+      }
+    ]
+  },
+  {
+    "title": "Une retraite spirituelle",
+    "body": "Un ami t'a convaincu de tenter une retraite de 7 jours : méditation, silence, retour à l'essentiel.",
+    "choices": [
+      {
+        "label": "Tenter l'aventure (1.5k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -2,
+          "stress": -22
+        },
+        "out": "Déstabilisant au départ, libérateur à la fin. Tu recommandes."
+      },
+      {
+        "label": "Faire juste le week-end d'introduction",
+        "tag": "prudent",
+        "eff": {
+          "cash": -1,
+          "stress": -10
+        },
+        "out": "Utile. Un premier pas vers plus de sérénité."
+      },
+      {
+        "label": "Pas trop ton truc, décliner poliment",
+        "tag": "risque",
+        "eff": {
+          "stress": 2
+        },
+        "out": "Tu respectes. Mais le stress ne baisse pas tout seul."
+      }
+    ]
+  },
+  {
+    "title": "Une cause qui te tient à cœur",
+    "body": "Tu veux t'impliquer dans une association ou une cause qui a du sens pour toi.",
+    "choices": [
+      {
+        "label": "Dons réguliers à une ONG (2k€/an)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -2,
+          "stress": -8
+        },
+        "out": "Tu donnes un sens à ta réussite. Et ça fait du bien."
+      },
+      {
+        "label": "Devenir bénévole actif chaque semaine",
+        "tag": "creatif",
+        "eff": {
+          "val": -3,
+          "stress": -15
+        },
+        "out": "Prenant, mais profondément enrichissant. Tu grandis en humilité."
+      },
+      {
+        "label": "Créer ta propre fondation (50k€ pour lancer)",
+        "tag": "risque",
+        "eff": {
+          "cash": -50,
+          "val": 20,
+          "stress": -10
+        },
+        "out": "Un héritage au-delà du patrimoine. Ambitieux et sincère."
+      }
+    ]
+  },
+  {
+    "title": "Écrire un livre ou partager ton histoire",
+    "body": "Ton parcours inspire des gens autour de toi. Une envie d'en faire quelque chose.",
+    "choices": [
+      {
+        "label": "Écrire tes mémoires ou un guide pratique",
+        "tag": "creatif",
+        "eff": {
+          "val": 15,
+          "stress": 8
+        },
+        "out": "Un projet lent mais gratifiant. Et potentiellement lucratif."
+      },
+      {
+        "label": "Lancer une newsletter ou un podcast",
+        "tag": "prudent",
+        "eff": {
+          "val": 8,
+          "stress": 5
+        },
+        "out": "Audience fidèle qui grandit. Un autre type d'investissement."
+      },
+      {
+        "label": "Mentorer des jeunes entrepreneurs",
+        "tag": "risque",
+        "eff": {
+          "stress": -10,
+          "val": 5
+        },
+        "out": "Donner au suivant. Ça te rappelle pourquoi tu as commencé."
+      }
+    ]
+  },
+  {
+    "title": "Réorganiser tes priorités de vie",
+    "body": "Une période charnière. Tu prends du recul sur ce qui compte vraiment dans ta vie.",
+    "choices": [
+      {
+        "label": "Réduire les heures de travail, être plus présent(e)",
+        "tag": "prudent",
+        "eff": {
+          "val": -5,
+          "stress": -20
+        },
+        "out": "La qualité de vie monte en flèche. Le reste suit."
+      },
+      {
+        "label": "Tout réorganiser autour de tes vraies valeurs",
+        "tag": "creatif",
+        "eff": {
+          "val": -8,
+          "stress": -25
+        },
+        "out": "Un virage à 90°. Libérateur et un peu vertigineux."
+      },
+      {
+        "label": "Continuer sur ta lancée, tu es satisfait(e)",
+        "tag": "risque",
+        "eff": {
+          "val": 10,
+          "stress": 5
+        },
+        "out": "Tu avances. Mais parfois la vitesse fait louper l'essentiel."
+      }
+    ]
+  },
+  {
+    "title": "Une invitation à rejoindre un club d'investisseurs",
+    "body": "Un cercle privé d'investisseurs immobiliers t'invite à les rejoindre. Cotisation et réseau sélect.",
+    "choices": [
+      {
+        "label": "Rejoindre (cotisation 5k€/an)",
+        "tag": "risque",
+        "eff": {
+          "cash": -5,
+          "val": 20
+        },
+        "out": "Un réseau qui ouvre des portes insoupçonnées."
+      },
+      {
+        "label": "Observer deux réunions avant de décider",
+        "tag": "prudent",
+        "eff": {
+          "stress": -2
+        },
+        "out": "Tu prends le temps de juger sur pièces. Sage."
+      },
+      {
+        "label": "Décliner — tu n'aimes pas ces milieux",
+        "tag": "creatif",
+        "eff": {
+          "stress": -5
+        },
+        "out": "Tu préfères rester indépendant(e). Cohérent avec ton style."
+      }
+    ]
+  },
+  {
+    "title": "Une villa de vacances à louer entre amis",
+    "body": "Un groupe d'amis veut louer une villa pour deux semaines cet été. Budget à partager.",
+    "choices": [
+      {
+        "label": "Villa bord de mer en Corse (3k€ ta part)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -3,
+          "stress": -18
+        },
+        "out": "Deux semaines inoubliables. L'été parfait."
+      },
+      {
+        "label": "Château dans le Périgord avec piscine (2k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -2,
+          "stress": -15
+        },
+        "out": "Élégant, reposant, et les repas en terrasse valent de l'or."
+      },
+      {
+        "label": "Passer ton tour cette année",
+        "tag": "risque",
+        "eff": {
+          "stress": 5
+        },
+        "out": "Tu économises, mais FOMO garanti à 100%."
+      }
+    ]
+  },
+  {
+    "title": "Investir dans ta réputation en ligne",
+    "body": "On te suggère de soigner ton image professionnelle en ligne : LinkedIn, site perso, contenu.",
+    "choices": [
+      {
+        "label": "Refonte complète profil + site personnel (3k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -3,
+          "val": 12
+        },
+        "out": "Ton image pro décolle. Les opportunités augmentent."
+      },
+      {
+        "label": "Créer du contenu régulier sur les réseaux",
+        "tag": "creatif",
+        "eff": {
+          "val": 8,
+          "stress": 6
+        },
+        "out": "Un audience se construit. Prenant mais précieux."
+      },
+      {
+        "label": "Laisser ton travail parler pour lui-même",
+        "tag": "risque",
+        "eff": {
+          "stress": -2
+        },
+        "out": "Authentique mais parfois invisible dans la masse."
+      }
+    ]
+  },
+  {
+    "title": "Une fête d'anniversaire mémorable",
+    "body": "Tu fêtes tes 40 ans (ou un autre cap). L'occasion d'une vraie célébration.",
+    "choices": [
+      {
+        "label": "Grande fête avec tous tes proches (8k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -8,
+          "stress": -20
+        },
+        "out": "Une nuit qui restera gravée. Les belles histoires méritent d'être fêtées."
+      },
+      {
+        "label": "Dîner privé avec tes 15 personnes préférées (3k€)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -3,
+          "stress": -15
+        },
+        "out": "Qualité > quantité. La meilleure soirée de l'année."
+      },
+      {
+        "label": "Un weekend en solo dans un endroit qui compte (5k€)",
+        "tag": "creatif",
+        "eff": {
+          "cash": -5,
+          "stress": -18
+        },
+        "out": "Tu célèbres à ta façon. Recharge et introspection."
+      }
+    ]
+  },
+  {
+    "title": "Apprendre une nouvelle langue",
+    "body": "Tu envisages de te mettre sérieusement à une langue étrangère — anglais perfectionné, espagnol, mandarin...",
+    "choices": [
+      {
+        "label": "Cours intensifs avec un prof native (3k€/an)",
+        "tag": "prudent",
+        "eff": {
+          "cash": -3,
+          "val": 8
+        },
+        "out": "Progression réelle et rapide. Un atout de plus."
+      },
+      {
+        "label": "Immersion totale à l'étranger 1 mois (6k€)",
+        "tag": "risque",
+        "eff": {
+          "cash": -6,
+          "stress": -12,
+          "val": 12
+        },
+        "out": "La méthode la plus efficace. Tu en ressors transformé(e)."
+      },
+      {
+        "label": "App de langues + podcasts, gratuit",
+        "tag": "creatif",
+        "eff": {
+          "stress": -4
+        },
+        "out": "Lent mais régulier. La régularité finit toujours par payer."
+      }
+    ]
+  },
+  {
+    "title": "Rencontre avec un mentor inspirant",
+    "body": "Un entrepreneur que tu admires accepte de prendre un café avec toi. Une conversation qui peut tout changer.",
+    "choices": [
+      {
+        "label": "Préparer soigneusement et en tirer le maximum",
+        "tag": "prudent",
+        "eff": {
+          "val": 15,
+          "stress": -5
+        },
+        "out": "Une heure qui en vaut mille. Tu repars avec une feuille de route."
+      },
+      {
+        "label": "Lui proposer de travailler ensemble",
+        "tag": "risque",
+        "eff": {
+          "val": 25,
+          "stress": 10
+        },
+        "out": "Audacieux. Et si ça marche, ça change ton trajectoire."
+      },
+      {
+        "label": "Juste écouter, sans agenda",
+        "tag": "creatif",
+        "eff": {
+          "stress": -10
+        },
+        "out": "Une leçon d'humilité et de vision. Précieux."
+      }
+    ]
+  },
+  {
+    "title": "Revenir dans ta ville natale",
+    "body": "Une opportunité professionnelle ou familiale te rapproche de ta région d'origine. Retour aux racines.",
+    "choices": [
+      {
+        "label": "Saisir l'occasion et revenir s'installer",
+        "tag": "creatif",
+        "eff": {
+          "cash": -5,
+          "stress": -15,
+          "val": 10
+        },
+        "out": "Un retour qui ressource. Les liens se reconstituent naturellement."
+      },
+      {
+        "label": "Rester dans ta ville actuelle, c'est ton ancrage",
+        "tag": "prudent",
+        "eff": {
+          "stress": 3
+        },
+        "out": "Tu restes où sont tes repères. Mais la nostalgie pointe parfois."
+      },
+      {
+        "label": "Investir là-bas sans y habiter",
+        "tag": "risque",
+        "eff": {
+          "cash": -8,
+          "val": 20
+        },
+        "out": "Un ancrage immobilier dans ton terroir. Pas bête."
+      }
+    ]
+  },
+  {
+    "title": "Un témoignage qui te touche",
+    "body": "Quelqu'un que tu as aidé il y a des années revient te remercier. Un rappel puissant de ton impact.",
+    "choices": [
+      {
+        "label": "Prendre le temps d'écouter et partager ton chemin",
+        "tag": "prudent",
+        "eff": {
+          "stress": -15
+        },
+        "out": "Un moment rare. Le succès prend un autre goût."
+      },
+      {
+        "label": "Proposer de continuer à l'accompagner",
+        "tag": "creatif",
+        "eff": {
+          "stress": -10,
+          "val": 5
+        },
+        "out": "Un mentor se révèle parfois en toi. Beau retour de karma."
+      },
+      {
+        "label": "Le remercier brièvement et continuer ta journée",
+        "tag": "risque",
+        "eff": {
+          "stress": 2
+        },
+        "out": "Pas le moment. Mais peut-être qu'on passera à côté de ce qui compte vraiment."
+      }
+    ]
   }
 ]
