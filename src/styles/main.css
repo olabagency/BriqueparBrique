@@ -89,21 +89,23 @@ body{
 .right-column-wrapper{display:none;}
 @media (min-width: 1200px){
   body{
-    padding-left:calc(300px + env(safe-area-inset-left));
-    padding-right:calc(300px + env(safe-area-inset-right));
+    padding-left:calc(290px + env(safe-area-inset-left));
+    padding-right:calc(290px + env(safe-area-inset-right));
   }
   .app{max-width:580px;}
   .portfolio-btn-row{display:none;}
 
   .left-column-wrapper{
     display:flex;flex-direction:column;gap:12px;
-    position:fixed;top:calc(60px + env(safe-area-inset-top));left:calc(16px + env(safe-area-inset-left));
+    position:fixed;top:calc(60px + env(safe-area-inset-top));
+    left:calc(50vw - 290px - 8px - 272px);
     width:272px;max-height:calc(100vh - 80px);overflow-y:auto;z-index:400;
     scrollbar-width:thin;scrollbar-color:var(--border) transparent;
   }
   .right-column-wrapper{
     display:flex;flex-direction:column;gap:12px;
-    position:fixed;top:calc(60px + env(safe-area-inset-top));right:calc(16px + env(safe-area-inset-right));
+    position:fixed;top:calc(60px + env(safe-area-inset-top));
+    left:calc(50vw + 290px + 8px);
     width:272px;max-height:calc(100vh - 80px);overflow-y:auto;z-index:400;
     scrollbar-width:thin;scrollbar-color:var(--border) transparent;
   }
@@ -117,15 +119,17 @@ body{
 }
 @media (min-width:1500px){
   body{
-    padding-left:calc(320px + env(safe-area-inset-left));
-    padding-right:calc(320px + env(safe-area-inset-right));
+    padding-left:calc(310px + env(safe-area-inset-left));
+    padding-right:calc(310px + env(safe-area-inset-right));
   }
   .app{max-width:640px;}
   .left-column-wrapper{
-    width:294px;left:calc(20px + env(safe-area-inset-left));
+    width:294px;
+    left:calc(50vw - 320px - 8px - 294px);
   }
   .right-column-wrapper{
-    width:294px;right:calc(20px + env(safe-area-inset-right));
+    width:294px;
+    left:calc(50vw + 320px + 8px);
   }
 }
 .achievement-category{font-size:11px;font-weight:700;color:var(--muted);margin:12px 0 4px;text-transform:uppercase;letter-spacing:.03em;}
