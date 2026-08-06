@@ -57,12 +57,14 @@ export default function PortfolioModal({ onClose }) {
         color: 'var(--text)',
         lineHeight: 1.6,
       }}>
-        <div style={{ fontWeight: 700, marginBottom: 4 }}>📬 À quoi sert la location ?</div>
-        <p style={{ margin: 0, color: 'var(--muted)' }}>
-          Un bien <strong>loué</strong> génère automatiquement un loyer chaque année (≈ 7 % de sa valeur).
-          Ce revenu s'ajoute à ton cash en fin d'année.
-          Un bien <strong>vacant</strong> n'apporte rien mais reste disponible à la revente immédiate.
-        </p>
+        <div style={{ fontWeight: 700, marginBottom: 6 }}>📬 Location : ce qu'il faut savoir</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 5, color: 'var(--muted)' }}>
+          <div>✅ <strong>Loué</strong> → loyer annuel automatique (≈ 7 % de la valeur)</div>
+          <div>😰 <strong>Loué</strong> → +1 stress/an par bien loué (gérer des locataires coûte)</div>
+          <div>⚡ <strong>Loué</strong> → risque d'événements locataires (impayés, dégradations…)</div>
+          <div>💸 <strong>Vente loué</strong> → décote −5 % (préavis légal, locataire en place)</div>
+          <div>🚀 <strong>Vente vacant</strong> → prix plein, immédiate</div>
+        </div>
         <div style={{ marginTop: 8, padding: '6px 10px', background: 'var(--surface)', borderRadius: 8, fontSize: 11, color: 'var(--muted)' }}>
           ⚠️ Tu ne peux <strong>changer le statut</strong> d'un bien qu'<strong>une seule fois par an</strong>.
           Choisis bien le moment — la décision est verrouillée jusqu'à l'année suivante.
@@ -91,8 +93,13 @@ export default function PortfolioModal({ onClose }) {
                   <span className="portfolio-row-value" style={{ color: prop.rented ? 'var(--accent)' : 'var(--muted)' }}>
                     {prop.rented
                       ? `📬 Loué · +${fmtCash(rent)}/an`
-                      : '🔓 Vacant · pas de revenus'}
+                      : '🔓 Vacant · vente prix plein'}
                   </span>
+                  {prop.rented && (
+                    <span style={{ fontSize: 10, color: 'var(--muted)' }}>
+                      Vente estimée : {fmtCash(Math.round((prop.value ?? prop.baseValue) * 0.95))} <span style={{ color: 'var(--amber)' }}>(−5 % locataire)</span>
+                    </span>
+                  )}
                   {alreadyToggled && (
                     <span style={{ fontSize: 10, color: 'var(--amber)', marginTop: 2 }}>
                       🔒 Statut modifié cette année — débloqué l'an prochain
@@ -112,9 +119,12 @@ export default function PortfolioModal({ onClose }) {
                   <button
                     className="portfolio-sell-btn"
                     onClick={() => {
-                      if (window.confirm(`Vendre ${prop.type} pour ${fmtCash(prop.value ?? prop.baseValue)} ?`)) {
-                        sellProperty(prop.id);
-                      }
+                      const baseVal = prop.value ?? prop.baseValue;
+                      const saleVal = prop.rented ? Math.round(baseVal * 0.95) : baseVal;
+                      const msg = prop.rented
+                        ? `Vendre ${prop.type} loué ?\n\nPrix : ${fmtCash(saleVal)} (−5 % locataire en place)\nValeur marché : ${fmtCash(baseVal)}`
+                        : `Vendre ${prop.type} pour ${fmtCash(saleVal)} ?`;
+                      if (window.confirm(msg)) sellProperty(prop.id);
                     }}
                   >
                     Vendre
