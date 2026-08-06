@@ -33,6 +33,7 @@ function genPropertyRecord(value) {
 }
 import persoEvents from '../data/events_perso.json';
 import immoEvents  from '../data/events_immo.json';
+import jobEvents   from '../data/events_jobs.json';
 import renovationEvents from '../data/renovation_events.json';
 import tenantEvents from '../data/tenant_events.json';
 import networkEvents from '../data/network_events.json';
@@ -107,6 +108,8 @@ function pickEvents(state, count = 3) {
     if (e.minYear         && state.year < e.minYear) continue;
     if (e.minPersonalCash && (state.personalCash ?? 0) < e.minPersonalCash) continue;
     if (e.requireFlag     && !state.flags?.[e.requireFlag]) continue;
+    // Skip property-management events when no properties owned yet
+    if (props.length === 0 && !e.choices?.some(c => (c.eff?.properties ?? 0) > 0)) continue;
     eligible.push({ ...e, _pool: 'immo' });
   }
 
@@ -159,6 +162,19 @@ function pickEvents(state, count = 3) {
     const idx = Math.floor(Math.random() * pool.length);
     result.push(pool[idx]);
     pool.splice(idx, 1);
+  }
+
+  // Mini-job events — quiz/trivia for quick cash when portfolio is small
+  if (props.length < 3 && Math.random() < 0.45) {
+    const eligible_jobs = jobEvents.filter(e => {
+      if (e.requireFlag && !state.flags?.[e.requireFlag]) return false;
+      if (e.excludeFlag && state.flags?.[e.excludeFlag]) return false;
+      return true;
+    });
+    if (eligible_jobs.length > 0) {
+      const e = eligible_jobs[Math.floor(Math.random() * eligible_jobs.length)];
+      result.push({ ...e, _pool: 'job' });
+    }
   }
 
   // Network contact events — one-time introductions, 30% chance/year after year 3

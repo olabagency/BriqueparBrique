@@ -1,0 +1,152 @@
+[
+  {
+    "title": "💼 Mission freelance comptabilité",
+    "body": "Un ami entrepreneur cherche un coup de main pour sa compta. Il te pose une question : 250 × 4 = ?",
+    "choices": [
+      { "label": "750", "eff": { "cash": 0, "stress": 2 }, "out": "Mauvaise réponse... Il rappelle quelqu'un d'autre." },
+      { "label": "1 000", "eff": { "cash": 2, "stress": -2 }, "out": "Exact ! La mission est bouclée en une heure. +2 k€ en trésorerie." },
+      { "label": "900", "eff": { "cash": 0, "stress": 1 }, "out": "Mauvaise réponse... Le contrat t'échappe." },
+      { "label": "850", "eff": { "cash": 0 }, "out": "Raté. Mieux vaut réviser ses tables !" }
+    ]
+  },
+  {
+    "title": "🧮 Cours particuliers de maths",
+    "body": "Un lycéen a besoin d'aide avant son bac. Montre l'exemple : 15² = ?",
+    "choices": [
+      { "label": "175", "eff": { "cash": 0, "stress": 1 }, "out": "Mauvaise réponse... L'élève préfère trouver un autre professeur." },
+      { "label": "225", "eff": { "cash": 3, "stress": -3 }, "out": "Parfait ! L'élève reprend confiance, tu décroches 5 séances. +3 k€." },
+      { "label": "195", "eff": { "cash": 0 }, "out": "Raté — 15 × 15 = 225, pas 195." },
+      { "label": "245", "eff": { "cash": 0 }, "out": "Non... Dommage." }
+    ]
+  },
+  {
+    "title": "📊 Consultation financière express",
+    "body": "Un voisin veut placer 100 k€. Il te demande si tu connais le taux de TVA standard en France.",
+    "choices": [
+      { "label": "15%", "eff": { "cash": 0, "stress": 1 }, "out": "Mauvaise réponse... Il doute de tes compétences." },
+      { "label": "20%", "eff": { "cash": 4, "stress": -2 }, "out": "Correct ! Il te fait confiance pour la suite. Honoraires : +4 k€." },
+      { "label": "10%", "eff": { "cash": 0 }, "out": "Non, c'est le taux réduit. Raté." },
+      { "label": "25%", "eff": { "cash": 0 }, "out": "Trop élevé. La TVA standard est 20%." }
+    ]
+  },
+  {
+    "title": "🗺️ Quiz géographique à la radio",
+    "body": "Tu tombes sur un concours radio. Question : quel fleuve traverse Paris ?",
+    "choices": [
+      { "label": "La Loire", "eff": { "cash": 0 }, "out": "Non ! La Loire passe bien loin de Paris." },
+      { "label": "La Seine", "eff": { "cash": 2, "stress": -1 }, "out": "Bien sûr ! Tu remportes le lot : +2 k€." },
+      { "label": "Le Rhône", "eff": { "cash": 0 }, "out": "Le Rhône, c'est Lyon. Raté." },
+      { "label": "La Marne", "eff": { "cash": 0 }, "out": "La Marne est un affluent, pas le fleuve principal. Dommage." }
+    ]
+  },
+  {
+    "title": "🏠 Expertise immobilière informelle",
+    "body": "Un ami vendeur te demande un avis. Question : un bail meublé dure par défaut combien de temps ?",
+    "choices": [
+      { "label": "6 mois", "eff": { "cash": 0, "stress": 1 }, "out": "Non, 6 mois c'est pour les locations de courte durée étudiante." },
+      { "label": "1 an", "eff": { "cash": 3, "stress": -2 }, "out": "Exact ! Il te confie la gestion. +3 k€ d'honoraires." },
+      { "label": "3 ans", "eff": { "cash": 0 }, "out": "3 ans c'est pour les baux nus. Pour le meublé, c'est 1 an." },
+      { "label": "2 ans", "eff": { "cash": 0 }, "out": "Pas tout à fait. La durée légale est de 1 an." }
+    ]
+  },
+  {
+    "title": "🧠 Concours de culture générale",
+    "body": "Ton club organise un quiz. Question : en quelle année a été inaugurée la Tour Eiffel ?",
+    "choices": [
+      { "label": "1872", "eff": { "cash": 0 }, "out": "Non, bien avant. La Tour fut inaugurée en 1889." },
+      { "label": "1889", "eff": { "cash": 2, "stress": -2 }, "out": "Parfait ! Tu remportes la soirée. +2 k€ de gain." },
+      { "label": "1901", "eff": { "cash": 0 }, "out": "Trop tard. C'était pour l'Exposition universelle de 1889." },
+      { "label": "1912", "eff": { "cash": 0 }, "out": "Raté. La Tour Eiffel date de 1889." }
+    ]
+  },
+  {
+    "title": "🔧 Réparation informatique pour un voisin",
+    "body": "Ton voisin a un souci d'ordi. Pour vérifier tes bases, il te pose une question : 40% de 250 = ?",
+    "choices": [
+      { "label": "90", "eff": { "cash": 0, "stress": 1 }, "out": "Non... 40% de 250 = 100. Il trouve quelqu'un d'autre." },
+      { "label": "100", "eff": { "cash": 2, "stress": -1 }, "out": "Correct ! Tu répares son PC en une heure. +2 k€." },
+      { "label": "110", "eff": { "cash": 0 }, "out": "Raté. 40 × 2,5 = 100, pas 110." },
+      { "label": "75", "eff": { "cash": 0 }, "out": "Non. C'est 30% de 250 qui font 75." }
+    ]
+  },
+  {
+    "title": "📝 Mission de traduction urgente",
+    "body": "Un cabinet juridique cherche un traducteur rapide. Pour tester ton sens du détail : racine carrée de 196 = ?",
+    "choices": [
+      { "label": "12", "eff": { "cash": 0 }, "out": "Non. 12² = 144. La réponse était 14." },
+      { "label": "14", "eff": { "cash": 3, "stress": -2 }, "out": "Exact ! Tu décroches la mission. +3 k€." },
+      { "label": "16", "eff": { "cash": 0 }, "out": "Non. 16² = 256. La réponse était 14." },
+      { "label": "18", "eff": { "cash": 0 }, "out": "Raté. √196 = 14." }
+    ]
+  },
+  {
+    "title": "🎙️ Animation de soirée quiz",
+    "body": "On te propose d'animer une soirée quiz corporate. Question test : 18 × 7 = ?",
+    "choices": [
+      { "label": "114", "eff": { "cash": 0 }, "out": "Non. 18 × 7 = 126. Le poste t'échappe." },
+      { "label": "126", "eff": { "cash": 4, "stress": -3 }, "out": "Parfait ! La soirée est un succès. +4 k€." },
+      { "label": "121", "eff": { "cash": 0 }, "out": "Raté. 11² = 121, mais 18 × 7 = 126." },
+      { "label": "132", "eff": { "cash": 0 }, "out": "Non, c'est 18 × 7,3 environ. La bonne réponse était 126." }
+    ]
+  },
+  {
+    "title": "🌍 Application de voyages — bêta-testeur",
+    "body": "Une startup te recrute pour tester leur app. Question de validation : quelle est la capitale de l'Allemagne ?",
+    "choices": [
+      { "label": "Munich", "eff": { "cash": 0 }, "out": "Munich est une grande ville, mais pas la capitale. Raté." },
+      { "label": "Berlin", "eff": { "cash": 2, "stress": -1 }, "out": "Exact ! Tu es accepté comme bêta-testeur. +2 k€ de dédommagement." },
+      { "label": "Hambourg", "eff": { "cash": 0 }, "out": "Non. Berlin est la capitale depuis 1990." },
+      { "label": "Francfort", "eff": { "cash": 0 }, "out": "Francfort accueille la BCE, mais Berlin est la capitale." }
+    ]
+  },
+  {
+    "title": "📐 Aide à un artisan pour ses devis",
+    "body": "Un artisan a besoin d'aide pour ses calculs. Il teste ta rigueur : si une pièce fait 12 m × 8 m, quelle est sa superficie ?",
+    "choices": [
+      { "label": "80 m²", "eff": { "cash": 0 }, "out": "Non. 12 × 8 = 96, pas 80." },
+      { "label": "96 m²", "eff": { "cash": 3, "stress": -2 }, "out": "Parfait ! L'artisan t'engage comme assistant. +3 k€." },
+      { "label": "100 m²", "eff": { "cash": 0 }, "out": "Raté. 10 × 10 = 100, mais ici c'est 12 × 8 = 96." },
+      { "label": "88 m²", "eff": { "cash": 0 }, "out": "Non. 12 × 8 = 96." }
+    ]
+  },
+  {
+    "title": "🏦 Rendez-vous conseil en banque",
+    "body": "Un ami banquier te propose une mission de conseil. Question préalable : combien vaut 10 000 € placés à 5%/an après 1 an ?",
+    "choices": [
+      { "label": "10 050 €", "eff": { "cash": 0 }, "out": "Non, 5% de 10 000 = 500 €, pas 50. La réponse était 10 500 €." },
+      { "label": "10 500 €", "eff": { "cash": 4, "stress": -2 }, "out": "Exact ! Tu décroches la mission. +4 k€." },
+      { "label": "10 250 €", "eff": { "cash": 0 }, "out": "Ce serait 2,5%. La réponse était 10 500 €." },
+      { "label": "11 000 €", "eff": { "cash": 0 }, "out": "Non, 10% de 10 000 = 1 000. La réponse était 10 500 €." }
+    ]
+  },
+  {
+    "title": "🖥️ Développement de site web express",
+    "body": "Une boutique locale cherche un site vitrine. Question de qualification : combien font 2³ + 5² ?",
+    "choices": [
+      { "label": "27", "eff": { "cash": 0 }, "out": "Non. 2³ = 8, 5² = 25, donc 8 + 25 = 33." },
+      { "label": "33", "eff": { "cash": 5, "stress": -3 }, "out": "Parfait ! Le client signe. +5 k€ pour le site." },
+      { "label": "29", "eff": { "cash": 0 }, "out": "Raté. 8 + 25 = 33." },
+      { "label": "41", "eff": { "cash": 0 }, "out": "Non. La réponse était 33." }
+    ]
+  },
+  {
+    "title": "🎓 Jury d'un concours scolaire",
+    "body": "On t'invite à être juré dans une compétition. Question imposée : quel est le plus grand pays du monde en superficie ?",
+    "choices": [
+      { "label": "Canada", "eff": { "cash": 0 }, "out": "Le Canada est 2ème, mais la Russie est bien plus grande." },
+      { "label": "Russie", "eff": { "cash": 2, "stress": -2 }, "out": "Exact ! Tu passes la sélection. Indemnité de juré : +2 k€." },
+      { "label": "Chine", "eff": { "cash": 0 }, "out": "La Chine est 4ème. La Russie est largement en tête." },
+      { "label": "États-Unis", "eff": { "cash": 0 }, "out": "Les États-Unis sont 3èmes. La Russie domine avec 17 millions de km²." }
+    ]
+  },
+  {
+    "title": "🔑 Audit d'appartement pour un propriétaire",
+    "body": "Un propriétaire cherche un regard extérieur. Il teste tes connaissances : le DPE classe les logements de A à... ?",
+    "choices": [
+      { "label": "A à E", "eff": { "cash": 0 }, "out": "Non, il y a plus de niveaux. De A à G." },
+      { "label": "A à G", "eff": { "cash": 3, "stress": -1 }, "out": "Exact ! Le propriétaire te confie l'audit. +3 k€." },
+      { "label": "A à F", "eff": { "cash": 0 }, "out": "Presque, mais il y a bien une lettre G pour les passoires thermiques." },
+      { "label": "A à H", "eff": { "cash": 0 }, "out": "Non, la classification s'arrête à G." }
+    ]
+  }
+]

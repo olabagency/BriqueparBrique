@@ -79,6 +79,18 @@ export function randInt(min, max) {
 }
 
 /**
+ * Format a monthly payment — shows euros for sub-k€ values.
+ * @param {number} v  value in k€
+ */
+export function fmtMonthly(v) {
+  if (v === null || v === undefined) return '—';
+  const abs = Math.abs(v);
+  if (abs < 1) return Math.round(v * 1000) + ' €';
+  if (abs >= 1000) return (v / 1000).toFixed(1).replace('.0', '') + ' M€';
+  return Math.round(v) + ' k€';
+}
+
+/**
  * Format a percentage with a + sign for positives.
  */
 export function fmtPct(v) {
