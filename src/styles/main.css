@@ -44,7 +44,8 @@ body{
   min-height:100dvh;
   display:flex;
   justify-content:center;
-  padding:calc(18px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) calc(36px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));
+  /* Extra bottom padding for the mobile nav bar (≈ 58px + safe area) */
+  padding:calc(18px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) calc(70px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));
   text-align:center;
 }
 .app{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;position:relative;}
@@ -58,12 +59,29 @@ body{
   cursor:pointer;
 }
 
-.portfolio-btn-row{display:flex;flex-wrap:wrap;gap:8px;width:100%;margin-top:8px;}
-.portfolio-btn{
-  flex:1 1 45%;font-size:11.5px;font-weight:700;padding:8px 6px;border-radius:10px;
-  background:var(--surface2);border:1px solid var(--border);color:var(--text);cursor:pointer;
+/* Mobile bottom nav — replaces the old portfolio-btn-row in the HUD */
+.mobile-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:300;
+  display:flex;align-items:stretch;
+  background:var(--surface);border-top:1px solid var(--border);
+  padding-bottom:env(safe-area-inset-bottom);
+  box-shadow:0 -2px 12px rgba(0,0,0,.08);
 }
-.portfolio-btn-buy{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}
+.mobile-nav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;padding:8px 4px 6px;
+  font-size:10.5px;font-weight:600;color:var(--muted);cursor:pointer;
+  border:none;background:transparent;transition:color .12s,background .12s;
+  touch-action:manipulation;
+}
+.mobile-nav-btn:hover,.mobile-nav-btn:active{color:var(--accent);background:var(--accent-soft);}
+.mobile-nav-icon{font-size:19px;line-height:1;}
+.mobile-nav-label{font-size:9px;letter-spacing:.02em;white-space:nowrap;}
+
+/* Legacy class kept for any remaining references but visually hidden */
+.portfolio-btn-row{display:none;}
+.portfolio-btn{display:none;}
+.portfolio-btn-buy{display:none;}
 .portfolio-modal{
   position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.5);
   display:flex;align-items:flex-end;justify-content:center;
@@ -93,7 +111,7 @@ body{
     padding-right:calc(290px + env(safe-area-inset-right));
   }
   .app{max-width:580px;}
-  .portfolio-btn-row{display:none;}
+  .mobile-nav{display:none;}
 
   .left-column-wrapper{
     display:flex;flex-direction:column;gap:12px;

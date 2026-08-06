@@ -637,7 +637,7 @@ function advanceYear(state) {
   if (traitDelta.stress) s.stress    = clamp((s.stress ?? 0) + traitDelta.stress, 0, STRESS_MAX);
 
   // Flag checks
-  if (!s.flags?.billionaireBefore45 && s.valuation >= 1000000 && s.age < 45) {
+  if (!s.flags?.billionaireBefore45 && s.valuation >= 10000 && s.age < 45) {
     s.flags = { ...s.flags, billionaireBefore45: true };
   }
   if (!s.flags?.twentyPropsBefore50 && (s.propertiesOwned ?? 0) >= 20 && s.age < 50) {

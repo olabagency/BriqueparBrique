@@ -41,27 +41,6 @@ export default function HUD({ onOpenModal, stress: stressProp }) {
         <div className="stage-pill" id="hudStage" data-stage={stage}>{stage}</div>
       </div>
 
-      <div className="portfolio-btn-row">
-        <button className="portfolio-btn" id="viewPortfolioBtn" onClick={() => onOpenModal('portfolio')}>
-          📋 Mon parc (<span id="portfolioCount">{propCount}</span>)
-        </button>
-        <button className="portfolio-btn portfolio-btn-buy" id="viewMarketBtn" onClick={() => onOpenModal('market')}>
-          🛒 Acheter
-        </button>
-        <button className="portfolio-btn" id="viewLoansBtn" onClick={() => onOpenModal('loans')}>
-          💳 Crédits
-        </button>
-        <button className="portfolio-btn" id="viewAchievementsBtn" onClick={() => onOpenModal('achievements')}>
-          🏆 Succès (<span id="achievementsCount">{achCount}</span>)
-        </button>
-        <button className="portfolio-btn" id="viewLuxuryShopBtn" onClick={() => onOpenModal('luxury')}>
-          🛍️ Boutique
-        </button>
-        <button className="portfolio-btn" id="viewBankBtn" onClick={() => onOpenModal('bank')}>
-          🏦 Compte
-        </button>
-      </div>
-
       <div className="hud-row2">
         <span className="mini-stat has-bar" data-tip={`${age ?? 18} ans — retraite possible à 60 ans`}>
           <span className="mi-icon">🎂</span>

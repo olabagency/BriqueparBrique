@@ -26,6 +26,27 @@ const MODALS = {
   bank:         BankModal,
 };
 
+function MobileNav({ onOpenModal, propCount, achCount }) {
+  const ACTIONS = [
+    { key: 'portfolio',    icon: '📋', label: 'Parc',    badge: propCount },
+    { key: 'market',       icon: '🛒', label: 'Acheter' },
+    { key: 'loans',        icon: '💳', label: 'Crédits' },
+    { key: 'achievements', icon: '🏆', label: 'Succès',  badge: achCount },
+    { key: 'bank',         icon: '🏦', label: 'Compte'  },
+    { key: 'luxury',       icon: '🛍️', label: 'Boutique'},
+  ];
+  return (
+    <nav className="mobile-nav" aria-label="Navigation">
+      {ACTIONS.map(({ key, icon, label, badge }) => (
+        <button key={key} className="mobile-nav-btn" onClick={() => onOpenModal(key)}>
+          <span className="mobile-nav-icon">{icon}</span>
+          <span className="mobile-nav-label">{label}{badge > 0 ? ` (${badge})` : ''}</span>
+        </button>
+      ))}
+    </nav>
+  );
+}
+
 export default function Game() {
   const { state } = useGame();
   const { emit } = useEffects();
@@ -124,6 +145,9 @@ export default function Game() {
   const hasEvent = idx < pendingEvents.length;
   const stress = state.stress ?? 0;
 
+  const propCount = state.propertiesOwned ?? (state.propertyList ?? []).length;
+  const achCount  = (state.achievements ?? []).length;
+
   return (
     <div className="app">
       <ThemeToggle />
@@ -145,6 +169,7 @@ export default function Game() {
         )}
       </div>
 
+      <MobileNav onOpenModal={openModal} propCount={propCount} achCount={achCount} />
       {ModalComponent && <ModalComponent onClose={closeModal} />}
       {state.yearReport && !state.over && <YearReportModal />}
       <EffectsLayer stress={stress} />
