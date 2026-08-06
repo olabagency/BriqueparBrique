@@ -1,8 +1,8 @@
 import React from 'react';
 import { fmtCash } from '../../engine/utils.js';
 
-const W = 320, H = 90;
-const PAD = { top: 10, bottom: 22, left: 6, right: 6 };
+const W = 320, H = 58;
+const PAD = { top: 8, bottom: 18, left: 6, right: 6 };
 const CW = W - PAD.left - PAD.right;
 const CH = H - PAD.top - PAD.bottom;
 

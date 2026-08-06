@@ -1,5 +1,5 @@
 [
-  { "id": "w1", "name": "Chronographe Argent",         "brand": "Lemaire & Fils",            "description": "Un classique intemporel au cadran épuré.",                  "category": "Montres",             "icon": "⌚", "price": 12,   "yearlyDrift": 0.02  },
+  { "id": "w1", "name": "Chronographe Argent",         "brand": "Lemaire & Fils",            "description": "Un classique intemporel au cadran épuré.",                  "category": "Montres",             "icon": "⌚", "price": 12,   "yearlyDrift": 0.02,  "image": "https://i.goopics.net/lm4gwb.png" },
   { "id": "w2", "name": "Montre Plongée Acier",        "brand": "Orologio Milano",            "description": "Étanche à 300m, prisée des amateurs d'aventure.",           "category": "Montres",             "icon": "⌚", "price": 18,   "yearlyDrift": 0.02  },
   { "id": "w3", "name": "Montre Squelette",            "brand": "Chronos Genève",             "description": "Mécanisme apparent, savoir-faire horloger exposé.",          "category": "Montres",             "icon": "⌚", "price": 35,   "yearlyDrift": 0.03  },
   { "id": "w4", "name": "Montre en Or Rose",           "brand": "Maison Aurel",               "description": "Boîtier en or 18 carats, discret et précieux.",              "category": "Montres",             "icon": "⌚", "price": 55,   "yearlyDrift": 0.04  },

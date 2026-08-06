@@ -396,8 +396,22 @@ header.hud::before{
   content:'';position:absolute;bottom:100%;left:50%;transform:translateX(-50%);
   border:5px solid transparent;border-bottom-color:#22261F;
 }
-.mi-icon{font-size:9.5px;line-height:1;}
-.mi-val{font-weight:700;transition:transform .2s ease;white-space:nowrap;}
+/* CSS tooltips for [data-tip] elements */
+[data-tip]{position:relative;}
+[data-tip]:hover::after{
+  content:attr(data-tip);
+  position:absolute;top:calc(100% + 7px);left:50%;transform:translateX(-50%);
+  background:#22261F;color:#fff;font-size:10.5px;font-weight:600;
+  padding:5px 10px;border-radius:8px;white-space:nowrap;
+  pointer-events:none;z-index:800;box-shadow:0 4px 12px rgba(0,0,0,.25);
+  font-family:'Inter',sans-serif;
+}
+[data-tip]:hover::before{
+  content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;border-bottom-color:#22261F;z-index:801;pointer-events:none;
+}
+.mi-icon{font-size:13px;line-height:1;}
+.mi-val{font-size:14px;font-weight:700;transition:transform .2s ease;white-space:nowrap;}
 .mi-val.up{color:var(--accent);}
 .mi-val.down{color:var(--red);}
 .mi-val.warn{color:var(--amber);}

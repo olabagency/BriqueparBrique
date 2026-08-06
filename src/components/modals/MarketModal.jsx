@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import Modal from '../ui/Modal.jsx';
 import { useGame } from '../../context/GameContext.jsx';
-import { fmtCash } from '../../engine/utils.js';
+import { fmtCash, fmtMonthly } from '../../engine/utils.js';
 import { calcLoanPayment } from '../../engine/market.js';
 import propertyData from '../../data/property_data.json';
 
@@ -139,17 +139,34 @@ function PurchaseConfigurator({ listing, effectivePrice, cash, onConfirm, onCanc
   );
 }
 
+const PRICE_TIERS = [
+  { id: 'all',       label: 'Tous',         unlock: 0   },
+  { id: 'budget',    label: '< 100 k€',     max: 100,   unlock: 0   },
+  { id: 'standard',  label: '100–300 k€',   min: 100, max: 300, unlock: 100 },
+  { id: 'premium',   label: '300–700 k€',   min: 300, max: 700, unlock: 300 },
+  { id: 'exception', label: '700 k€+',      min: 700,   unlock: 700 },
+];
+
 export default function MarketModal({ onClose }) {
   const { state, buyProperty, refreshMarket } = useGame();
-  const { marketListings = [], cash, economicCycle } = state;
+  const { marketListings = [], cash, economicCycle, valuation = 0 } = state;
   const [filter, setFilter] = useState('');
   const [selectedId, setSelectedId] = useState(null);
+  const [priceTier, setPriceTier] = useState('all');
 
   const hasAgent = (state.contacts ?? []).includes('agent_immo');
 
-  const filtered = filter
-    ? marketListings.filter(l => l.type === filter || l.condition === filter)
-    : marketListings;
+  const filtered = marketListings.filter(l => {
+    if (filter && l.type !== filter && l.condition !== filter) return false;
+    if (priceTier !== 'all') {
+      const tier = PRICE_TIERS.find(t => t.id === priceTier);
+      if (tier) {
+        if (tier.min !== undefined && l.price < tier.min) return false;
+        if (tier.max !== undefined && l.price >= tier.max) return false;
+      }
+    }
+    return true;
+  });
 
   const types = [...new Set(marketListings.map(l => l.type))];
 
@@ -170,6 +187,25 @@ export default function MarketModal({ onClose }) {
         {types.map(t => (
           <button key={t} className={`market-filter-chip ${filter === t ? 'active' : ''}`} onClick={() => setFilter(t)}>{t}</button>
         ))}
+      </div>
+
+      <div className="market-filters" style={{ marginTop: 0 }}>
+        {PRICE_TIERS.map(tier => {
+          const unlocked = valuation >= tier.unlock;
+          const active = priceTier === tier.id;
+          return (
+            <button
+              key={tier.id}
+              className={`market-filter-chip ${active ? 'active' : ''}`}
+              onClick={() => unlocked && setPriceTier(active ? 'all' : tier.id)}
+              disabled={!unlocked}
+              title={!unlocked ? `Débloqué à ${tier.unlock} k€ de patrimoine` : undefined}
+              style={{ opacity: unlocked ? 1 : 0.4, cursor: unlocked ? 'pointer' : 'not-allowed' }}
+            >
+              {tier.label}{!unlocked && ' 🔒'}
+            </button>
+          );
+        })}
       </div>
 
       <div className="portfolio-list">
@@ -204,7 +240,7 @@ export default function MarketModal({ onClose }) {
                 {hasAgent && <span style={{ marginLeft: 6, color: 'var(--accent)', fontWeight: 700 }}>−5% agent</span>}
               </div>
               <div className="market-listing-meta" style={{ color: 'var(--muted)' }}>
-                Apport min 10% : {fmtCash(minApport)} · Mensualité indicative : {fmtCash(previewLoan.monthlyPayment)}/mois
+                Apport min 10% : {fmtCash(minApport)} · Mensualité indicative : {fmtMonthly(previewLoan.monthlyPayment)}/mois
               </div>
 
               {isSelected ? (
