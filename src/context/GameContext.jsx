@@ -297,12 +297,14 @@ function reducer(state, action) {
     }
 
     case 'BUY_PROPERTY': {
-      const { listing } = action.payload;
+      const { listing, apportPct } = action.payload;
       const s = { ...state };
       const hasAgent = (s.contacts ?? []).includes('agent_immo');
       const basePrice = listing.price ?? listing.baseValue ?? 0;
       const effectivePrice = hasAgent ? Math.round(basePrice * 0.95) : basePrice;
-      const loanInfo = calcLoanPayment(effectivePrice);
+      // apportPct in [0,1]: fraction paid upfront. loanRate = 1 - apportPct
+      const loanRate = apportPct != null ? Math.max(0, 1 - apportPct) : PROPERTY_LOAN_RATE;
+      const loanInfo = calcLoanPayment(effectivePrice, loanRate);
       const downPayment = effectivePrice - loanInfo.loanAmount;
 
       if (s.cash < downPayment) return s;
@@ -312,6 +314,7 @@ function reducer(state, action) {
         id: listing.id ?? crypto.randomUUID(),
         condition: listing.condition ?? 'bonEtat',
         value: effectivePrice,
+        baseValue: effectivePrice,
         rented: false,
         yearPurchased: s.year,
       };
@@ -321,6 +324,7 @@ function reducer(state, action) {
         propertyId: prop.id,
         balance: loanInfo.loanAmount,
         remaining: loanInfo.loanAmount,
+        originalAmount: loanInfo.loanAmount,
         annualPayment: loanInfo.annualPayment,
         totalYearly: loanInfo.annualPayment,
         rate: loanInfo.rate,
@@ -484,16 +488,35 @@ function reducer(state, action) {
 
     case 'RENEGOTIATE_LOAN': {
       const { loanId } = action.payload;
+      const loan = (state.loans ?? []).find(l => l.id === loanId);
+      if (!loan || loan.lastNegotiatedYear === state.year) return state;
+
+      const fee = Math.round((loan.balance ?? 0) * 0.01);
+      if ((state.cash ?? 0) < fee) return { ...state, lastRenegotiationResult: { loanId, success: false, reason: 'insufficient_funds', fee } };
+
+      const success = Math.random() < 0.65;
+      const rateBefore = loan.rate;
+      const reduction = success ? (0.003 + Math.random() * 0.002) : 0;
+      const newRate = success ? Math.max(0.005, rateBefore - reduction) : rateBefore;
+      const yrs = Math.max(1, loan.yearsRemaining ?? 1);
+      const newAnnual = success ? Math.round(loan.balance * (newRate / (1 - Math.pow(1 + newRate, -yrs)))) : (loan.annualPayment ?? loan.totalYearly);
+
       const loans = (state.loans ?? []).map(l => {
-        if (l.id !== loanId || l.lastNegotiatedYear === state.year) return l;
-        const reduction = 0.003 + Math.random() * 0.002;
-        const newRate = Math.max(0.005, l.rate - reduction);
-        const yrs = Math.max(1, l.yearsRemaining ?? 1);
-        const newAnnual = Math.round(l.balance * (newRate / (1 - Math.pow(1 + newRate, -yrs))));
+        if (l.id !== loanId) return l;
         return { ...l, rate: newRate, annualPayment: newAnnual, totalYearly: newAnnual, lastNegotiatedYear: state.year };
       });
-      return { ...state, loans };
+
+      return {
+        ...state,
+        cash: (state.cash ?? 0) - fee,
+        loans,
+        lastRenegotiationResult: { loanId, success, rateBefore, rateAfter: newRate, saving: success ? (loan.annualPayment ?? 0) - newAnnual : 0, fee },
+        currentYearFinance: { ...state.currentYearFinance, credits: (state.currentYearFinance?.credits ?? 0) - fee },
+      };
     }
+
+    case 'CLEAR_RENEGOTIATION_RESULT':
+      return { ...state, lastRenegotiationResult: null };
 
     case 'MASS_REPAY_LOANS': {
       const totalDebt = (state.loans ?? []).reduce((s, l) => s + Math.round((l.balance ?? 0) * 1.03), 0);
@@ -732,7 +755,7 @@ export function GameProvider({ children }) {
   const startGame    = useCallback((opts) => dispatch({ type: 'START_GAME',    payload: opts }), []);
   const loadSave     = useCallback((s)    => dispatch({ type: 'LOAD_SAVE',     payload: s }),    []);
   const resolveEvent = useCallback((p)    => dispatch({ type: 'RESOLVE_EVENT', payload: p }),    []);
-  const buyProperty  = useCallback((l)    => dispatch({ type: 'BUY_PROPERTY',  payload: { listing: l } }), []);
+  const buyProperty  = useCallback((l, apportPct) => dispatch({ type: 'BUY_PROPERTY',  payload: { listing: l, apportPct } }), []);
   const sellProperty = useCallback((id)   => dispatch({ type: 'SELL_PROPERTY', payload: { propertyId: id } }), []);
   const toggleRent       = useCallback((id)   => dispatch({ type: 'TOGGLE_RENT',       payload: { propertyId: id } }), []);
   const renovateProperty = useCallback((p)    => dispatch({ type: 'RENOVATE_PROPERTY', payload: p }), []);
@@ -741,6 +764,7 @@ export function GameProvider({ children }) {
   const retire       = useCallback(()     => dispatch({ type: 'RETIRE' }), []);
   const repayLoan       = useCallback((id)  => dispatch({ type: 'REPAY_LOAN',        payload: { loanId: id } }), []);
   const renegotiateLoan = useCallback((id)  => dispatch({ type: 'RENEGOTIATE_LOAN',  payload: { loanId: id } }), []);
+  const clearRenegotiationResult = useCallback(() => dispatch({ type: 'CLEAR_RENEGOTIATION_RESULT' }), []);
   const massRepayLoans  = useCallback(()    => dispatch({ type: 'MASS_REPAY_LOANS' }), []);
   const bankWithdraw = useCallback((pct)  => dispatch({ type: 'BANK_WITHDRAW', payload: { pct } }), []);
   const bankInject   = useCallback((pct)  => dispatch({ type: 'BANK_INJECT',   payload: { pct } }), []);
@@ -755,7 +779,7 @@ export function GameProvider({ children }) {
     startGame, loadSave, resolveEvent,
     buyProperty, sellProperty, toggleRent, renovateProperty,
     buyLuxury, sellLuxury,
-    retire, repayLoan, renegotiateLoan, massRepayLoans,
+    retire, repayLoan, renegotiateLoan, clearRenegotiationResult, massRepayLoans,
     bankWithdraw, bankInject, changeSalary,
     refreshMarket, setScreen, resetGame, dismissYearReport,
   };

@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../ui/Modal.jsx';
 import { useGame } from '../../context/GameContext.jsx';
 import { fmtCash } from '../../engine/utils.js';
 
 export default function LoansModal({ onClose }) {
-  const { state, repayLoan, renegotiateLoan, massRepayLoans } = useGame();
-  const { loans = [], propertyList = [], cash } = state;
+  const { state, repayLoan, renegotiateLoan, clearRenegotiationResult, massRepayLoans } = useGame();
+  const { loans = [], propertyList = [], cash, lastRenegotiationResult } = state;
+
+  const [resultBanner, setResultBanner] = useState(null);
+
+  // Show result banner when renegotiation completes
+  useEffect(() => {
+    if (!lastRenegotiationResult) return;
+    setResultBanner(lastRenegotiationResult);
+    clearRenegotiationResult();
+    const t = setTimeout(() => setResultBanner(null), 5000);
+    return () => clearTimeout(t);
+  }, [lastRenegotiationResult]); // eslint-disable-line
 
   const getProperty = (propertyId) => propertyList.find(p => p.id === propertyId);
 
@@ -28,7 +39,19 @@ export default function LoansModal({ onClose }) {
 
   const handleRenegotiate = (loan) => {
     if (loan.lastNegotiatedYear === state.year) return;
-    if (window.confirm(`Renégocier le taux de ce crédit ? La réduction sera aléatoire (entre −0.3 % et −0.5 %).`)) {
+    const fee = Math.round((loan.balance ?? 0) * 0.01);
+    if ((cash ?? 0) < fee) {
+      alert(`Trésorerie insuffisante pour payer les frais de renégociation (${fmtCash(fee)}).`);
+      return;
+    }
+    if (window.confirm(
+      `Renégocier le taux ?\n\n` +
+      `• Frais : ${fmtCash(fee)} (1% du capital restant, prélevés immédiatement)\n` +
+      `• Succès : ~65% de chance\n` +
+      `• En cas de réussite : taux réduit de −0.3 % à −0.5 %\n` +
+      `• En cas d'échec : frais perdus, taux inchangé\n\n` +
+      `Cette action est irréversible.`
+    )) {
       renegotiateLoan(loan.id);
     }
   };
@@ -56,6 +79,24 @@ export default function LoansModal({ onClose }) {
 
   return (
     <Modal title={`💳 Mes crédits (${loans.length})`} onClose={onClose}>
+
+      {/* Result banner */}
+      {resultBanner && (
+        <div style={{
+          padding: '10px 14px', borderRadius: 10, fontSize: 12, fontWeight: 600,
+          background: resultBanner.success ? 'rgba(31,122,77,.12)' : 'rgba(184,64,46,.1)',
+          border: `1px solid ${resultBanner.success ? 'rgba(31,122,77,.3)' : 'rgba(184,64,46,.3)'}`,
+          color: resultBanner.success ? 'var(--accent)' : 'var(--red)',
+          display: 'flex', alignItems: 'center', gap: 8,
+        }}>
+          <span style={{ fontSize: 18 }}>{resultBanner.success ? '✅' : '❌'}</span>
+          <div>
+            {resultBanner.success
+              ? `Renégociation réussie ! Nouveau taux : ${(resultBanner.rateAfter * 100).toFixed(2)}% (−${((resultBanner.rateBefore - resultBanner.rateAfter) * 100).toFixed(2)}%). Économie : ${fmtCash(resultBanner.saving)}/an.`
+              : `Renégociation refusée par la banque. Frais de ${fmtCash(resultBanner.fee)} prélevés.`}
+          </div>
+        </div>
+      )}
 
       {/* Aggregate summary */}
       <div style={{ display: 'flex', gap: 10 }}>
@@ -125,10 +166,12 @@ export default function LoansModal({ onClose }) {
           const balance   = Math.round(loan.balance ?? loan.remaining ?? 0);
           const original  = Math.round(loan.originalAmount ?? balance);
           const payoff    = Math.round(balance * 1.03);
+          const reNegFee  = Math.round(balance * 0.01);
           const canRepay  = (cash ?? 0) >= payoff;
+          const canReNeg  = (cash ?? 0) >= reNegFee;
           const alreadyNeg = loan.lastNegotiatedYear === state.year;
           const pctDone   = original > 0 ? Math.round(((original - balance) / original) * 100) : 0;
-          const rate      = ((loan.rate ?? 0.02) * 100).toFixed(1);
+          const rate      = ((loan.rate ?? 0.02) * 100).toFixed(2);
 
           return (
             <div
@@ -136,6 +179,9 @@ export default function LoansModal({ onClose }) {
               style={{
                 background: 'var(--surface2)', border: '1px solid var(--border)',
                 borderRadius: 12, padding: '12px 14px',
+                borderColor: resultBanner?.loanId === loan.id
+                  ? (resultBanner.success ? 'rgba(31,122,77,.4)' : 'rgba(184,64,46,.4)')
+                  : undefined,
               }}
             >
               {/* Header */}
@@ -172,22 +218,29 @@ export default function LoansModal({ onClose }) {
                 </div>
               </div>
 
+              {/* Renegotiate info */}
+              {!alreadyNeg && (
+                <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 6, padding: '5px 8px', background: 'var(--surface)', borderRadius: 6 }}>
+                  Renégociation : frais {fmtCash(reNegFee)} · 65% de succès · −0.3 à −0.5% si accepté
+                </div>
+              )}
+
               {/* Actions */}
               <div style={{ display: 'flex', gap: 6 }}>
                 <button
                   onClick={() => handleRenegotiate(loan)}
-                  disabled={alreadyNeg}
+                  disabled={alreadyNeg || !canReNeg}
                   style={{
                     flex: 1, padding: '7px 0', borderRadius: 8, fontSize: 11.5, fontWeight: 600,
-                    background: alreadyNeg ? 'var(--surface)' : 'var(--surface)',
-                    border: `1px solid ${alreadyNeg ? 'var(--border)' : 'var(--amber)'}`,
-                    color: alreadyNeg ? 'var(--muted)' : 'var(--amber)',
-                    cursor: alreadyNeg ? 'not-allowed' : 'pointer',
-                    opacity: alreadyNeg ? 0.5 : 1,
+                    background: 'var(--surface)',
+                    border: `1px solid ${alreadyNeg ? 'var(--border)' : canReNeg ? 'var(--amber)' : 'var(--border)'}`,
+                    color: alreadyNeg ? 'var(--muted)' : canReNeg ? 'var(--amber)' : 'var(--muted)',
+                    cursor: (alreadyNeg || !canReNeg) ? 'not-allowed' : 'pointer',
+                    opacity: (alreadyNeg || !canReNeg) ? 0.5 : 1,
                   }}
-                  title={alreadyNeg ? 'Déjà renégocié cette année' : 'Demander un meilleur taux'}
+                  title={alreadyNeg ? 'Déjà renégocié cette année' : !canReNeg ? `Frais insuffisants (${fmtCash(reNegFee)})` : `Frais : ${fmtCash(reNegFee)} · 65% de succès`}
                 >
-                  {alreadyNeg ? '🔄 Renégocié' : '🔄 Renégocier'}
+                  {alreadyNeg ? '🔄 Renégocié' : `🔄 Renégocier`}
                 </button>
                 <button
                   onClick={() => handleRepay(loan)}
