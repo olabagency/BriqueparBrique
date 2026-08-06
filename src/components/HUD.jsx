@@ -3,13 +3,14 @@ import { useGame } from '../context/GameContext.jsx';
 import { fmtCash, stageFor } from '../engine/utils.js';
 import achievements from '../data/achievements.json';
 
-export default function HUD({ onOpenModal }) {
+export default function HUD({ onOpenModal, stress: stressProp }) {
   const { state } = useGame();
   const {
     name, companyName, gender, sector,
-    year, age, cash, personalCash, stress,
+    year, age, cash, personalCash, stress: stateStress,
     valuation, propertyList, propertiesOwned,
   } = state;
+  const stress = stressProp ?? stateStress ?? 0;
 
   const stage = stageFor(year ?? 1);
   const propCount = propertiesOwned ?? (propertyList ?? []).length;
@@ -27,8 +28,10 @@ export default function HUD({ onOpenModal }) {
     ? `🏢 ${companyName} — ${sector?.name ?? ''}`
     : `🏢 ${sector?.name ?? ''}`;
 
+  const hudStressClass = stress >= 90 ? 'hud-stress-critical' : stress >= 70 ? 'hud-stress-high' : '';
+
   return (
-    <header className="hud">
+    <header className={`hud ${hudStressClass}`}>
       <div className="hud-row1">
         <div className="avatar-circle" id="avatarCircle">{avatarEmoji}</div>
         <div className="hud-id">
@@ -63,10 +66,6 @@ export default function HUD({ onOpenModal }) {
         <span className="mini-stat" data-tip="Ton âge">
           <span className="mi-icon">🎂</span>
           <span className="mi-val mono" id="statAge">{age ?? 18}</span>
-        </span>
-        <span className="mini-stat" data-tip="Années depuis le lancement">
-          <span className="mi-icon">📅</span>
-          <span className="mi-val mono" id="statYear">{year ?? 1}</span>
         </span>
         <span className="mini-stat" data-tip="Trésorerie de l'entreprise">
           <span className="mi-icon">💰</span>

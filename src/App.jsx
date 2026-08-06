@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { GameProvider, useGame } from './context/GameContext.jsx';
+import { EffectsProvider } from './context/EffectsContext.jsx';
 import { loadTheme, saveTheme } from './engine/saveLoad.js';
 import Landing    from './components/Landing.jsx';
 import Onboarding from './components/Onboarding.jsx';
@@ -27,7 +28,9 @@ function AppShell() {
 export default function App() {
   return (
     <GameProvider>
-      <AppShell />
+      <EffectsProvider>
+        <AppShell />
+      </EffectsProvider>
     </GameProvider>
   );
 }

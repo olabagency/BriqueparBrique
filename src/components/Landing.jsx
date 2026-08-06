@@ -4,6 +4,7 @@ import { loadGame, hasSave, loadHistory } from '../engine/saveLoad.js';
 import ThemeToggle from './ui/ThemeToggle.jsx';
 import { fmtCash } from '../engine/utils.js';
 import achievementsDef from '../data/achievements.json';
+import globalBoard from '../data/global_leaderboard.json';
 
 const CHALLENGES = [
   { id: 'no_funding',    label: "Termine sans jamais lever de fonds" },
@@ -113,7 +114,8 @@ export default function Landing() {
     if (saved) loadSave(saved);
   };
 
-  const top10 = [...history].sort((a, b) => (b.finalVal ?? 0) - (a.finalVal ?? 0)).slice(0, 10);
+  const merged = [...globalBoard, ...history].sort((a, b) => (b.finalVal ?? 0) - (a.finalVal ?? 0));
+  const top10 = merged.slice(0, 10);
   const last5 = [...history].slice(-5).reverse();
 
   return (
