@@ -16,7 +16,7 @@ function getDb() {
 }
 
 // Unique session ID per browser tab
-const SESSION_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+export const SESSION_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
 /**
  * Write/update this player's presence.

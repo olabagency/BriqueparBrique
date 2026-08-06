@@ -4,11 +4,14 @@ import { fmtCash, stageFor, stageMultiplier } from '../engine/utils.js';
 import { modifyEffByTrait } from '../engine/traitEffect.js';
 
 const CATEGORY_CONFIG = {
-  perso:   { cls: 'cat-perso',   text: '💜 Vie personnelle' },
-  immo:    { cls: 'cat-sector',  text: '🏘️ Immobilier' },
-  reno:    { cls: 'cat-sector',  text: '🔨 Rénovation' },
-  business:{ cls: 'cat-business',text: '💼 Vie professionnelle' },
-  sector:  { cls: 'cat-sector',  text: '🏘️ Immobilier' },
+  perso:    { cls: 'cat-perso',    text: '💜 Vie personnelle' },
+  immo:     { cls: 'cat-sector',   text: '🏘️ Immobilier' },
+  reno:     { cls: 'cat-sector',   text: '🔨 Rénovation' },
+  tenant:   { cls: 'cat-tenant',   text: '👥 Locataires' },
+  network:  { cls: 'cat-network',  text: '🤝 Réseau professionnel' },
+  economic: { cls: 'cat-economic', text: '📊 Conjoncture économique' },
+  business: { cls: 'cat-business', text: '💼 Vie professionnelle' },
+  sector:   { cls: 'cat-sector',   text: '🏘️ Immobilier' },
 };
 
 function applyStageScale(eff, year) {
@@ -33,8 +36,11 @@ export default function EventCard() {
 
   const handleChoice = (choice) => {
     const rawEff   = choice.eff ?? {};
-    const scaled   = applyStageScale(rawEff, state.year);
+    // setSalary is not scaled — preserve it separately
+    const setSalary = rawEff.setSalary;
+    const scaled   = applyStageScale({ ...rawEff, setSalary: undefined }, state.year);
     const eff      = modifyEffByTrait(state.traitId, scaled);
+    if (setSalary) eff.setSalary = setSalary;
     setOutcome({
       text: choice.out,
       eff,
@@ -63,6 +69,9 @@ export default function EventCard() {
       costPct:         choice.costPct,
       gainPct:         choice.gainPct,
       targetProperty,
+      contact:         choice.contact,
+      valMultiplier:   choice.valMultiplier,
+      eventPool:       event._pool,
     });
     setOutcome(null);
   };
@@ -113,6 +122,8 @@ export default function EventCard() {
   );
 }
 
+const SALARY_LABELS = { none: 'Aucun salaire', modest: '8 k€/an', comfortable: '20 k€/an', high: '45 k€/an' };
+
 function buildDeltas(eff, choice) {
   if (!eff) return [];
   const deltas = [];
@@ -120,7 +131,16 @@ function buildDeltas(eff, choice) {
   if (eff.personalCash) deltas.push({ label: `💶 ${eff.personalCash > 0 ? '+' : ''}${eff.personalCash} k€`, positive: eff.personalCash > 0 });
   if (eff.val !== undefined && eff.val !== 0) deltas.push({ label: `📈 ${eff.val > 0 ? '+' : ''}${eff.val} k€`, positive: eff.val > 0 });
   if (eff.stress)       deltas.push({ label: `😰 ${eff.stress > 0 ? '+' : ''}${eff.stress}`,           positive: eff.stress < 0 });
+  if (eff.setSalary)    deltas.push({ label: `💼 Salaire fixé : ${SALARY_LABELS[eff.setSalary] ?? eff.setSalary}`, positive: eff.setSalary !== 'none' });
   if (eff.properties && eff.properties !== 0) deltas.push({ label: `🏠 ${eff.properties > 0 ? '+' : ''}${eff.properties} bien${Math.abs(eff.properties) > 1 ? 's' : ''}`, positive: eff.properties > 0 });
+  if (choice.contact) {
+    const labels = { courtier: 'Courtier', notaire: 'Notaire', expert_comptable: 'Expert-comptable', agent_immo: 'Agent immo' };
+    deltas.push({ label: `🤝 ${labels[choice.contact] ?? choice.contact} rejoint ton réseau`, positive: true });
+  }
+  if (choice.valMultiplier !== undefined) {
+    const pct = Math.round((choice.valMultiplier - 1) * 100);
+    deltas.push({ label: `🏘️ Parc ${pct > 0 ? '+' : ''}${pct}%`, positive: pct >= 0 });
+  }
   if (choice.costPct !== undefined) {
     deltas.push({ label: 'Coût travaux', positive: false });
     if (choice.gainPct > 0) deltas.push({ label: '+Valorisation', positive: true });

@@ -111,11 +111,13 @@ export default function Landing() {
   const [history]    = useState(() => loadHistory() ?? []);
   const [selectedRun, setSelectedRun] = useState(null);
   const [liveScores, setLiveScores] = useState(null);
+  const [loadingScores, setLoadingScores] = useState(FIREBASE_ENABLED);
 
   useEffect(() => {
     if (!FIREBASE_ENABLED) return;
     fetchGlobalScores(50).then(scores => {
-      if (scores.length > 0) setLiveScores(scores);
+      setLiveScores(scores);
+      setLoadingScores(false);
     });
   }, []);
 
@@ -124,7 +126,8 @@ export default function Landing() {
     if (saved) loadSave(saved);
   };
 
-  const baseGlobal = liveScores ?? globalBoard;
+  // When Firebase is enabled, use only real scores (never fake seeded data)
+  const baseGlobal = FIREBASE_ENABLED ? (liveScores ?? []) : globalBoard;
   const merged = [...baseGlobal, ...history].sort((a, b) => (b.finalVal ?? 0) - (a.finalVal ?? 0));
   const top10 = merged.slice(0, 10);
   const last5 = [...history].slice(-5).reverse();
@@ -174,18 +177,28 @@ export default function Landing() {
           Commencer l'aventure →
         </button>
 
-        {top10.length > 0 && (
+        {(top10.length > 0 || loadingScores) && (
           <div className="past-lives" id="leaderboardSection">
             <div className="past-lives-title">
               🏆 Top 10 — Meilleurs scores
-              {FIREBASE_ENABLED && liveScores && (
+              {FIREBASE_ENABLED && !loadingScores && (
                 <span style={{ fontSize: 10, color: 'var(--accent)', marginLeft: 8, fontWeight: 400 }}>● live</span>
               )}
             </div>
+            {loadingScores ? (
+              <div style={{ textAlign: 'center', padding: '18px 0', color: 'var(--muted)', fontSize: 13 }}>
+                Chargement du classement…
+              </div>
+            ) : top10.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '18px 0', color: 'var(--muted)', fontSize: 13 }}>
+                Aucun score enregistré — sois le premier !
+              </div>
+            ) : (
             <div style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center', marginBottom: 8 }}>
               Clique sur une ligne pour voir le détail complet
             </div>
-            <div className="past-lives-list">
+            )}
+            {top10.length > 0 && <div className="past-lives-list">
               {top10.map((run, i) => (
                 <button
                   key={i}
@@ -217,7 +230,7 @@ export default function Landing() {
                   </div>
                 </button>
               ))}
-            </div>
+            </div>}
           </div>
         )}
 

@@ -6767,5 +6767,159 @@
         "out": "Un moment fort qui rassemble ceux qui comptent le plus autour de toi."
       }
     ]
+  },
+  {
+    "title": "Tu décides de te verser un vrai salaire",
+    "body": "Jusqu'ici tu t'es tout réinvesti dans le projet. Ton comptable te rappelle qu'un dirigeant sans salaire fixe, c'est une bombe à retardement sociale.",
+    "minYear": 1,
+    "category": "business",
+    "choices": [
+      {
+        "label": "Salaire modeste : 8 k€/an (préserve la tréso)",
+        "eff": {
+          "setSalary": "modest",
+          "stress": -3
+        },
+        "out": "Un petit filet de sécurité, suffisant pour tenir sans te mettre en danger."
+      },
+      {
+        "label": "Salaire confortable : 20 k€/an",
+        "eff": {
+          "setSalary": "comfortable",
+          "stress": -5
+        },
+        "out": "Tu respires. Une rémunération correcte qui sécurise ta vie personnelle."
+      },
+      {
+        "label": "Continuer sans salaire pour l'instant",
+        "eff": {
+          "stress": 5
+        },
+        "out": "Pas de sortie de cash, mais le manque de revenu personnel commence à peser."
+      }
+    ]
+  },
+  {
+    "title": "Une mission de conseil t'apporte un revenu inattendu",
+    "body": "Un ami dirigeant te sollicite pour restructurer son portefeuille immobilier. Trois semaines de travail, une belle rémunération.",
+    "minYear": 2,
+    "category": "business",
+    "choices": [
+      {
+        "label": "Accepter et facturer 25 k€",
+        "eff": {
+          "cash": 25,
+          "stress": 8
+        },
+        "out": "Mission accomplie. 25 k€ rentrent directement dans la tréso."
+      },
+      {
+        "label": "Accepter pour 40 k€ (négocier haut)",
+        "eff": {
+          "cash": 40,
+          "stress": 15
+        },
+        "out": "Ambitieux. Ça passe — mais les nuits ont été courtes."
+      },
+      {
+        "label": "Refuser, trop de projets en cours",
+        "eff": {
+          "stress": -5
+        },
+        "out": "Sagesse ou occasion ratée ? Tu gardes la tête hors de l'eau."
+      }
+    ]
+  },
+  {
+    "title": "Tu augmentes ton salaire dirigeant",
+    "body": "Les résultats sont là. Ton expert-comptable te conseille d'ajuster ta rémunération à la réalité de ton engagement.",
+    "minYear": 5,
+    "category": "business",
+    "choices": [
+      {
+        "label": "Passer à 45 k€/an (salaire haut)",
+        "eff": {
+          "setSalary": "high",
+          "stress": -8
+        },
+        "out": "Enfin une rémunération à la hauteur de l'investissement personnel. Le moral remonte."
+      },
+      {
+        "label": "Rester à 20 k€/an, réinvestir la diff",
+        "eff": {
+          "setSalary": "comfortable",
+          "stress": -3
+        },
+        "out": "Discipline d'entrepreneur. La tréso le remerciera."
+      }
+    ]
+  },
+  {
+    "title": "Une plus-value de cession te remplit les poches",
+    "body": "Tu avais oublié une petite participation dans une SCI d'un ami. La revente du local lui rapporte — et toi aussi.",
+    "minYear": 3,
+    "category": "immo",
+    "choices": [
+      {
+        "label": "Encaisser les 35 k€ dans la tréso",
+        "eff": {
+          "cash": 35
+        },
+        "out": "Un coup de pouce bienvenu. La trésorerie respire."
+      },
+      {
+        "label": "Basculer tout en épargne personnelle",
+        "eff": {
+          "personalCash": 35
+        },
+        "out": "Tu mets ça de côté pour toi — prudence ou retraite anticipée ?"
+      }
+    ]
+  },
+  {
+    "title": "Une prime de gestion locative exceptionnelle",
+    "body": "Cette année, ton taux d'occupation atteint 100 %. Ton gestionnaire te reverse un bonus de performance.",
+    "minYear": 4,
+    "category": "immo",
+    "choices": [
+      {
+        "label": "Encaisser le bonus (20 k€)",
+        "eff": {
+          "cash": 20
+        },
+        "out": "20 k€ directement en tréso. Une récompense méritée."
+      },
+      {
+        "label": "Reinvestir le bonus dans un nouveau bien",
+        "eff": {
+          "cash": 5,
+          "val": 30,
+          "stress": 8
+        },
+        "out": "Le cash va dans la mâchoire du marché. Le parc grossit encore."
+      }
+    ]
+  },
+  {
+    "title": "Un remboursement fiscal inattendu",
+    "body": "Le fisc te restitue un trop-perçu sur les exercices précédents. Ton expert-comptable l'avait repéré — bien joué.",
+    "minYear": 3,
+    "category": "business",
+    "choices": [
+      {
+        "label": "Utiliser les 30 k€ pour la trésorerie",
+        "eff": {
+          "cash": 30
+        },
+        "out": "L'État te rend ce qu'il te devait. La tréso salue."
+      },
+      {
+        "label": "Verser en épargne personnelle",
+        "eff": {
+          "personalCash": 30
+        },
+        "out": "Tu te paies enfin un peu — justice rendue."
+      }
+    ]
   }
 ]

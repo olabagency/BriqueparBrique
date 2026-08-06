@@ -1,0 +1,98 @@
+[
+  {
+    "title": "Crise immobilière — les prix s'effondrent",
+    "body": "Les taux d'intérêt ont explosé. Les acheteurs fuient le marché. Les prix chutent partout en France. Ton parc perd de la valeur sur le papier — mais des opportunités d'achat exceptionnelles apparaissent pour ceux qui ont du cash.",
+    "choices": [
+      {
+        "label": "Acheter massivement — profiter de la crise",
+        "eff": { "cash": -30, "stress": 15 },
+        "valMultiplier": 0.82,
+        "out": "Tu te lèves tôt, tu achètes à prix cassé. Douloureux à court terme, probablement gagnant à long terme."
+      },
+      {
+        "label": "Tenir le cap — ne rien vendre, ne rien acheter",
+        "eff": { "stress": 12 },
+        "valMultiplier": 0.85,
+        "out": "Tu résistes à la panique. Le parc perd de la valeur sur le papier, mais tu restes solide."
+      },
+      {
+        "label": "Vendre avant que ça empire",
+        "eff": { "cash": 20, "stress": 5 },
+        "valMultiplier": 0.80,
+        "out": "Tu cèdes un bien en urgence. Perte sèche, mais tu sécurises du cash pour saisir les opportunités qui suivront."
+      }
+    ]
+  },
+  {
+    "title": "Boom immobilier — les prix s'envolent",
+    "body": "La demande explose. Les taux sont bas, les acheteurs se battent pour chaque bien. Ton parc prend de la valeur à toute vitesse. Le moment de décider : garder, vendre ou acheter encore ?",
+    "choices": [
+      {
+        "label": "Profiter du boom pour vendre avec plus-value",
+        "eff": { "cash": 35, "stress": -5 },
+        "valMultiplier": 1.18,
+        "out": "Tu réalises une belle plus-value sur un ou plusieurs biens. Le timing était parfait."
+      },
+      {
+        "label": "Garder et regarder le parc monter",
+        "eff": { "stress": -8 },
+        "valMultiplier": 1.22,
+        "out": "Le parc continue de grimper. Tu résistes à la tentation de vendre au sommet — pas facile."
+      },
+      {
+        "label": "Acheter encore — le boom peut durer",
+        "eff": { "cash": -25, "stress": 14 },
+        "valMultiplier": 1.20,
+        "out": "Pari risqué mais audacieux. Tu rentres encore plus dans le marché au meilleur moment — ou presque."
+      }
+    ]
+  },
+  {
+    "title": "Inflation galopante — tout augmente",
+    "body": "L'inflation dépasse 9 %. Tes coûts augmentent, certains locataires peinent à payer. Mais la pierre reste une valeur refuge : les investisseurs se ruent vers l'immobilier pour se protéger.",
+    "choices": [
+      {
+        "label": "Réviser les loyers à la hausse",
+        "eff": { "cash": 18, "stress": 14 },
+        "valMultiplier": 1.10,
+        "out": "Certains locataires contestent. Les loyers augmentent tout de même — et ton cash flow suit l'inflation."
+      },
+      {
+        "label": "Maintenir les loyers — fidéliser les locataires",
+        "eff": { "stress": -6 },
+        "valMultiplier": 1.08,
+        "out": "Tes locataires t'adorent. Le parc prend malgré tout de la valeur en contexte inflationniste."
+      },
+      {
+        "label": "Refinancer tes crédits à taux fixe maintenant",
+        "eff": { "cash": -10, "stress": 6 },
+        "valMultiplier": 1.09,
+        "out": "Bonne décision. Tu fixes tes remboursements avant que les taux ne grimpent encore davantage."
+      }
+    ]
+  },
+  {
+    "title": "La BCE monte ses taux brusquement",
+    "body": "La Banque centrale européenne relève ses taux directeurs de 2 points en quelques mois. Les crédits immobiliers coûtent plus cher, les projets d'achat se renchérissent. Les marchés s'attendent à une correction.",
+    "choices": [
+      {
+        "label": "Rembourser par anticipation un maximum de crédits",
+        "eff": { "cash": -22, "stress": -8 },
+        "valMultiplier": 0.96,
+        "out": "Tu réduis ton endettement avant que ça coûte trop cher. Prudent, parfois payant."
+      },
+      {
+        "label": "Absorber la hausse — les loyers compensent encore",
+        "eff": { "stress": 16 },
+        "valMultiplier": 0.94,
+        "out": "Les loyers couvrent encore les mensualités, mais la marge se resserre. Tu surveilles de près."
+      },
+      {
+        "label": "Profiter de la panique pour acheter moins cher",
+        "eff": { "cash": -28, "stress": 20 },
+        "valMultiplier": 0.93,
+        "out": "Contre-intuitif mais audacieux. Tu achètes quand les autres fuient — long terme probablement favorable."
+      }
+    ]
+  }
+]
