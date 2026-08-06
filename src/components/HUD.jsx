@@ -63,9 +63,18 @@ export default function HUD({ onOpenModal, stress: stressProp }) {
       </div>
 
       <div className="hud-row2">
-        <span className="mini-stat" data-tip="Ton âge">
+        <span className="mini-stat has-bar" data-tip={`${age ?? 18} ans — retraite possible à 60 ans`}>
           <span className="mi-icon">🎂</span>
           <span className="mi-val mono" id="statAge">{age ?? 18}</span>
+          <span className="mi-bar">
+            <span
+              className="mi-bar-fill"
+              style={{
+                width: `${Math.min(100, ((age ?? 18) - 18) / (80 - 18) * 100)}%`,
+                background: 'linear-gradient(90deg, var(--accent), var(--amber))',
+              }}
+            />
+          </span>
         </span>
         <span className="mini-stat" data-tip="Trésorerie de l'entreprise">
           <span className="mi-icon">💰</span>

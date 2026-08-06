@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Un courtier indépendant te contacte",
+    "body": "Baptiste Leroux te croise lors d'un événement professionnel. Courtier depuis 15 ans, il négocie des taux imbattables pour ses clients investisseurs. Il te propose de rejoindre son carnet.",
+    "excludeFlag": "seen_courtier",
+    "choices": [
+      {
+        "label": "Rejoindre son réseau — taux négociés",
+        "contact": "courtier",
+        "flag": "seen_courtier",
+        "eff": { "cash": -2, "stress": -4 },
+        "out": "Baptiste devient ton courtier attitré. Chaque année, il optimise tes remboursements et te fait économiser sur chaque crédit en cours."
+      },
+      {
+        "label": "Garder ton indépendance bancaire",
+        "flag": "seen_courtier",
+        "eff": { "stress": -1 },
+        "out": "Tu préfères traiter directement avec les banques. Peut-être une autre fois."
+      }
+    ]
+  },
+  {
+    "title": "Un notaire te propose un accès privilégié",
+    "body": "Maître Sylvie Chauvin gère les successions de plusieurs grandes familles locales. Des biens doivent être vendus vite, avant la mise en marché officielle. Elle cherche des acheteurs sérieux et discrets.",
+    "excludeFlag": "seen_notaire",
+    "choices": [
+      {
+        "label": "Entrer dans son carnet de contacts",
+        "contact": "notaire",
+        "flag": "seen_notaire",
+        "eff": { "cash": -3, "stress": -2 },
+        "out": "Maître Chauvin t'envoie désormais les biens off-market en avant-première. Le marché que tu vois chaque année sera plus riche et plus varié."
+      },
+      {
+        "label": "Décliner poliment",
+        "flag": "seen_notaire",
+        "eff": { "stress": -1 },
+        "out": "Pas le bon moment. Elle comprend — et ne recontactera pas."
+      }
+    ]
+  },
+  {
+    "title": "Une experte-comptable spécialisée en immobilier",
+    "body": "Claire Forestier gère la comptabilité d'une dizaine de marchands de biens. Elle optimise les charges, les structures et aide ses clients à dormir sereinement. Elle cherche un nouveau dossier.",
+    "excludeFlag": "seen_comptable",
+    "choices": [
+      {
+        "label": "La prendre en mission (abonnement annuel)",
+        "contact": "expert_comptable",
+        "flag": "seen_comptable",
+        "eff": { "cash": -5, "stress": -6 },
+        "out": "Claire prend en charge tes obligations fiscales et comptables. Son suivi te retire 3 points de stress chaque année — une charge mentale en moins."
+      },
+      {
+        "label": "Continuer à te débrouiller seul",
+        "flag": "seen_comptable",
+        "eff": { "stress": 4 },
+        "out": "Tu gères encore seul. La prochaine déclaration va quand même te coûter des nuits blanches."
+      }
+    ]
+  },
+  {
+    "title": "Une chasseuse de biens t'approche",
+    "body": "Sofia Merlo repère des biens pour des investisseurs avant même qu'ils ne soient listés — et elle négocie dur avec les vendeurs. Elle cherche des acheteurs réguliers avec lesquels s'engager sur le long terme.",
+    "excludeFlag": "seen_agent",
+    "choices": [
+      {
+        "label": "Travailler exclusivement avec elle",
+        "contact": "agent_immo",
+        "flag": "seen_agent",
+        "eff": { "cash": -2, "stress": -3 },
+        "out": "Sofia devient ta chasseuse officielle. Chaque bien que tu achètes via elle te revient 5 % moins cher — elle négocie à ta place."
+      },
+      {
+        "label": "Refuser — tu préfères choisir librement",
+        "flag": "seen_agent",
+        "eff": { "stress": 0 },
+        "out": "Tu continues seul. Plus de liberté, mais tu paies toujours le prix affiché."
+      }
+    ]
+  }
+]

@@ -12,6 +12,7 @@ import LoansModal        from './modals/LoansModal.jsx';
 import AchievementsModal from './modals/AchievementsModal.jsx';
 import LuxuryShopModal   from './modals/LuxuryShopModal.jsx';
 import BankModal         from './modals/BankModal.jsx';
+import YearReportModal  from './modals/YearReportModal.jsx';
 import achievementsDef from '../data/achievements.json';
 
 const MODALS = {
@@ -141,6 +142,7 @@ export default function Game() {
       </div>
 
       {ModalComponent && <ModalComponent onClose={closeModal} />}
+      {state.yearReport && !state.over && <YearReportModal />}
       <EffectsLayer stress={stress} />
     </div>
   );

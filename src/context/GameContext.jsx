@@ -34,6 +34,8 @@ import persoEvents from '../data/events_perso.json';
 import immoEvents  from '../data/events_immo.json';
 import renovationEvents from '../data/renovation_events.json';
 import tenantEvents from '../data/tenant_events.json';
+import networkEvents from '../data/network_events.json';
+import econEvents from '../data/economic_events.json';
 import achievements from '../data/achievements.json';
 
 const GameContext = createContext(null);
@@ -138,6 +140,21 @@ function pickEvents(state, count = 3) {
     result.push(pool[idx]);
     pool.splice(idx, 1);
   }
+
+  // Network contact events — one-time introductions, 30% chance/year after year 3
+  if (state.year >= 3) {
+    const unseen = networkEvents.filter(e => e.excludeFlag && !state.flags?.[e.excludeFlag]);
+    if (unseen.length > 0 && Math.random() < 0.30) {
+      result.push({ ...unseen[0], _pool: 'network' });
+    }
+  }
+
+  // Economic events — rare macro shocks, only after age 30, 20% chance/year
+  if (state.age >= 30 && Math.random() < 0.20) {
+    const econ = econEvents[Math.floor(Math.random() * econEvents.length)];
+    result.push({ ...econ, _pool: 'economic' });
+  }
+
   return result;
 }
 
@@ -158,11 +175,25 @@ function reducer(state, action) {
     }
 
     case 'RESOLVE_EVENT': {
-      const { eff = {}, flag, unsetFlag, fatal, keepUnrenovated, costPct, gainPct, targetProperty } = action.payload;
+      const { eff = {}, flag, unsetFlag, fatal, keepUnrenovated, costPct, gainPct, targetProperty, contact, valMultiplier, eventPool } = action.payload;
       let s = { ...state };
 
       if (flag)      s.flags = { ...s.flags, [flag]: true };
       if (unsetFlag) { const f = { ...s.flags }; delete f[unsetFlag]; s.flags = f; }
+
+      // Network contact unlock
+      if (contact && !(s.contacts ?? []).includes(contact)) {
+        s.contacts = [...(s.contacts ?? []), contact];
+      }
+
+      // Economic event: apply portfolio-wide value multiplier
+      if (valMultiplier !== undefined && (s.propertyList ?? []).length > 0) {
+        s.propertyList = s.propertyList.map(p => ({
+          ...p,
+          value: Math.max(1, Math.round((p.value ?? 0) * valMultiplier)),
+        }));
+        s.valuation = s.propertyList.reduce((sum, p) => sum + (p.value ?? 0), 0);
+      }
 
       if (eff.cash)         s.cash         = (s.cash ?? 0) + eff.cash;
       if (eff.personalCash) s.personalCash = Math.max(0, (s.personalCash ?? 0) + eff.personalCash);
@@ -239,8 +270,11 @@ function reducer(state, action) {
     case 'BUY_PROPERTY': {
       const { listing } = action.payload;
       const s = { ...state };
-      const loanInfo = calcLoanPayment(listing.price ?? listing.baseValue ?? 0);
-      const downPayment = (listing.price ?? listing.baseValue ?? 0) - loanInfo.loanAmount;
+      const hasAgent = (s.contacts ?? []).includes('agent_immo');
+      const basePrice = listing.price ?? listing.baseValue ?? 0;
+      const effectivePrice = hasAgent ? Math.round(basePrice * 0.95) : basePrice;
+      const loanInfo = calcLoanPayment(effectivePrice);
+      const downPayment = effectivePrice - loanInfo.loanAmount;
 
       if (s.cash < downPayment) return s;
 
@@ -248,7 +282,7 @@ function reducer(state, action) {
         ...listing,
         id: listing.id ?? crypto.randomUUID(),
         condition: listing.condition ?? 'bonEtat',
-        value: listing.price ?? listing.baseValue ?? 0,
+        value: effectivePrice,
         rented: false,
         yearPurchased: s.year,
       };
@@ -461,6 +495,9 @@ function reducer(state, action) {
       return { screen: 'landing' };
     }
 
+    case 'DISMISS_YEAR_REPORT':
+      return { ...state, yearReport: null };
+
     default:
       return state;
   }
@@ -470,6 +507,11 @@ function reducer(state, action) {
 
 function advanceYear(state) {
   let s = { ...state };
+
+  // Snapshot before archiving — used for year report
+  const lastYearFinance = { ...s.currentYearFinance };
+  const prevYear = s.year;
+  const prevAge  = s.age;
 
   // Archive current year finances
   const priorYearsFinance = {};
@@ -530,8 +572,40 @@ function advanceYear(state) {
     s.flags = { ...s.flags, twentyPropsBefore50: true };
   }
 
+  const contacts = s.contacts ?? [];
+
+  // Contact bonuses
+  if (contacts.includes('expert_comptable')) {
+    s.stress = clamp(s.stress - 3, 0, STRESS_MAX);
+  }
+  if (contacts.includes('courtier') && (s.loans ?? []).length > 0) {
+    const courtierSaving = (s.loans ?? []).length * 3;
+    s.cash = (s.cash ?? 0) + courtierSaving;
+  }
+
   s.achievements = checkAchievements(s);
-  s.marketListings = generateMarketListings(s.economicCycle, 6);
+
+  // Wealth history snapshot
+  s.wealthHistory = [...(s.wealthHistory ?? []), {
+    year: s.year, age: s.age, valuation: s.valuation, cash: s.cash,
+  }];
+
+  // Year report data (shown as modal at start of new year)
+  s.yearReport = {
+    year: prevYear,
+    age: prevAge,
+    finance: lastYearFinance,
+    stress: s.stress,
+    valuation: s.valuation,
+    cash: s.cash,
+    propCount: (s.propertyList ?? []).length,
+    rentedCount: (s.propertyList ?? []).filter(p => p.rented).length,
+    contacts: [...contacts],
+    courtierSaving: contacts.includes('courtier') ? (s.loans ?? []).length * 3 : 0,
+  };
+
+  const listingCount = contacts.includes('notaire') ? 8 : 6;
+  s.marketListings = generateMarketListings(s.economicCycle, listingCount);
   s.pendingEvents = pickEvents(s, s.eventsPerYear ?? 3);
   s.currentEventIndex = 0;
 
@@ -575,8 +649,9 @@ export function GameProvider({ children }) {
   const massRepayLoans  = useCallback(()    => dispatch({ type: 'MASS_REPAY_LOANS' }), []);
   const bankWithdraw = useCallback((pct)  => dispatch({ type: 'BANK_WITHDRAW', payload: { pct } }), []);
   const bankInject   = useCallback((pct)  => dispatch({ type: 'BANK_INJECT',   payload: { pct } }), []);
-  const refreshMarket= useCallback(()     => dispatch({ type: 'REFRESH_MARKET' }), []);
-  const setScreen    = useCallback((scr)  => dispatch({ type: 'SET_SCREEN',    payload: scr }), []);
+  const refreshMarket      = useCallback(()    => dispatch({ type: 'REFRESH_MARKET' }), []);
+  const setScreen          = useCallback((scr) => dispatch({ type: 'SET_SCREEN',    payload: scr }), []);
+  const dismissYearReport  = useCallback(()    => dispatch({ type: 'DISMISS_YEAR_REPORT' }), []);
   const resetGame    = useCallback(()     => dispatch({ type: 'RESET' }), []);
 
   const value = {
@@ -586,7 +661,7 @@ export function GameProvider({ children }) {
     buyLuxury, sellLuxury,
     retire, repayLoan, renegotiateLoan, massRepayLoans,
     bankWithdraw, bankInject,
-    refreshMarket, setScreen, resetGame,
+    refreshMarket, setScreen, resetGame, dismissYearReport,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

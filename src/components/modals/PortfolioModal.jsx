@@ -4,6 +4,7 @@ import { useGame } from '../../context/GameContext.jsx';
 import { fmtCash } from '../../engine/utils.js';
 import { calcRent as calcRentEngine } from '../../engine/market.js';
 import propertyData from '../../data/property_data.json';
+import WealthChart from '../ui/WealthChart.jsx';
 
 export default function PortfolioModal({ onClose }) {
   const { state, sellProperty, toggleRent } = useGame();
@@ -13,9 +14,24 @@ export default function PortfolioModal({ onClose }) {
   const rentedProps = properties.filter(p => p.rented);
   const totalAnnualRent = rentedProps.reduce((sum, p) => sum + calcRentEngine(p), 0);
   const totalValue = properties.reduce((sum, p) => sum + (p.value ?? 0), 0);
+  const wealthHistory = state.wealthHistory ?? [];
 
   return (
     <Modal title={`🏘️ Ton parc immobilier`} onClose={onClose}>
+
+      {wealthHistory.length >= 2 && (
+        <div style={{
+          background: 'var(--surface2)',
+          border: '1px solid var(--border)',
+          borderRadius: 10,
+          padding: '10px 12px 6px',
+        }}>
+          <div style={{ fontSize: 10, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: 4 }}>
+            📈 Évolution du patrimoine
+          </div>
+          <WealthChart history={wealthHistory} />
+        </div>
+      )}
 
       {properties.length > 0 && (
         <div style={{
