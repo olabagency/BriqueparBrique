@@ -6,7 +6,7 @@ import { fmtCash } from '../engine/utils.js';
 import achievementsDef from '../data/achievements.json';
 import globalBoard from '../data/global_leaderboard.json';
 import { FIREBASE_ENABLED } from '../engine/firebaseConfig.js';
-import { fetchGlobalScores } from '../engine/globalScores.js';
+import { fetchCombinedLeaderboard } from '../engine/firebaseGame.js';
 
 const CHALLENGES = [
   { id: 'no_funding',    label: "Termine sans jamais lever de fonds" },
@@ -115,7 +115,7 @@ export default function Landing() {
 
   useEffect(() => {
     if (!FIREBASE_ENABLED) return;
-    fetchGlobalScores(50).then(scores => {
+    fetchCombinedLeaderboard().then(scores => {
       setLiveScores(scores);  // null = error, [] = empty, [...] = results
       setLoadingScores(false);
     });
@@ -127,16 +127,15 @@ export default function Landing() {
   };
 
   // Merge strategy:
-  // - Firebase returned real scores → use them + local history
-  // - Firebase returned empty [] (no runs finished yet) → fall back to static seed + local history
-  // - Firebase failed (null) or disabled → use static seed + local history
+  // - Firebase returned real scores (finished + active) → use them + local history
+  // - Firebase returned empty [] or failed (null) → fall back to static seed + local history
   const firebaseScores = liveScores && liveScores.length > 0 ? liveScores : null;
   const baseGlobal = firebaseScores ?? globalBoard;
-  const merged = [...baseGlobal, ...history].sort((a, b) => (b.finalVal ?? 0) - (a.finalVal ?? 0));
-  // Deduplicate by name+finalVal in case local history already appears in Firebase
+  const merged = [...baseGlobal, ...history].sort((a, b) => (b.finalVal ?? b.valuation ?? 0) - (a.finalVal ?? a.valuation ?? 0));
+  // Deduplicate by sessionId or name+finalVal
   const seen = new Set();
   const deduped = merged.filter(r => {
-    const key = `${r.name}|${r.finalVal}|${r.date ?? ''}`;
+    const key = r.sessionId ?? `${r.name}|${r.finalVal ?? r.valuation}|${r.date ?? ''}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
@@ -236,12 +235,21 @@ export default function Landing() {
                     <span style={{ minWidth: 22, display: 'inline-block' }}>
                       {MEDAL[i] ?? <span style={{ fontSize: 11, color: 'var(--muted)', fontWeight: 700 }}>#{i + 1}</span>}
                     </span>
-                    <span style={{ flex: 1 }}>{run.name ?? run.pseudo}{run.companyName ? ` · ${run.companyName}` : ''}</span>
-                    <span className="past-life-badge">{fmtCash(run.finalVal ?? 0)}</span>
+                    <span style={{ flex: 1 }}>
+                      {run.name ?? run.pseudo}{run.companyName ? ` · ${run.companyName}` : ''}
+                      {run._source === 'active' && (
+                        <span style={{ marginLeft: 6, fontSize: 9, fontWeight: 700, color: 'var(--accent)', background: 'var(--accent-soft)', padding: '1px 5px', borderRadius: 4 }}>
+                          ● en cours
+                        </span>
+                      )}
+                    </span>
+                    <span className="past-life-badge">{fmtCash(run.finalVal ?? run.valuation ?? 0)}</span>
                   </div>
                   <div className="past-life-sub" style={{ paddingLeft: 26 }}>
-                    {run.years ?? '?'} ans joués · {(run.achievements ?? []).length} succès
-                    {run.endingKind && ` · ${ENDINGS[run.endingKind]?.emoji ?? ''} ${ENDINGS[run.endingKind]?.title ?? ''}`}
+                    {run._source === 'active'
+                      ? `An ${run.year ?? '?'} · ${run.age ?? '?'} ans · ${(run.achievements ?? []).length} succès · 🎮 en ligne`
+                      : `${run.years ?? '?'} ans joués · ${(run.achievements ?? []).length} succès${run.endingKind ? ` · ${ENDINGS[run.endingKind]?.emoji ?? ''} ${ENDINGS[run.endingKind]?.title ?? ''}` : ''}`
+                    }
                   </div>
                 </button>
               ))}

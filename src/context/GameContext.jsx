@@ -2,6 +2,7 @@ import React, { createContext, useContext, useReducer, useCallback } from 'react
 import { freshState, buildRunSummary } from '../engine/gameState.js';
 import { saveGame, loadGame, deleteSave, appendHistory } from '../engine/saveLoad.js';
 import { pushGlobalScore } from '../engine/globalScores.js';
+import { syncActiveGame, removeActiveGame, pushFinishedGame } from '../engine/firebaseGame.js';
 import { removePresence } from '../engine/presence.js';
 import { pushLiveNotification } from '../engine/liveNotifications.js';
 import {
@@ -271,7 +272,9 @@ function reducer(state, action) {
         const summary = buildRunSummary({ ...s, endingKind: 'fatal_event', over: true });
         appendHistory(summary);
         pushGlobalScore(summary);
+        pushFinishedGame(summary);
         removePresence();
+        removeActiveGame();
         deleteSave();
         return { ...s, over: true, endingKind: 'fatal_event', screen: 'end' };
       }
@@ -518,7 +521,9 @@ function reducer(state, action) {
       const summary = buildRunSummary(newState);
       appendHistory(summary);
       pushGlobalScore(summary);
+      pushFinishedGame(summary);
       removePresence();
+      removeActiveGame();
       deleteSave();
       return { ...newState, screen: 'end' };
     }
@@ -668,7 +673,9 @@ function advanceYear(state) {
     const summary = buildRunSummary({ ...s, endingKind: 'burnout', over: true });
     appendHistory(summary);
     pushGlobalScore(summary);
+    pushFinishedGame(summary);
     removePresence();
+    removeActiveGame();
     deleteSave();
     return { ...s, over: true, endingKind: 'burnout', screen: 'end' };
   }
@@ -676,12 +683,15 @@ function advanceYear(state) {
     const summary = buildRunSummary({ ...s, endingKind: 'age_limit', over: true });
     appendHistory(summary);
     pushGlobalScore(summary);
+    pushFinishedGame(summary);
     removePresence();
+    removeActiveGame();
     deleteSave();
     return { ...s, over: true, endingKind: 'age_limit', screen: 'end' };
   }
 
   saveGame(s);
+  syncActiveGame(s);
   return s;
 }
 
