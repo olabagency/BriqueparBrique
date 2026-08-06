@@ -1,0 +1,756 @@
+[
+  {
+    "title": "Un locataire ne paie plus son loyer",
+    "body": "L'un de tes locataires cesse de payer sans explication depuis deux mois. Les relances restent sans réponse.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Engager une procédure d'expulsion", "tag": "prudent", "eff": {"cash": -10, "stress": 15}, "out": "La procédure aboutit, mais elle prend du temps et coûte cher."},
+      {"label": "Négocier un plan d'apurement de la dette", "tag": "creatif", "eff": {"cash": -5, "stress": 8}, "out": "Un accord fragile, mais qui évite les frais de justice."},
+      {"label": "Vendre le bien occupé avec une décote", "tag": "risque", "eff": {"val": -15, "stress": 5}, "out": "Tu te défais d'un problème en perdant une partie de la valeur du bien."}
+    ]
+  },
+  {
+    "title": "Un syndic malhonnête te lèse",
+    "body": "Tu découvres que le syndic de copropriété facture des prestations fictives depuis plusieurs exercices.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "minProperties": 2,
+    "choices": [
+      {"label": "Porter plainte et changer de syndic", "tag": "prudent", "eff": {"cash": -8, "stress": 10}, "out": "Une procédure longue, mais qui nettoie durablement la situation."},
+      {"label": "Négocier discrètement un remboursement partiel", "tag": "creatif", "eff": {"cash": 5, "stress": 8}, "out": "Un accord informel qui te rembourse une partie, sans éclat."},
+      {"label": "Ignorer et continuer avec ce syndic", "tag": "risque", "eff": {"cash": -5, "stress": -3}, "out": "La situation continue, au détriment de tes finances."}
+    ]
+  },
+  {
+    "title": "Un vice caché est découvert après la vente",
+    "body": "L'acheteur d'un de tes biens t'assigne en justice pour un vice caché non déclaré.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Régler à l'amiable sans attendre le jugement", "tag": "prudent", "eff": {"cash": -20, "stress": 10}, "out": "Un accord rapide qui clôt le dossier, même si c'est coûteux."},
+      {"label": "Contester en prouvant que tu n'étais pas au courant", "tag": "risque", "eff": {"cash": -15, "stress": 20}, "out": "Une bataille judiciaire incertaine dont l'issue peut aller dans les deux sens."},
+      {"label": "Mandater un avocat spécialisé en immobilier", "tag": "creatif", "eff": {"cash": -10, "stress": 12}, "out": "Un défenseur compétent qui améliore significativement tes chances."}
+    ]
+  },
+  {
+    "title": "Opportunité : immeuble entier à saisir",
+    "body": "Un immeuble de rapport est proposé à un prix bien en dessous du marché. Le vendeur veut conclure rapidement.",
+    "sector": "immo",
+    "category": "immo",
+    "minProperties": 3,
+    "choices": [
+      {"label": "Saisir l'opportunité immédiatement", "tag": "audacieux", "eff": {"cash": -80, "val": 120, "stress": 15}, "out": "Un investissement massif qui pourrait transformer ton patrimoine."},
+      {"label": "Faire une offre plus mesurée", "tag": "prudent", "eff": {"cash": -50, "val": 70, "stress": 8}, "out": "L'affaire se conclut à un prix acceptable pour les deux parties."},
+      {"label": "Laisser passer l'occasion", "tag": "risque", "eff": {}, "out": "L'immeuble part à un concurrent. L'occasion ne reviendra pas."}
+    ]
+  },
+  {
+    "title": "La mairie classe ton quartier en zone de rénovation prioritaire",
+    "body": "Les pouvoirs publics annoncent un vaste programme de rénovation urbaine dans le secteur où se trouvent plusieurs de tes biens.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Anticiper et rénover tes biens avant la hausse officielle", "tag": "audacieux", "eff": {"cash": -20, "val": 30, "stress": 8}, "out": "Tu prends de l'avance sur la hausse des prix qui arrive."},
+      {"label": "Profiter de la plus-value sans rien dépenser", "tag": "prudent", "eff": {"val": 15}, "out": "La valeur monte naturellement, sans effort de ta part."},
+      {"label": "Vendre maintenant avant les travaux de la mairie", "tag": "creatif", "eff": {"cash": 20, "val": -10}, "out": "Tu encaisses rapidement sans attendre la revalorisation complète."}
+    ]
+  },
+  {
+    "title": "Un locataire cause des dégâts importants",
+    "body": "En visitant le bien après le départ d'un locataire, tu constates des dégradations bien au-delà de l'usure normale.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Utiliser le dépôt de garantie et poursuivre pour le reste", "tag": "prudent", "eff": {"cash": -8, "stress": 12}, "out": "Une procédure qui te rembourse partiellement, au prix d'une démarche fastidieuse."},
+      {"label": "Rénover rapidement et mettre le bien en location", "tag": "creatif", "eff": {"cash": -15, "stress": 8}, "out": "Le bien est remis en état rapidement. Tu perds de l'argent mais reprends vite."},
+      {"label": "Vendre le bien en l'état avec une décote", "tag": "risque", "eff": {"val": -20, "stress": 5}, "out": "Tu te défais du problème, mais en perdant une belle part de valeur."}
+    ]
+  },
+  {
+    "title": "Une catastrophe naturelle endommage un bien",
+    "body": "Une inondation ou une tempête violente endommage sérieusement l'un de tes biens.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Faire jouer l'assurance et faire les réparations", "tag": "prudent", "eff": {"cash": -5, "val": -8, "stress": 12}, "out": "L'assurance couvre une grande partie des dégâts. La situation est rétablie."},
+      {"label": "Vendre en urgence à prix sacrifié", "tag": "risque", "eff": {"val": -30, "stress": 5}, "out": "Tu liquides le bien rapidement, en perdant beaucoup."},
+      {"label": "Rénover pour en faire un bien bien supérieur à avant", "tag": "audacieux", "eff": {"cash": -25, "val": 20, "stress": 10}, "out": "La catastrophe devient l'occasion de remettre le bien au goût du jour."}
+    ]
+  },
+  {
+    "title": "Un promoteur veut racheter ton lot dans une opération globale",
+    "body": "Un grand promoteur immobilier te propose de racheter ton bien, inclus dans un projet de réaménagement d'ampleur.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Accepter l'offre généreuse", "tag": "prudent", "eff": {"cash": 40, "val": -10}, "out": "Une vente avantageuse qui libère du capital pour de nouveaux projets."},
+      {"label": "Négocier à la hausse en sachant qu'ils ont besoin de toi", "tag": "audacieux", "eff": {"cash": 60, "val": -10, "stress": 8}, "out": "Tu obtiens une prime supplémentaire en jouant la montre habilement."},
+      {"label": "Refuser et conserver le bien dans ton patrimoine", "tag": "risque", "eff": {"val": 10, "stress": 3}, "out": "Tu gardes le bien. Le quartier se développera peut-être sans toi."}
+    ]
+  },
+  {
+    "title": "Un dossier de permis de construire est refusé",
+    "body": "Un projet d'agrandissement ou de changement de destination que tu avais planifié depuis des mois se voit refuser son permis.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Faire appel de la décision", "tag": "prudent", "eff": {"cash": -10, "stress": 10}, "out": "Un recours long et incertain, mais pas impossible à gagner."},
+      {"label": "Réviser le projet pour le rendre conforme", "tag": "creatif", "eff": {"cash": -8, "val": 5, "stress": 8}, "out": "Un projet revu qui finit par obtenir son feu vert."},
+      {"label": "Abandonner le projet et vendre le bien", "tag": "risque", "eff": {"val": -10, "stress": 5}, "out": "Tu renonces et te débarrasses d'un bien qui ne correspond plus à tes plans."}
+    ]
+  },
+  {
+    "title": "Les taux d'intérêt remontent brusquement",
+    "body": "Une hausse marquée des taux d'intérêt renchérit le coût de tes emprunts en cours et complique les nouveaux financements.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Renégocier tes crédits avant que ça ne monte encore", "tag": "prudent", "eff": {"cash": -5, "val": -5, "stress": 8}, "out": "Tu sécurises les conditions existantes avant la prochaine hausse."},
+      {"label": "Suspendre tout nouvel investissement le temps que ça se calme", "tag": "creatif", "eff": {"val": -8}, "out": "Une pause stratégique qui protège tes marges sur la durée."},
+      {"label": "Saisir des biens dont les vendeurs sont contraints par la hausse", "tag": "audacieux", "eff": {"cash": -30, "val": 35, "stress": 12}, "out": "La hausse des taux force d'autres à vendre. Tu en profites."}
+    ]
+  },
+  {
+    "title": "Ton gestionnaire locatif commet des erreurs répétées",
+    "body": "Ton agence de gestion locative accumule les erreurs : loyers mal reversés, états des lieux bâclés, locataires mal sélectionnés.",
+    "sector": "immo",
+    "category": "immo",
+    "minProperties": 3,
+    "choices": [
+      {"label": "Changer de gestionnaire", "tag": "prudent", "eff": {"cash": -8, "stress": 8}, "out": "Une transition laborieuse, mais qui améliore la gestion sur la durée."},
+      {"label": "Reprendre la gestion en direct", "tag": "audacieux", "eff": {"cash": 5, "stress": 20}, "out": "Tu économises des frais, mais au prix d'un investissement en temps considérable."},
+      {"label": "Exiger un remboursement et un plan d'amélioration", "tag": "creatif", "eff": {"cash": 3, "stress": 5}, "out": "L'agence fait des efforts. La situation s'améliore un peu."}
+    ]
+  },
+  {
+    "title": "Un bien dans une zone tendue prend de la valeur rapidement",
+    "body": "Le quartier où se trouve l'un de tes biens est devenu très recherché, et sa valeur s'est envolée ces derniers mois.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Vendre pour encaisser la plus-value", "tag": "prudent", "eff": {"cash": 50, "val": -15}, "out": "Tu cristallises une belle plus-value en profitant du pic du marché."},
+      {"label": "Conserver en attendant encore mieux", "tag": "audacieux", "eff": {"val": 25, "stress": 5}, "out": "Tu paries sur une poursuite de la hausse. Le risque est réel, le gain potentiel aussi."},
+      {"label": "Refinancer pour tirer parti de la hausse sans vendre", "tag": "creatif", "eff": {"cash": 20, "stress": 5}, "out": "Tu débloques des liquidités sans céder le bien, et tu gardes la main."}
+    ]
+  },
+  {
+    "title": "Un incendie endommage partiellement l'un de tes biens",
+    "body": "Un début d'incendie cause des dégâts significatifs dans l'un de tes appartements. L'assurance est appelée à la rescousse.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Faire jouer l'assurance et rénover entièrement", "tag": "prudent", "eff": {"cash": -10, "val": 5, "stress": 12}, "out": "Le bien est entièrement remis à neuf, mieux qu'avant l'incident."},
+      {"label": "Réparer a minima et remettre en location rapidement", "tag": "risque", "eff": {"cash": -5, "val": -5, "stress": 8}, "out": "Un retour rapide à la location, mais le bien garde quelques cicatrices."},
+      {"label": "Vendre après remise en état partielle", "tag": "creatif", "eff": {"cash": 15, "val": -8}, "out": "Une vente rapide après travaux de sécurisation, sans aller jusqu'à la rénovation complète."}
+    ]
+  },
+  {
+    "title": "Une nouvelle ligne de transport valorise fortement tes biens du secteur",
+    "body": "L'annonce d'une nouvelle ligne de métro ou de tramway à proximité directe de certains de tes biens fait monter les prix.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Profiter de la hausse pour vendre maintenant", "tag": "prudent", "eff": {"cash": 35, "val": -10}, "out": "Tu encaisses rapidement la plus-value avant que le marché ne s'ajuste."},
+      {"label": "Acheter davantage dans le même secteur pendant qu'il est encore temps", "tag": "audacieux", "eff": {"cash": -40, "val": 60, "stress": 10}, "out": "Tu maximises ton exposition à la hausse en doublant la mise."},
+      {"label": "Conserver et augmenter les loyers légèrement", "tag": "creatif", "eff": {"val": 20, "cash": 5}, "out": "Tu tires parti de la valorisation sans céder les biens."}
+    ]
+  },
+  {
+    "title": "Un projet de réhabilitation pour un bâtiment historique",
+    "body": "Tu as repéré un vieux bâtiment classé à vendre. Sa réhabilitation est lourde, mais les avantages fiscaux sont réels.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Te lancer dans ce projet ambitieux", "tag": "audacieux", "eff": {"cash": -60, "val": 90, "stress": 20}, "out": "Un projet exigeant qui se transforme en joyau de ton patrimoine."},
+      {"label": "Faire une offre conditionnée à des études préalables", "tag": "prudent", "eff": {"cash": -15, "val": 30, "stress": 8}, "out": "Une approche maîtrisée qui réduit les risques de mauvaise surprise."},
+      {"label": "Laisser passer cette affaire trop risquée", "tag": "risque", "eff": {}, "out": "Tu passes. L'occasion ne se représentera probablement pas."}
+    ]
+  },
+  {
+    "title": "Une forte demande locative dans ta ville",
+    "body": "La tension locative dans ta ville s'est encore accentuée. Tes biens ne restent plus vides jamais longtemps.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Augmenter les loyers dans les limites légales", "tag": "prudent", "eff": {"cash": 15, "stress": 3}, "out": "Une hausse mesurée qui améliore le rendement sans créer de tension avec tes locataires."},
+      {"label": "Profiter de la situation pour acquérir de nouveaux biens", "tag": "audacieux", "eff": {"cash": -35, "val": 50, "stress": 12}, "out": "Tu renforces ton exposition à un marché porteur."},
+      {"label": "Passer des biens en location meublée pour un meilleur rendement", "tag": "creatif", "eff": {"cash": -8, "val": 10}, "out": "Un changement de régime qui améliore nettement le rendement locatif."}
+    ]
+  },
+  {
+    "title": "Une copropriété vote des travaux coûteux",
+    "body": "L'assemblée générale de copropriété vote à la majorité des travaux lourds de ravalement et de mise aux normes.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Payer ta quote-part et profiter de la valorisation", "tag": "prudent", "eff": {"cash": -20, "val": 15, "stress": 5}, "out": "Des travaux de qualité qui valorisent durablement le bâtiment."},
+      {"label": "Contester le vote et bloquer les travaux", "tag": "risque", "eff": {"stress": 15}, "out": "Un bras de fer avec la copropriété, qui dépense une énergie considérable."},
+      {"label": "Vendre avant que les appels de fonds ne commencent", "tag": "creatif", "eff": {"cash": 20, "val": -5}, "out": "Tu passes la main avant les dépenses, en préservant tes liquidités."}
+    ]
+  },
+  {
+    "title": "Une nouvelle réglementation sur les passoires thermiques te touche",
+    "body": "Une nouvelle loi impose d'importants travaux d'isolation thermique aux propriétaires bailleurs de biens mal classés.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Faire les travaux d'isolation nécessaires", "tag": "prudent", "eff": {"cash": -25, "val": 20, "stress": 8}, "out": "Un investissement lourd mais qui repositionne le bien durablement."},
+      {"label": "Vendre avant l'entrée en vigueur de la réglementation", "tag": "creatif", "eff": {"cash": 20, "val": -10}, "out": "Tu te débarrasses du bien avant que la réglementation ne plombe sa valeur."},
+      {"label": "Attendre en espérant un assouplissement de la loi", "tag": "risque", "eff": {"val": -12, "stress": 8}, "out": "L'attente est risquée : la loi se renforce au lieu de s'assouplir."}
+    ]
+  },
+  {
+    "title": "Un fonds d'investissement te propose une joint-venture",
+    "body": "Un fonds immobilier privé te propose de co-investir sur un projet d'envergure que tu ne pourrais pas financer seul.",
+    "sector": "immo",
+    "category": "immo",
+    "minProperties": 5,
+    "choices": [
+      {"label": "Accepter le partenariat", "tag": "audacieux", "eff": {"cash": -30, "val": 80, "stress": 10}, "out": "Un projet d'ampleur qui dépasse ce que tu aurais pu faire seul."},
+      {"label": "Négocier des conditions plus favorables avant de signer", "tag": "prudent", "eff": {"cash": -20, "val": 55, "stress": 8}, "out": "Un accord rééquilibré qui te laisse plus de contrôle."},
+      {"label": "Décliner et rester maître de ton propre développement", "tag": "risque", "eff": {"stress": -3}, "out": "Tu gardes ton indépendance totale. L'opportunité passe à quelqu'un d'autre."}
+    ]
+  },
+  {
+    "title": "Une plainte de voisinage menace l'un de tes locataires",
+    "body": "Des locataires dans l'un de tes biens sont accusés de nuisances sonores répétées par le voisinage.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Intervenir fermement et rappeler les règles à tes locataires", "tag": "prudent", "eff": {"stress": 5}, "out": "La situation s'apaise après une mise au point claire."},
+      {"label": "Engager une procédure de résiliation du bail", "tag": "risque", "eff": {"cash": -10, "stress": 15}, "out": "Une décision radicale qui règle le problème, mais qui prend du temps et de l'énergie."},
+      {"label": "Proposer une médiation entre les deux parties", "tag": "creatif", "eff": {"stress": 3}, "out": "Un dialogue facilité qui calme le jeu sans démarche judiciaire."}
+    ]
+  },
+  {
+    "title": "Le marché immobilier local se retourne",
+    "body": "Après des années de hausse, le marché local se retourne. Certains acheteurs potentiels se retirent, les délais de vente s'allongent.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Vendre rapidement quelques biens avant que ça ne baisse davantage", "tag": "prudent", "eff": {"cash": 40, "val": -20, "stress": 8}, "out": "Tu cristallises des plus-values avant le bas du cycle."},
+      {"label": "Acheter des biens dont les propriétaires sont en difficulté", "tag": "audacieux", "eff": {"cash": -45, "val": 65, "stress": 12}, "out": "Le bas du cycle te permet d'acheter à des prix exceptionnels."},
+      {"label": "Attendre que le marché se stabilise", "tag": "creatif", "eff": {"val": -10, "stress": 5}, "out": "Une posture attentiste raisonnable, dans l'incertitude du moment."}
+    ]
+  },
+  {
+    "title": "Une zone franche fiscale est créée à proximité",
+    "body": "Le gouvernement crée une zone économique spéciale près de l'un de tes secteurs d'investissement, avec des avantages fiscaux pour les propriétaires bailleurs.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Investir massivement dans cette zone", "tag": "audacieux", "eff": {"cash": -50, "val": 80, "stress": 10}, "out": "Tu prends une position forte dans un secteur qui va se dynamiser."},
+      {"label": "Investir prudemment pour tester la zone", "tag": "prudent", "eff": {"cash": -20, "val": 30, "stress": 5}, "out": "Une exposition modérée qui te laisse de la flexibilité."},
+      {"label": "Attendre de voir si la mesure est vraiment efficace", "tag": "creatif", "eff": {"val": 5}, "out": "Une prudence qui te fait manquer les premiers gains, mais qui évite les paris risqués."}
+    ]
+  },
+  {
+    "title": "Tu identifies une opportunité de division parcellaire",
+    "body": "Un terrain acquis il y a quelques années peut être divisé pour créer des lots constructibles distincts.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Lancer la procédure de division avec un géomètre", "tag": "audacieux", "eff": {"cash": -15, "val": 40, "stress": 10}, "out": "Une opération complexe mais très rentable si elle aboutit."},
+      {"label": "Vendre le terrain en l'état à un promoteur", "tag": "prudent", "eff": {"cash": 30, "val": -8}, "out": "Une cession simple qui libère du capital sans effort de transformation."},
+      {"label": "Mettre le terrain en attente d'une meilleure fenêtre de marché", "tag": "creatif", "eff": {"stress": -3}, "out": "Tu gardes le terrain et attends le bon moment pour valoriser l'opportunité."}
+    ]
+  },
+  {
+    "title": "Un recours de voisinage bloque un projet de construction",
+    "body": "Un voisin dépose un recours contre le permis de construire de ton nouveau projet, bloquant les travaux pendant de longs mois.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Contester le recours en justice", "tag": "risque", "eff": {"cash": -15, "stress": 20}, "out": "Une bataille judiciaire coûteuse, dont l'issue reste incertaine."},
+      {"label": "Proposer un accord amiable au voisin", "tag": "prudent", "eff": {"cash": -10, "stress": 10}, "out": "Un compromis qui débloque le projet, au prix d'une concession."},
+      {"label": "Modifier légèrement le projet pour lever l'objection", "tag": "creatif", "eff": {"cash": -8, "val": -5, "stress": 8}, "out": "Un projet revu qui satisfait les deux parties et relance les travaux."}
+    ]
+  },
+  {
+    "title": "Un investisseur étranger s'intéresse à ton patrimoine",
+    "body": "Un fonds immobilier étranger te propose de racheter l'ensemble de ton patrimoine en une seule opération.",
+    "sector": "immo",
+    "category": "immo",
+    "minProperties": 8,
+    "choices": [
+      {"label": "Vendre intégralement pour réaliser tout ton patrimoine", "tag": "audacieux", "eff": {"cash": 300, "val": -200, "stress": -20}, "out": "Une opération de vie qui change tout. Tout ton capital immobilier est liquide."},
+      {"label": "Vendre seulement une partie sélectionnée", "tag": "prudent", "eff": {"cash": 120, "val": -80, "stress": -8}, "out": "Un compromis qui t'apporte des liquidités sans vider ton patrimoine."},
+      {"label": "Refuser — tu n'es pas vendeur", "tag": "risque", "eff": {"stress": 3}, "out": "Tu gardes tout. L'offre n'est plus sur la table."}
+    ]
+  },
+  {
+    "title": "Ton comptable détecte une optimisation fiscale significative",
+    "body": "Ton comptable identifie une structure fiscale plus avantageuse pour ton patrimoine immobilier — SCI, holding ou autre.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Mettre en place la restructuration recommandée", "tag": "prudent", "eff": {"cash": -12, "val": 15, "stress": 5}, "out": "Une réorganisation juridique et fiscale qui améliore le rendement global."},
+      {"label": "Chercher un deuxième avis avant d'agir", "tag": "creatif", "eff": {"cash": -5, "val": 10, "stress": 3}, "out": "Une validation croisée qui confirme la pertinence de la recommandation."},
+      {"label": "Rester sur la structure actuelle, par prudence", "tag": "risque", "eff": {}, "out": "Tu passes à côté d'une optimisation, mais tu évites tout risque de remise en cause."}
+    ]
+  },
+  {
+    "title": "Un locataire te demande de vendre le bien qu'il occupe",
+    "body": "Un locataire de longue date te contacte pour te proposer d'acheter le bien qu'il occupe, en faisant jouer son droit de préemption.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Accepter sa proposition au prix du marché", "tag": "prudent", "eff": {"cash": 30, "val": -8}, "out": "Une vente propre, à un acheteur motivé qui connaît bien le bien."},
+      {"label": "Saisir l'occasion pour vendre à un meilleur prix", "tag": "risque", "eff": {"cash": 40, "val": -10, "stress": 5}, "out": "Tu tentes d'obtenir plus. Le locataire négocie, ou se retire."},
+      {"label": "Décliner et conserver le bien pour continuer à le louer", "tag": "creatif", "eff": {"val": 5}, "out": "Le bien reste dans ton patrimoine. Le locataire reste aussi — pour l'instant."}
+    ]
+  },
+  {
+    "title": "Une escroquerie à la fausse agence te cible",
+    "body": "Tu découvres qu'une fausse agence immobilière se sert de tes photos et de tes annonces pour escroquer des candidats locataires.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Déposer plainte et alerter les autorités compétentes", "tag": "prudent", "eff": {"cash": -5, "stress": 10}, "out": "Une démarche longue mais nécessaire pour protéger ton image et tes biens."},
+      {"label": "Publier une mise en garde sur les réseaux pour alerter", "tag": "creatif", "eff": {"stress": 5}, "out": "Une action rapide qui protège tes futurs locataires."},
+      {"label": "Changer toutes tes annonces et tes photos immédiatement", "tag": "risque", "eff": {"stress": 8}, "out": "Un chantier fastidieux, mais une protection immédiate et efficace."}
+    ]
+  },
+  {
+    "title": "Un bien en indivision devient source de conflit",
+    "body": "Un bien acquis en indivision avec un associé crée des tensions croissantes sur les décisions à prendre.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Racheter la part de ton associé pour devenir seul maître", "tag": "audacieux", "eff": {"cash": -30, "val": 15, "stress": 10}, "out": "Tu prends le contrôle total du bien, au prix d'un effort financier."},
+      {"label": "Vendre ta part à l'associé ou à un tiers", "tag": "prudent", "eff": {"cash": 20, "val": -5, "stress": -8}, "out": "Tu sors proprement de l'indivision en encaissant ta part."},
+      {"label": "Formaliser un accord clair entre vous par acte notarié", "tag": "creatif", "eff": {"cash": -5, "stress": -5}, "out": "Un encadrement juridique qui clarifie les règles entre coindivisaires."}
+    ]
+  },
+  {
+    "title": "Un bien en zone inondable perd de sa valeur",
+    "body": "Un rapport officiel classe l'un de tes biens en zone à risque d'inondation, avec des conséquences directes sur sa valeur d'assurance et de revente.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Vendre avant que l'information ne soit trop connue", "tag": "risque", "eff": {"cash": 15, "val": -20, "stress": 8}, "out": "Tu limites la casse en cédant rapidement, avant la diffusion large du rapport."},
+      {"label": "Investir dans des protections contre les inondations", "tag": "prudent", "eff": {"cash": -15, "val": 5, "stress": 5}, "out": "Des travaux de protection qui maintiennent la valeur du bien à un niveau acceptable."},
+      {"label": "Conserver et louer malgré le classement", "tag": "creatif", "eff": {"val": -10}, "out": "Le bien reste loué, mais sa valeur de revente continue de décliner doucement."}
+    ]
+  },
+  {
+    "title": "Une levée de fonds participative pour un projet immobilier",
+    "body": "Tu envisages de lever des fonds auprès d'investisseurs particuliers pour financer un projet trop ambitieux pour ton seul bilan.",
+    "sector": "immo",
+    "category": "immo",
+    "minProperties": 4,
+    "choices": [
+      {"label": "Lancer la levée de fonds en crowdfunding immobilier", "tag": "audacieux", "eff": {"cash": 30, "val": 50, "stress": 15}, "out": "Un financement original qui décuple tes capacités d'investissement."},
+      {"label": "Approcher des investisseurs privés dans ton réseau", "tag": "prudent", "eff": {"cash": 20, "val": 35, "stress": 10}, "out": "Un tour de table réussi avec des partenaires de confiance."},
+      {"label": "Renoncer et financer seul sur une base plus modeste", "tag": "risque", "eff": {"cash": -15, "val": 20, "stress": 5}, "out": "Un projet réduit mais entièrement maîtrisé."}
+    ]
+  },
+  {
+    "title": "Un voisin t'accuse d'empiètement de ta clôture",
+    "body": "Ton voisin affirme que ta clôture empiète de quelques centimètres sur sa propriété, et menace d'aller en justice.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Faire appel à un géomètre-expert pour clarifier les limites", "tag": "prudent", "eff": {"cash": -5, "stress": 5}, "out": "Un bornage officiel qui clôt le litige de façon définitive."},
+      {"label": "Reculer la clôture sans demander son reste", "tag": "creatif", "eff": {"cash": -3, "stress": -5}, "out": "Un geste de bonne foi qui désamorce immédiatement la tension."},
+      {"label": "Contester fermement et aller au tribunal si besoin", "tag": "risque", "eff": {"cash": -10, "stress": 15}, "out": "Un conflit qui s'envenime, avec une issue très incertaine."}
+    ]
+  },
+  {
+    "title": "Un changement de zonage ouvre de nouvelles possibilités",
+    "body": "La commune révise son plan local d'urbanisme, reclassant certains de tes terrains dans une zone constructible plus permissive.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Construire toi-même sur ce terrain revalorisé", "tag": "audacieux", "eff": {"cash": -40, "val": 70, "stress": 15}, "out": "Un projet ambitieux qui exploite pleinement les nouvelles possibilités offertes."},
+      {"label": "Vendre le terrain revalorisé à un promoteur", "tag": "prudent", "eff": {"cash": 45, "val": -10}, "out": "Tu encaisses rapidement la plus-value liée au changement de zonage."},
+      {"label": "Attendre pour profiter encore de la hausse avant d'agir", "tag": "creatif", "eff": {"val": 15, "stress": 3}, "out": "Une patience stratégique qui peut encore améliorer le résultat final."}
+    ]
+  },
+  {
+    "title": "Un locataire exceptionnel te demande un bail longue durée",
+    "body": "Un locataire exemplaire depuis des années te propose de signer un bail longue durée en échange d'un loyer légèrement inférieur au marché.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Accepter — la stabilité vaut bien un petit écart de loyer", "tag": "prudent", "eff": {"cash": -3, "stress": -10}, "out": "Une sécurité locative précieuse, avec un locataire dont tu connais la valeur."},
+      {"label": "Refuser pour maintenir un loyer de marché", "tag": "risque", "eff": {"stress": 5}, "out": "Le locataire repart. Tu retrouveras quelqu'un, peut-être moins fiable."},
+      {"label": "Négocier un bail plus court avec option de renouvellement", "tag": "creatif", "eff": {"stress": -5}, "out": "Un compromis qui préserve ta flexibilité sans perdre ce bon locataire."}
+    ]
+  },
+  {
+    "title": "Un bien que tu voulais acheter est vendu à quelqu'un d'autre",
+    "body": "Après des semaines de négociation, le bien sur lequel tu avais misé est finalement cédé à un autre acheteur qui a surenchéri en dernière minute.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Proposer immédiatement une surenchère", "tag": "audacieux", "eff": {"cash": -40, "val": 30, "stress": 10}, "out": "Tu obtiens le bien, mais bien au-dessus de ton prix cible initial."},
+      {"label": "Accepter la défaite et passer à un autre bien", "tag": "prudent", "eff": {"stress": 5}, "out": "Une déception, mais une discipline budgétaire qui reste saine."},
+      {"label": "Contacter directement le nouvel acquéreur pour lui racheter", "tag": "creatif", "eff": {"cash": -20, "val": 15, "stress": 8}, "out": "Un angle inattendu qui peut parfois aboutir, si le timing est bon."}
+    ]
+  },
+  {
+    "title": "Un expert immobilier réévalue ton patrimoine à la baisse",
+    "body": "Une expertise officielle de ton patrimoine aboutit à une valorisation inférieure de 15% à ce que tu anticipais.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Demander une contre-expertise", "tag": "risque", "eff": {"cash": -5, "stress": 10}, "out": "Une seconde opinion qui peut confirmer ou corriger la première évaluation."},
+      {"label": "Accepter et ajuster ta stratégie en conséquence", "tag": "prudent", "eff": {"val": -10, "stress": 5}, "out": "Une réalité actée qui permet de mieux calibrer tes décisions futures."},
+      {"label": "Investir dans les biens sous-valorisés pour les revaloriser", "tag": "creatif", "eff": {"cash": -20, "val": 15, "stress": 8}, "out": "Tu prends le problème à bras le corps en agissant sur la valeur intrinsèque des biens."}
+    ]
+  },
+  {
+    "title": "Un projet de coliving dans ton quartier crée une opportunité",
+    "body": "La tendance du coliving s'installe dans ta ville. Un de tes grands appartements pourrait parfaitement convenir à ce mode d'exploitation.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Convertir l'appartement en coliving", "tag": "audacieux", "eff": {"cash": -20, "val": 20, "stress": 12}, "out": "Un modèle plus rentable, mais qui demande plus de gestion au quotidien."},
+      {"label": "Louer à une société de coliving sans t'en occuper", "tag": "prudent", "eff": {"cash": 5, "stress": -5}, "out": "Une exploitation déléguée qui améliore le rendement sans surcharge de gestion."},
+      {"label": "Garder le bien en location classique", "tag": "creatif", "eff": {}, "out": "Tu restes sur ce que tu connais, sans prendre de risque sur un marché encore jeune."}
+    ]
+  },
+  {
+    "title": "Une opportunité de résidence étudiante se présente",
+    "body": "Un terrain proche d'une université est à vendre, parfaitement situé pour développer une résidence étudiante.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Développer la résidence étudiante", "tag": "audacieux", "eff": {"cash": -60, "val": 90, "stress": 18}, "out": "Un projet d'ampleur qui prend du temps, mais qui génère un flux locatif régulier et solide."},
+      {"label": "Vendre le terrain à un opérateur spécialisé", "tag": "prudent", "eff": {"cash": 35}, "out": "Une cession rapide qui libère du capital sans t'engager dans un projet complexe."},
+      {"label": "Développer une version réduite en commençant petit", "tag": "creatif", "eff": {"cash": -25, "val": 40, "stress": 10}, "out": "Un premier pas maîtrisé dans ce segment porteur."}
+    ]
+  },
+  {
+    "title": "Une crise sanitaire impacte le marché locatif",
+    "body": "Une épidémie ou une crise sanitaire locale fait fuir certains locataires et réduit la demande dans ton secteur.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Baisser temporairement les loyers pour garder tes locataires", "tag": "prudent", "eff": {"cash": -8, "stress": 8}, "out": "Un geste qui fidélise tes locataires dans une période difficile."},
+      {"label": "Profiter des prix bas pour acheter des biens supplémentaires", "tag": "audacieux", "eff": {"cash": -50, "val": 70, "stress": 12}, "out": "Le bas du cycle te permet d'acquérir à des conditions exceptionnelles."},
+      {"label": "Attendre que la situation se normalise sans trop bouger", "tag": "creatif", "eff": {"val": -5, "stress": 5}, "out": "Une posture attentiste dans l'incertitude, raisonnable mais pas sans coût."}
+    ]
+  },
+  {
+    "title": "Un bien hérité s'avère difficile à vendre",
+    "body": "Tu hérites d'un bien dans une zone rurale dépeuplée. La vente s'avère beaucoup plus complexe que prévu.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Rénover pour le rendre attractif", "tag": "prudent", "eff": {"cash": -20, "val": 15, "stress": 10}, "out": "Un effort de rénovation qui améliore les chances de vente."},
+      {"label": "Louer en saisonnier en attendant une meilleure opportunité", "tag": "creatif", "eff": {"cash": 8, "stress": 5}, "out": "Un usage qui génère un peu de revenus en attendant le bon acheteur."},
+      {"label": "Vendre rapidement à n'importe quel prix pour s'en défaire", "tag": "risque", "eff": {"cash": 5, "stress": -5}, "out": "Tu récupères quelque chose et tu passes à autre chose."}
+    ]
+  },
+  {
+    "title": "Ton banquier te propose un financement exceptionnel",
+    "body": "Ton banquier habituel, satisfait de votre relation de longue date, te propose un crédit à des conditions particulièrement favorables.",
+    "sector": "immo",
+    "category": "immo",
+    "minProperties": 4,
+    "choices": [
+      {"label": "Utiliser ce financement pour un gros projet ciblé", "tag": "audacieux", "eff": {"cash": 50, "val": 80, "stress": 12}, "out": "Une opportunité rare qui te permet de passer un cap dans ton patrimoine."},
+      {"label": "L'utiliser pour consolider et rembourser de l'existant", "tag": "prudent", "eff": {"cash": 20, "val": 10, "stress": -5}, "out": "Un rééquilibrage sain de ton bilan, avec de meilleures conditions."},
+      {"label": "Décliner, tu préfères ne pas ajouter de dettes", "tag": "risque", "eff": {"stress": -3}, "out": "Tu gardes un bilan propre, mais tu passes à côté d'une belle fenêtre."}
+    ]
+  },
+  {
+    "title": "Un artiste propose un troc : une œuvre d'art contre un loyer réduit",
+    "body": "Un artiste locataire te propose de payer une partie de son loyer en œuvres d'art originales.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Accepter le deal", "tag": "creatif", "eff": {"cash": -5, "stress": -8}, "out": "Un accord original qui t'apporte quelque chose d'inattendu dans ton quotidien."},
+      {"label": "Refuser, le loyer doit se payer en euros", "tag": "prudent", "eff": {"stress": 3}, "out": "Un refus sans ambiguïté. Le locataire accepte ou part."},
+      {"label": "Négocier un mix : partie en cash, partie en art", "tag": "audacieux", "eff": {"cash": -3, "stress": -5}, "out": "Un compromis original qui satisfait les deux parties."}
+    ]
+  },
+  {
+    "title": "Un journaliste enquête sur les propriétaires bailleurs dans ta ville",
+    "body": "Un journaliste te contacte pour un reportage sur les propriétaires bailleurs dans ta ville, cherchant des témoignages.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Accepter de témoigner positivement", "tag": "audacieux", "eff": {"val": 10, "stress": 8}, "out": "Une visibilité qui peut séduire des partenaires, mais qui expose aussi."},
+      {"label": "Refuser catégoriquement de témoigner", "tag": "prudent", "eff": {"stress": -3}, "out": "Tu restes dans l'ombre. Le reportage sort sans toi."},
+      {"label": "Proposer un angle plus équilibré et constructif au journaliste", "tag": "creatif", "eff": {"val": 5, "stress": 3}, "out": "Un témoignage nuancé qui améliore légèrement ton image publique."}
+    ]
+  },
+  {
+    "title": "Une startup de proptech veut tester son outil dans ton parc",
+    "body": "Une jeune startup immobilière te propose de tester gratuitement son outil de gestion locative 2.0 sur l'ensemble de ton parc.",
+    "sector": "immo",
+    "category": "immo",
+    "minProperties": 5,
+    "choices": [
+      {"label": "Accepter d'être leur cobaye", "tag": "creatif", "eff": {"stress": -8, "val": 5}, "out": "Un gain de temps réel si l'outil tient ses promesses. Et il les tient."},
+      {"label": "Refuser, tu n'as pas le temps d'essuyer les plâtres", "tag": "prudent", "eff": {}, "out": "Tu préserves ta stabilité opérationnelle en évitant tout risque lié à un outil non éprouvé."},
+      {"label": "Négocier une participation au capital de la startup en échange", "tag": "audacieux", "eff": {"stress": 3, "val": 8}, "out": "Un pari risqué, mais potentiellement très lucratif si la startup décolle."}
+    ]
+  },
+  {
+    "title": "Un bien commercial se libère dans ton parc",
+    "body": "Ton locataire commercial ferme boutique et libère un local qui était loué depuis des années.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Remettre en location commerciale à un nouveau preneur", "tag": "prudent", "eff": {"stress": 8, "cash": 5}, "out": "Un nouveau locataire commercial prend la suite après quelques mois de vacance."},
+      {"label": "Transformer en logement pour un usage plus flexible", "tag": "creatif", "eff": {"cash": -20, "val": 15, "stress": 10}, "out": "Une conversion qui repositionne le bien sur un marché plus porteur."},
+      {"label": "Vendre le local libéré professionnel", "tag": "risque", "eff": {"cash": 25, "val": -5}, "out": "Tu cèdes rapidement le bien libéré, en récupérant du capital frais."}
+    ]
+  },
+  {
+    "title": "Un audit révèle un problème d'amiante dans un vieux bâtiment",
+    "body": "Un audit technique révèle la présence d'amiante dans un immeuble ancien de ton parc. Les travaux de désamiantage sont obligatoires.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Faire les travaux de désamiantage rapidement", "tag": "prudent", "eff": {"cash": -30, "val": 10, "stress": 12}, "out": "Un chantier coûteux mais indispensable pour remettre le bien en conformité."},
+      {"label": "Vendre à un investisseur informé avec une décote importante", "tag": "risque", "eff": {"cash": 10, "val": -25, "stress": 8}, "out": "Tu te débarrasses du problème en le cédant avec une forte décote."},
+      {"label": "Conserver et louer en attendant de financer les travaux", "tag": "creatif", "eff": {"stress": 10, "val": -5}, "out": "Une attente risquée sur le plan légal, mais qui te laisse le temps de trouver les fonds."}
+    ]
+  },
+  {
+    "title": "Le marché des parkings s'effondre avec l'essor des voitures électriques",
+    "body": "La diminution du nombre de voitures thermiques en ville rend certains de tes parkings beaucoup moins attractifs.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Vendre tes parkings avant que ça ne baisse encore", "tag": "prudent", "eff": {"cash": 15, "val": -10}, "out": "Tu limites la casse en cédant avant que le marché ne se retourne complètement."},
+      {"label": "Convertir les parkings en bornes de recharge", "tag": "creatif", "eff": {"cash": -15, "val": 10, "stress": 8}, "out": "Un repositionnement malin sur la tendance des véhicules électriques."},
+      {"label": "Conserver en attendant que la demande revienne", "tag": "risque", "eff": {"val": -15}, "out": "Une attente qui coûte cher si la tendance se confirme durablement."}
+    ]
+  },
+  {
+    "title": "Un locataire insolvable abandonne le logement sans crier gare",
+    "body": "Un locataire disparaît du jour au lendemain, laissant un appartement dans un état catastrophique et sans avoir payé les derniers mois.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Nettoyer et rénover rapidement pour remettre en location", "tag": "prudent", "eff": {"cash": -15, "stress": 10}, "out": "Un retour rapide à une situation normale, avec un vrai investissement en temps et en argent."},
+      {"label": "Actionner ta garantie loyers impayés", "tag": "creatif", "eff": {"cash": -5, "stress": 8}, "out": "L'assurance couvre une bonne partie des pertes. Pas toutes, mais une bonne partie."},
+      {"label": "Vendre le bien en l'état pour passer à autre chose", "tag": "risque", "eff": {"val": -20, "stress": 5}, "out": "Tu solds une mauvaise expérience pour en tirer les leçons ailleurs."}
+    ]
+  },
+  {
+    "title": "Une augmentation des taxes foncières grève tes charges",
+    "body": "La commune augmente significativement les taxes foncières, réduisant le rendement net de ton parc immobilier.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Répercuter partiellement sur les loyers", "tag": "risque", "eff": {"cash": 5, "stress": 5}, "out": "Une hausse des loyers qui compense en partie, mais qui crée des tensions."},
+      {"label": "Absorber la hausse sur les marges", "tag": "prudent", "eff": {"cash": -8, "stress": 5}, "out": "Tu préserves la relation avec tes locataires, au prix d'une rentabilité réduite."},
+      {"label": "Vendre les biens les moins rentables", "tag": "creatif", "eff": {"cash": 20, "val": -15}, "out": "Un écrémage de ton parc qui améliore le rendement moyen global."}
+    ]
+  },
+  {
+    "title": "Une demande de réduction de loyer massif post-crise",
+    "body": "Plusieurs locataires se regroupent pour demander collectivement une réduction de loyer suite à une crise économique.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Accepter une réduction temporaire pour préserver la relation", "tag": "prudent", "eff": {"cash": -10, "stress": -5}, "out": "Un geste apprécié qui fidélise tes locataires sur la durée."},
+      {"label": "Refuser et risquer des départs simultanés", "tag": "risque", "eff": {"val": -8, "stress": 15}, "out": "Plusieurs biens se libèrent en même temps. La vacance locative pèse lourd."},
+      {"label": "Négocier au cas par cas selon la situation de chacun", "tag": "creatif", "eff": {"cash": -5, "stress": 8}, "out": "Une approche personnalisée qui limite les pertes tout en montrant de la compréhension."}
+    ]
+  },
+  {
+    "title": "Tu découvres une erreur dans un compromis de vente déjà signé",
+    "body": "Une erreur significative dans un compromis de vente que tu viens de signer remet en question les conditions de la transaction.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Corriger l'erreur par avenant avec le vendeur", "tag": "prudent", "eff": {"cash": -5, "stress": 8}, "out": "Une correction à l'amiable qui préserve la transaction dans de bonnes conditions."},
+      {"label": "Annuler la vente dans le délai légal de rétractation", "tag": "risque", "eff": {"stress": 10}, "out": "Tu sors proprement de la transaction, mais tu perds du temps."},
+      {"label": "Renégocier les conditions en t'appuyant sur l'erreur constatée", "tag": "creatif", "eff": {"cash": 5, "stress": 5}, "out": "L'erreur te donne un levier inattendu pour obtenir de meilleures conditions."}
+    ]
+  },
+  {
+    "title": "Un promoteur voisin construit un immeuble qui masque ta vue",
+    "body": "La construction d'un immeuble adjacent supprime une vue dégagée qui constituait un atout majeur de l'un de tes biens.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Vendre rapidement, avant que la dépréciation soit trop visible", "tag": "prudent", "eff": {"cash": 20, "val": -8}, "out": "Tu agis vite pour limiter la perte de valeur liée à la nouvelle construction."},
+      {"label": "Attaquer la construction en justice", "tag": "risque", "eff": {"cash": -15, "stress": 20}, "out": "Un recours très difficile à gagner, coûteux en temps et en énergie."},
+      {"label": "Rénover le bien pour compenser la perte de vue", "tag": "creatif", "eff": {"cash": -15, "val": 5, "stress": 8}, "out": "Un repositionnement du bien sur d'autres atouts, pour atténuer l'impact."}
+    ]
+  },
+  {
+    "title": "Tu reçois une offre d'achat à un prix hors marché",
+    "body": "Un particulier très motivé te propose d'acheter l'un de tes biens bien au-dessus du prix du marché.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Accepter cette offre exceptionnelle sans attendre", "tag": "prudent", "eff": {"cash": 50, "val": -10}, "out": "Une vente au-dessus du marché qui cristallise une plus-value exceptionnelle."},
+      {"label": "Contre-proposer encore plus haut", "tag": "risque", "eff": {"stress": 5}, "out": "L'acheteur hésite, reconsidère, et pourrait finalement se retirer."},
+      {"label": "Utiliser cette offre pour sonder d'autres acheteurs potentiels", "tag": "creatif", "eff": {"cash": 40, "val": -8, "stress": 5}, "out": "Une mise aux enchères informelle qui te permet de tirer le meilleur prix possible."}
+    ]
+  },
+  {
+    "title": "Un architecte éco-responsable propose une rénovation verte",
+    "body": "Un architecte spécialisé dans les rénovations écologiques te propose de transformer l'un de tes biens en modèle de construction durable.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Embarquer dans cette rénovation exemplaire", "tag": "creatif", "eff": {"cash": -35, "val": 30, "stress": 10}, "out": "Un bien repositionné sur des critères qui deviendront de plus en plus importants."},
+      {"label": "Adapter le projet à un budget plus raisonnable", "tag": "prudent", "eff": {"cash": -18, "val": 15, "stress": 5}, "out": "Un équilibre entre ambition écologique et réalité économique."},
+      {"label": "Décliner, trop cher pour le retour sur investissement attendu", "tag": "risque", "eff": {}, "out": "Tu passes. Le bien reste dans son état actuel."}
+    ]
+  },
+  {
+    "title": "Un programme de défiscalisation se ferme",
+    "body": "Un dispositif fiscal avantageux dont tu bénéficies pour plusieurs de tes biens arrive à son terme, sans renouvellement prévu.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Vendre les biens concernés avant la fin de l'avantage fiscal", "tag": "prudent", "eff": {"cash": 30, "val": -15, "stress": 5}, "out": "Tu optimises la fiscalité de la cession en vendant au bon moment."},
+      {"label": "Conserver et absorber la hausse d'imposition", "tag": "risque", "eff": {"cash": -10, "val": 5, "stress": 8}, "out": "La rentabilité baisse mais les biens gardent leur valeur sur la durée."},
+      {"label": "Réorganiser juridiquement la structure patrimoniale", "tag": "creatif", "eff": {"cash": -12, "val": 10, "stress": 5}, "out": "Une restructuration fiscale qui compense en partie la perte de l'avantage."}
+    ]
+  },
+  {
+    "title": "Un acheteur tente de te forcer la main sur une vente",
+    "body": "Un acheteur bien informé utilise des vices de procédure pour tenter de t'obliger à céder un bien à un prix inférieur.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Mandater un avocat pour défendre tes droits", "tag": "prudent", "eff": {"cash": -10, "stress": 15}, "out": "Un défenseur compétent qui préserve tes intérêts dans un rapport de force tendu."},
+      {"label": "Accepter la pression et vendre pour en finir", "tag": "risque", "eff": {"cash": 15, "val": -25, "stress": 5}, "out": "Une capitulation qui clôt l'affaire, mais à un prix inférieur à ta valeur."},
+      {"label": "Exposer publiquement les pratiques de l'acheteur", "tag": "creatif", "eff": {"val": -5, "stress": 10}, "out": "Une réponse risquée qui peut rebattre les cartes, mais qui expose aussi."}
+    ]
+  },
+  {
+    "title": "Un bien vacants devient une charge difficile à assumer",
+    "body": "Un bien reste vacant depuis plusieurs mois, sans acheteur ni locataire, et génère des charges sans aucun revenu en contrepartie.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Baisser significativement le prix ou le loyer pour trouver preneur", "tag": "prudent", "eff": {"val": -10, "cash": 8}, "out": "Une concession nécessaire qui met fin à une vacance coûteuse."},
+      {"label": "Rénover pour le rendre plus attractif avant de le re-commercialiser", "tag": "creatif", "eff": {"cash": -15, "val": 10, "stress": 8}, "out": "Un investissement qui améliore l'attractivité du bien."},
+      {"label": "Vendre en urgence pour arrêter l'hémorragie", "tag": "risque", "eff": {"cash": 10, "val": -20, "stress": 5}, "out": "Tu te délestes d'un poids, au prix d'une belle décote."}
+    ]
+  },
+  {
+    "title": "Un locataire t'assigne en justice pour logement insalubre",
+    "body": "Un locataire te traîne en justice en alléguant des conditions de logement insalubres dans le bien qu'il occupe.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Faire les travaux immédiatement pour régulariser la situation", "tag": "prudent", "eff": {"cash": -20, "stress": 12}, "out": "Une réponse rapide qui montre ta bonne foi et clôt le litige."},
+      {"label": "Contester les accusations point par point devant le tribunal", "tag": "risque", "eff": {"cash": -15, "stress": 20}, "out": "Une bataille judiciaire épuisante, dont l'issue est loin d'être certaine."},
+      {"label": "Proposer un relogement immédiat et une indemnité", "tag": "creatif", "eff": {"cash": -12, "stress": 10}, "out": "Un accord amiable qui règle rapidement le problème, à moindre coût humain."}
+    ]
+  },
+  {
+    "title": "Un concurrent te fait une concurrence déloyale sur une offre",
+    "body": "Un concurrent peu scrupuleux copie tes annonces et propose les mêmes biens à des prix cassés pour t'évincer du marché.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Signaler la pratique et déposer plainte", "tag": "prudent", "eff": {"cash": -5, "stress": 10}, "out": "Une démarche légale qui peut aboutir, mais qui prend du temps."},
+      {"label": "Différencier ton offre pour qu'elle ne soit plus comparable", "tag": "creatif", "eff": {"cash": -10, "val": 8}, "out": "Un repositionnement qui rend ta concurrence moins frontale."},
+      {"label": "Baisser tes prix pour maintenir ta compétitivité", "tag": "risque", "eff": {"val": -8, "cash": 5}, "out": "Tu t'alignes sur les prix bas, en sacrifiant une partie de ta rentabilité."}
+    ]
+  },
+  {
+    "title": "Un bien historique te crée une notoriété locale",
+    "body": "L'un de tes biens, un immeuble ancien remarquable, devient un sujet d'intérêt local et attire une certaine notoriété.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Jouer cette carte pour développer ton réseau local", "tag": "creatif", "eff": {"val": 10, "stress": -5}, "out": "Une notoriété bienveillante qui ouvre des portes et facilite les transactions futures."},
+      {"label": "Rester discret malgré l'attention", "tag": "prudent", "eff": {"stress": -8}, "out": "Tu gardes un profil bas. L'attention retombera d'elle-même."},
+      {"label": "Valoriser commercialement le bien grâce à cette notoriété", "tag": "audacieux", "eff": {"val": 20, "cash": 10, "stress": 5}, "out": "La notoriété du bien se transforme en levier commercial direct."}
+    ]
+  },
+  {
+    "title": "Tu réalises que tu as trop misé sur un seul secteur géographique",
+    "body": "Une analyse de ton patrimoine révèle que la quasi-totalité de tes biens sont concentrés dans une seule zone, te rendant vulnérable à tout choc local.",
+    "sector": "immo",
+    "category": "immo",
+    "minProperties": 6,
+    "choices": [
+      {"label": "Diversifier géographiquement en vendant puis rachetant ailleurs", "tag": "prudent", "eff": {"cash": 20, "val": -10, "stress": 10}, "out": "Une diversification qui réduit le risque de concentration géographique."},
+      {"label": "Renforcer encore dans ce secteur que tu connais bien", "tag": "risque", "eff": {"cash": -30, "val": 40, "stress": 8}, "out": "Tu concentres davantage en jouant sur ta connaissance locale."},
+      {"label": "Commencer à explorer un nouveau secteur en parallèle", "tag": "creatif", "eff": {"cash": -15, "val": 20, "stress": 5}, "out": "Un pied dans un nouveau marché, sans bouleverser ce qui fonctionne déjà."}
+    ]
+  },
+  {
+    "title": "Un bien locatif devient la cible d'une association militante",
+    "body": "Une association de locataires désigne l'un de tes biens dans une campagne médiatique sur les loyers excessifs dans ta ville.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Communiquer positivement sur tes pratiques de propriétaire", "tag": "creatif", "eff": {"stress": 5}, "out": "Une réponse mesurée qui calme partiellement la polémique."},
+      {"label": "Rester silencieux et laisser passer la tempête", "tag": "prudent", "eff": {"stress": 8}, "out": "La tempête médiatique passe, mais l'image en garde quelques cicatrices."},
+      {"label": "Réduire le loyer du bien ciblé pour désamorcer la critique", "tag": "audacieux", "eff": {"cash": -5, "val": -5, "stress": -8}, "out": "Un geste concret qui retourne l'opinion et redore ton image de propriétaire."}
+    ]
+  },
+  {
+    "title": "Tu identifies un bien sous-évalué lors d'une succession",
+    "body": "Un notaire te contacte pour une vente issue d'une succession. Le bien est clairement sous-évalué par les héritiers pressés de conclure.",
+    "sector": "immo",
+    "category": "immo",
+    "choices": [
+      {"label": "Acheter rapidement à ce prix avantageux", "tag": "audacieux", "eff": {"cash": -35, "val": 60, "stress": 5}, "out": "Une affaire exceptionnelle conclue avant que d'autres ne la repèrent."},
+      {"label": "Proposer un prix intermédiaire plus équitable", "tag": "prudent", "eff": {"cash": -28, "val": 40, "stress": 3}, "out": "Un prix juste qui te fait quand même une belle affaire."},
+      {"label": "Passer ton chemin, ce n'est pas éthique de profiter de leur situation", "tag": "creatif", "eff": {}, "out": "Tu passes en conscience. L'occasion ira à quelqu'un d'autre."}
+    ]
+  },
+  {
+    "title": "Un programme de réhabilitation urbaine te touche",
+    "body": "Tes biens se trouvent dans le périmètre d'un vaste programme de réhabilitation urbaine financé en partie par l'État.",
+    "sector": "immo",
+    "category": "immo",
+    "targetProperty": true,
+    "choices": [
+      {"label": "Participer activement au programme pour en bénéficier pleinement", "tag": "audacieux", "eff": {"cash": -15, "val": 30, "stress": 8}, "out": "Un accompagnement public qui améliore significativement la valeur de ton patrimoine."},
+      {"label": "Suivre le programme sans t'y impliquer outre mesure", "tag": "prudent", "eff": {"val": 15, "stress": 3}, "out": "Tu profites passivement de la hausse de valeur induite par le programme."},
+      {"label": "Vendre maintenant avant les travaux de réhabilitation", "tag": "creatif", "eff": {"cash": 20, "val": -10}, "out": "Tu prends ta plus-value avant que les travaux ne valorisent encore plus les biens."}
+    ]
+  }
+]

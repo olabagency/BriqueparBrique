@@ -1,0 +1,5 @@
+[
+  {"id": "H",  "emoji": "🙋‍♂️", "name": "Un homme",      "label": "Fondateur"},
+  {"id": "F",  "emoji": "🙋‍♀️", "name": "Une femme",      "label": "Fondatrice"},
+  {"id": "NB", "emoji": "🙋",   "name": "Peu importe",    "label": "Fondateur·rice"}
+]

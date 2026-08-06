@@ -1,0 +1,173 @@
+import {
+  PROPERTY_CONDITION_VALUES,
+  PROPERTY_LOAN_RATE,
+  PROPERTY_LOAN_INTEREST,
+  PROPERTY_RENT_RATIO,
+} from '../config.js';
+import propertyData from '../data/property_data.json';
+import { randInt, shuffleArray } from './utils.js';
+
+const CYCLE_MULT = {
+  hausse: 1.15,
+  neutre: 1.0,
+  baisse: 0.85,
+};
+
+/**
+ * Generate a single property listing.
+ * @param {string} cycle  'hausse' | 'neutre' | 'baisse'
+ */
+function generateListing(cycle) {
+  const types  = propertyData.types;
+  const places = propertyData.places;
+  const conds  = propertyData.conditions;
+
+  const type      = types[randInt(0, types.length - 1)];
+  const place     = places[randInt(0, places.length - 1)];
+  const condition = conds[randInt(0, conds.length - 1)];
+
+  const range  = propertyData.baseValues[type];
+  const base   = randInt(range.min, range.max);
+  const condMult = PROPERTY_CONDITION_VALUES[condition] ?? 1;
+  const cycleMult = CYCLE_MULT[cycle] ?? 1;
+
+  const price = Math.round(base * condMult * cycleMult);
+
+  return {
+    id:        crypto.randomUUID(),
+    type,
+    place,
+    condition,
+    price,              // ask price in k€
+    baseValue: price,   // market value used for rent/loan calc
+  };
+}
+
+/**
+ * Generate a fresh set of market listings.
+ * @param {string} cycle   economic cycle
+ * @param {number} count   number of listings to generate
+ * @returns {object[]}
+ */
+export function generateMarketListings(cycle = 'neutre', count = 6) {
+  const listings = [];
+  for (let i = 0; i < count; i++) {
+    listings.push(generateListing(cycle));
+  }
+  return listings;
+}
+
+/**
+ * Calculate the annual rent for a property.
+ * @param {object} property
+ * @returns {number}  annual rent in k€
+ */
+export function calcRent(property) {
+  const condMult = PROPERTY_CONDITION_VALUES[property.condition] ?? 1;
+  const val = property.value ?? property.baseValue ?? 0;
+  return Math.round(val * condMult * PROPERTY_RENT_RATIO);
+}
+
+/**
+ * Calculate monthly loan payment (annuité mensuelle) in k€.
+ * Uses a simple constant annuity formula.
+ *
+ * @param {number} price        — property price in k€
+ * @param {number} loanRate     — fraction financed (default from config)
+ * @param {number} interest     — annual interest rate (default from config)
+ * @param {number} termYears    — loan duration in years
+ * @returns {{ loanAmount, monthlyPayment, totalYearly }}
+ */
+export function calcLoanPayment(
+  price,
+  loanRate    = PROPERTY_LOAN_RATE,
+  interest    = PROPERTY_LOAN_INTEREST,
+  termYears   = 20,
+) {
+  const loanAmount = Math.round(price * loanRate);
+  const n  = termYears * 12;
+  const r  = interest / 12;
+
+  let monthlyPayment;
+  if (r === 0) {
+    monthlyPayment = loanAmount / n;
+  } else {
+    monthlyPayment = (loanAmount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  const annualPayment = Math.round(monthlyPayment * 12 * 10) / 10;
+  return {
+    loanAmount,
+    monthlyPayment: Math.round(monthlyPayment * 10) / 10,
+    totalYearly:    annualPayment,
+    annualPayment,
+    years:          termYears,
+    termYears,
+    rate:           interest,
+    interestRate:   interest,
+  };
+}
+
+/**
+ * Apply one year of loan amortization to all active loans.
+ * Deducts yearly payments from cash and reduces remaining balance.
+ *
+ * @param {object[]} loans   — current loan array
+ * @param {number}   cash    — current business cash
+ * @returns {{ loans: object[], cashDelta: number }}
+ */
+export function amortizeLoans(loans, cash) {
+  let cashDelta = 0;
+  const updated = loans
+    .map((loan) => {
+      const payment = loan.annualPayment ?? loan.totalYearly ?? 0;
+      cashDelta -= payment;
+      const balance = Math.max(0, (loan.balance ?? loan.remaining ?? loan.loanAmount ?? 0) - payment);
+      return { ...loan, balance, remaining: balance };
+    })
+    .filter((loan) => loan.balance > 0);
+
+  return { loans: updated, cashDelta };
+}
+
+/**
+ * Advance property values by one year, applying cycle drift and random noise.
+ * @param {object[]} properties
+ * @param {string}   cycle
+ * @returns {object[]}  updated properties
+ */
+export function appreciateProperties(properties, cycle = 'neutre') {
+  const baseDrift = { hausse: 0.05, neutre: 0.02, baisse: -0.03 }[cycle] ?? 0.02;
+
+  return properties.map((p) => {
+    const noise   = (Math.random() - 0.5) * 0.04;
+    const growth  = baseDrift + noise;
+    const current = p.value ?? p.baseValue ?? 0;
+    const newVal  = Math.round(current * (1 + growth));
+    return { ...p, value: newVal, baseValue: newVal };
+  });
+}
+
+/**
+ * Pick the next economic cycle randomly.
+ * Weighted: neutre 50%, hausse 25%, baisse 25%.
+ * @param {string} current — current cycle
+ * @returns {string}
+ */
+export function nextEconomicCycle(current) {
+  const r = Math.random();
+  if (r < 0.25) return 'hausse';
+  if (r < 0.50) return 'baisse';
+  return 'neutre';
+}
+
+/**
+ * Collect all rents from rented properties for the year.
+ * @param {object[]} properties
+ * @returns {number}  total rent in k€
+ */
+export function collectRents(properties) {
+  return properties
+    .filter((p) => p.rented)
+    .reduce((sum, p) => sum + (calcRent(p)), 0);
+}

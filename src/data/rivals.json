@@ -1,0 +1,7 @@
+{
+  "firstNames": ["Léa","Karim","Nora","Hugo","Maya","Théo","Inès","Adam","Chloé","Yanis","Zoé","Malik"],
+  "lastNames": ["Bertrand","Nguyen","Castillo","Dubreuil","Okafor","Lindqvist","Moreau","Haddad","Ferreira","Kessler"],
+  "companyNames": {
+    "immo": ["Bâtiflex","Pierrenova","UrbaCime","Loginova"]
+  }
+}

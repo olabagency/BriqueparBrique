@@ -1,0 +1,26 @@
+{
+  "types": ["Studio","Appartement T2","Appartement T3","Duplex","Maison","Loft","Immeuble de rapport","Local commercial","Terrain","Parking"],
+  "places": [
+    "rue de la Paix","avenue des Lilas","boulevard du Marché","impasse des Artisans",
+    "chemin des Vignes","rue Saint-Nicolas","allée des Chênes","place de la Fontaine",
+    "rue des Acacias","cité Pasteur","villa des Fleurs","résidence du Lac"
+  ],
+  "conditions": ["aRenover","bonEtat","renove"],
+  "conditionLabels": {
+    "aRenover": "À rénover",
+    "bonEtat": "Bon état",
+    "renove": "Rénové"
+  },
+  "baseValues": {
+    "Studio": {"min": 80, "max": 150},
+    "Appartement T2": {"min": 120, "max": 220},
+    "Appartement T3": {"min": 180, "max": 320},
+    "Duplex": {"min": 220, "max": 400},
+    "Maison": {"min": 280, "max": 500},
+    "Loft": {"min": 200, "max": 380},
+    "Immeuble de rapport": {"min": 500, "max": 1200},
+    "Local commercial": {"min": 150, "max": 400},
+    "Terrain": {"min": 60, "max": 200},
+    "Parking": {"min": 20, "max": 60}
+  }
+}

@@ -1,0 +1,8 @@
+[
+  {"min": 1,  "max": 2,   "name": "IDÉE"},
+  {"min": 3,  "max": 6,   "name": "LANCEMENT"},
+  {"min": 7,  "max": 12,  "name": "CROISSANCE"},
+  {"min": 13, "max": 20,  "name": "EXPANSION"},
+  {"min": 21, "max": 30,  "name": "MATURITÉ"},
+  {"min": 31, "max": 999, "name": "HÉRITAGE"}
+]

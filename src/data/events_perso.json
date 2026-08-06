@@ -1,0 +1,446 @@
+[
+  {
+    "title": "Une histoire d'amour prend de l'ampleur",
+    "body": "La personne que tu vois depuis quelques mois te demande de lui faire plus de place dans ta vie.",
+    "category": "perso",
+    "choices": [
+      {"label": "Faire vraiment de la place dans ton emploi du temps", "tag": "prudent", "eff": {"stress": -15, "val": -5}, "out": "Tu ralentis un peu au travail, mais tu te sens beaucoup mieux.", "flag": "hasPartner"},
+      {"label": "Mettre la relation en pause pour l'instant", "tag": "risque", "eff": {"stress": 10}, "out": "Le travail continue à plein régime, mais un vide s'installe."},
+      {"label": "Trouver un équilibre imparfait mais honnête", "tag": "creatif", "eff": {"stress": -6, "val": -3}, "out": "Ce n'est pas parfait, mais les deux parties tiennent le coup.", "flag": "hasPartner"}
+    ]
+  },
+  {
+    "title": "Un ami proche te demande d'investir dans son projet",
+    "body": "Il croit dur comme fer à son idée et te demande de l'argent pour démarrer. Un refus pourrait fragiliser votre amitié.",
+    "category": "perso",
+    "choices": [
+      {"label": "Investir malgré le risque, par amitié", "tag": "risque", "eff": {"cash": -20, "stress": 10}, "out": "Ton argent part avec lui. L'amitié tient, pour l'instant."},
+      {"label": "Refuser poliment", "tag": "prudent", "eff": {"stress": 5}, "out": "Une gêne s'installe entre vous, mais ton argent reste où il est."},
+      {"label": "Lui proposer un petit prêt raisonnable plutôt qu'un gros chèque", "tag": "creatif", "eff": {"cash": -8, "stress": 3}, "out": "Un compromis qui protège un peu votre amitié et ton compte en banque."}
+    ]
+  },
+  {
+    "title": "Ta famille s'inquiète pour toi",
+    "body": "Tes proches trouvent que tu as l'air fatigué·e depuis des mois et te le disent sans détour, lors d'un repas de famille.",
+    "category": "perso",
+    "choices": [
+      {"label": "Prendre un vrai moment pour les rassurer et souffler", "tag": "prudent", "eff": {"stress": -15, "val": -3}, "out": "Ça fait du bien de lâcher prise un week-end entier."},
+      {"label": "Les rassurer vite fait et retourner travailler", "tag": "risque", "eff": {"stress": 5}, "out": "Le message ne passe qu'à moitié, mais le travail continue."},
+      {"label": "Les inviter à visiter ton entreprise pour qu'ils comprennent", "tag": "creatif", "eff": {"stress": -8}, "out": "Ils repartent rassurés, fiers de ce que tu construis."}
+    ]
+  },
+  {
+    "title": "Un problème de santé te rattrape",
+    "body": "Des douleurs au dos et une fatigue persistante t'accompagnent depuis des semaines. Ton corps commence à te le faire payer.",
+    "category": "perso",
+    "choices": [
+      {"label": "Consulter un médecin et suivre ses conseils", "tag": "prudent", "eff": {"stress": -20, "cash": -5, "val": -5}, "out": "Quelques semaines plus calmes, mais tu te sens enfin bien."},
+      {"label": "Ignorer et continuer comme avant", "tag": "risque", "eff": {"stress": 15}, "out": "Tu tiens le rythme, mais ton corps commence à te le rappeler."},
+      {"label": "Déléguer une partie de ton travail pour te soigner", "tag": "creatif", "eff": {"stress": -10, "val": -5}, "out": "Un premier pas vers une entreprise qui ne dépend plus que de toi."}
+    ]
+  },
+  {
+    "title": "Une opportunité t'éloignerait de ta ville natale",
+    "body": "Développer ton entreprise dans de bonnes conditions demanderait de déménager loin de tes proches.",
+    "category": "perso",
+    "choices": [
+      {"label": "Déménager pour donner sa chance à l'entreprise", "tag": "audacieux", "eff": {"val": 10, "stress": 15}, "out": "Un nouveau départ, loin de tes repères habituels."},
+      {"label": "Rester près de tes proches", "tag": "prudent", "eff": {"val": -5, "stress": -10}, "out": "Tu perds un peu d'élan, mais tu gardes ce qui compte pour toi."},
+      {"label": "Faire les deux, en alternant les semaines", "tag": "creatif", "eff": {"stress": 8, "val": 3}, "out": "Un rythme fatigant, mais qui te permet de ne rien sacrifier."}
+    ]
+  },
+  {
+    "title": "Une rencontre inattendue lors d'un salon professionnel",
+    "body": "Quelqu'un te fait tourner la tête pendant un déplacement professionnel. Le courant passe immédiatement.",
+    "category": "perso",
+    "choices": [
+      {"label": "Se laisser porter par cette rencontre", "tag": "creatif", "eff": {"stress": -10}, "out": "Une parenthèse agréable dans un emploi du temps chargé."},
+      {"label": "Rester concentré·e sur le travail", "tag": "prudent", "eff": {"stress": 5, "val": 3}, "out": "Le salon est un succès professionnel. Le reste attendra."},
+      {"label": "Échanger vos contacts sans rien brusquer", "tag": "prudent", "eff": {"stress": -3}, "out": "Rien ne presse. L'avenir dira si ça reprend."}
+    ]
+  },
+  {
+    "title": "Ton/ta partenaire en a assez de tes horaires",
+    "body": "Les soirées et week-ends passés à travailler pèsent de plus en plus sur votre relation. La discussion devient sérieuse.",
+    "requireFlag": "hasPartner",
+    "category": "perso",
+    "choices": [
+      {"label": "Poser un vrai jour de repos chaque semaine, sans exception", "tag": "prudent", "eff": {"val": -8, "stress": -20}, "out": "Un changement difficile à tenir, mais qui sauve beaucoup de choses."},
+      {"label": "Promettre que ça va changer, sans vraiment changer", "tag": "risque", "eff": {"stress": 10}, "out": "La tension retombe un temps, avant de revenir plus fort."},
+      {"label": "Proposer une vraie soirée à deux cette semaine", "tag": "creatif", "eff": {"stress": -10, "val": -3}, "out": "Un geste simple qui fait beaucoup de bien à votre relation."}
+    ]
+  },
+  {
+    "title": "Tu deviens parent",
+    "body": "Un heureux événement bouleverse ta vie personnelle. L'entreprise, elle, continue de tourner sans faire de pause.",
+    "requireFlag": "hasPartner",
+    "category": "perso",
+    "choices": [
+      {"label": "Prendre un vrai congé pour profiter de ce moment", "tag": "prudent", "eff": {"stress": -25, "val": -15}, "out": "Un moment précieux, que l'entreprise finit par absorber.", "flag": "hasChild"},
+      {"label": "Reprendre le travail après quelques jours à peine", "tag": "risque", "eff": {"stress": 15, "val": 5}, "out": "L'entreprise ne ralentit pas. Toi, tu es épuisé·e.", "flag": "hasChild"},
+      {"label": "Trouver un rythme à mi-chemin entre les deux", "tag": "creatif", "eff": {"stress": -10, "val": -5}, "out": "Ni tout l'un, ni tout l'autre — un équilibre fragile mais réel.", "flag": "hasChild"}
+    ]
+  },
+  {
+    "title": "Un deuil te touche personnellement",
+    "body": "Tu perds quelqu'un d'important pour toi. Le monde professionnel, lui, continue d'avancer.",
+    "category": "perso",
+    "choices": [
+      {"label": "Prendre le temps qu'il faut pour faire ton deuil", "tag": "prudent", "eff": {"stress": -20, "val": -10}, "out": "Tu reviens plus tard, mais avec les idées bien plus claires."},
+      {"label": "Te réfugier dans le travail pour ne pas y penser", "tag": "risque", "eff": {"stress": 10, "val": 5}, "out": "Le travail avance. La douleur, elle, attend son heure."},
+      {"label": "T'appuyer sur ton équipe pour tenir le coup", "tag": "creatif", "eff": {"stress": -8, "val": -3}, "out": "Tu découvres à quel point ton équipe peut te porter."}
+    ]
+  },
+  {
+    "title": "Tu te sens seul·e dans cette aventure",
+    "body": "Depuis quelques semaines, un sentiment de solitude s'installe. Personne autour de toi ne vit vraiment la même chose.",
+    "category": "perso",
+    "choices": [
+      {"label": "Rejoindre un groupe d'entrepreneurs pour échanger", "tag": "creatif", "eff": {"stress": -15}, "out": "Tu réalises que beaucoup d'autres traversent la même chose."},
+      {"label": "Continuer seul·e, ça finira par passer", "tag": "risque", "eff": {"stress": 8}, "out": "Le sentiment reste, en arrière-plan."},
+      {"label": "En parler ouvertement à ton équipe", "tag": "prudent", "eff": {"stress": -10}, "out": "Un moment de vérité qui rapproche tout le monde."}
+    ]
+  },
+  {
+    "title": "Tu deviens la personne de référence financière de ta famille",
+    "body": "Depuis ta réussite, ta famille se tourne vers toi pour chaque décision financière importante, petite ou grande.",
+    "category": "perso",
+    "choices": [
+      {"label": "Accepter ce rôle et les aider activement", "tag": "prudent", "eff": {"cash": -10, "stress": 10}, "out": "Tu deviens un pilier familial, à un vrai coût personnel."},
+      {"label": "Fixer des limites claires dès maintenant", "tag": "creatif", "eff": {"stress": -8}, "out": "Certains le prennent mal, mais tu protèges ton énergie."},
+      {"label": "Aider financièrement sans jamais poser de limites", "tag": "risque", "eff": {"cash": -20, "stress": 5}, "out": "Tu donnes sans compter, jusqu'à ce que ça pèse vraiment."}
+    ]
+  },
+  {
+    "title": "Un héritage familial imprévu te parvient",
+    "body": "Un héritage inattendu, sans lien avec l'entreprise, atterrit sur ton compte personnel.",
+    "category": "perso",
+    "choices": [
+      {"label": "Le réinvestir entièrement dans l'entreprise", "tag": "audacieux", "eff": {"val": 20, "stress": 5}, "out": "Un coup de pouce supplémentaire à ton aventure entrepreneuriale."},
+      {"label": "Le mettre de côté, séparé de tes affaires", "tag": "prudent", "eff": {"cash": 40, "stress": -5}, "out": "Une sécurité personnelle bienvenue, à l'abri des aléas de l'entreprise."},
+      {"label": "En profiter pour t'offrir quelque chose qui te tient à cœur", "tag": "creatif", "eff": {"cash": 20, "stress": -10}, "out": "Un plaisir personnel, mérité après tant d'efforts."}
+    ]
+  },
+  {
+    "title": "Tu te surprends à douter de tout ce que tu as construit",
+    "body": "Un doute profond s'installe : et si tout ça ne menait nulle part ? Le syndrome de l'imposteur revient en force.",
+    "category": "perso",
+    "choices": [
+      {"label": "En parler ouvertement avec quelqu'un en qui tu as confiance", "tag": "prudent", "eff": {"stress": -18}, "out": "Mettre des mots dessus allège vraiment le poids du doute."},
+      {"label": "Redoubler d'efforts pour faire taire ce doute", "tag": "risque", "eff": {"val": 10, "stress": 15}, "out": "Le doute recule un temps, remplacé par la fatigue."},
+      {"label": "Prendre du recul et relire le chemin parcouru", "tag": "creatif", "eff": {"stress": -10}, "out": "Tu réalises à quel point tu as déjà accompli beaucoup."}
+    ]
+  },
+  {
+    "title": "Un ami proche te demande discrètement de l'aide face à une expulsion",
+    "body": "Un ami proche, en grande difficulté financière, t'avoue discrètement risquer une expulsion de son propre logement.",
+    "minAge": 28,
+    "category": "perso",
+    "choices": [
+      {"label": "L'héberger temporairement dans un de tes biens vacants", "tag": "prudent", "eff": {"cash": -10, "stress": -8}, "out": "Un geste généreux qui soulage immédiatement ton ami."},
+      {"label": "L'aider financièrement sans lui proposer de logement", "tag": "creatif", "eff": {"personalCash": -15, "stress": -5}, "out": "Un soutien discret qui l'aide à passer ce cap difficile."},
+      {"label": "Rester en retrait, ce n'est pas à toi de régler ça", "tag": "risque", "eff": {"stress": 8}, "out": "Une distance qui te protège, mais qui laisse un goût amer dans l'amitié."}
+    ]
+  },
+  {
+    "title": "Tu envisages sérieusement un changement de vie radical",
+    "body": "L'idée de tout changer — lieu de vie, rythme, priorités — devient une vraie question, après des décennies dans le même mouvement.",
+    "minAge": 50,
+    "category": "perso",
+    "choices": [
+      {"label": "Explorer concrètement cette possibilité", "tag": "audacieux", "eff": {"stress": -15, "val": -10}, "out": "Un vrai vertige, mais aussi une liberté nouvelle qui s'ouvre."},
+      {"label": "Rester sur ta trajectoire actuelle", "tag": "prudent", "eff": {"stress": 5}, "out": "Tu continues sur la voie connue, sans grand bouleversement."},
+      {"label": "Introduire des changements progressifs plutôt qu'un bouleversement total", "tag": "creatif", "eff": {"stress": -10}, "out": "Un compromis qui fait évoluer ta vie sans tout renverser d'un coup."}
+    ]
+  },
+  {
+    "title": "Tu commences à penser sérieusement à ta succession",
+    "body": "La question de qui prendra ta suite, à la tête de ce que tu as construit, devient de plus en plus concrète et pressante.",
+    "minAge": 60,
+    "category": "perso",
+    "choices": [
+      {"label": "Commencer à préparer activement quelqu'un en interne", "tag": "prudent", "eff": {"cash": -15, "stress": -8}, "out": "Une transition anticipée qui rassure toute l'organisation."},
+      {"label": "Repousser cette question encore un peu", "tag": "risque", "eff": {"stress": 8}, "out": "Le sujet reste en suspens, malgré son importance grandissante."},
+      {"label": "Envisager une succession familiale", "tag": "creatif", "eff": {"stress": -5}, "out": "Une piste qui soulève autant d'espoirs que de questions nouvelles."}
+    ]
+  },
+  {
+    "title": "Ton/ta partenaire pose un ultimatum : lui/elle ou l'entreprise",
+    "body": "Après des années à te voir absent·e, ton/ta partenaire pose un choix brutal : ralentir vraiment, ou se séparer.",
+    "requireFlag": "hasPartner",
+    "category": "perso",
+    "choices": [
+      {"label": "Choisir la relation, quitte à ralentir fortement l'entreprise", "tag": "prudent", "eff": {"val": -30, "stress": -25}, "out": "Un vrai choix de vie, qui coûte cher professionnellement mais sauve l'essentiel."},
+      {"label": "Choisir l'entreprise, au risque de tout perdre côté cœur", "tag": "risque", "eff": {"val": 20, "stress": 20}, "out": "La relation se brise net. Le travail, lui, continue comme si de rien n'était."},
+      {"label": "Proposer une thérapie de couple avant de trancher", "tag": "creatif", "eff": {"cash": -15, "val": -10, "stress": -15}, "out": "Un vrai effort à deux qui pourrait bien sauver la relation, sans tout sacrifier."}
+    ]
+  },
+  {
+    "title": "On te diagnostique une maladie sérieuse",
+    "body": "Un diagnostic médical sérieux tombe d'un coup, bouleversant toutes tes priorités du jour au lendemain.",
+    "minAge": 25,
+    "category": "perso",
+    "choices": [
+      {"label": "Tout mettre entre parenthèses pour te soigner", "tag": "prudent", "eff": {"val": -35, "stress": -10, "personalCash": -20}, "out": "Une pause radicale, qui protège ta santé avant tout le reste."},
+      {"label": "Continuer à travailler en parallèle des traitements", "tag": "risque", "eff": {"val": 5, "stress": 30}, "out": "Tu tiens le rythme, au prix d'un corps poussé à ses limites."},
+      {"label": "Déléguer entièrement l'entreprise pendant ta convalescence", "tag": "creatif", "eff": {"val": -15, "stress": -18}, "out": "Un vrai test de confiance envers ton équipe, qui répond magnifiquement présente."}
+    ]
+  },
+  {
+    "title": "Un héritage colossal et inattendu te tombe dessus",
+    "body": "Un parent éloigné, que tu connaissais à peine, te laisse un héritage personnel considérable.",
+    "minAge": 22,
+    "category": "perso",
+    "choices": [
+      {"label": "Investir massivement cet argent dans l'entreprise", "tag": "audacieux", "eff": {"personalCash": -80, "cash": 70, "val": 20}, "out": "Un coup d'accélérateur inattendu pour ton entreprise."},
+      {"label": "Le garder entièrement à l'écart, sur ton compte personnel", "tag": "prudent", "eff": {"personalCash": 80, "stress": -15}, "out": "Une sécurité personnelle immense, à l'abri des aléas de l'entreprise."},
+      {"label": "Partager une partie avec ta famille et tes proches", "tag": "creatif", "eff": {"personalCash": 40, "stress": -20}, "out": "Un geste qui te fait autant de bien qu'à ceux qui t'entourent."}
+    ]
+  },
+  {
+    "title": "Tu organises enfin le voyage dont tu rêves depuis toujours",
+    "body": "L'idée d'un grand voyage, repoussé depuis des années par manque de temps, redevient soudain réalisable.",
+    "category": "perso",
+    "choices": [
+      {"label": "Partir vraiment, sans culpabiliser", "tag": "prudent", "eff": {"personalCash": -20, "stress": -20}, "out": "Un vrai bol d'air, qui recharge complètement les batteries."},
+      {"label": "Repousser encore une fois", "tag": "risque", "eff": {"stress": 8}, "out": "Le voyage attendra. Comme souvent."},
+      {"label": "Partir pour une version plus courte", "tag": "creatif", "eff": {"personalCash": -8, "stress": -10}, "out": "Un compromis qui fait quand même beaucoup de bien."}
+    ]
+  },
+  {
+    "title": "Tu retrouves une passion mise de côté depuis des années",
+    "body": "Un instrument de musique, un sport, une pratique artistique que tu avais abandonnée te fait de l'œil à nouveau.",
+    "category": "perso",
+    "choices": [
+      {"label": "T'y remettre vraiment, une fois par semaine", "tag": "prudent", "eff": {"stress": -15, "val": -3}, "out": "Un vrai bol d'air qui recharge les batteries sur la durée."},
+      {"label": "Ne pas prendre le temps, ça attendra encore", "tag": "risque", "eff": {"stress": 5}, "out": "La passion attend, patiemment, dans un coin de ta tête."},
+      {"label": "En faire quelque chose lié à ton image de marque", "tag": "creatif", "eff": {"val": 3, "stress": -5}, "out": "Un pont inattendu entre ta vie perso et ton entreprise."}
+    ]
+  },
+  {
+    "title": "Tes parents te demandent un coup de main pour déménager",
+    "body": "Tes parents te sollicitent pour un déménagement, sans se douter que tu gères déjà des dizaines de biens.",
+    "minAge": 19,
+    "category": "perso",
+    "choices": [
+      {"label": "Tout organiser toi-même avec plaisir", "tag": "prudent", "eff": {"stress": -5}, "out": "Un moment familial simple, loin de tes tableurs habituels."},
+      {"label": "Payer des déménageurs professionnels pour eux", "tag": "creatif", "eff": {"personalCash": -8, "stress": -3}, "out": "Un service offert qui leur simplifie vraiment la vie."},
+      {"label": "Les aider un minimum, débordé·e par ailleurs", "tag": "risque", "eff": {"stress": 3}, "out": "Une aide un peu distraite, entre deux dossiers en cours."}
+    ]
+  },
+  {
+    "title": "Tu fêtes tes 35 ans, un vrai bilan de mi-parcours",
+    "body": "Ce nouvel anniversaire te pousse à faire un vrai bilan : est-ce que ta vie ressemble à ce que tu voulais qu'elle soit ?",
+    "minAge": 35,
+    "category": "perso",
+    "choices": [
+      {"label": "Célébrer largement avec tes proches", "tag": "prudent", "eff": {"personalCash": -10, "stress": -10}, "out": "Une belle soirée qui rappelle tout ce que tu as construit, professionnellement et personnellement."},
+      {"label": "Passer une soirée tranquille, en petit comité", "tag": "creatif", "eff": {"stress": -8}, "out": "Un moment simple, mais tout aussi précieux."},
+      {"label": "Ignorer, ce n'est qu'un chiffre", "tag": "risque", "eff": {"stress": 5}, "out": "Le bilan attendra encore un peu."}
+    ]
+  },
+  {
+    "title": "Une envie soudaine de tout changer te traverse",
+    "body": "Une envie impulsive de faire quelque chose de complètement différent — un tatouage, un road trip, une folie — te prend d'un coup.",
+    "category": "perso",
+    "choices": [
+      {"label": "Te laisser aller à cette impulsion", "tag": "audacieux", "eff": {"cash": -10, "stress": -15}, "out": "Un moment de liberté pure, qui ne regrette rien."},
+      {"label": "Résister et rester concentré·e sur tes objectifs", "tag": "prudent", "eff": {"stress": 5}, "out": "L'envie s'efface, remplacée par la routine habituelle."},
+      {"label": "Canaliser cette envie dans quelque chose de plus mesuré", "tag": "creatif", "eff": {"cash": -5, "stress": -8}, "out": "Un compromis qui satisfait une partie de cette envie de liberté."}
+    ]
+  },
+  {
+    "title": "Tu envisages un vrai accompagnement psychologique",
+    "body": "La charge mentale accumulée depuis des années te pousse à envisager sérieusement un suivi.",
+    "category": "perso",
+    "choices": [
+      {"label": "Commencer un suivi régulier", "tag": "prudent", "eff": {"stress": -25, "cash": -5}, "out": "Un espace précieux pour déposer ce que tu portais seul·e."},
+      {"label": "Repousser encore, le temps manque", "tag": "risque", "eff": {"stress": 10}, "out": "Le sujet reste en suspens, la charge continue de s'accumuler."},
+      {"label": "Essayer un groupe de parole entre entrepreneurs", "tag": "creatif", "eff": {"stress": -12}, "out": "Tu découvres que beaucoup d'autres vivent la même chose que toi."}
+    ]
+  },
+  {
+    "title": "Tu te réconcilies avec un conflit familial ancien",
+    "body": "Une brouille familiale vieille de plusieurs années pourrait enfin se refermer, si tu fais le premier pas.",
+    "category": "perso",
+    "choices": [
+      {"label": "Faire le premier pas sincèrement", "tag": "prudent", "eff": {"stress": -15}, "out": "Un poids que tu portais depuis longtemps s'allège enfin."},
+      {"label": "Laisser les choses comme elles sont", "tag": "risque", "eff": {"stress": 5}, "out": "Le confort de l'habitude, mais le poids reste entier."},
+      {"label": "Écrire une lettre plutôt qu'une confrontation directe", "tag": "creatif", "eff": {"stress": -8}, "out": "Un geste plus doux, qui ouvre une porte sans forcer."}
+    ]
+  },
+  {
+    "title": "Ton enfant traverse une période difficile",
+    "body": "Ton enfant rencontre des difficultés à l'école ou avec ses ami·es, et a clairement besoin de toi en ce moment.",
+    "requireFlag": "hasChild",
+    "category": "perso",
+    "choices": [
+      {"label": "Réduire ton temps de travail pour être présent·e", "tag": "prudent", "eff": {"val": -12, "stress": -10}, "out": "Une période plus calme professionnellement, mais où tu es là."},
+      {"label": "Déléguer un maximum pour rester concentré·e sur l'entreprise", "tag": "risque", "eff": {"val": 8, "stress": 15}, "out": "L'entreprise ne ralentit pas. Un fossé se creuse ailleurs."},
+      {"label": "Trouver un accompagnement extérieur pour ton enfant", "tag": "creatif", "eff": {"cash": -10, "stress": -8}, "out": "Un soutien extérieur bienvenu, qui soulage tout le monde."}
+    ]
+  },
+  {
+    "title": "Tu te découvres une nouvelle passion inattendue",
+    "body": "Presque par hasard, une nouvelle activité te procure un plaisir et un apaisement que tu ne soupçonnais pas.",
+    "category": "perso",
+    "choices": [
+      {"label": "T'y investir régulièrement", "tag": "prudent", "eff": {"stress": -15}, "out": "Un vrai espace de respiration qui n'a rien à voir avec le travail."},
+      {"label": "La laisser rester occasionnelle", "tag": "creatif", "eff": {"stress": -5}, "out": "Un petit plaisir ponctuel, sans grand bouleversement."},
+      {"label": "La laisser de côté, faute de temps", "tag": "risque", "eff": {"stress": 5}, "out": "La découverte reste sans suite, faute de disponibilité."}
+    ]
+  },
+  {
+    "title": "Un vieux rêve refait surface",
+    "body": "Un projet artistique, un voyage, un livre que tu voulais écrire — quelque chose que tu avais mis de côté au début de l'aventure te revient en tête, avec insistance.",
+    "category": "perso",
+    "choices": [
+      {"label": "Te donner enfin les moyens de le faire", "tag": "prudent", "eff": {"stress": -15, "val": -5}, "out": "Un vieux rêve enfin honoré, même si tout n'est pas parfait."},
+      {"label": "Le remettre encore à plus tard", "tag": "risque", "eff": {"stress": 8}, "out": "Il attendra. Comme souvent."},
+      {"label": "En faire un petit projet parallèle, sans pression", "tag": "creatif", "eff": {"stress": -8}, "out": "Un espace de liberté qui ne demande presque rien à l'entreprise."}
+    ]
+  },
+  {
+    "title": "Ta réussite immobilière crée une distance avec de vieux amis moins aisés",
+    "body": "Certains amis de longue date semblent de plus en plus mal à l'aise face à ta réussite, évitant même parfois d'en parler ouvertement.",
+    "minAge": 37,
+    "category": "perso",
+    "choices": [
+      {"label": "Aborder franchement le sujet avec eux", "tag": "prudent", "eff": {"stress": -10}, "out": "Une conversation honnête qui désamorce une bonne partie du malaise."},
+      {"label": "Laisser faire, la distance s'installera naturellement", "tag": "risque", "eff": {"stress": 5}, "out": "Certaines amitiés s'effritent doucement, sans qu'on en parle jamais vraiment."},
+      {"label": "Faire preuve de plus de discrétion sur ta réussite en leur présence", "tag": "creatif", "eff": {"stress": -5}, "out": "Un effort de tact qui préserve certaines amitiés précieuses."}
+    ]
+  },
+  {
+    "title": "Tu te demandes si tu es devenu·e la personne que tu voulais être",
+    "body": "Un moment de calme inattendu te pousse à faire un vrai bilan personnel, au-delà des chiffres de l'entreprise.",
+    "category": "perso",
+    "choices": [
+      {"label": "Prendre vraiment le temps de ce bilan", "tag": "prudent", "eff": {"stress": -10}, "out": "Une clarté nouvelle sur ce qui compte vraiment pour toi."},
+      {"label": "Éviter la question, trop inconfortable pour l'instant", "tag": "risque", "eff": {"stress": 5}, "out": "La question reste posée, en arrière-plan."},
+      {"label": "En discuter avec quelqu'un de confiance", "tag": "creatif", "eff": {"stress": -8}, "out": "Une conversation qui aide à y voir plus clair, ensemble."}
+    ]
+  },
+  {
+    "title": "Tu as retrouvé un vieux rêve d'architecture",
+    "body": "Un vieux rêve de jeunesse, celui de dessiner toi-même une maison plutôt que de toujours acheter l'existant, revient te chatouiller l'esprit.",
+    "minAge": 35,
+    "category": "perso",
+    "choices": [
+      {"label": "T'inscrire à une formation d'architecture d'intérieur", "tag": "prudent", "eff": {"cash": -15, "stress": -10}, "out": "Une passion retrouvée qui enrichit aussi, indirectement, ton métier."},
+      {"label": "Laisser ce rêve de côté, le temps manque", "tag": "risque", "eff": {"stress": 5}, "out": "Un rêve remis à plus tard, une fois de plus."},
+      {"label": "Concevoir toi-même les plans de ta prochaine rénovation", "tag": "creatif", "eff": {"val": 8, "stress": -8}, "out": "Une première tentative personnelle, entre amateurisme et vraie fierté."}
+    ]
+  },
+  {
+    "title": "Tu envisages de prendre de vraies vacances",
+    "body": "Cela fait des mois que tu n'as pas pris un vrai temps de repos loin de tes dossiers.",
+    "minAge": 32,
+    "category": "perso",
+    "choices": [
+      {"label": "Bloquer deux semaines complètes de vraies vacances", "tag": "prudent", "eff": {"stress": -18, "cash": -8}, "out": "Un vrai repos qui te fait un bien immense."},
+      {"label": "Repousser encore, il y a trop à faire", "tag": "risque", "eff": {"stress": 10}, "out": "Un repos différé une fois de plus, au prix de ta fatigue accumulée."},
+      {"label": "Partir quelques jours seulement, téléphone à portée de main", "tag": "creatif", "eff": {"stress": -8}, "out": "Un compromis qui te repose un peu, sans totale déconnexion."}
+    ]
+  },
+  {
+    "title": "Ta famille te reproche de ne voir le monde qu'en mètres carrés",
+    "body": "Lors d'un repas de famille, on te reproche gentiment de ne plus regarder un paysage, une ville ou même une maison de vacances sans calculer instinctivement son potentiel locatif.",
+    "minAge": 38,
+    "category": "perso",
+    "choices": [
+      {"label": "En rire et confirmer que c'est un peu vrai", "tag": "prudent", "eff": {"stress": -5}, "out": "Un moment léger qui désamorce la remarque avec humour."},
+      {"label": "Te vexer un peu de cette caricature", "tag": "risque", "eff": {"stress": 8}, "out": "Une remarque qui te touche plus que tu ne voudrais l'admettre."},
+      {"label": "Prendre un vrai temps de déconnexion pendant les vacances suivantes", "tag": "creatif", "eff": {"stress": -15}, "out": "Un effort conscient qui te fait vraiment du bien, et rassure tes proches."}
+    ]
+  },
+  {
+    "title": "Un ami proche t'annonce vouloir changer complètement de vie",
+    "body": "Un ami proche t'annonce vouloir tout quitter pour recommencer ailleurs, à zéro.",
+    "minAge": 36,
+    "category": "perso",
+    "choices": [
+      {"label": "L'encourager pleinement dans cette décision courageuse", "tag": "prudent", "eff": {"stress": -5}, "out": "Un soutien sincère face à un choix de vie audacieux."},
+      {"label": "Exprimer tes doutes sur ce changement radical", "tag": "risque", "eff": {}, "out": "Une franchise qui crée un peu de distance, mais reste honnête."},
+      {"label": "L'aider concrètement à préparer cette transition", "tag": "creatif", "eff": {"cash": -8}, "out": "Un soutien actif qui facilite vraiment ce grand changement de vie."}
+    ]
+  },
+  {
+    "title": "Un cousin éloigné te sollicite pour un projet douteux",
+    "body": "Un cousin que tu connais à peine te propose un investissement qui sent bon l'arnaque.",
+    "minAge": 34,
+    "category": "perso",
+    "choices": [
+      {"label": "Décliner poliment mais fermement", "tag": "prudent", "eff": {"stress": 3}, "out": "Un refus qui te protège d'une situation clairement risquée."},
+      {"label": "Accepter par politesse familiale", "tag": "risque", "eff": {"personalCash": -20, "stress": 10}, "out": "Une erreur de jugement qui te coûte cher, en argent et en confiance."},
+      {"label": "Lui suggérer poliment de se faire accompagner par un vrai conseiller", "tag": "creatif", "eff": {"stress": -3}, "out": "Un conseil avisé qui protège la relation sans t'impliquer financièrement."}
+    ]
+  },
+  {
+    "title": "Une dispute de couple éclate sur la gestion de l'argent",
+    "body": "Une tension sérieuse surgit avec ton/ta partenaire sur la façon dont l'argent du foyer est géré.",
+    "requireFlag": "hasPartner",
+    "minAge": 28,
+    "category": "perso",
+    "choices": [
+      {"label": "Proposer une vraie discussion sur vos finances communes", "tag": "prudent", "eff": {"stress": -8}, "out": "Une conversation difficile mais nécessaire, qui clarifie les choses."},
+      {"label": "Éviter le sujet pour l'instant", "tag": "risque", "eff": {"stress": 5}, "out": "Une tension qui continue de couver, sans résolution."},
+      {"label": "Proposer de séparer clairement les comptes personnels et communs", "tag": "creatif", "eff": {"stress": -5}, "out": "Un compromis qui clarifie durablement votre organisation financière."}
+    ]
+  },
+  {
+    "title": "Un bilan de santé te pousse à revoir ton hygiène de vie",
+    "body": "Un contrôle médical de routine t'incite fortement à revoir certaines de tes habitudes quotidiennes.",
+    "category": "perso",
+    "choices": [
+      {"label": "Changer réellement tes habitudes dès maintenant", "tag": "prudent", "eff": {"stress": -15, "val": -5}, "out": "Un vrai changement, qui demande de la discipline sur la durée."},
+      {"label": "Repousser ces changements à plus tard", "tag": "risque", "eff": {"stress": 8}, "out": "Le sujet reste en tête, sans action concrète pour l'instant."},
+      {"label": "Trouver un accompagnement professionnel adapté", "tag": "creatif", "eff": {"cash": -10, "stress": -10}, "out": "Un vrai soutien qui facilite ce changement de cap."}
+    ]
+  },
+  {
+    "title": "Un vieux rêve de jeunesse abandonné refait surface",
+    "body": "L'occasion concrète de réaliser enfin un rêve que tu avais mis de côté au tout début de ton aventure entrepreneuriale se présente, une seule fois.",
+    "minAge": 30,
+    "category": "perso",
+    "choices": [
+      {"label": "Tout arrêter quelques mois pour le vivre pleinement", "tag": "audacieux", "eff": {"val": -25, "personalCash": -30, "stress": -30}, "out": "Un vrai bond dans ta propre vie, dont tu te souviendras toute ta vie."},
+      {"label": "Laisser passer cette occasion, l'entreprise passe avant", "tag": "prudent", "eff": {"val": 10, "stress": 12}, "out": "Tu restes concentré·e sur ta trajectoire actuelle, avec un pincement au cœur."},
+      {"label": "Trouver une version réduite, compatible avec ton emploi du temps", "tag": "creatif", "eff": {"personalCash": -15, "stress": -18}, "out": "Un compromis qui ne remplace pas tout, mais qui apaise vraiment quelque chose."}
+    ]
+  },
+  {
+    "title": "Tu te réconcilies pleinement avec ton propre parcours",
+    "body": "Un moment de calme t'amène enfin à faire la paix avec les choix, bons et mauvais, de tout ton parcours.",
+    "minAge": 60,
+    "category": "perso",
+    "choices": [
+      {"label": "Accueillir cette paix intérieure avec gratitude", "tag": "prudent", "eff": {"stress": -15}, "out": "Une sérénité durable qui change vraiment ton rapport au temps qui reste."},
+      {"label": "Continuer d'avancer sans t'y attarder", "tag": "risque", "eff": {"stress": 3}, "out": "Tu restes tourné·e vers l'avenir, sans t'arrêter sur ce bilan."},
+      {"label": "Partager cette paix intérieure avec tes proches", "tag": "creatif", "eff": {"stress": -12}, "out": "Un moment de partage qui touche sincèrement ton entourage."}
+    ]
+  },
+  {
+    "title": "Tu achètes en secret un bien pour surprendre ta famille",
+    "body": "L'idée d'acheter en toute discrétion un bien de vacances, pour surprendre ta famille le jour où tu leur en donneras les clés, te trotte dans la tête.",
+    "minAge": 30,
+    "category": "perso",
+    "choices": [
+      {"label": "Aller jusqu'au bout de cette surprise", "tag": "audacieux", "eff": {"personalCash": -30, "stress": -10}, "out": "Un moment de pure émotion le jour de la révélation, qui restera gravé longtemps."},
+      {"label": "Finalement leur en parler avant d'acheter", "tag": "prudent", "eff": {"stress": -5}, "out": "Une transparence qui enlève l'effet de surprise, mais qui évite tout malentendu."},
+      {"label": "Abandonner l'idée, trop risquée financièrement en secret", "tag": "creatif", "eff": {"stress": 3}, "out": "Tu renonces à ce projet un peu fou, par simple prudence."}
+    ]
+  },
+  {
+    "title": "Ton/ta partenaire critique le temps passé à visiter des biens le week-end",
+    "body": "Ton/ta partenaire commence à en avoir assez de tes visites de biens qui grignotent systématiquement vos week-ends en famille.",
+    "requireFlag": "hasPartner",
+    "minAge": 26,
+    "category": "perso",
+    "choices": [
+      {"label": "Réserver désormais un vrai week-end sur deux sans aucune visite", "tag": "prudent", "eff": {"stress": -10, "val": -5}, "out": "Un compromis qui apaise la relation, au prix d'un rythme de recherche ralenti."},
+      {"label": "Continuer comme avant, les affaires n'attendent pas", "tag": "risque", "eff": {"stress": 8}, "out": "Une tension qui continue de couver dans le couple."},
+      {"label": "L'emmener visiter avec toi, pour partager cette passion", "tag": "creatif", "eff": {"stress": -8}, "out": "Une activité transformée en moment à deux, presque comme une chasse au trésor."}
+    ]
+  }
+]

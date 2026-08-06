@@ -1,0 +1,8 @@
+[
+  {"id": "chanceux",       "emoji": "🍀", "name": "Chanceux·se",    "desc": "La chance te sourit plus souvent qu'aux autres.",                                      "proba": 0.3, "effectType": "chanceux"},
+  {"id": "resilient",      "emoji": "🧘", "name": "Résilient·e",    "desc": "Le stress glisse sur toi plus facilement que sur les autres.",                         "proba": 0.3, "effectType": "resilient"},
+  {"id": "impulsif",       "emoji": "⚡", "name": "Impulsif·ve",    "desc": "Tu fonces sans trop réfléchir — pour le meilleur et pour le pire.",                    "proba": 0.3, "effectType": "impulsif"},
+  {"id": "charismatique",  "emoji": "✨", "name": "Charismatique",  "desc": "Les gens te font confiance rapidement.",                                                "proba": 0.3, "effectType": "charismatique"},
+  {"id": "perfectionniste","emoji": "🔍", "name": "Perfectionniste","desc": "Tu vises l'excellence, quitte à t'épuiser un peu.",                                    "proba": 0.3, "effectType": "perfectionniste"},
+  {"id": "sociable",       "emoji": "🤝", "name": "Sociable",       "desc": "Ton réseau te sort parfois de situations compliquées.",                                 "proba": 0.3, "effectType": "sociable"}
+]

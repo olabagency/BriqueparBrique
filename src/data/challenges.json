@@ -1,0 +1,4 @@
+[
+  {"id": "no_funding",      "label": "Termine sans jamais lever de fonds",      "checkFlag": null, "checkFlagNot": "raisedFunding"},
+  {"id": "billionaire_45",  "label": "Deviens milliardaire avant 45 ans",        "checkFlag": "billionaireBefore45", "checkFlagNot": null}
+]

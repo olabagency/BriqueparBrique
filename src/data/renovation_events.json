@@ -1,0 +1,122 @@
+[
+  {
+    "id": "reno_normal",
+    "title": "Une rénovation qui se passe comme prévu",
+    "body": "Les travaux avancent sans accroc particulier.",
+    "choices": [
+      {"label": "Rénovation standard", "costPct": 0.30, "gainPct": 0.45, "stress": 3, "out": "Le bien est rénové proprement dans les temps."},
+      {"label": "Rénovation économique, un peu bâclée", "costPct": 0.18, "gainPct": 0.20, "stress": 0, "out": "Moins cher, mais le résultat le montre un peu."},
+      {"label": "Rénovation haut de gamme", "costPct": 0.45, "gainPct": 0.70, "stress": 8, "out": "Un résultat exceptionnel qui fait vraiment la différence."}
+    ]
+  },
+  {
+    "id": "reno_surprise",
+    "title": "Une mauvaise surprise derrière les murs",
+    "body": "En ouvrant les cloisons, les artisans découvrent un problème caché (humidité, vieille installation électrique dangereuse...).",
+    "choices": [
+      {"label": "Traiter le problème en profondeur", "costPct": 0.55, "gainPct": 0.40, "stress": 10, "out": "Un vrai travail de fond qui règle le problème durablement."},
+      {"label": "Traiter a minima pour avancer plus vite", "costPct": 0.30, "gainPct": 0.15, "stress": 5, "out": "Une solution de façade qui pourrait bien ressurgir plus tard."},
+      {"label": "Abandonner la rénovation pour cette fois", "costPct": 0.10, "gainPct": 0, "stress": 5, "keepUnrenovated": true, "out": "Tu remets ce chantier à plus tard."}
+    ]
+  },
+  {
+    "id": "reno_artisan_disparu",
+    "title": "Un artisan disparaît en plein chantier",
+    "body": "L'artisan censé mener les travaux cesse de répondre du jour au lendemain, chantier à moitié fait.",
+    "choices": [
+      {"label": "Trouver en urgence un remplaçant", "costPct": 0.50, "gainPct": 0.35, "stress": 12, "out": "Un nouveau départ pour les travaux, à un coût supplémentaire."},
+      {"label": "Attendre son retour hypothétique", "costPct": 0.15, "gainPct": 0, "stress": 8, "keepUnrenovated": true, "out": "Le chantier traîne, sans fin en vue."},
+      {"label": "Reprendre le chantier avec une entreprise sérieuse", "costPct": 0.48, "gainPct": 0.50, "stress": 8, "out": "Un démarrage retardé, mais un résultat final de qualité."}
+    ]
+  },
+  {
+    "id": "reno_depassement",
+    "title": "Une rénovation qui dépasse largement le budget prévu",
+    "body": "Le chantier dérape : chaque semaine apporte son lot de surcoûts imprévus.",
+    "choices": [
+      {"label": "Assumer le dépassement pour finir le travail", "costPct": 0.60, "gainPct": 0.55, "stress": 10, "out": "Un chantier enfin terminé, malgré le dérapage budgétaire."},
+      {"label": "Arrêter les travaux à mi-chemin", "costPct": 0.35, "gainPct": 0.10, "stress": 8, "out": "Un bien à moitié rénové, en attendant de meilleures conditions."},
+      {"label": "Négocier fermement pour limiter la casse", "costPct": 0.40, "gainPct": 0.35, "stress": 8, "out": "Un recadrage difficile, mais qui limite les frais."}
+    ]
+  },
+  {
+    "id": "reno_decouverte",
+    "title": "Une découverte inattendue valorise le bien bien plus que prévu",
+    "body": "Les travaux révèlent une cheminée d'époque et des parquets en excellent état, cachés sous des couches de mauvais goût.",
+    "choices": [
+      {"label": "Mettre en valeur ces éléments d'époque", "costPct": 0.35, "gainPct": 0.85, "stress": 5, "out": "Un bien authentique qui se distingue nettement sur le marché."},
+      {"label": "Rester sur un plan de rénovation standard", "costPct": 0.30, "gainPct": 0.45, "stress": 3, "out": "Le bien est rénové correctement, sans exploiter tout son potentiel."},
+      {"label": "Investir encore plus pour sublimer ces découvertes", "costPct": 0.55, "gainPct": 1.00, "stress": 10, "out": "Un bijou immobilier qui dépasse toutes les espérances."}
+    ]
+  },
+  {
+    "id": "reno_inspection",
+    "title": "Une inspection de sécurité retarde le chantier",
+    "body": "Une inspection impose des travaux de mise aux normes supplémentaires avant de pouvoir continuer.",
+    "choices": [
+      {"label": "Te mettre en conformité immédiatement", "costPct": 0.45, "gainPct": 0.40, "stress": 8, "out": "Un chantier rallongé, mais entièrement aux normes."},
+      {"label": "Contester certaines exigences jugées excessives", "costPct": 0.20, "gainPct": 0.15, "stress": 10, "out": "Une contestation qui limite les coûts, mais aussi les gains."},
+      {"label": "Faire appel à un bureau de contrôle indépendant", "costPct": 0.30, "gainPct": 0.35, "stress": 5, "out": "Un regard extérieur qui propose une solution raisonnable."}
+    ]
+  },
+  {
+    "id": "reno_voisinage",
+    "title": "Le voisinage se plaint du bruit des travaux",
+    "body": "Les nuisances sonores du chantier provoquent des tensions avec le voisinage, au point que certains menacent de porter plainte.",
+    "choices": [
+      {"label": "Adapter les horaires pour apaiser tout le monde", "costPct": 0.35, "gainPct": 0.40, "stress": 5, "out": "Une solution qui calme les tensions, à un rythme légèrement ralenti."},
+      {"label": "Continuer sans rien changer", "costPct": 0.30, "gainPct": 0.45, "stress": 10, "out": "Le chantier avance, au prix d'une relation dégradée avec le voisinage."},
+      {"label": "Offrir un geste de compensation aux voisins", "costPct": 0.33, "gainPct": 0.42, "stress": 3, "out": "Un petit budget sympathie qui achète la paix sociale."}
+    ]
+  },
+  {
+    "id": "reno_materiaux",
+    "title": "Les prix des matériaux s'envolent en plein chantier",
+    "body": "Une flambée soudaine des prix des matériaux de construction fait grimper la facture des travaux.",
+    "choices": [
+      {"label": "Absorber la hausse pour ne pas retarder le chantier", "costPct": 0.50, "gainPct": 0.45, "stress": 8, "out": "Le chantier continue sans interruption, malgré l'impact sur le budget."},
+      {"label": "Chercher des matériaux alternatifs moins chers", "costPct": 0.30, "gainPct": 0.30, "stress": 5, "out": "Un compromis qui préserve le budget sans sacrifier la qualité essentielle."},
+      {"label": "Suspendre temporairement le chantier", "costPct": 0.10, "gainPct": 0, "stress": 8, "keepUnrenovated": true, "out": "Tu attends que les prix se normalisent avant de reprendre."}
+    ]
+  },
+  {
+    "id": "reno_architecte",
+    "title": "Un architecte d'intérieur transforme le projet initial",
+    "body": "Un architecte consulté en cours de route propose une refonte complète qui change toute l'ambition du projet.",
+    "choices": [
+      {"label": "Suivre pleinement sa nouvelle vision", "costPct": 0.60, "gainPct": 0.90, "stress": 10, "out": "Un résultat époustouflant, très au-dessus des attentes initiales."},
+      {"label": "Garder le projet initial, plus simple", "costPct": 0.30, "gainPct": 0.40, "stress": 0, "out": "Un résultat propre et prévisible, sans la surenchère."},
+      {"label": "Trouver un compromis entre les deux visions", "costPct": 0.42, "gainPct": 0.60, "stress": 6, "out": "Un équilibre qui prend le meilleur des deux approches."}
+    ]
+  },
+  {
+    "id": "reno_rapide",
+    "title": "Chantier terminé en avance, sous le budget prévu",
+    "body": "Contre toute attente, les travaux se terminent plus vite et moins cher que prévu.",
+    "choices": [
+      {"label": "Profiter de cette économie", "costPct": 0.20, "gainPct": 0.40, "stress": -5, "out": "Une bonne nouvelle qui améliore le rendement global de l'opération."},
+      {"label": "Réinvestir l'économie dans une finition supplémentaire", "costPct": 0.30, "gainPct": 0.55, "stress": 0, "out": "Un investissement malin qui pousse encore plus la valeur du bien."},
+      {"label": "Garder précieusement cette bonne surprise", "costPct": 0.18, "gainPct": 0.35, "stress": -8, "out": "Tu encaisses l'économie sans t'en priver."}
+    ]
+  },
+  {
+    "id": "reno_merule",
+    "title": "Une mérule est découverte dans la charpente",
+    "body": "Un champignon lignivore (la mérule) est détecté dans la charpente pendant les travaux — une découverte qui change la donne.",
+    "choices": [
+      {"label": "Traiter intégralement et rapidement", "costPct": 0.65, "gainPct": 0.35, "stress": 12, "out": "Un traitement complet qui protège durablement la structure du bien."},
+      {"label": "Traiter a minima les zones les plus touchées", "costPct": 0.35, "gainPct": 0.10, "stress": 10, "out": "Une solution partielle qui pourrait ne pas suffire à terme."},
+      {"label": "Faire intervenir un spécialiste avant de décider", "costPct": 0.25, "gainPct": 0.20, "stress": 5, "out": "Un diagnostic précis qui t'évite de sur-traiter ou sous-traiter."}
+    ]
+  },
+  {
+    "id": "reno_greve",
+    "title": "Une grève chez les artisans retarde le chantier",
+    "body": "Un mouvement social chez les artisans du bâtiment retarde de plusieurs semaines le chantier.",
+    "choices": [
+      {"label": "Attendre patiemment la reprise", "costPct": 0.20, "gainPct": 0.35, "stress": 5, "out": "Un délai supplémentaire, mais le chantier repart correctement."},
+      {"label": "Chercher une entreprise non concernée par le mouvement", "costPct": 0.45, "gainPct": 0.45, "stress": 8, "out": "Un coût plus élevé, mais un calendrier respecté."},
+      {"label": "Profiter du délai pour revoir les plans", "costPct": 0.25, "gainPct": 0.40, "stress": -3, "out": "Un temps utile qui améliore finalement le résultat final."}
+    ]
+  }
+]
