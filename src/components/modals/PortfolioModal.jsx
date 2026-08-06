@@ -19,7 +19,7 @@ export default function PortfolioModal({ onClose }) {
   const wealthHistory = state.wealthHistory ?? [];
 
   return (
-    <Modal title={`🏘️ Ton parc immobilier`} onClose={onClose}>
+    <Modal title={`🏘️ Ton parc immobilier`} onClose={onClose} wide>
 
       {wealthHistory.length >= 2 && (
         <div style={{
@@ -92,70 +92,75 @@ export default function PortfolioModal({ onClose }) {
       {properties.length === 0 ? (
         <p className="portfolio-empty">Aucun bien dans ton portfolio.<br />Visite le marché pour acheter ton premier bien !</p>
       ) : (
-        <div className="portfolio-list">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 10 }}>
           {properties.map(prop => {
             const condLabel = propertyData.conditionLabels?.[prop.condition] ?? prop.condition;
             const rent = calcRentEngine(prop);
             const alreadyToggled = prop.lastRentToggleYear === currentYear;
+            const baseVal = prop.value ?? prop.baseValue;
+            const saleVal = prop.rented ? Math.round(baseVal * 0.95) : baseVal;
+            const condColor = prop.condition === 'renove' ? 'var(--accent)' : prop.condition === 'aRenover' ? 'var(--red)' : 'var(--muted)';
 
             return (
-              <div className="portfolio-row" key={prop.id}>
-                <div className="portfolio-row-info">
-                  <span className="portfolio-row-name">{prop.type}</span>
-                  <span className="portfolio-row-value">
-                    {prop.place} · {condLabel}
+              <div key={prop.id} style={{
+                background: 'var(--surface2)', border: '1px solid var(--border)',
+                borderRadius: 12, padding: '12px 14px',
+                display: 'flex', flexDirection: 'column', gap: 6,
+                borderLeft: `3px solid ${prop.rented ? 'var(--accent)' : 'var(--border)'}`,
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 700 }}>{prop.type}</div>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 1 }}>{prop.place}</div>
+                  </div>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: condColor, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 6, padding: '2px 6px' }}>
+                    {condLabel}
                   </span>
-                  <span className="portfolio-row-value">
-                    Valeur : <strong style={{ color: 'var(--text)' }}>{fmtCash(prop.value ?? prop.baseValue)}</strong>
-                  </span>
-                  <span className="portfolio-row-value" style={{ color: prop.rented ? 'var(--accent)' : 'var(--muted)' }}>
-                    {prop.rented
-                      ? `📬 Loué · +${fmtCash(rent)}/an`
-                      : '🔓 Vacant · vente prix plein'}
-                  </span>
-                  {prop.rented && (
-                    <span style={{ fontSize: 10, color: 'var(--muted)' }}>
-                      Vente estimée : {fmtCash(Math.round((prop.value ?? prop.baseValue) * 0.95))} <span style={{ color: 'var(--amber)' }}>(−5 % locataire)</span>
-                    </span>
-                  )}
-                  {alreadyToggled && (
-                    <span style={{ fontSize: 10, color: 'var(--amber)', marginTop: 2 }}>
-                      🔒 Statut modifié cette année — débloqué l'an prochain
-                    </span>
-                  )}
                 </div>
-                <div className="portfolio-row-actions">
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
+                  <span style={{ color: 'var(--muted)' }}>Valeur</span>
+                  <strong style={{ fontFamily: 'monospace' }}>{fmtCash(baseVal)}</strong>
+                </div>
+
+                <div style={{ fontSize: 12, color: prop.rented ? 'var(--accent)' : 'var(--muted)', display: 'flex', justifyContent: 'space-between' }}>
+                  <span>{prop.rented ? '📬 Loué' : '🔓 Vacant'}</span>
+                  {prop.rented && <strong style={{ fontFamily: 'monospace' }}>+{fmtCash(rent)}/an</strong>}
+                </div>
+
+                {alreadyToggled && (
+                  <div style={{ fontSize: 10, color: 'var(--amber)' }}>🔒 Statut verrouillé jusqu'à l'an prochain</div>
+                )}
+
+                <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
                   {prop.condition === 'aRenover' && (
                     <button
                       className="portfolio-renovate-btn"
                       onClick={() => setRenovatingProp(prop)}
-                      title="Rénover ce bien"
-                      style={{ background: 'var(--amber)', color: '#fff' }}
-                    >
-                      🔨
-                    </button>
+                      style={{ background: 'var(--amber)', color: '#fff', flex: '0 0 auto' }}
+                      title="Rénover"
+                    >🔨</button>
                   )}
                   <button
                     className="portfolio-renovate-btn"
                     onClick={() => toggleRent(prop.id)}
                     disabled={alreadyToggled}
-                    title={alreadyToggled ? 'Déjà modifié cette année' : prop.rented ? 'Arrêter la location' : 'Mettre en location'}
-                    style={{ opacity: alreadyToggled ? 0.4 : 1, cursor: alreadyToggled ? 'not-allowed' : 'pointer' }}
+                    style={{ opacity: alreadyToggled ? 0.4 : 1, cursor: alreadyToggled ? 'not-allowed' : 'pointer', flex: '0 0 auto' }}
+                    title={prop.rented ? 'Arrêter la location' : 'Mettre en location'}
                   >
                     {prop.rented ? '🔓' : '📬'}
                   </button>
                   <button
                     className="portfolio-sell-btn"
+                    style={{ flex: 1 }}
                     onClick={() => {
-                      const baseVal = prop.value ?? prop.baseValue;
-                      const saleVal = prop.rented ? Math.round(baseVal * 0.95) : baseVal;
                       const msg = prop.rented
-                        ? `Vendre ${prop.type} loué ?\n\nPrix : ${fmtCash(saleVal)} (−5 % locataire en place)\nValeur marché : ${fmtCash(baseVal)}`
+                        ? `Vendre ${prop.type} loué ?\nPrix : ${fmtCash(saleVal)} (−5 % locataire en place)`
                         : `Vendre ${prop.type} pour ${fmtCash(saleVal)} ?`;
                       if (window.confirm(msg)) sellProperty(prop.id);
                     }}
                   >
-                    Vendre
+                    Vendre {fmtCash(saleVal)}
                   </button>
                 </div>
               </div>

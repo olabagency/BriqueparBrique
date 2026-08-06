@@ -18069,5 +18069,293 @@
         "out": "Une situation qui te permet de tirer le meilleur prix possible de ce bien très demandé."
       }
     ]
+  },
+  {
+    "title": "Un journaliste d'investigation enquête sur les grands propriétaires de ta région",
+    "body": "Tu reçois un appel d'un journaliste connu. Il prépare un reportage sur les investisseurs immobiliers. Ton nom figure dans ses recherches.",
+    "minAge": 50,
+    "minVal": 500,
+    "choices": [
+      {
+        "label": "Refuser tout contact — rester dans l'ombre",
+        "tag": "prudent",
+        "eff": {
+          "stress": 8
+        },
+        "out": "Tu évites l'exposition, mais la rumeur court."
+      },
+      {
+        "label": "Accepter une interview — jouer la transparence",
+        "tag": "audacieux",
+        "eff": {
+          "cash": 15,
+          "stress": -5,
+          "val": 30
+        },
+        "out": "L'article te présente comme un visionnaire. Ton téléphone n'arrête plus de sonner."
+      },
+      {
+        "label": "Faire intervenir un avocat pour bloquer la publication",
+        "tag": "risque",
+        "eff": {
+          "cash": -20,
+          "stress": 12
+        },
+        "out": "La publication est retardée, mais l'avocat a coûté cher."
+      }
+    ]
+  },
+  {
+    "title": "Un concurrent en difficulté tente une OPA hostile sur ton parc immobilier",
+    "body": "Un groupe concurrent, acculé par ses dettes, cherche à racheter de force des actifs. Ils ont approché ta banque pour bloquer tes crédits.",
+    "minAge": 45,
+    "minVal": 1000,
+    "choices": [
+      {
+        "label": "Contre-attaquer — racheter ses actifs avant qu'il ne t'affaiblisse",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -80,
+          "val": 200,
+          "stress": 20
+        },
+        "out": "Une manœuvre risquée qui te sort renforcé et élimine la menace."
+      },
+      {
+        "label": "Trouver un partenaire financier pour te protéger",
+        "tag": "prudent",
+        "eff": {
+          "cash": 40,
+          "stress": 10
+        },
+        "out": "Un fonds allié prend une participation minoritaire. Tu restes maître."
+      },
+      {
+        "label": "Ignorer — tes finances sont solides",
+        "tag": "risque",
+        "eff": {
+          "stress": 25,
+          "val": -50
+        },
+        "out": "La pression bancaire fait chuter temporairement la valeur perçue de ton parc."
+      }
+    ]
+  },
+  {
+    "title": "Un effondrement géologique menace un quartier entier où tu as des biens",
+    "body": "Les autorités viennent de classer une zone à risque. Deux de tes biens sont potentiellement concernés.",
+    "minAge": 40,
+    "minProperties": 3,
+    "choices": [
+      {
+        "label": "Vendre immédiatement à prix sacrifié avant l'annonce officielle",
+        "tag": "risque",
+        "eff": {
+          "cash": 60,
+          "val": -120,
+          "stress": 20
+        },
+        "out": "Tu liquides à perte mais évites le pire. Les acheteurs apprendront vite."
+      },
+      {
+        "label": "Contester le classement avec un géologue indépendant",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -25,
+          "stress": 15,
+          "val": 40
+        },
+        "out": "Le rapport indépendant démontre une exagération. Tes biens sont réhabilités."
+      },
+      {
+        "label": "Attendre l'évaluation officielle sans agir",
+        "tag": "prudent",
+        "eff": {
+          "stress": 18
+        },
+        "out": "L'attente est éprouvante, mais la situation finit par se clarifier."
+      }
+    ]
+  },
+  {
+    "title": "La ville te propose de racheter l'un de tes terrains pour construire un équipement public",
+    "body": "La mairie veut y installer un parc ou une école. C'est une expropriation amiable — mais le prix proposé est inférieur au marché.",
+    "minAge": 50,
+    "minProperties": 2,
+    "choices": [
+      {
+        "label": "Accepter l'offre — paix avec les institutions",
+        "tag": "prudent",
+        "eff": {
+          "cash": 45,
+          "stress": -8
+        },
+        "out": "Une vente rapide et sans friction. La mairie te cite en exemple."
+      },
+      {
+        "label": "Négocier un prix plus élevé en menaçant de refuser",
+        "tag": "audacieux",
+        "eff": {
+          "cash": 90,
+          "stress": 10
+        },
+        "out": "Après une semaine de bras de fer, tu obtiens 30 % de plus que l'offre initiale."
+      },
+      {
+        "label": "Refuser et développer le terrain toi-même",
+        "tag": "risque",
+        "eff": {
+          "cash": -30,
+          "val": 150,
+          "stress": 20
+        },
+        "out": "Un projet ambitieux, coûteux, mais qui crée un actif premium."
+      }
+    ]
+  },
+  {
+    "title": "Un incendie ravage une partie de ton immeuble le plus rentable",
+    "body": "Appel en pleine nuit. L'un de tes immeubles brûle. Les pompiers maîtrisent le sinistre, mais deux étages sont inutilisables.",
+    "minAge": 35,
+    "minProperties": 3,
+    "choices": [
+      {
+        "label": "Activer l'assurance et reconstruire à l'identique",
+        "tag": "prudent",
+        "eff": {
+          "cash": -30,
+          "val": -80,
+          "stress": 25
+        },
+        "out": "La reconstruction prend deux ans. L'assurance couvre 70 % des dégâts."
+      },
+      {
+        "label": "Reconstruire en surélévant — ajouter deux étages premium",
+        "tag": "audacieux",
+        "eff": {
+          "cash": -120,
+          "val": 250,
+          "stress": 30
+        },
+        "out": "Un chantier éprouvant, mais le nouvel immeuble vaut trois fois plus."
+      },
+      {
+        "label": "Vendre le bien endommagé à un promoteur",
+        "tag": "risque",
+        "eff": {
+          "cash": 80,
+          "val": -100,
+          "stress": 8
+        },
+        "out": "Une sortie propre. Le promoteur voit le potentiel là où tu vois les cendres."
+      }
+    ]
+  },
+  {
+    "title": "Ta fille ou ton fils veut reprendre une partie de ton parc pour lancer sa propre activité",
+    "body": "Il/elle a 25 ans, une vision, et beaucoup d'ambition. Tu peux l'aider — mais au détriment de ta propre expansion.",
+    "minAge": 48,
+    "minVal": 600,
+    "choices": [
+      {
+        "label": "Lui céder un bien à prix coûtant — investir dans sa réussite",
+        "tag": "prudent",
+        "eff": {
+          "cash": -20,
+          "val": -80,
+          "stress": -10,
+          "personalCash": 30
+        },
+        "out": "Un geste fort. Il/elle réussit — et t'en sera reconnaissant(e) toute sa vie."
+      },
+      {
+        "label": "Lui prêter de l'argent avec un contrat clair",
+        "tag": "risque",
+        "eff": {
+          "cash": -40,
+          "stress": 5
+        },
+        "out": "Un prêt familial. Les relations resteront saines si tout se passe bien."
+      },
+      {
+        "label": "Refuser — chacun trace son propre chemin",
+        "tag": "audacieux",
+        "eff": {
+          "stress": 15
+        },
+        "out": "Décision douloureuse. Il/elle trouve d'autres moyens. La relation se refroidit."
+      }
+    ]
+  },
+  {
+    "title": "Un fonds de pension étranger propose un partenariat exclusif d'envergure nationale",
+    "body": "Ils gèrent 4 milliards d'euros et cherchent un opérateur local de confiance pour déployer 200 M€ en France.",
+    "minAge": 52,
+    "minVal": 2000,
+    "choices": [
+      {
+        "label": "Accepter le partenariat — un levier immense",
+        "tag": "audacieux",
+        "eff": {
+          "cash": 150,
+          "val": 500,
+          "stress": 25
+        },
+        "out": "Ton parc explose. La pression opérationnelle aussi. Tu n'as plus une minute."
+      },
+      {
+        "label": "Négocier un rôle de conseil sans engagement capitalistique",
+        "tag": "prudent",
+        "eff": {
+          "cash": 60,
+          "stress": 5
+        },
+        "out": "Honoraires de conseil confortables sans perdre le contrôle de ton empire."
+      },
+      {
+        "label": "Refuser — garder ton indépendance à tout prix",
+        "tag": "risque",
+        "eff": {
+          "stress": -8,
+          "val": -20
+        },
+        "out": "Tu restes libre. Mais l'occasion ne se représentera peut-être jamais."
+      }
+    ]
+  },
+  {
+    "title": "Une rétrospective médiatique te consacre comme l'un des plus grands investisseurs immobiliers du pays",
+    "body": "Un magazine économique veut publier ta biographie sous forme d'article de fond. Une reconnaissance nationale, mais une exposition totale.",
+    "minAge": 60,
+    "minVal": 1500,
+    "choices": [
+      {
+        "label": "Accepter — laisser une trace dans l'histoire de l'immobilier français",
+        "tag": "audacieux",
+        "eff": {
+          "cash": 25,
+          "val": 80,
+          "stress": -15
+        },
+        "out": "L'article est un chef-d'œuvre. Des générations s'en inspireront."
+      },
+      {
+        "label": "Accepter uniquement sous pseudonyme",
+        "tag": "prudent",
+        "eff": {
+          "cash": 10,
+          "stress": -5
+        },
+        "out": "Discret mais impactant. Ceux qui savent, savent."
+      },
+      {
+        "label": "Refuser — la richesse préserve mieux dans l'ombre",
+        "tag": "risque",
+        "eff": {
+          "stress": -20
+        },
+        "out": "Tu choisis la paix. Certains se demandent qui tu es vraiment."
+      }
+    ]
   }
 ]
