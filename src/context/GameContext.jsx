@@ -3,6 +3,7 @@ import { freshState, buildRunSummary } from '../engine/gameState.js';
 import { saveGame, loadGame, deleteSave, appendHistory } from '../engine/saveLoad.js';
 import { pushGlobalScore } from '../engine/globalScores.js';
 import { removePresence } from '../engine/presence.js';
+import { pushLiveNotification } from '../engine/liveNotifications.js';
 import {
   generateMarketListings,
   collectRents,
@@ -70,6 +71,15 @@ function checkAchievements(state) {
     if (evalAchievement(ach, state)) unlocked.push(ach.id);
   }
   return unlocked;
+}
+
+function notifyNewAchievements(name, oldList, newList) {
+  if (!name) return;
+  const newly = newList.filter(id => !oldList.includes(id));
+  for (const id of newly) {
+    const ach = achievements.find(a => a.id === id);
+    if (ach) pushLiveNotification({ name, action: `a débloqué « ${ach.title} »` });
+  }
 }
 
 // ─── Event picking ────────────────────────────────────────────────────────────
@@ -266,7 +276,10 @@ function reducer(state, action) {
         flags: { ...s.flags, everHadLoan: loanInfo.loanAmount > 0 ? true : s.flags?.everHadLoan },
         currentYearFinance: { ...s.currentYearFinance, achats: (s.currentYearFinance?.achats ?? 0) - (prop.value ?? 0) },
       };
+      const prevAchsBuy = s.achievements ?? [];
       newState.achievements = checkAchievements(newState);
+      if (s.name) pushLiveNotification({ name: s.name, action: `vient d'acheter un ${prop.type} à ${prop.place}` });
+      notifyNewAchievements(newState.name, prevAchsBuy, newState.achievements);
       return newState;
     }
 
@@ -285,6 +298,13 @@ function reducer(state, action) {
       if (loanToRepay) cashGain -= loanToRepay.balance;
 
       const loans = (s.loans ?? []).filter(l => l.propertyId !== propertyId);
+      const pctGain = sold.value > 0 && sold.yearPurchased
+        ? Math.round(((saleValue - (sold.baseValue ?? sold.value)) / (sold.baseValue ?? sold.value)) * 100)
+        : null;
+      if (s.name) {
+        const gainStr = pctGain !== null && pctGain !== 0 ? ` (${pctGain > 0 ? '+' : ''}${pctGain}%)` : '';
+        pushLiveNotification({ name: s.name, action: `a revendu son ${sold.type}${gainStr}` });
+      }
       return {
         ...s,
         cash: (s.cash ?? 0) + cashGain,

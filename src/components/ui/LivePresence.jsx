@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useGame } from '../../context/GameContext.jsx';
 import { useEffects } from '../../context/EffectsContext.jsx';
 import { FIREBASE_ENABLED } from '../../engine/firebaseConfig.js';
-import { updatePresence, subscribePresence } from '../../engine/presence.js';
+import { updatePresence, subscribePresence, SESSION_ID } from '../../engine/presence.js';
+import { subscribeLiveNotifications } from '../../engine/liveNotifications.js';
 import globalBoard from '../../data/global_leaderboard.json';
 import { fmtCash } from '../../engine/utils.js';
 
@@ -67,12 +68,10 @@ function useRealPresence(emit) {
     return () => clearInterval(interval);
   }, [state.name, state.year, state.valuation, state.stress]);
 
-  // Subscribe to other players
+  // Subscribe to other players' presence
   useEffect(() => {
     const unsub = subscribePresence((live) => {
       const prev = prevPlayersRef.current;
-
-      // Detect newly joined players and emit notification
       live.forEach(p => {
         const wasPresent = prev.some(q => q.name === p.name);
         if (!wasPresent && p.name) {
@@ -80,9 +79,23 @@ function useRealPresence(emit) {
           emit({ type: 'live', player: p, action: `est en ligne${valStr}` });
         }
       });
-
       prevPlayersRef.current = live;
       setPlayers(live);
+    });
+    return unsub;
+  }, [emit]);
+
+  // Subscribe to real game-event notifications (buy, sell, achievements)
+  const lastSeenTsRef = useRef(Date.now());
+  useEffect(() => {
+    const unsub = subscribeLiveNotifications((notifs) => {
+      const newOnes = notifs
+        .filter(n => n.ts > lastSeenTsRef.current && n.sessionId !== SESSION_ID);
+      if (newOnes.length === 0) return;
+      lastSeenTsRef.current = Math.max(...newOnes.map(n => n.ts));
+      for (const n of newOnes) {
+        emit({ type: 'live', player: { name: n.name }, action: n.action });
+      }
     });
     return unsub;
   }, [emit]);
