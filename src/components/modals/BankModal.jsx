@@ -35,9 +35,18 @@ function TransferButton({ label, amount, disabled, onClick, variant = 'neutral' 
   );
 }
 
+const SALARY_LEVELS = [
+  { id: 'none',        label: 'Aucun salaire',   annual: 0,   desc: 'Tout reste en trésorerie' },
+  { id: 'modest',      label: 'Modeste',          annual: 8,   desc: '8 k€/an → épargne perso' },
+  { id: 'comfortable', label: 'Confortable',      annual: 20,  desc: '20 k€/an → épargne perso' },
+  { id: 'high',        label: 'Élevé',            annual: 45,  desc: '45 k€/an → épargne perso' },
+];
+
 export default function BankModal({ onClose }) {
-  const { state, retire, bankWithdraw, bankInject } = useGame();
-  const { cash, personalCash, age, bankOpsThisYear = 0 } = state;
+  const { state, retire, bankWithdraw, bankInject, changeSalary } = useGame();
+  const { cash, personalCash, age, bankOpsThisYear = 0, salary = 'none', year = 1, lastSalaryChangeYear = 0 } = state;
+  const SALARY_COOLDOWN = 3;
+  const canChangeSalary = (year - lastSalaryChangeYear) >= SALARY_COOLDOWN || lastSalaryChangeYear === 0;
 
   const opsRemaining = Math.max(0, BANK_MAX_OPS - bankOpsThisYear);
   const canOperate   = opsRemaining > 0;
@@ -162,6 +171,44 @@ export default function BankModal({ onClose }) {
               />
             );
           })}
+        </div>
+      </div>
+
+      {/* Salary */}
+      <div style={{ borderTop: '1px solid var(--border)', paddingTop: 14 }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.04em', marginBottom: 8 }}>
+          💼 Salaire fondateur
+          {!canChangeSalary && (
+            <span style={{ fontWeight: 400, color: 'var(--amber)', marginLeft: 8 }}>
+              · modifiable dans {SALARY_COOLDOWN - (year - lastSalaryChangeYear)} an(s)
+            </span>
+          )}
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+          {SALARY_LEVELS.map(lvl => {
+            const isActive = (salary || 'none') === lvl.id;
+            return (
+              <button
+                key={lvl.id}
+                disabled={!canChangeSalary && !isActive}
+                onClick={() => { if (!isActive) changeSalary(lvl.id); }}
+                style={{
+                  padding: '8px 10px', borderRadius: 10, textAlign: 'left',
+                  background: isActive ? 'var(--accent-soft)' : 'var(--surface2)',
+                  border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border)'}`,
+                  color: isActive ? 'var(--accent)' : 'var(--text)',
+                  cursor: (!canChangeSalary && !isActive) ? 'not-allowed' : isActive ? 'default' : 'pointer',
+                  opacity: (!canChangeSalary && !isActive) ? 0.45 : 1,
+                }}
+              >
+                <div style={{ fontSize: 11, fontWeight: 700 }}>{lvl.label}{isActive ? ' ✓' : ''}</div>
+                <div style={{ fontSize: 10, color: isActive ? 'var(--accent)' : 'var(--muted)', marginTop: 2 }}>{lvl.desc}</div>
+              </button>
+            );
+          })}
+        </div>
+        <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 6 }}>
+          Le salaire est prélevé de la trésorerie chaque année et versé sur ton épargne personnelle.
         </div>
       </div>
 

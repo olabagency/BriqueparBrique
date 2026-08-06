@@ -66,7 +66,7 @@
         "label": "Payer un expert pour évaluer le bien de l'extérieur avant d'enchérir",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": 7,
           "val": 30,
           "properties": 1,
           "stress": 5
@@ -172,7 +172,8 @@
         "tag": "creatif",
         "eff": {
           "stress": 8,
-          "val": 3
+          "val": 3,
+          "cash": 4
         },
         "out": "Un recadrage qui remet, difficilement, le chantier sur les rails."
       }
@@ -198,7 +199,7 @@
         "label": "Faire un traitement minimal, juste pour masquer le souci",
         "tag": "risque",
         "eff": {
-          "cash": -5,
+          "cash": 3,
           "val": -5
         },
         "out": "Une solution de façade qui pourrait bien ressurgir plus tard."
@@ -306,7 +307,7 @@
         "label": "Trouver un mentor local plutôt qu'une formation générique",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": -2,
           "val": 8
         },
         "out": "Un accompagnement plus personnalisé, qui accélère vraiment ta courbe d'apprentissage."
@@ -323,7 +324,8 @@
         "label": "Aller à leur rencontre pour te présenter",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Une démarche simple qui désamorce une bonne partie des tensions."
       },
@@ -411,7 +413,7 @@
         "label": "Faire appel à une assurance loyers impayés",
         "tag": "creatif",
         "eff": {
-          "cash": -8,
+          "cash": -5,
           "stress": -5
         },
         "out": "Une solution qui coûte en prime d'assurance, mais qui protège vraiment."
@@ -427,7 +429,7 @@
         "label": "Accélérer tes achats avant que ça n'empire encore",
         "tag": "risque",
         "eff": {
-          "cash": -30,
+          "cash": -22,
           "val": 35,
           "properties": 1,
           "stress": 10
@@ -481,7 +483,8 @@
         "label": "Abandonner ce projet d'extension",
         "tag": "creatif",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 4
         },
         "out": "Tu renonces à ce projet, sans t'acharner davantage."
       }
@@ -516,7 +519,7 @@
         "label": "Négocier avec ton locataire une solution temporaire",
         "tag": "creatif",
         "eff": {
-          "cash": -12,
+          "cash": -9,
           "stress": 5
         },
         "out": "Un compromis qui limite les tensions le temps des réparations."
@@ -605,7 +608,7 @@
         "label": "Confier toute la gestion à cette agence",
         "tag": "prudent",
         "eff": {
-          "cash": -8,
+          "cash": -3,
           "stress": -15
         },
         "out": "Un vrai soulagement au quotidien, à un coût récurrent qui rogne tes marges."
@@ -693,7 +696,7 @@
         "label": "Revoir entièrement ton processus de sélection des locataires",
         "tag": "creatif",
         "eff": {
-          "cash": -15,
+          "cash": -10,
           "val": 8
         },
         "out": "Un investissement qui limite ce genre de mauvaises surprises à l'avenir."
@@ -766,7 +769,7 @@
         "label": "Faire intervenir un médiateur de copropriété",
         "tag": "creatif",
         "eff": {
-          "cash": -8,
+          "cash": -5,
           "stress": -3
         },
         "out": "Un tiers neutre qui aide à dénouer un conflit qui aurait pu s'envenimer."
@@ -856,7 +859,8 @@
         "label": "Le/la rassurer avec un vrai point sur ta stratégie",
         "tag": "prudent",
         "eff": {
-          "stress": -10
+          "stress": -10,
+          "cash": 5
         },
         "out": "Une conversation qui apaise, en expliquant clairement où tu vas."
       },
@@ -888,7 +892,7 @@
         "label": "Profiter pleinement de ce dispositif",
         "tag": "audacieux",
         "eff": {
-          "cash": -30,
+          "cash": -22,
           "val": 45,
           "properties": 1
         },
@@ -960,7 +964,7 @@
         "label": "Payer ta quote-part sans discuter",
         "tag": "prudent",
         "eff": {
-          "cash": -25,
+          "cash": -21,
           "val": 15
         },
         "out": "Un coût réel, mais un immeuble mieux entretenu qui valorise tes biens."
@@ -1012,7 +1016,7 @@
         "label": "Tester sur un seul bien avant de généraliser",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": -1,
           "val": 8
         },
         "out": "Un test mesuré qui te permet de juger avant de tout transformer."
@@ -1029,7 +1033,7 @@
         "label": "Faire intervenir un géomètre officiel",
         "tag": "prudent",
         "eff": {
-          "cash": -10,
+          "cash": -7,
           "stress": 5
         },
         "out": "Une clarification définitive, qui referme le sujet pour de bon."
@@ -1150,7 +1154,7 @@
         "label": "Créer une petite structure, sans recrutement immédiat",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -2,
           "val": 15
         },
         "out": "Un premier pas vers une vraie agence, à ton rythme."
@@ -1315,7 +1319,8 @@
         "label": "Accepter et jouer pleinement la carte de la transparence",
         "tag": "creatif",
         "eff": {
-          "val": 8
+          "val": 8,
+          "cash": 3
         },
         "out": "Un article qui valorise réellement ton parcours et attire de nouvelles opportunités."
       },
@@ -1365,7 +1370,7 @@
         "label": "Réduire le nombre de logements pour te mettre aux normes",
         "tag": "creatif",
         "eff": {
-          "cash": -20,
+          "cash": -14,
           "val": 5
         },
         "out": "Une solution qui sacrifie un peu de surface locative pour la conformité."
@@ -1570,7 +1575,8 @@
         "label": "Rester fidèle à l'immobilier, ton domaine de prédilection",
         "tag": "risque",
         "eff": {
-          "stress": 5
+          "stress": 5,
+          "cash": 3
         },
         "out": "Tu continues à tout miser sur ce que tu maîtrises le mieux."
       },
@@ -1649,7 +1655,7 @@
         "label": "Faire appel à un expert-comptable spécialisé en urgence",
         "tag": "creatif",
         "eff": {
-          "cash": -25,
+          "cash": -20,
           "stress": 10
         },
         "out": "Un accompagnement qui sécurise le déroulement du contrôle."
@@ -1722,7 +1728,8 @@
         "tag": "creatif",
         "eff": {
           "stress": 10,
-          "val": 5
+          "val": 5,
+          "cash": 5
         },
         "out": "Une implication qui te permet de peser plus justement sur la décision."
       }
@@ -1781,7 +1788,8 @@
         "label": "Poursuivre le projet sans en tenir compte",
         "tag": "risque",
         "eff": {
-          "val": 10
+          "val": 10,
+          "cash": 6
         },
         "out": "Le projet avance, au prix d'une image dégradée dans le quartier."
       },
@@ -1806,7 +1814,7 @@
         "label": "Revoir tes conditions pour le retenir",
         "tag": "prudent",
         "eff": {
-          "cash": -15
+          "cash": -10
         },
         "out": "Un effort financier qui garde une relation de confiance précieuse."
       },
@@ -2095,7 +2103,9 @@
       {
         "label": "Refuser de répondre à leurs questions",
         "tag": "risque",
-        "eff": {},
+        "eff": {
+          "cash": 4
+        },
         "out": "Le silence alimente les soupçons plus qu'il ne les calme."
       },
       {
@@ -2207,7 +2217,8 @@
         "label": "Chercher une autre opportunité plutôt que d'attendre",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Tu passes à autre chose, sans savoir ce que tu aurais pu obtenir ici."
       }
@@ -2223,7 +2234,8 @@
         "label": "Assumer pleinement cette identification publique",
         "tag": "creatif",
         "eff": {
-          "val": 15
+          "val": 15,
+          "cash": 5
         },
         "out": "Une reconnaissance qui dépasse largement le cadre de ton activité initiale."
       },
@@ -2261,7 +2273,9 @@
       {
         "label": "Rester silencieux, ce scandale ne te concerne pas directement",
         "tag": "risque",
-        "eff": {},
+        "eff": {
+          "cash": 5
+        },
         "out": "L'amalgame persiste malgré tout, un peu, dans l'esprit du public."
       },
       {
@@ -2395,7 +2409,7 @@
         "label": "Rejoindre pleinement ce cercle",
         "tag": "audacieux",
         "eff": {
-          "cash": -20,
+          "cash": -5,
           "val": 40
         },
         "out": "Un accès à un réseau qui ouvre des portes jusque-là fermées."
@@ -2429,7 +2443,7 @@
         "label": "Organiser une transmission structurée dès maintenant",
         "tag": "prudent",
         "eff": {
-          "cash": -30,
+          "cash": -27,
           "stress": -15
         },
         "out": "Une organisation qui anticipe sereinement l'avenir de ton patrimoine."
@@ -2642,7 +2656,7 @@
         "tag": "risque",
         "eff": {
           "val": 40,
-          "cash": -15,
+          "cash": 0,
           "stress": 15
         },
         "out": "Le permis tombe étonnamment vite, sans que personne ne semble s'en étonner.",
@@ -2722,7 +2736,8 @@
         "tag": "risque",
         "eff": {
           "personalCash": 35,
-          "stress": 10
+          "stress": 10,
+          "cash": 4
         },
         "out": "Tes revenus nets personnels augmentent nettement, sur une base qui ne dit pas tout.",
         "fatal": {
@@ -2758,7 +2773,7 @@
         "label": "Accepter l'arrangement proposé",
         "tag": "risque",
         "eff": {
-          "cash": -15,
+          "cash": -10,
           "val": 20,
           "stress": 10
         },
@@ -2856,7 +2871,7 @@
         "label": "Acheter deux places d'un coup, proposées ensemble",
         "tag": "creatif",
         "eff": {
-          "cash": -15,
+          "cash": -11,
           "val": 20,
           "properties": 2
         },
@@ -2892,7 +2907,7 @@
         "label": "Visiter avec un architecte pour optimiser l'espace avant d'acheter",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": 3,
           "val": 28,
           "properties": 1
         },
@@ -3010,7 +3025,8 @@
         "label": "Les faire expertiser et les vendre",
         "tag": "creatif",
         "eff": {
-          "personalCash": 12
+          "personalCash": 12,
+          "cash": 5
         },
         "out": "Une petite trouvaille inattendue, qui vient compléter ton épargne perso."
       },
@@ -3060,7 +3076,7 @@
         "label": "Faire relire tous tes contrats par un juriste spécialisé",
         "tag": "creatif",
         "eff": {
-          "cash": -8,
+          "cash": 0,
           "val": 10
         },
         "out": "Un investissement qui sécurise durablement toute ta pratique contractuelle."
@@ -3095,7 +3111,7 @@
         "label": "Faire réaliser une estimation indépendante avant de négocier",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": 7,
           "val": 30,
           "properties": 1
         },
@@ -3113,7 +3129,8 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "val": 5
+          "val": 5,
+          "cash": 4
         },
         "out": "Des années d'expérience partagées, qui t'évitent plusieurs erreurs classiques."
       },
@@ -3144,7 +3161,7 @@
         "label": "Souscrire une assurance plus chère, faute de mieux",
         "tag": "prudent",
         "eff": {
-          "cash": -8,
+          "cash": -4,
           "stress": -5
         },
         "out": "Une protection réelle, à un coût plus élevé que prévu."
@@ -3176,7 +3193,7 @@
         "label": "Accepter ce service",
         "tag": "prudent",
         "eff": {
-          "cash": -10,
+          "cash": -2,
           "val": 15,
           "properties": 1,
           "stress": -5
@@ -3223,7 +3240,7 @@
         "label": "Te déplacer quand même avant de te décider",
         "tag": "prudent",
         "eff": {
-          "cash": -8,
+          "cash": 0,
           "val": 40,
           "properties": 1,
           "stress": 5
@@ -3300,7 +3317,7 @@
         "label": "Revoir le règlement intérieur de la colocation",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": 0,
           "val": 5
         },
         "out": "Un cadre plus clair qui prévient une partie des futurs conflits."
@@ -3317,7 +3334,7 @@
         "label": "Traiter immédiatement et intégralement",
         "tag": "prudent",
         "eff": {
-          "cash": -25,
+          "cash": -21,
           "val": 15,
           "stress": 8
         },
@@ -3364,7 +3381,8 @@
         "label": "Attendre d'avoir vendu avant d'acheter",
         "tag": "prudent",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 8
         },
         "out": "Une prudence qui limite le risque, au prix d'une opportunité potentiellement perdue."
       },
@@ -3409,7 +3427,7 @@
         "label": "Renégocier seulement le prêt le plus important",
         "tag": "creatif",
         "eff": {
-          "cash": -3,
+          "cash": 5,
           "val": 10
         },
         "out": "Un effort ciblé sur ce qui compte le plus."
@@ -3444,7 +3462,7 @@
         "label": "Installer un système de télésurveillance sur l'ensemble du parc",
         "tag": "creatif",
         "eff": {
-          "cash": -20,
+          "cash": -14,
           "val": 10,
           "stress": -5
         },
@@ -3480,7 +3498,7 @@
         "label": "Faire relire tous tes contrats d'assurance par un courtier",
         "tag": "creatif",
         "eff": {
-          "cash": -8,
+          "cash": -5,
           "val": 8
         },
         "out": "Une vérification qui sécurise durablement l'ensemble de ton parc assuré."
@@ -3584,7 +3602,7 @@
         "label": "Adapter le logement en profitant d'aides publiques disponibles",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -5,
           "val": 10
         },
         "out": "Un aménagement financé en partie par des aides, qui profite à tout futur locataire."
@@ -3601,7 +3619,7 @@
         "label": "Opter pour des finitions haut de gamme",
         "tag": "audacieux",
         "eff": {
-          "cash": -25,
+          "cash": -15,
           "val": 30
         },
         "out": "Un bien qui se distingue nettement, à un coût de rénovation plus élevé."
@@ -3672,7 +3690,7 @@
         "label": "Investir dans cette installation",
         "tag": "audacieux",
         "eff": {
-          "cash": -30,
+          "cash": -25,
           "val": 20
         },
         "out": "Un investissement énergétique qui valorise durablement le bien et réduit ses charges."
@@ -3724,7 +3742,7 @@
         "label": "Faire réaliser un vrai bornage complet du bien",
         "tag": "creatif",
         "eff": {
-          "cash": -15,
+          "cash": -7,
           "val": 10
         },
         "out": "Une clarification complète qui sécurise toute future transaction."
@@ -3741,7 +3759,7 @@
         "label": "Meubler entièrement et basculer en location meublée",
         "tag": "audacieux",
         "eff": {
-          "cash": -15,
+          "cash": -10,
           "val": 12
         },
         "out": "Une fiscalité plus favorable, au prix d'un investissement initial en mobilier."
@@ -3775,7 +3793,8 @@
         "label": "Respecter la protection et attendre",
         "tag": "prudent",
         "eff": {
-          "stress": 5
+          "stress": 5,
+          "cash": 4
         },
         "out": "Tu respectes la loi, en repoussant ton projet de vente."
       },
@@ -3819,7 +3838,9 @@
       {
         "label": "Ignorer, ce n'est qu'un avis parmi d'autres",
         "tag": "risque",
-        "eff": {},
+        "eff": {
+          "cash": 3
+        },
         "out": "L'avis reste visible, sans réponse de ta part."
       },
       {
@@ -3859,7 +3880,7 @@
         "label": "Fournir des chauffages d'appoint en attendant la réparation",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -6,
           "stress": 8
         },
         "out": "Une solution temporaire qui limite les dégâts relationnels."
@@ -3876,7 +3897,7 @@
         "label": "Créer cette SCI familiale dès maintenant",
         "tag": "prudent",
         "eff": {
-          "cash": -15,
+          "cash": -11,
           "stress": -10
         },
         "out": "Une structure qui simplifiera grandement les choses le moment venu."
@@ -3910,7 +3931,7 @@
         "label": "Faire réparer immédiatement, tu régleras les responsabilités après",
         "tag": "prudent",
         "eff": {
-          "cash": -15,
+          "cash": -12,
           "stress": 5
         },
         "out": "Ton locataire est vite rassuré, même si tu dois avancer les frais."
@@ -3944,7 +3965,7 @@
         "label": "Acheter ce local commercial",
         "tag": "audacieux",
         "eff": {
-          "cash": -30,
+          "cash": -22,
           "val": 35,
           "properties": 1,
           "stress": 8
@@ -4000,7 +4021,7 @@
         "label": "Revoir ton processus de sélection des locataires pour l'avenir",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -6,
           "val": 8
         },
         "out": "Un investissement qui limite ce genre de mauvaise surprise à l'avenir."
@@ -4017,7 +4038,7 @@
         "label": "Adopter pleinement cette solution digitale",
         "tag": "audacieux",
         "eff": {
-          "cash": -10,
+          "cash": -5,
           "stress": -15
         },
         "out": "Un vrai gain de temps au quotidien, pour un abonnement mensuel raisonnable."
@@ -4068,7 +4089,7 @@
         "label": "Mettre le bien en travaux pour justifier la vacance",
         "tag": "creatif",
         "eff": {
-          "cash": -20,
+          "cash": -16,
           "val": 15
         },
         "out": "Une solution qui évite la taxe tout en valorisant réellement le bien."
@@ -4123,7 +4144,7 @@
         "label": "Prendre la tête du projet",
         "tag": "audacieux",
         "eff": {
-          "cash": -25,
+          "cash": -21,
           "val": 20
         },
         "out": "Un rôle moteur qui valorise l'ensemble de l'immeuble, avec de vraies responsabilités."
@@ -4157,7 +4178,7 @@
         "label": "Rembourser immédiatement tous les vacanciers concernés",
         "tag": "prudent",
         "eff": {
-          "cash": -15
+          "cash": -10
         },
         "out": "Un geste commercial qui coûte, mais qui préserve totalement ta réputation."
       },
@@ -4343,7 +4364,7 @@
         "label": "Payer l'intégralité des réparations pour en finir",
         "tag": "risque",
         "eff": {
-          "cash": -20,
+          "cash": -15,
           "stress": -5
         },
         "out": "Un coût assumé seul, qui évite une procédure longue."
@@ -4388,7 +4409,7 @@
         "label": "Négocier une durée de bail plus courte",
         "tag": "creatif",
         "eff": {
-          "cash": -30,
+          "cash": -22,
           "val": 35,
           "properties": 1
         },
@@ -4547,7 +4568,7 @@
         "label": "Réaliser en urgence tous les travaux nécessaires",
         "tag": "prudent",
         "eff": {
-          "cash": -30,
+          "cash": -26,
           "val": 15,
           "stress": 10
         },
@@ -4714,7 +4735,8 @@
         "label": "Profiter de la revalorisation du quartier sans investir toi-même",
         "tag": "creatif",
         "eff": {
-          "val": 15
+          "val": 15,
+          "cash": 5
         },
         "out": "Un effet d'aubaine qui profite à la valeur de ton bien, sans que tu aies rien fait."
       }
@@ -4749,7 +4771,7 @@
         "label": "Faire réaliser une étude actuarielle avant de te décider",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": 5,
           "val": 30,
           "properties": 1,
           "stress": 5
@@ -4859,7 +4881,7 @@
         "label": "Te faire accompagner par un fiscaliste pour optimiser la transition",
         "tag": "creatif",
         "eff": {
-          "cash": -15,
+          "cash": -7,
           "val": 10
         },
         "out": "Un accompagnement qui limite au maximum l'impact de cette réforme."
@@ -4950,7 +4972,7 @@
         "label": "Confier la gestion complète à ce family office",
         "tag": "prudent",
         "eff": {
-          "cash": -25,
+          "cash": -21,
           "stress": -25
         },
         "out": "Une tranquillité d'esprit précieuse, à un coût de gestion non négligeable."
@@ -5278,7 +5300,8 @@
         "label": "Organiser une réunion familiale pour clarifier tes intentions",
         "tag": "prudent",
         "eff": {
-          "stress": -15
+          "stress": -15,
+          "cash": 4
         },
         "out": "Une transparence qui apaise, même si elle ne résout pas tout instantanément."
       },
@@ -5426,7 +5449,9 @@
       {
         "label": "Accepter cet hommage avec fierté",
         "tag": "creatif",
-        "eff": {},
+        "eff": {
+          "cash": 3
+        },
         "out": "Une reconnaissance qui marque durablement ton parcours dans la ville."
       },
       {
@@ -5469,7 +5494,8 @@
         "label": "Négocier des droits d'auteur sur les ventes du livre",
         "tag": "audacieux",
         "eff": {
-          "personalCash": 15
+          "personalCash": 15,
+          "cash": 8
         },
         "out": "Une reconnaissance qui, en plus, génère un petit revenu personnel."
       }
@@ -5485,7 +5511,7 @@
         "label": "Lui transmettre progressivement les rênes",
         "tag": "prudent",
         "eff": {
-          "cash": -15,
+          "cash": -12,
           "stress": -20
         },
         "out": "Une transmission en douceur, qui assure la pérennité de ce que tu as construit."
@@ -5527,7 +5553,8 @@
         "label": "Refuser, pour garder une pleine liberté d'exploitation",
         "tag": "risque",
         "eff": {
-          "val": 10
+          "val": 10,
+          "cash": 5
         },
         "out": "Tu conserves ta liberté totale, sans cette reconnaissance patrimoniale."
       },
@@ -5599,7 +5626,8 @@
         "label": "Décliner, ce n'est pas ta vocation première",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 8
         },
         "out": "Tu restes concentré·e sur une logique purement patrimoniale."
       },
@@ -5623,7 +5651,9 @@
       {
         "label": "Accepter cette distinction avec un discours marquant",
         "tag": "creatif",
-        "eff": {},
+        "eff": {
+          "cash": 3
+        },
         "out": "Un moment fort qui couronne symboliquement toute une vie de bâtisseur."
       },
       {
@@ -5649,7 +5679,8 @@
         "label": "Leur présenter un vrai plan financier détaillé",
         "tag": "prudent",
         "eff": {
-          "stress": -10
+          "stress": -10,
+          "cash": 4
         },
         "out": "Une présentation sérieuse qui rassure une bonne partie de leurs craintes."
       },
@@ -5681,7 +5712,8 @@
         "label": "Lui faire visiter avec fierté",
         "tag": "prudent",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 4
         },
         "out": "Un moment simple qui te fait réaliser le chemin déjà parcouru."
       },
@@ -5779,7 +5811,8 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "val": 5
+          "val": 5,
+          "cash": 4
         },
         "out": "Des rencontres précieuses, malgré un sentiment initial d'imposture."
       },
@@ -5847,7 +5880,7 @@
         "label": "Lancer la réunion des deux studios",
         "tag": "audacieux",
         "eff": {
-          "cash": -25,
+          "cash": -13,
           "val": 35,
           "properties": -1,
           "stress": 10
@@ -5926,7 +5959,7 @@
         "label": "Trouver un arrangement à l'amiable avant l'intervention",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": -1,
           "stress": 3
         },
         "out": "Un compromis qui évite les frais d'huissier."
@@ -6003,7 +6036,7 @@
         "label": "Tester le coliving sur un seul bien",
         "tag": "creatif",
         "eff": {
-          "cash": -8,
+          "cash": 0,
           "val": 12
         },
         "out": "Un test mesuré de ce nouveau modèle locatif."
@@ -6028,7 +6061,8 @@
         "label": "Refuser poliment, le risque est trop personnel",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Tu protèges ta propre situation, au prix d'une petite déception familiale."
       },
@@ -6071,7 +6105,7 @@
         "label": "Vérifier en détail les conditions avant de te décider",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": 0,
           "val": 25,
           "properties": 1
         },
@@ -6121,7 +6155,9 @@
       {
         "label": "Accepter et partager ton expérience en détail",
         "tag": "creatif",
-        "eff": {},
+        "eff": {
+          "cash": 4
+        },
         "out": "Un témoignage qui inspire d'autres débutants, et valorise aussi ton image."
       },
       {
@@ -6164,7 +6200,8 @@
         "label": "Demander à un proche expérimenté de t'accompagner",
         "tag": "creatif",
         "eff": {
-          "stress": -10
+          "stress": -10,
+          "cash": 3
         },
         "out": "Une présence rassurante qui change vraiment ton vécu de ce moment."
       }
@@ -6265,7 +6302,7 @@
         "label": "Te renseigner en détail avant de te positionner",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": 3,
           "val": 30,
           "properties": 1
         },
@@ -6335,7 +6372,8 @@
         "tag": "creatif",
         "eff": {
           "val": 8,
-          "stress": -3
+          "stress": -3,
+          "cash": 4
         },
         "out": "Un compromis qui te donne plus de temps, sans tout risquer d'un coup."
       }
@@ -6369,7 +6407,8 @@
         "label": "Proposer une collaboration ponctuelle plutôt qu'une fusion complète",
         "tag": "creatif",
         "eff": {
-          "val": 10
+          "val": 10,
+          "cash": 6
         },
         "out": "Un compromis qui teste la collaboration sans tout fusionner."
       }
@@ -6419,7 +6458,7 @@
         "label": "Embaucher à temps plein dès maintenant",
         "tag": "audacieux",
         "eff": {
-          "cash": -15,
+          "cash": -12,
           "stress": -15
         },
         "out": "Un vrai soulagement au quotidien, à un coût fixe qui pèse sur ta rentabilité."
@@ -6486,7 +6525,7 @@
         "label": "Adhérer pleinement à cette association",
         "tag": "prudent",
         "eff": {
-          "cash": -5,
+          "cash": -2,
           "stress": -8
         },
         "out": "Un vrai soutien juridique et humain, précieux pour la suite."
@@ -6528,7 +6567,7 @@
         "label": "Proposer un accord amiable pour en finir",
         "tag": "prudent",
         "eff": {
-          "cash": -15,
+          "cash": -10,
           "stress": -8
         },
         "out": "Un compromis qui coûte, mais qui referme enfin ce dossier épuisant."
@@ -6572,7 +6611,7 @@
         "label": "Te faire accompagner pour bien calibrer cette nouvelle structure",
         "tag": "creatif",
         "eff": {
-          "cash": -12,
+          "cash": -4,
           "val": 12
         },
         "out": "Un conseil qui sécurise ce choix structurant pour la suite."
@@ -6589,7 +6628,7 @@
         "label": "Confier toute ta comptabilité à ce cabinet",
         "tag": "prudent",
         "eff": {
-          "cash": -10,
+          "cash": -5,
           "stress": -12
         },
         "out": "Une tranquillité d'esprit précieuse sur un sujet de plus en plus technique."
@@ -6623,7 +6662,8 @@
         "label": "Accepter et jouer la carte de la transparence",
         "tag": "creatif",
         "eff": {
-          "val": 8
+          "val": 8,
+          "cash": 5
         },
         "out": "Un article qui valorise réellement ton parcours et attire de nouvelles opportunités."
       },
@@ -6697,7 +6737,8 @@
         "label": "Décliner, ce n'est pas ta priorité actuelle",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Tu restes concentré·e sur ton activité, sans cette intervention."
       },
@@ -6753,7 +6794,7 @@
         "label": "Louer un bureau professionnel dédié",
         "tag": "audacieux",
         "eff": {
-          "cash": -15,
+          "cash": -12,
           "val": 8,
           "stress": -10
         },
@@ -6831,7 +6872,8 @@
         "tag": "prudent",
         "eff": {
           "val": -5,
-          "stress": -8
+          "stress": -8,
+          "cash": 5
         },
         "out": "Un vrai partenariat de couple qui redistribue les responsabilités."
       },
@@ -6915,7 +6957,7 @@
         "label": "Acheter en visant une location à un artisan local",
         "tag": "creatif",
         "eff": {
-          "cash": -30,
+          "cash": -22,
           "val": 40,
           "properties": 1
         },
@@ -6933,7 +6975,7 @@
         "label": "Accepter et investir dans une présence remarquée",
         "tag": "audacieux",
         "eff": {
-          "cash": -15,
+          "cash": -12,
           "val": 8
         },
         "out": "Une visibilité qui attire de nouveaux contacts et opportunités."
@@ -6976,7 +7018,8 @@
         "label": "Rester uniquement investisseur, sans cette diversification",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 8
         },
         "out": "Tu restes concentré·e sur ton cœur de métier d'investisseur."
       },
@@ -7123,7 +7166,9 @@
       {
         "label": "Ignorer, ce n'est qu'un article local",
         "tag": "risque",
-        "eff": {},
+        "eff": {
+          "cash": 5
+        },
         "out": "L'article continue de circuler localement, sans réponse de ta part."
       },
       {
@@ -7184,7 +7229,7 @@
         "label": "Réaliser cet audit complet",
         "tag": "prudent",
         "eff": {
-          "cash": -20,
+          "cash": -16,
           "val": 10,
           "stress": -8
         },
@@ -7219,7 +7264,7 @@
         "label": "Lui proposer un partenariat plutôt qu'un départ",
         "tag": "prudent",
         "eff": {
-          "cash": -15
+          "cash": -10
         },
         "out": "Un accord qui transforme un départ potentiel en collaboration renforcée."
       },
@@ -7339,7 +7384,7 @@
         "label": "Acheter une petite parcelle test plutôt que la totalité",
         "tag": "creatif",
         "eff": {
-          "cash": -20,
+          "cash": -10,
           "val": 15
         },
         "out": "Un pari plus mesuré sur ce même potentiel d'urbanisation future."
@@ -7355,7 +7400,9 @@
       {
         "label": "Relayer cette mention avec enthousiasme",
         "tag": "creatif",
-        "eff": {},
+        "eff": {
+          "cash": 4
+        },
         "out": "Un coup de projecteur inattendu, qui valorise ta réputation de bailleur."
       },
       {
@@ -7437,7 +7484,8 @@
         "label": "Chercher une autre opportunité plutôt que d'attendre",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Tu passes à autre chose, sans savoir ce que tu aurais pu obtenir ici."
       }
@@ -7506,7 +7554,7 @@
         "label": "Renforcer immédiatement tes contrôles comptables internes",
         "tag": "creatif",
         "eff": {
-          "cash": -15,
+          "cash": -10,
           "val": 10
         },
         "out": "Un investissement qui protège durablement contre ce type de dérive à l'avenir."
@@ -7655,7 +7703,7 @@
         "label": "Faire appel à un fiscaliste spécialisé en urgence",
         "tag": "creatif",
         "eff": {
-          "cash": -30,
+          "cash": -25,
           "stress": 10
         },
         "out": "Un accompagnement qui sécurise le déroulement du contrôle."
@@ -7744,7 +7792,7 @@
         "label": "Investir dans ces nouveaux services partagés",
         "tag": "audacieux",
         "eff": {
-          "cash": -30,
+          "cash": -26,
           "val": 20
         },
         "out": "Un parc modernisé qui répond aux attentes d'une clientèle plus jeune et exigeante."
@@ -7824,7 +7872,8 @@
         "label": "Décliner, ton emploi du temps ne le permet pas",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Une opportunité de visibilité en moins, mais un agenda préservé."
       },
@@ -7855,7 +7904,9 @@
       {
         "label": "Rester silencieux, le scandale ne te concerne pas directement",
         "tag": "risque",
-        "eff": {},
+        "eff": {
+          "cash": 3
+        },
         "out": "L'amalgame persiste malgré tout, un peu, dans l'esprit du public."
       },
       {
@@ -7985,7 +8036,7 @@
         "label": "Accepter cet audit complet",
         "tag": "prudent",
         "eff": {
-          "cash": -30,
+          "cash": -22,
           "val": 20
         },
         "out": "Des recommandations précieuses, à un prix qui reste raisonnable au vu des enjeux."
@@ -8058,7 +8109,8 @@
         "label": "Communiquer largement sur ce classement",
         "tag": "creatif",
         "eff": {
-          "val": 8
+          "val": 8,
+          "cash": 5
         },
         "out": "Une reconnaissance qui rejaillit largement sur ton activité."
       },
@@ -8134,7 +8186,8 @@
         "label": "Décliner, ce n'est pas ta priorité",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Tu restes concentré·e sur ton activité, sans cette collaboration académique."
       },
@@ -8175,7 +8228,7 @@
         "label": "Proposer un geste temporaire de baisse de loyer",
         "tag": "creatif",
         "eff": {
-          "cash": -20,
+          "cash": -15,
           "stress": -5
         },
         "out": "Un compromis qui désamorce la crise, au prix d'un effort financier réel."
@@ -8193,7 +8246,8 @@
         "tag": "prudent",
         "eff": {
           "val": -10,
-          "stress": -20
+          "stress": -20,
+          "cash": 6
         },
         "out": "Un vrai changement de rythme, qui allège considérablement ta charge mentale."
       },
@@ -8407,7 +8461,7 @@
         "label": "Créer cette fondation familiale",
         "tag": "prudent",
         "eff": {
-          "cash": -30,
+          "cash": -26,
           "stress": -15
         },
         "out": "Une structure pérenne qui organise sereinement l'avenir de ton patrimoine."
@@ -8515,7 +8569,8 @@
         "label": "Accepter cette candidature avec enthousiasme",
         "tag": "creatif",
         "eff": {
-          "val": 8
+          "val": 8,
+          "cash": 3
         },
         "out": "Une reconnaissance nationale qui couronne des décennies de travail."
       },
@@ -8582,7 +8637,8 @@
         "label": "Organiser une vraie discussion familiale sur ce sujet",
         "tag": "prudent",
         "eff": {
-          "stress": -12
+          "stress": -12,
+          "cash": 5
         },
         "out": "Une transparence qui apaise, même si elle ne résout pas tout instantanément."
       },
@@ -8659,7 +8715,8 @@
         "label": "Décliner, ce n'est pas ta priorité actuelle",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Tu restes concentré·e sur ta propre gestion patrimoniale."
       },
@@ -8759,7 +8816,7 @@
         "label": "Structurer une transmission complète et détaillée",
         "tag": "prudent",
         "eff": {
-          "cash": -25,
+          "cash": -21,
           "stress": -18
         },
         "out": "Une organisation qui anticipe sereinement l'avenir de tout ton patrimoine."
@@ -8799,7 +8856,9 @@
       {
         "label": "Rester silencieux, ce scandale ne te concerne pas directement",
         "tag": "risque",
-        "eff": {},
+        "eff": {
+          "cash": 3
+        },
         "out": "L'amalgame persiste malgré tout, un peu, dans l'esprit du public."
       },
       {
@@ -8831,7 +8890,8 @@
         "label": "Décliner, ton énergie se fait plus rare à cet âge",
         "tag": "prudent",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 6
         },
         "out": "Tu préfères concentrer ton énergie sur ton propre patrimoine."
       },
@@ -8890,7 +8950,9 @@
       {
         "label": "Accepter et t'impliquer pleinement dans cette exposition",
         "tag": "creatif",
-        "eff": {},
+        "eff": {
+          "cash": 4
+        },
         "out": "Une reconnaissance culturelle rare, qui inscrit ton parcours dans l'histoire locale."
       },
       {
@@ -8955,7 +9017,7 @@
         "label": "Mettre en place un programme de formation complet",
         "tag": "prudent",
         "eff": {
-          "cash": -20,
+          "cash": -17,
           "stress": -15
         },
         "out": "Une transmission structurée qui assure la pérennité de ce que tu as construit."
@@ -8989,7 +9051,8 @@
         "label": "Participer pleinement à cette fête",
         "tag": "creatif",
         "eff": {
-          "stress": -15
+          "stress": -15,
+          "cash": 5
         },
         "out": "Un moment d'une grande émotion, qui couronne des décennies de relations humaines sincères."
       },
@@ -9057,7 +9120,8 @@
         "label": "Prendre vraiment le temps de ce bilan personnel",
         "tag": "prudent",
         "eff": {
-          "stress": -20
+          "stress": -20,
+          "cash": 5
         },
         "out": "Une clarté nouvelle sur ce qui compte vraiment, après tant d'années de bâtisseur."
       },
@@ -9171,7 +9235,8 @@
         "tag": "risque",
         "eff": {
           "personalCash": 35,
-          "stress": 15
+          "stress": 15,
+          "cash": 4
         },
         "out": "L'argent trouve une origine apparente, sur le papier du moins.",
         "fatal": {
@@ -9209,7 +9274,7 @@
         "label": "Accepter ce montage via prête-nom",
         "tag": "risque",
         "eff": {
-          "cash": -30,
+          "cash": -15,
           "val": 45,
           "properties": 1,
           "stress": 15
@@ -9289,7 +9354,8 @@
         "tag": "risque",
         "eff": {
           "val": 20,
-          "stress": 15
+          "stress": 15,
+          "cash": 6
         },
         "out": "Le locataire finit par partir, plus vite que prévu.",
         "fatal": {
@@ -9340,7 +9406,8 @@
         "label": "Refuser et payer la taxe réelle",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Tu restes sur des bases parfaitement conformes à la réalité."
       },
@@ -9423,7 +9490,8 @@
         "label": "Changer d'huissier pour plus de rigueur professionnelle",
         "tag": "creatif",
         "eff": {
-          "stress": 3
+          "stress": 3,
+          "cash": 4
         },
         "out": "Tu préfères t'entourer de professionnels irréprochables."
       }
@@ -9464,7 +9532,7 @@
         "label": "Adapter le projet pour réduire réellement son impact",
         "tag": "creatif",
         "eff": {
-          "cash": -20,
+          "cash": -5,
           "val": 20
         },
         "out": "Un effort qui coûte cher, mais qui rend l'étude honnête sans artifice."
@@ -9493,7 +9561,8 @@
         "label": "Refuser, mieux vaut de vrais avis, même moins nombreux",
         "tag": "prudent",
         "eff": {
-          "stress": 5
+          "stress": 5,
+          "cash": 5
         },
         "out": "Une réputation plus lente à construire, mais entièrement sincère."
       },
@@ -9568,7 +9637,8 @@
         "label": "Refuser catégoriquement",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 4
         },
         "out": "Tu refuses de t'abaisser à ce genre de pratique."
       },
@@ -9632,7 +9702,7 @@
         "label": "Accepter cet accès privilégié",
         "tag": "risque",
         "eff": {
-          "cash": -20,
+          "cash": -12,
           "val": 45,
           "properties": 1,
           "stress": 15
@@ -9713,7 +9783,8 @@
         "eff": {
           "val": 30,
           "properties": -1,
-          "stress": 15
+          "stress": 15,
+          "cash": 10
         },
         "out": "Le permis est délivré étonnamment vite, contre un logement offert en douce.",
         "fatal": {
@@ -9839,7 +9910,8 @@
         "label": "Refuser catégoriquement ce chantage",
         "tag": "prudent",
         "eff": {
-          "stress": 10
+          "stress": 10,
+          "cash": 5
         },
         "out": "Tu refuses de céder, quel qu'en soit le prix à payer."
       },
@@ -9920,7 +9992,7 @@
         "label": "Te renseigner en détail sur la réglementation avant de te décider",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": 7,
           "val": 35,
           "properties": 1
         },
@@ -10046,7 +10118,8 @@
         "label": "Leur répondre personnellement avec beaucoup de chaleur",
         "tag": "prudent",
         "eff": {
-          "stress": -10
+          "stress": -10,
+          "cash": 3
         },
         "out": "Un échange sincère qui rappelle pourquoi ce métier a aussi un vrai sens humain."
       },
@@ -10094,7 +10167,8 @@
         "tag": "creatif",
         "eff": {
           "val": 5,
-          "stress": -5
+          "stress": -5,
+          "cash": 4
         },
         "out": "Un contretemps transformé en occasion d'avancer sur d'autres aspects du projet."
       }
@@ -10118,7 +10192,9 @@
       {
         "label": "Rassurer verbalement sans mesures techniques",
         "tag": "risque",
-        "eff": {},
+        "eff": {
+          "cash": 3
+        },
         "out": "Une réponse jugée insuffisante par une partie de tes locataires inquiets."
       },
       {
@@ -10182,7 +10258,8 @@
         "label": "Refuser, par précaution pour les locataires allergiques",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Tu préfères éviter tout risque, même minime, pour tes locataires."
       },
@@ -10206,7 +10283,8 @@
         "label": "Accepter cette occupation temporaire",
         "tag": "creatif",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 4
         },
         "out": "Un geste apprécié localement, qui valorise ton image tout en attendant ton propre projet."
       },
@@ -10238,7 +10316,7 @@
         "label": "Accepter ce partenariat technologique",
         "tag": "audacieux",
         "eff": {
-          "cash": -15,
+          "cash": -9,
           "val": 15
         },
         "out": "Une modernisation qui facilite grandement la commercialisation à distance de tes biens."
@@ -10327,7 +10405,8 @@
         "tag": "creatif",
         "eff": {
           "val": -8,
-          "stress": 5
+          "stress": 5,
+          "cash": 5
         },
         "out": "Une adaptation qui limite l'impact de ce changement de vue."
       }
@@ -10359,7 +10438,7 @@
         "label": "Négocier un espace de stationnement vélo sécurisé pour tes locataires",
         "tag": "audacieux",
         "eff": {
-          "cash": -5,
+          "cash": 3,
           "val": 10
         },
         "out": "Un aménagement qui complète parfaitement cette nouvelle infrastructure urbaine."
@@ -10384,7 +10463,9 @@
       {
         "label": "Miser sur la qualité de tes biens plutôt que sur le prix",
         "tag": "prudent",
-        "eff": {},
+        "eff": {
+          "cash": 5
+        },
         "out": "Une différenciation qui rassure une partie de ta clientèle fidèle."
       },
       {
@@ -10519,7 +10600,8 @@
         "label": "Décliner, tu préfères ne pas t'impliquer dans les affaires familiales d'autrui",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Tu restes en dehors de ce conflit, par simple prudence."
       },
@@ -10543,7 +10625,7 @@
         "label": "Lancer un petit projet de logements en containers",
         "tag": "audacieux",
         "eff": {
-          "cash": -25,
+          "cash": -13,
           "val": 35,
           "properties": 1,
           "stress": 10
@@ -10645,7 +10727,8 @@
         "label": "Abattre l'arbre malgré l'opposition",
         "tag": "risque",
         "eff": {
-          "val": 20
+          "val": 20,
+          "cash": 4
         },
         "out": "Le projet avance comme prévu, au prix d'une image locale sérieusement écornée."
       },
@@ -10679,7 +10762,7 @@
         "label": "Faire analyser et valoriser cette source dans ta communication",
         "tag": "creatif",
         "eff": {
-          "cash": -8,
+          "cash": -2,
           "val": 15
         },
         "out": "Un atout inattendu qui distingue agréablement ce bien sur le marché.",
@@ -10769,7 +10852,7 @@
         "label": "Tester ce concept sur un seul bien",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -2,
           "val": 18
         },
         "out": "Un test mesuré de ce nouveau mode de vie hybride."
@@ -10932,7 +11015,8 @@
         "label": "Organiser une vraie discussion familiale pour trancher ensemble",
         "tag": "prudent",
         "eff": {
-          "stress": -12
+          "stress": -12,
+          "cash": 3
         },
         "out": "Une transparence qui apaise, même si elle ne résout pas tout instantanément."
       },
@@ -11040,7 +11124,8 @@
         "label": "Décliner, cette charge est trop lourde à assumer en plus du reste",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 4
         },
         "out": "Tu préfères te concentrer sur tes propres affaires, sans cette charge supplémentaire."
       },
@@ -11066,7 +11151,8 @@
         "label": "Accepter avec une immense joie",
         "tag": "prudent",
         "eff": {
-          "stress": -10
+          "stress": -10,
+          "cash": 4
         },
         "out": "Un rôle inattendu qui te touche bien plus que tu ne l'aurais imaginé venant de simples locataires devenus proches."
       },
@@ -11100,7 +11186,7 @@
         "label": "Adopter cette gestion collaborative",
         "tag": "audacieux",
         "eff": {
-          "cash": -8,
+          "cash": -5,
           "stress": -5
         },
         "out": "Une approche novatrice qui renforce nettement la satisfaction de tes locataires."
@@ -11171,7 +11257,8 @@
         "label": "Communiquer largement sur cette reconnaissance officielle",
         "tag": "creatif",
         "eff": {
-          "val": 8
+          "val": 8,
+          "cash": 5
         },
         "out": "Une reconnaissance institutionnelle rare qui rejaillit largement sur ton activité."
       },
@@ -11270,7 +11357,7 @@
         "label": "Investir dans ces aménagements très instagrammables",
         "tag": "audacieux",
         "eff": {
-          "cash": -25,
+          "cash": -20,
           "val": 20
         },
         "out": "Un bien qui devient un vrai décor de shooting, avec un loyer qui suit."
@@ -11303,7 +11390,7 @@
         "label": "Adopter l'IA pour toutes tes annonces",
         "tag": "audacieux",
         "eff": {
-          "cash": -5,
+          "cash": 1,
           "val": 10,
           "stress": -8
         },
@@ -11378,7 +11465,7 @@
         "label": "Jouer le jeu de cette décoration tendance",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -4,
           "val": 12
         },
         "out": "Un studio devenu presque un décor de conte de fées, qui plaît beaucoup."
@@ -11418,7 +11505,8 @@
         "label": "Laisser les locataires s'en amuser un peu",
         "tag": "creatif",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Un petit événement improbable qui devient une bonne anecdote du quartier."
       },
@@ -11460,7 +11548,7 @@
         "label": "Créer une offre 'rétro premium' assumée et bien marketée",
         "tag": "audacieux",
         "eff": {
-          "cash": -10,
+          "cash": -5,
           "val": 22
         },
         "out": "Un positionnement malin qui transforme une faiblesse en vraie force commerciale."
@@ -11524,7 +11612,8 @@
         "label": "La déplacer toi-même sur le trottoir",
         "tag": "creatif",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Un petit geste pragmatique qui règle la situation en deux minutes."
       },
@@ -11564,7 +11653,7 @@
         "label": "Investir pour améliorer encore la fraîcheur naturelle de ces biens",
         "tag": "audacieux",
         "eff": {
-          "cash": -15,
+          "cash": -9,
           "val": 18
         },
         "out": "Un investissement qui anticipe intelligemment des étés de plus en plus chauds."
@@ -11588,7 +11677,8 @@
         "label": "Laisser faire tant que le loyer tombe",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Un silence qui t'arrange presque, tant que rien de grave ne se passe."
       },
@@ -11621,7 +11711,8 @@
         "label": "Décliner poliment, tu préfères un devis plus classique",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Tu restes sur des bases plus rassurantes, sans regretter ce choix."
       },
@@ -11709,7 +11800,7 @@
         "label": "Tester cette technologie encore expérimentale",
         "tag": "audacieux",
         "eff": {
-          "cash": -15,
+          "cash": -9,
           "val": 10
         },
         "out": "Une expérience originale, dont l'utilité réelle reste encore à prouver."
@@ -11750,7 +11841,9 @@
       {
         "label": "Ignorer, ça finira bien par disparaître tout seul",
         "tag": "risque",
-        "eff": {},
+        "eff": {
+          "cash": 5
+        },
         "out": "La vidéo continue de circuler, semant une confusion regrettable."
       },
       {
@@ -11772,7 +11865,8 @@
         "label": "Participer toi-même, sans ton téléphone",
         "tag": "prudent",
         "eff": {
-          "stress": -12
+          "stress": -12,
+          "cash": 4
         },
         "out": "Une soirée étonnamment agréable, loin des notifications habituelles."
       },
@@ -11803,7 +11897,8 @@
         "label": "Jouer le jeu et répondre sur le même ton",
         "tag": "creatif",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 4
         },
         "out": "Une négociation surréaliste mais finalement efficace, et un bon souvenir en prime."
       },
@@ -11880,7 +11975,7 @@
         "label": "Chercher des matériaux alternatifs pour t'adapter",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -6,
           "val": 8
         },
         "out": "Une adaptation qui, avec un peu d'ingéniosité, limite l'impact de cette pénurie improbable."
@@ -11913,7 +12008,8 @@
         "label": "Laisser faire, c'est plutôt drôle en vérité",
         "tag": "creatif",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Un objet insolite qui devient presque la mascotte de l'immeuble."
       },
@@ -11952,7 +12048,8 @@
         "label": "Utiliser les bonnes notes comme argument commercial",
         "tag": "creatif",
         "eff": {
-          "val": 8
+          "val": 8,
+          "cash": 5
         },
         "out": "Un outil externe transformé en argument de vente inattendu."
       }
@@ -11986,7 +12083,8 @@
         "label": "Leur proposer un compromis avec un simple mode avion assumé",
         "tag": "audacieux",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 8
         },
         "out": "Une solution pragmatique qui répond à l'esprit de leur demande, sans tout réinventer."
       }
@@ -12036,7 +12134,8 @@
         "label": "Accepter d'apparaître brièvement dans le direct",
         "tag": "creatif",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 4
         },
         "out": "Un moment sympathique et spontané qui humanise vraiment ton image de bailleur."
       },
@@ -12066,7 +12165,7 @@
         "label": "L'adopter tout de suite",
         "tag": "prudent",
         "eff": {
-          "cash": -3,
+          "cash": 0,
           "stress": -5
         },
         "out": "Un petit confort qui t'évite déjà des oublis de débutant."
@@ -12107,7 +12206,7 @@
         "label": "Baisser le loyer pour compenser la nuisance",
         "tag": "risque",
         "eff": {
-          "cash": -5
+          "cash": -2
         },
         "out": "Un geste qui fidélise ton locataire malgré le désagrément."
       },
@@ -12131,7 +12230,7 @@
         "label": "Financer le raccordement",
         "tag": "audacieux",
         "eff": {
-          "cash": -10,
+          "cash": -6,
           "val": 8
         },
         "out": "Un bien enfin dans les standards attendus par les jeunes actifs."
@@ -12165,7 +12264,8 @@
         "label": "Cultiver cette amitié sans arrière-pensée",
         "tag": "prudent",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 3
         },
         "out": "Une relation humaine précieuse, qui dépasse le simple bail."
       },
@@ -12247,7 +12347,7 @@
         "label": "Installer une pompe de relevage permanente",
         "tag": "creatif",
         "eff": {
-          "cash": -18,
+          "cash": -13,
           "val": 8
         },
         "targetProperty": true,
@@ -12282,7 +12382,7 @@
         "label": "Profiter de la panne pour moderniser l'ascenseur",
         "tag": "creatif",
         "eff": {
-          "cash": -25,
+          "cash": -19,
           "val": 12
         },
         "out": "Un investissement plus lourd, mais un équipement enfin fiable."
@@ -12299,7 +12399,7 @@
         "label": "Investir dans du mobilier commun de qualité",
         "tag": "audacieux",
         "eff": {
-          "cash": -10,
+          "cash": -7,
           "val": 8
         },
         "out": "Un espace de vie qui rend la colocation bien plus attractive."
@@ -12339,7 +12439,8 @@
         "label": "Décliner, tu préfères investir plutôt qu'habiter",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Tu restes locataire, en concentrant ton argent sur l'investissement locatif."
       },
@@ -12364,7 +12465,7 @@
         "label": "Équiper plusieurs biens de ce dispositif",
         "tag": "audacieux",
         "eff": {
-          "cash": -15,
+          "cash": -7,
           "val": 12
         },
         "out": "Un argument moderne qui distingue nettement tes annonces."
@@ -12408,7 +12509,8 @@
         "label": "Trouver un arrangement à l'amiable avec le voisin",
         "tag": "creatif",
         "eff": {
-          "stress": 3
+          "stress": 3,
+          "cash": 5
         },
         "targetProperty": true,
         "out": "Un compromis simple qui évite les frais d'expertise."
@@ -12442,7 +12544,8 @@
         "label": "Décliner, son audience est trop faible",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Tu préfères attendre un partenaire plus établi."
       },
@@ -12473,7 +12576,7 @@
         "label": "Réparer directement à tes frais",
         "tag": "prudent",
         "eff": {
-          "cash": -25,
+          "cash": -17,
           "val": 10
         },
         "targetProperty": true,
@@ -12500,7 +12603,7 @@
         "label": "Payer ta quote-part sans discuter",
         "tag": "prudent",
         "eff": {
-          "cash": -15
+          "cash": -10
         },
         "out": "Un coût assumé sans conflit avec les autres copropriétaires."
       },
@@ -12601,7 +12704,7 @@
         "label": "Renforcer encore la sécurité après cette alerte",
         "tag": "prudent",
         "eff": {
-          "cash": -8,
+          "cash": -5,
           "stress": -5
         },
         "targetProperty": true,
@@ -12636,7 +12739,7 @@
         "label": "Tenter la conversion en coliving étudiant",
         "tag": "audacieux",
         "eff": {
-          "cash": -10,
+          "cash": -6,
           "val": 15
         },
         "out": "Un modèle plus rentable, avec une gestion locative un peu plus active."
@@ -12668,7 +12771,8 @@
         "label": "Mettre à profit ces nouvelles connaissances",
         "tag": "prudent",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 3
         },
         "out": "Une expérience précieuse qui t'aide à mieux négocier tes prochains achats."
       },
@@ -12732,7 +12836,7 @@
         "label": "Inscrire plusieurs biens au programme",
         "tag": "audacieux",
         "eff": {
-          "cash": -30,
+          "cash": -20,
           "val": 35
         },
         "out": "Une rénovation groupée qui coûte moins cher qu'en solo."
@@ -12787,7 +12891,7 @@
         "label": "Faire appel à un professionnel pour accélérer les démarches",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -5,
           "stress": 3
         },
         "out": "Un accompagnement qui fluidifie cette nouvelle contrainte administrative."
@@ -12840,7 +12944,7 @@
         "label": "Souscrire cette garantie sur tout ton parc",
         "tag": "prudent",
         "eff": {
-          "cash": -8,
+          "cash": -5,
           "stress": -8
         },
         "out": "Une tranquillité d'esprit qui vaut bien ce coût mensuel modeste."
@@ -12874,7 +12978,8 @@
         "label": "Le remercier chaleureusement pour ce coup de main",
         "tag": "prudent",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 4
         },
         "out": "Une relation professionnelle précieuse qui pourrait resservir."
       },
@@ -12988,7 +13093,7 @@
         "label": "Améliorer concrètement les prestations offertes",
         "tag": "creatif",
         "eff": {
-          "cash": -15,
+          "cash": -10,
           "val": 10
         },
         "out": "Un investissement qui rend ton offre nettement plus compétitive."
@@ -13078,7 +13183,8 @@
         "label": "Maintenir le projet tel quel",
         "tag": "risque",
         "eff": {
-          "val": 20
+          "val": 20,
+          "cash": 8
         },
         "out": "Le projet avance, au prix d'une image locale sérieusement écornée."
       },
@@ -13148,7 +13254,7 @@
         "label": "Accepter cette révision complète",
         "tag": "prudent",
         "eff": {
-          "cash": -25,
+          "cash": -20,
           "val": 15
         },
         "out": "Une structure optimisée qui simplifie durablement ta gestion patrimoniale."
@@ -13182,7 +13288,8 @@
         "label": "Tenter un échange de biens avec un autre investisseur",
         "tag": "audacieux",
         "eff": {
-          "val": 15
+          "val": 15,
+          "cash": 4
         },
         "out": "Une diversification géographique obtenue sans frais de transaction classiques."
       },
@@ -13251,7 +13358,8 @@
         "label": "Accepter cet audit gratuit",
         "tag": "creatif",
         "eff": {
-          "val": 10
+          "val": 10,
+          "cash": 6
         },
         "out": "Des recommandations utiles, obtenues sans frais direct."
       },
@@ -13283,7 +13391,7 @@
         "label": "Accepter de retravailler avec lui",
         "tag": "audacieux",
         "eff": {
-          "cash": -30,
+          "cash": -18,
           "val": 45,
           "properties": 1
         },
@@ -13334,7 +13442,7 @@
         "label": "Investir pour améliorer ta note sur les biens les plus faibles",
         "tag": "audacieux",
         "eff": {
-          "cash": -20,
+          "cash": -16,
           "val": 15
         },
         "out": "Un effort qui améliore réellement l'image et la qualité de ton parc."
@@ -13351,7 +13459,7 @@
         "label": "Régler à l'amiable pour tourner la page",
         "tag": "prudent",
         "eff": {
-          "cash": -15,
+          "cash": -11,
           "stress": -5
         },
         "out": "Un règlement qui referme définitivement un vieux dossier."
@@ -13439,7 +13547,7 @@
         "label": "Te renseigner sur les pratiques de tes gestionnaires actuels",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": -2,
           "stress": -5
         },
         "out": "Une vérification qui sécurise ta gestion présente et future."
@@ -13502,7 +13610,9 @@
       {
         "label": "Ignorer, ce n'est qu'un avis parmi d'autres",
         "tag": "risque",
-        "eff": {},
+        "eff": {
+          "cash": 5
+        },
         "out": "L'avis reste visible, sans réponse de ta part."
       },
       {
@@ -13580,7 +13690,7 @@
         "label": "Proposer un geste commercial pour clore le différend",
         "tag": "creatif",
         "eff": {
-          "cash": -8
+          "cash": -5
         },
         "out": "Un compromis qui referme le dossier sans procédure."
       }
@@ -13685,7 +13795,8 @@
         "label": "Profiter du désarroi de ses clients pour les approcher",
         "tag": "audacieux",
         "eff": {
-          "val": 15
+          "val": 15,
+          "cash": 4
         },
         "out": "Une opportunité commerciale, au prix d'une image un peu opportuniste."
       }
@@ -13738,7 +13849,7 @@
         "label": "Adapter ta stratégie de transmission dès maintenant",
         "tag": "prudent",
         "eff": {
-          "cash": -20,
+          "cash": -16,
           "stress": -10
         },
         "out": "Une anticipation qui protège au mieux tes héritiers de cette réforme."
@@ -13780,7 +13891,8 @@
         "label": "Décliner, tu préfères rester discret",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Tu restes en retrait, malgré cette belle proposition."
       },
@@ -13858,7 +13970,7 @@
         "label": "Proposer de partager cette reprise avec un tiers de confiance",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -2,
           "val": 12
         },
         "out": "Un compromis qui répartit intelligemment cette nouvelle charge."
@@ -13911,7 +14023,7 @@
         "label": "Proposer des baux flexibles sur une partie du parc",
         "tag": "audacieux",
         "eff": {
-          "cash": -10,
+          "cash": -5,
           "val": 15
         },
         "out": "Une offre moderne qui séduit une nouvelle génération de locataires."
@@ -13961,7 +14073,7 @@
         "label": "Proposer un partenariat ponctuel sur un projet précis",
         "tag": "creatif",
         "eff": {
-          "cash": -20,
+          "cash": -10,
           "val": 35,
           "properties": 1,
           "stress": 5
@@ -13980,7 +14092,8 @@
         "label": "Accepter cette contribution bénévole",
         "tag": "prudent",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 3
         },
         "out": "Une contribution qui valorise ton expertise au service du patrimoine local."
       },
@@ -14048,7 +14161,7 @@
         "label": "Accepter cet audit complet",
         "tag": "prudent",
         "eff": {
-          "cash": -25,
+          "cash": -22,
           "stress": -10
         },
         "out": "Une vérification qui sécurise durablement la transmission prévue."
@@ -14091,7 +14204,8 @@
         "label": "Décliner, ce déplacement te semble trop lourd",
         "tag": "prudent",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 4
         },
         "out": "Tu préserves ton énergie, sans cette reconnaissance internationale."
       },
@@ -14148,7 +14262,9 @@
       {
         "label": "Accepter cette distinction avec fierté",
         "tag": "creatif",
-        "eff": {},
+        "eff": {
+          "cash": 3
+        },
         "out": "Une reconnaissance qui couronne des décennies de travail acharné."
       },
       {
@@ -14175,7 +14291,8 @@
         "label": "Accepter ce rôle de mentor",
         "tag": "prudent",
         "eff": {
-          "stress": -8
+          "stress": -8,
+          "cash": 3
         },
         "out": "Une transmission qui te fait autant de bien qu'à ce jeune investisseur."
       },
@@ -14242,7 +14359,7 @@
         "label": "Réunir toute la famille pour établir ce pacte ensemble",
         "tag": "prudent",
         "eff": {
-          "cash": -15,
+          "cash": -10,
           "stress": -15
         },
         "out": "Une démarche qui prépare sereinement l'avenir de tout ton patrimoine."
@@ -14314,7 +14431,9 @@
       {
         "label": "Accepter de collaborer pleinement à cette étude",
         "tag": "creatif",
-        "eff": {},
+        "eff": {
+          "cash": 4
+        },
         "out": "Un témoignage qui inspirera durablement de futurs investisseurs."
       },
       {
@@ -14341,7 +14460,8 @@
         "label": "Prendre vraiment le temps de ce bilan personnel",
         "tag": "prudent",
         "eff": {
-          "stress": -20
+          "stress": -20,
+          "cash": 4
         },
         "out": "Une clarté nouvelle sur ce qui compte vraiment, après tant d'années de bâtisseur."
       },
@@ -14388,7 +14508,8 @@
         "label": "Demander à un proche expérimenté de t'accompagner",
         "tag": "creatif",
         "eff": {
-          "stress": -8
+          "stress": -8,
+          "cash": 5
         },
         "out": "Une présence rassurante qui change vraiment ton vécu du rendez-vous."
       }
@@ -14404,7 +14525,7 @@
         "label": "Accepter ce mandat exclusif",
         "tag": "prudent",
         "eff": {
-          "cash": -5,
+          "cash": 0,
           "val": 8
         },
         "out": "Une vente mieux accompagnée, à un coût de commission un peu supérieur."
@@ -14446,7 +14567,7 @@
         "label": "Foncer quand même, ton instinct te dit d'y aller",
         "tag": "audacieux",
         "eff": {
-          "cash": -30,
+          "cash": -20,
           "val": 35,
           "properties": 1,
           "stress": 8
@@ -14480,7 +14601,8 @@
         "label": "Décliner, tu préfères rester discret",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 4
         },
         "out": "Tu avances sans cette visibilité, à ton rythme."
       },
@@ -14518,7 +14640,8 @@
         "label": "Prendre toi-même un rôle actif au conseil syndical",
         "tag": "creatif",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Une implication qui améliore concrètement la gestion de l'immeuble."
       }
@@ -14551,7 +14674,7 @@
         "label": "Te faire accompagner par un comptable pour ce premier contrôle",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -5,
           "stress": -5
         },
         "out": "Un accompagnement qui sécurise sereinement cette première expérience."
@@ -14575,7 +14698,8 @@
         "label": "Refuser poliment, le risque est trop personnel",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Tu protèges ta propre situation, au prix d'une petite déception amicale."
       },
@@ -14638,7 +14762,8 @@
         "label": "Laisser le syndic gérer ça sans t'impliquer",
         "tag": "risque",
         "eff": {
-          "stress": 3
+          "stress": 3,
+          "cash": 4
         },
         "out": "Tu restes en retrait, en espérant que ça se résout sans toi."
       },
@@ -14860,7 +14985,7 @@
         "label": "Proposer une médiation avec le nouveau voisin",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": -2,
           "stress": 3
         },
         "out": "Un dialogue qui pourrait enfin clore ce vieux différend."
@@ -14916,7 +15041,7 @@
         "label": "Réaliser tous les travaux exigés",
         "tag": "prudent",
         "eff": {
-          "cash": -30,
+          "cash": -22,
           "val": 20
         },
         "targetProperty": true,
@@ -15016,7 +15141,7 @@
         "label": "Proposer un règlement amiable rapide",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -7,
           "stress": -3
         },
         "out": "Un compromis qui referme rapidement ce différend sans grand éclat."
@@ -15088,7 +15213,7 @@
         "label": "Profiter de cette période pour digitaliser ta gestion à distance",
         "tag": "creatif",
         "eff": {
-          "cash": -15,
+          "cash": -12,
           "val": 8,
           "stress": -3
         },
@@ -15143,7 +15268,7 @@
         "label": "T'engager dans ce partenariat social",
         "tag": "audacieux",
         "eff": {
-          "cash": -20,
+          "cash": -12,
           "val": -10,
           "stress": -8
         },
@@ -15230,7 +15355,8 @@
         "label": "Chercher une autre opportunité plutôt que d'attendre",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 4
         },
         "out": "Tu passes à autre chose, sans savoir ce que tu aurais pu obtenir."
       }
@@ -15340,7 +15466,8 @@
         "label": "Proposer une collaboration ponctuelle plutôt qu'une fusion",
         "tag": "creatif",
         "eff": {
-          "val": 18
+          "val": 18,
+          "cash": 12
         },
         "out": "Un compromis qui teste la collaboration sans tout fusionner."
       }
@@ -15465,7 +15592,9 @@
       {
         "label": "Accepter cet hommage avec émotion",
         "tag": "creatif",
-        "eff": {},
+        "eff": {
+          "cash": 3
+        },
         "out": "Une reconnaissance durable, gravée dans la pierre de ce quartier transformé."
       },
       {
@@ -15492,7 +15621,7 @@
         "label": "Tenter cet achat groupé entre inconnus",
         "tag": "audacieux",
         "eff": {
-          "cash": -25,
+          "cash": -15,
           "val": 35,
           "properties": 1,
           "stress": 10
@@ -15545,7 +15674,7 @@
         "label": "Accepter en choisissant ensemble le thème de la fresque",
         "tag": "audacieux",
         "eff": {
-          "cash": -5,
+          "cash": -1,
           "val": 15
         },
         "targetProperty": true,
@@ -15698,7 +15827,7 @@
         "label": "Accepter cette collaboration gratuite",
         "tag": "audacieux",
         "eff": {
-          "cash": -10,
+          "cash": -5,
           "val": 25
         },
         "out": "Un design signé qui valorise nettement le bien, pour un coût minime."
@@ -15773,7 +15902,9 @@
       {
         "label": "Ignorer, cette histoire ne te concerne pas directement",
         "tag": "risque",
-        "eff": {},
+        "eff": {
+          "cash": 4
+        },
         "out": "Un léger amalgame qui persiste malgré tout dans l'esprit du public."
       },
       {
@@ -15982,7 +16113,7 @@
         "label": "Profiter du délai pour valoriser cette découverte dans ta communication",
         "tag": "creatif",
         "eff": {
-          "cash": -8,
+          "cash": -2,
           "val": 12
         },
         "targetProperty": true,
@@ -16228,7 +16359,8 @@
         "label": "Organiser une petite cérémonie d'ouverture avec le voisinage",
         "tag": "creatif",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 4
         },
         "out": "Un moment convivial et inattendu qui marque agréablement le quartier."
       },
@@ -16260,7 +16392,7 @@
         "label": "Équiper plusieurs biens de ce mobilier astucieux",
         "tag": "audacieux",
         "eff": {
-          "cash": -18,
+          "cash": -14,
           "val": 20
         },
         "out": "Des micro-logements bien plus fonctionnels, qui séduisent une nouvelle clientèle."
@@ -16490,7 +16622,7 @@
         "label": "Faire intervenir un professionnel en urgence",
         "tag": "prudent",
         "eff": {
-          "cash": -10
+          "cash": -6
         },
         "targetProperty": true,
         "out": "Une intervention rapide qui rassure immédiatement le locataire."
@@ -16523,7 +16655,7 @@
         "label": "Distribuer des ventilateurs d'appoint",
         "tag": "prudent",
         "eff": {
-          "cash": -8
+          "cash": -4
         },
         "out": "Un geste apprécié qui limite les tensions pendant cet épisode de chaleur."
       },
@@ -16550,7 +16682,7 @@
         "label": "Payer le tarif majoré pour une intervention d'urgence",
         "tag": "prudent",
         "eff": {
-          "cash": -20
+          "cash": -15
         },
         "out": "Un coût élevé, mais un problème résolu rapidement malgré le jour férié."
       },
@@ -16587,7 +16719,8 @@
         "label": "Ignorer, ce n'est qu'un hasard sans conséquence",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Tu laisses passer ce petit clin d'œil du hasard."
       },
@@ -16618,7 +16751,8 @@
         "label": "Ne rien faire, ce n'est pas ta responsabilité",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 4
         },
         "out": "Tu laisses la municipalité s'en apercevoir par elle-même."
       },
@@ -16689,7 +16823,9 @@
       {
         "label": "Envoyer un message rassurant à tous tes locataires",
         "tag": "creatif",
-        "eff": {},
+        "eff": {
+          "cash": 5
+        },
         "out": "Un geste apprécié qui rassure tout le monde pendant cette coupure."
       }
     ]
@@ -16703,7 +16839,7 @@
         "label": "Faire nettoyer et poser un dispositif anti-pigeon",
         "tag": "prudent",
         "eff": {
-          "cash": -10
+          "cash": -5
         },
         "targetProperty": true,
         "out": "Un problème réglé durablement, avec une solution qui évite la récidive."
@@ -16753,7 +16889,7 @@
         "label": "Alerter immédiatement tous les habitants par précaution",
         "tag": "creatif",
         "eff": {
-          "cash": -3
+          "cash": 1
         },
         "out": "Une réaction prudente qui rassure durablement tes locataires."
       }
@@ -16799,7 +16935,7 @@
         "label": "Faire traiter le jardin en urgence",
         "tag": "prudent",
         "eff": {
-          "cash": -12
+          "cash": -9
         },
         "targetProperty": true,
         "out": "Un traitement rapide qui sécurise le jardin pour la famille locataire."
@@ -16831,7 +16967,8 @@
         "label": "Rester neutre, ce n'est pas ton sujet",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Tu observes la situation sans t'impliquer."
       },
@@ -16908,7 +17045,7 @@
         "label": "En profiter pour vérifier l'état général de la toiture",
         "tag": "creatif",
         "eff": {
-          "cash": -8,
+          "cash": -4,
           "val": 5
         },
         "targetProperty": true,
@@ -16942,7 +17079,7 @@
         "label": "Profiter de l'occasion pour installer une clôture plus solide",
         "tag": "creatif",
         "eff": {
-          "cash": -15,
+          "cash": -12,
           "val": 8
         },
         "targetProperty": true,
@@ -16958,7 +17095,9 @@
       {
         "label": "Prévenir ton locataire commercial à l'avance",
         "tag": "prudent",
-        "eff": {},
+        "eff": {
+          "cash": 5
+        },
         "out": "Un geste apprécié qui limite la surprise pour ton locataire."
       },
       {
@@ -17005,7 +17144,8 @@
         "label": "Demander un délai supplémentaire à l'administration",
         "tag": "creatif",
         "eff": {
-          "stress": 3
+          "stress": 3,
+          "cash": 4
         },
         "out": "Un délai accordé qui t'évite de tout précipiter."
       }
@@ -17064,7 +17204,8 @@
         "label": "Le laisser tranquille, il ne dérange personne",
         "tag": "risque",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 3
         },
         "out": "Un colocataire à quatre pattes bien involontaire."
       },
@@ -17103,7 +17244,7 @@
         "label": "Proposer l'installation d'une meilleure ventilation",
         "tag": "creatif",
         "eff": {
-          "cash": -10,
+          "cash": -7,
           "val": 5
         },
         "targetProperty": true,
@@ -17120,7 +17261,8 @@
         "label": "Laisser faire, tant que ça ne pose pas de problème",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Une tolérance simple qui n'engendre aucune conséquence particulière."
       },
@@ -17150,7 +17292,9 @@
       {
         "label": "Prévenir tes locataires à l'avance de la gêne temporaire",
         "tag": "prudent",
-        "eff": {},
+        "eff": {
+          "cash": 4
+        },
         "out": "Un geste simple qui évite toute mauvaise surprise."
       },
       {
@@ -17178,7 +17322,7 @@
         "label": "Faire refaire immédiatement le diagnostic",
         "tag": "prudent",
         "eff": {
-          "cash": -8
+          "cash": -4
         },
         "targetProperty": true,
         "out": "Une régularisation rapide qui sécurise la situation du bien."
@@ -17218,7 +17362,7 @@
         "label": "Rembourser quand même, pour préserver la relation",
         "tag": "risque",
         "eff": {
-          "cash": -5
+          "cash": 0
         },
         "out": "Un geste commercial qui coûte peu et apaise la relation."
       },
@@ -17241,7 +17385,8 @@
         "label": "Passer dire bonjour et profiter du moment",
         "tag": "prudent",
         "eff": {
-          "stress": -5
+          "stress": -5,
+          "cash": 4
         },
         "out": "Un moment convivial qui valorise l'ambiance de l'immeuble."
       },
@@ -17272,7 +17417,8 @@
         "label": "Profiter de cette visibilité pour ajuster le prix à la hausse",
         "tag": "audacieux",
         "eff": {
-          "val": 12
+          "val": 12,
+          "cash": 8
         },
         "out": "Une demande en forte hausse qui justifie une réévaluation du prix."
       },
@@ -17317,7 +17463,7 @@
         "label": "Isoler durablement cette canalisation pour l'avenir",
         "tag": "creatif",
         "eff": {
-          "cash": -20,
+          "cash": -15,
           "val": 8
         },
         "targetProperty": true,
@@ -17350,7 +17496,7 @@
         "label": "Installer un second équipement pour éviter tout conflit",
         "tag": "creatif",
         "eff": {
-          "cash": -15,
+          "cash": -10,
           "val": 5
         },
         "out": "Un investissement qui règle définitivement cette source de tension."
@@ -17366,7 +17512,7 @@
         "label": "Faire vérifier tous tes diagnostics par un professionnel de confiance",
         "tag": "prudent",
         "eff": {
-          "cash": -15
+          "cash": -12
         },
         "out": "Une vérification qui sécurise durablement la conformité de ton parc."
       },
@@ -17398,7 +17544,8 @@
         "tag": "prudent",
         "eff": {
           "personalCash": 5,
-          "stress": -5
+          "stress": -5,
+          "cash": 4
         },
         "out": "Un moment convivial et un petit rangement personnel bienvenu."
       },
@@ -17443,7 +17590,7 @@
         "label": "Faire vérifier et recalibrer le système d'alarme",
         "tag": "creatif",
         "eff": {
-          "cash": -8
+          "cash": -3
         },
         "out": "Un réglage qui évite ce genre de fausse alerte à l'avenir."
       }
@@ -17466,7 +17613,8 @@
         "label": "La laisser pousser, ça donne un certain charme",
         "tag": "risque",
         "eff": {
-          "val": 3
+          "val": 3,
+          "cash": 3
         },
         "out": "Un charme naturel inattendu, sans grande conséquence."
       },
@@ -17489,7 +17637,8 @@
         "label": "L'aider à le récupérer sans difficulté",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 4
         },
         "out": "Un geste simple qui se passe sans le moindre problème."
       },
@@ -17518,7 +17667,7 @@
         "label": "Faire corriger officiellement cette erreur",
         "tag": "prudent",
         "eff": {
-          "cash": -8
+          "cash": -5
         },
         "targetProperty": true,
         "out": "Une régularisation qui clarifie définitivement la situation du bien."
@@ -17598,7 +17747,8 @@
         "label": "Anticiper une éventuelle baisse de valeur en ajustant ta stratégie",
         "tag": "creatif",
         "eff": {
-          "val": -5
+          "val": -5,
+          "cash": 5
         },
         "out": "Une prudence qui limite l'impact si la rumeur s'avérait vraie."
       }
@@ -17661,7 +17811,7 @@
         "label": "Profiter de l'occasion pour revoir l'étanchéité de la cuisine",
         "tag": "creatif",
         "eff": {
-          "cash": -15,
+          "cash": -11,
           "val": 5
         },
         "targetProperty": true,
@@ -17678,7 +17828,7 @@
         "label": "Faire installer des compteurs individuels",
         "tag": "prudent",
         "eff": {
-          "cash": -20,
+          "cash": -17,
           "val": 8
         },
         "out": "Un investissement qui règle définitivement ce type de désaccord récurrent."
@@ -17710,7 +17860,7 @@
         "label": "Faire intervenir un dépanneur en urgence",
         "tag": "prudent",
         "eff": {
-          "cash": -15
+          "cash": -10
         },
         "out": "Une intervention rapide qui débloque la situation pour tout le monde."
       },
@@ -17755,7 +17905,7 @@
         "label": "Mettre en place un canal d'information pour ce genre de situation",
         "tag": "creatif",
         "eff": {
-          "cash": -3
+          "cash": 2
         },
         "out": "Un dispositif qui rassure durablement pour toute future alerte."
       }
@@ -17776,7 +17926,8 @@
         "label": "Refuser, tu préfères garder le hall neutre",
         "tag": "prudent",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Tu préserves un hall sobre, sans cette animation culturelle."
       },
@@ -17817,7 +17968,7 @@
         "label": "Reboucher provisoirement en attendant une expertise complète",
         "tag": "creatif",
         "eff": {
-          "cash": -5,
+          "cash": 0,
           "stress": 3
         },
         "targetProperty": true,
@@ -17879,7 +18030,8 @@
         "label": "Organiser une réunion pour renforcer l'esprit collectif du jardin",
         "tag": "creatif",
         "eff": {
-          "stress": -3
+          "stress": -3,
+          "cash": 5
         },
         "out": "Un geste qui responsabilise agréablement toute la communauté du jardin."
       }
@@ -17910,7 +18062,7 @@
         "label": "Installer une boîte aux lettres mieux identifiée pour chaque logement",
         "tag": "creatif",
         "eff": {
-          "cash": -5
+          "cash": 0
         },
         "out": "Une solution simple qui évite définitivement ce genre de confusion."
       }
@@ -17924,7 +18076,9 @@
       {
         "label": "Prévenir à l'avance la prochaine fois",
         "tag": "prudent",
-        "eff": {},
+        "eff": {
+          "cash": 5
+        },
         "out": "Une leçon apprise qui améliore ta communication pour l'avenir."
       },
       {
@@ -17971,7 +18125,7 @@
         "label": "Proposer un canal de signalement officiel pour l'avenir",
         "tag": "creatif",
         "eff": {
-          "cash": -3
+          "cash": 0
         },
         "out": "Un dispositif qui facilite désormais ce genre de remontée d'information."
       }
@@ -17986,7 +18140,7 @@
         "label": "Faire réaliser un constat d'huissier préventif",
         "tag": "prudent",
         "eff": {
-          "cash": -10
+          "cash": -6
         },
         "targetProperty": true,
         "out": "Une précaution qui protège tes intérêts en cas de dégât futur."
@@ -18018,7 +18172,8 @@
         "label": "Faire estimer et vendre ces objets",
         "tag": "creatif",
         "eff": {
-          "personalCash": 8
+          "personalCash": 8,
+          "cash": 4
         },
         "out": "Une petite trouvaille inattendue qui vient compléter ton épargne perso."
       },
@@ -18064,7 +18219,8 @@
         "label": "Transformer cette affluence en petite mise en concurrence des offres",
         "tag": "audacieux",
         "eff": {
-          "val": 15
+          "val": 15,
+          "cash": 4
         },
         "out": "Une situation qui te permet de tirer le meilleur prix possible de ce bien très demandé."
       }
@@ -18261,7 +18417,7 @@
         "label": "Lui céder un bien à prix coûtant — investir dans sa réussite",
         "tag": "prudent",
         "eff": {
-          "cash": -20,
+          "cash": -8,
           "val": -80,
           "stress": -10,
           "personalCash": 30

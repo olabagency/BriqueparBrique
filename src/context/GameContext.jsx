@@ -554,6 +554,12 @@ function reducer(state, action) {
     case 'DISMISS_YEAR_REPORT':
       return { ...state, yearReport: null };
 
+    case 'SET_SALARY': {
+      const { level } = action.payload;
+      if (!SALARY_AMOUNTS[level] !== undefined) return state;
+      return { ...state, salary: level, lastSalaryChangeYear: state.year };
+    }
+
     default:
       return state;
   }
@@ -722,6 +728,7 @@ export function GameProvider({ children }) {
   const massRepayLoans  = useCallback(()    => dispatch({ type: 'MASS_REPAY_LOANS' }), []);
   const bankWithdraw = useCallback((pct)  => dispatch({ type: 'BANK_WITHDRAW', payload: { pct } }), []);
   const bankInject   = useCallback((pct)  => dispatch({ type: 'BANK_INJECT',   payload: { pct } }), []);
+  const changeSalary = useCallback((level) => dispatch({ type: 'SET_SALARY', payload: { level } }), []);
   const refreshMarket      = useCallback(()    => dispatch({ type: 'REFRESH_MARKET' }), []);
   const setScreen          = useCallback((scr) => dispatch({ type: 'SET_SCREEN',    payload: scr }), []);
   const dismissYearReport  = useCallback(()    => dispatch({ type: 'DISMISS_YEAR_REPORT' }), []);
@@ -733,7 +740,7 @@ export function GameProvider({ children }) {
     buyProperty, sellProperty, toggleRent, renovateProperty,
     buyLuxury, sellLuxury,
     retire, repayLoan, renegotiateLoan, massRepayLoans,
-    bankWithdraw, bankInject,
+    bankWithdraw, bankInject, changeSalary,
     refreshMarket, setScreen, resetGame, dismissYearReport,
   };
 
