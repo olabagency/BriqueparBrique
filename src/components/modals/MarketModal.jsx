@@ -6,7 +6,19 @@ import { calcLoanPayment } from '../../engine/market.js';
 import propertyData from '../../data/property_data.json';
 
 const CYCLE_LABELS = { hausse: '📈 Marché haussier', neutre: '➡️ Marché neutre', baisse: '📉 Marché baissier' };
-const MIN_APPORT_PCT = 10; // minimum 10% down
+const MIN_APPORT_PCT = 10;
+const TYPE_EMOJI = {
+  'Studio':               '🛏️',
+  'Appartement T2':       '🏠',
+  'Appartement T3':       '🏢',
+  'Duplex':               '🏘️',
+  'Maison':               '🏡',
+  'Loft':                 '✨',
+  'Immeuble de rapport':  '🏗️',
+  'Local commercial':     '🏪',
+  'Terrain':              '🌿',
+  'Parking':              '🚗',
+};
 
 function PurchaseConfigurator({ listing, effectivePrice, cash, onConfirm, onCancel }) {
   const [apportPct, setApportPct] = useState(20);
@@ -154,7 +166,7 @@ export default function MarketModal({ onClose }) {
   const types = [...new Set(marketListings.map(l => l.type))];
 
   return (
-    <Modal title="🛒 Marché immobilier" onClose={onClose}>
+    <Modal title="🛒 Marché immobilier" onClose={onClose} wide>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
         <span style={{ fontSize: 12, color: 'var(--muted)' }}>{CYCLE_LABELS[economicCycle]}</span>
         <button
@@ -172,63 +184,59 @@ export default function MarketModal({ onClose }) {
         ))}
       </div>
 
-      <div className="portfolio-list">
+      <div className="market-grid">
         {filtered.map(listing => {
           const basePrice = listing.price;
           const effectivePrice = hasAgent ? Math.round(basePrice * 0.95) : basePrice;
-          const previewLoan = calcLoanPayment(effectivePrice, 0.8); // preview at 20% apport
           const minApport = Math.round(effectivePrice * MIN_APPORT_PCT / 100);
           const canAffordMin = cash >= minApport;
           const condLabel = propertyData.conditionLabels?.[listing.condition] ?? listing.condition;
           const isSelected = selectedId === listing.id;
+          const emoji = TYPE_EMOJI[listing.type] ?? '🏠';
 
           return (
-            <div
-              className="market-listing-card"
-              key={listing.id}
-              style={{ borderColor: isSelected ? 'var(--accent)' : undefined }}
-            >
-              <div className="market-listing-top">
-                <span className="market-listing-name">{listing.type}</span>
-                <div style={{ textAlign: 'right' }}>
-                  {hasAgent && (
-                    <div style={{ fontSize: 10, color: 'var(--accent)', textDecoration: 'line-through', opacity: .6 }}>
-                      {fmtCash(basePrice)}
-                    </div>
-                  )}
-                  <span className="market-listing-price">{fmtCash(effectivePrice)}</span>
-                </div>
-              </div>
-              <div className="market-listing-meta">
-                📍 {listing.place} · {condLabel}
-                {hasAgent && <span style={{ marginLeft: 6, color: 'var(--accent)', fontWeight: 700 }}>−5% agent</span>}
-              </div>
-              <div className="market-listing-meta" style={{ color: 'var(--muted)' }}>
-                Apport min 10% : {fmtCash(minApport)} · Mensualité indicative : {fmtCash(previewLoan.monthlyPayment)}/mois
-              </div>
-
+            <div className={`market-grid-card${isSelected ? ' market-grid-card--selected' : ''}`} key={listing.id}>
               {isSelected ? (
-                <PurchaseConfigurator
-                  listing={listing}
-                  effectivePrice={effectivePrice}
-                  cash={cash}
-                  onConfirm={(apportPct) => {
-                    buyProperty(listing, apportPct);
-                    onClose();
-                  }}
-                  onCancel={() => setSelectedId(null)}
-                />
+                <>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                    <span style={{ fontSize: 28 }}>{emoji}</span>
+                    <div>
+                      <div style={{ fontWeight: 700, fontSize: 13 }}>{listing.type}</div>
+                      <div style={{ fontSize: 11, color: 'var(--muted)' }}>📍 {listing.place} · {condLabel}</div>
+                    </div>
+                    <div style={{ marginLeft: 'auto', fontWeight: 800, fontFamily: 'monospace', color: 'var(--accent)' }}>
+                      {fmtCash(effectivePrice)}
+                    </div>
+                  </div>
+                  <PurchaseConfigurator
+                    listing={listing}
+                    effectivePrice={effectivePrice}
+                    cash={cash}
+                    onConfirm={(apportPct) => { buyProperty(listing, apportPct); onClose(); }}
+                    onCancel={() => setSelectedId(null)}
+                  />
+                </>
               ) : (
-                <button
-                  className="market-listing-buy-btn"
-                  disabled={!canAffordMin}
-                  onClick={() => setSelectedId(listing.id)}
-                  title={!canAffordMin ? `Apport minimum requis : ${fmtCash(minApport)}` : 'Configurer le financement'}
-                >
-                  {canAffordMin
-                    ? `Financer →`
-                    : `Apport insuffisant (min. ${fmtCash(minApport)})`}
-                </button>
+                <>
+                  <div className="market-grid-card-emoji">{emoji}</div>
+                  <div className="market-grid-card-type">{listing.type}</div>
+                  <div className="market-grid-card-price">
+                    {hasAgent && <span style={{ textDecoration: 'line-through', opacity: .5, marginRight: 4, fontSize: 11 }}>{fmtCash(basePrice)}</span>}
+                    {fmtCash(effectivePrice)}
+                  </div>
+                  <div className="market-grid-card-meta">📍 {listing.place}</div>
+                  <div className="market-grid-card-meta">
+                    {condLabel}{hasAgent && <span style={{ color: 'var(--accent)', marginLeft: 4, fontWeight: 700 }}>−5%</span>}
+                  </div>
+                  <button
+                    className="market-listing-buy-btn"
+                    style={{ marginTop: 'auto' }}
+                    disabled={!canAffordMin}
+                    onClick={() => setSelectedId(listing.id)}
+                  >
+                    {canAffordMin ? 'Financer →' : `Min. ${fmtCash(minApport)}`}
+                  </button>
+                </>
               )}
             </div>
           );

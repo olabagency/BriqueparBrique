@@ -48,14 +48,14 @@ export default function LeftSidebar({ onOpenModal }) {
         <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
           <button
             className="btn-ghost"
-            style={{ flex: 1, fontSize: 12 }}
+            style={{ flex: 1, fontSize: 11, padding: '6px 8px', border: '1px solid var(--border)', borderRadius: 8 }}
             onClick={() => onOpenModal('portfolio')}
           >
             📋 Gérer
           </button>
           <button
             style={{
-              flex: 1, fontSize: 12, fontWeight: 700, padding: '6px 0',
+              flex: 1, fontSize: 11, fontWeight: 700, padding: '6px 0',
               background: 'var(--accent-soft)', border: '1px solid var(--accent)',
               borderRadius: 8, color: 'var(--accent)', cursor: 'pointer',
             }}
@@ -63,6 +63,13 @@ export default function LeftSidebar({ onOpenModal }) {
           >
             🛒 Acheter
           </button>
+        </div>
+
+        <div className="sidebar-location-tip">
+          <div className="sidebar-location-tip-title">📬 Location</div>
+          <div>✅ Louer → loyer auto ~7% · +1 stress/an · risque événements</div>
+          <div>💸 Vente loué −5% · 🚀 Vacant = prix plein</div>
+          <div style={{ marginTop: 4, color: 'var(--amber)' }}>⚠️ 1 changement de statut/an</div>
         </div>
       </div>
 
@@ -98,22 +105,13 @@ export default function LeftSidebar({ onOpenModal }) {
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <button
-            className="btn-ghost"
-            style={{ width: '100%', fontSize: 12 }}
-            onClick={() => onOpenModal('luxury')}
-          >
-            🛍️ Boutique de luxe
-          </button>
-          <button
-            className="btn-ghost"
-            style={{ width: '100%', fontSize: 12 }}
-            onClick={() => onOpenModal('bank')}
-          >
-            🏦 Gérer mon compte
-          </button>
-        </div>
+        <button
+          className="btn-ghost"
+          style={{ width: '100%', fontSize: 11, padding: '6px 8px', border: '1px solid var(--border)', borderRadius: 8 }}
+          onClick={() => onOpenModal('luxury')}
+        >
+          🛍️ Boutique
+        </button>
       </div>
     </div>
   );

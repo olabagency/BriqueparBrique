@@ -17,6 +17,7 @@ export default function Modal({ title, onClose, children, wide }) {
         <div className="modal-body">
           {children}
         </div>
+        <div className="modal-fade-bottom" aria-hidden="true" />
       </div>
     </div>
   );

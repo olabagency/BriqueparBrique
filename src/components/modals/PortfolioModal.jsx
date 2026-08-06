@@ -66,29 +66,6 @@ export default function PortfolioModal({ onClose }) {
         </div>
       )}
 
-      <div style={{
-        background: 'var(--accent-soft)',
-        border: '1px solid rgba(31,122,77,.25)',
-        borderRadius: 10,
-        padding: '10px 14px',
-        fontSize: 12,
-        color: 'var(--text)',
-        lineHeight: 1.6,
-      }}>
-        <div style={{ fontWeight: 700, marginBottom: 6 }}>📬 Location : ce qu'il faut savoir</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 5, color: 'var(--muted)' }}>
-          <div>✅ <strong>Loué</strong> → loyer annuel automatique (≈ 7 % de la valeur)</div>
-          <div>😰 <strong>Loué</strong> → +1 stress/an par bien loué (gérer des locataires coûte)</div>
-          <div>⚡ <strong>Loué</strong> → risque d'événements locataires (impayés, dégradations…)</div>
-          <div>💸 <strong>Vente loué</strong> → décote −5 % (préavis légal, locataire en place)</div>
-          <div>🚀 <strong>Vente vacant</strong> → prix plein, immédiate</div>
-        </div>
-        <div style={{ marginTop: 8, padding: '6px 10px', background: 'var(--surface)', borderRadius: 8, fontSize: 11, color: 'var(--muted)' }}>
-          ⚠️ Tu ne peux <strong>changer le statut</strong> d'un bien qu'<strong>une seule fois par an</strong>.
-          Choisis bien le moment — la décision est verrouillée jusqu'à l'année suivante.
-        </div>
-      </div>
-
       {properties.length === 0 ? (
         <p className="portfolio-empty">Aucun bien dans ton portfolio.<br />Visite le marché pour acheter ton premier bien !</p>
       ) : (
