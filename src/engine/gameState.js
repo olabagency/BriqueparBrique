@@ -65,6 +65,7 @@ export function freshState({ name, companyName, gender, sector, traitId, challen
 
     // Session timing
     sessionStart: Date.now(),
+    runId: crypto.randomUUID(),
   };
 }
 
@@ -84,5 +85,6 @@ export function buildRunSummary(state) {
     propertiesOwned: state.propertiesOwned,
     date:         Date.now(),
     durationMs:   state.sessionStart ? Date.now() - state.sessionStart : null,
+    runId:        state.runId ?? crypto.randomUUID(),
   };
 }

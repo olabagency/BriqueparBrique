@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from 'firebase/app';
-import { getDatabase, ref, set, remove, get, push, limitToLast, query as fbQuery, orderByChild } from 'firebase/database';
+import { getDatabase, ref, set, remove, get, limitToLast, query as fbQuery, orderByChild } from 'firebase/database';
 import { FIREBASE_CONFIG, FIREBASE_ENABLED } from './firebaseConfig.js';
 import { SESSION_ID } from './presence.js';
 
@@ -57,13 +57,16 @@ export async function removeActiveGame() {
 /**
  * Push a finished run to the leaderboard AND to the permanent runs archive.
  * - leaderboard/{SESSION_ID}: overwritten each time (keeps best/last per session for scoreboard)
- * - runs/{pushId}: one entry per finished game, never overwritten — the full archive
+ * - runs/{runId}: keyed by the run's unique UUID → idempotent, no duplicates even if called twice
  */
 export async function pushFinishedGame(summary) {
   const db = getDb();
   if (!db) return;
 
+  const runId = summary.runId ?? SESSION_ID;
+
   const payload = {
+    runId,
     sessionId:       SESSION_ID,
     name:            summary.name ?? 'Joueur',
     companyName:     summary.companyName ?? '',
@@ -91,8 +94,8 @@ export async function pushFinishedGame(summary) {
   }
 
   try {
-    // Archive: push() generates a unique key → every run is preserved forever
-    await push(ref(db, 'runs'), payload);
+    // Archive: keyed by runId (UUID) → set() is idempotent, no duplicates on double-call
+    await set(ref(db, `runs/${runId}`), payload);
   } catch (e) {
     console.warn('pushFinishedGame (runs archive) failed', e);
   }
