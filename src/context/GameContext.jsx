@@ -535,6 +535,13 @@ function advanceYear(state) {
   }
 
   s.achievements = checkAchievements(s);
+
+  // Wealth history snapshot for charts
+  s.wealthHistory = [...(s.wealthHistory ?? []), {
+    year: s.year, age: s.age, valuation: s.valuation,
+    cash: s.cash, personalCash: s.personalCash ?? 0,
+  }];
+
   s.marketListings = generateMarketListings(s.economicCycle, 6);
   s.pendingEvents = pickEvents(s, s.eventsPerYear ?? 3);
   s.currentEventIndex = 0;
