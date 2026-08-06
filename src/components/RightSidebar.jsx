@@ -188,51 +188,6 @@ export default function RightSidebar({ onOpenModal }) {
         </div>
       </div>
 
-      {/* Live ranking */}
-      {FIREBASE_ENABLED && (
-        <div className="right-column-box">
-          <h3>🌐 Classement live</h3>
-          {!rankingData ? (
-            <div style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center', padding: '8px 0' }}>Chargement…</div>
-          ) : rankingData.length === 0 ? (
-            <div style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center', padding: '8px 0' }}>Aucun joueur en ligne</div>
-          ) : (
-            <>
-              {myRank >= 0 && (
-                <div style={{ fontSize: 11, color: 'var(--accent)', fontWeight: 700, marginBottom: 8, textAlign: 'center' }}>
-                  Tu es #{myRank + 1} parmi {rankingData.length} joueur{rankingData.length > 1 ? 's' : ''}
-                </div>
-              )}
-              <div>
-                {rankingData.slice(0, 5).map((r, i) => {
-                  const rVal = r.finalVal ?? r.valuation ?? 0;
-                  const isMe = rVal <= myVal && (!rankingData[i - 1] || (rankingData[i - 1].finalVal ?? 0) > myVal);
-                  const isActive = r._source === 'active';
-                  return (
-                    <div key={i} className={`live-rank-row${isMe ? ' live-rank-row--me' : ''}`}>
-                      <span style={{ fontSize: 12, minWidth: 18, fontWeight: 700, color: i < 3 ? ['#f59e0b','#9ca3af','#b45309'][i] : 'var(--muted)' }}>
-                        {['🥇','🥈','🥉'][i] ?? `#${i+1}`}
-                      </span>
-                      <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {r.name ?? r.pseudo ?? '—'}
-                        {isActive && <span style={{ marginLeft: 4, fontSize: 8, color: 'var(--accent)', fontWeight: 700 }}>● live</span>}
-                      </span>
-                      <span style={{ fontFamily: 'monospace', fontSize: 11, color: 'var(--accent)', flexShrink: 0 }}>{fmtCash(rVal)}</span>
-                    </div>
-                  );
-                })}
-                {myRank >= 5 && (
-                  <div className="live-rank-row live-rank-row--me" style={{ marginTop: 4 }}>
-                    <span style={{ fontSize: 11, fontWeight: 700, minWidth: 18 }}>#{myRank + 1}</span>
-                    <span style={{ flex: 1 }}>Toi</span>
-                    <span style={{ fontFamily: 'monospace', fontSize: 11, color: 'var(--accent)' }}>{fmtCash(myVal)}</span>
-                  </div>
-                )}
-              </div>
-            </>
-          )}
-        </div>
-      )}
 
       {/* Next milestone spotlight */}
       {nextMilestone && (

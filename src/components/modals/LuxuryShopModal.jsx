@@ -51,16 +51,15 @@ export default function LuxuryShopModal({ onClose }) {
                 {item.image
                   ? <img src={item.image} alt={item.name} className="luxury-card-img" />
                   : <div className="luxury-card-icon">{item.icon}</div>}
-                <div className="luxury-card-name">{item.name}</div>
-                <div className="luxury-card-brand">{item.brand}</div>
-                <div className="luxury-card-desc">{item.description}</div>
+                <div className="luxury-card-body">
+                  <div className="luxury-card-name">{item.name}</div>
+                  <div className="luxury-card-brand">{item.brand}</div>
+                  <div className="luxury-card-desc">{item.description}</div>
+                </div>
                 <button
                   className="luxury-card-buy"
                   style={{ background: 'var(--red)' }}
-                  onClick={() => {
-                    const val = item.currentValue !== undefined ? Math.round(item.currentValue) : item.price;
-                    if (window.confirm(`Revendre ${item.name} ?`)) sellLuxury(item.id);
-                  }}
+                  onClick={() => { if (window.confirm(`Revendre ${item.name} ?`)) sellLuxury(item.id); }}
                 >
                   Revendre
                 </button>
@@ -90,16 +89,17 @@ export default function LuxuryShopModal({ onClose }) {
               return (
                 <div className={`luxury-card${isOwned ? ' luxury-card--owned' : ''}`} key={item.id}>
                   {item.image
-                  ? <img src={item.image} alt={item.name} className="luxury-card-img" />
-                  : <div className="luxury-card-icon">{item.icon}</div>}
-                  <div className="luxury-card-name">{item.name}</div>
-                  <div className="luxury-card-brand">{item.brand}</div>
-                  <div className="luxury-card-desc">{item.description}</div>
+                    ? <img src={item.image} alt={item.name} className="luxury-card-img" />
+                    : <div className="luxury-card-icon">{item.icon}</div>}
+                  <div className="luxury-card-body">
+                    <div className="luxury-card-name">{item.name}</div>
+                    <div className="luxury-card-brand">{item.brand}</div>
+                    <div className="luxury-card-desc">{item.description}</div>
+                  </div>
                   <button
                     className="luxury-card-buy"
                     disabled={isOwned || !canBuy}
                     onClick={() => buyLuxury(item)}
-                    style={!isOwned && !canBuy ? { background: 'var(--surface)', color: 'var(--muted)', border: '1px solid var(--border)' } : {}}
                   >
                     {isOwned ? '✓ Possédé' : canBuy ? `Acheter — ${fmtCash(item.price)}` : 'Budget insuffisant'}
                   </button>
