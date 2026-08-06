@@ -4,56 +4,7 @@ import { useEffects } from '../../context/EffectsContext.jsx';
 import { FIREBASE_ENABLED } from '../../engine/firebaseConfig.js';
 import { updatePresence, subscribePresence, SESSION_ID } from '../../engine/presence.js';
 import { subscribeLiveNotifications } from '../../engine/liveNotifications.js';
-import globalBoard from '../../data/global_leaderboard.json';
 import { fmtCash } from '../../engine/utils.js';
-
-// ─── Simulated presence ───────────────────────────────────────────────────────
-
-const SIM_ACTIONS = [
-  `vient d'acheter un bien`,
-  `a mis son bien en location`,
-  `a renégocié son crédit`,
-  `a débloqué un nouveau succès`,
-  `vient de démarrer une nouvelle partie`,
-  `a revendu avec plus-value`,
-  `traverse une période de stress élevé`,
-  `a rénové un appartement`,
-  `a perdu plus de 100k€ sur un investissement`,
-  `est passé à 0 de stress — zen total`,
-  `vient d'acheter son 3ème bien`,
-  `a remboursé son crédit en avance`,
-  `a débloqué le succès "Propriétaire"`,
-  `vient de passer à la retraite à 45 ans`,
-  `a subi un impayé de loyer`,
-];
-
-function pickSimPlayers() {
-  const seed = Math.floor(Date.now() / (1000 * 60 * 60 * 4));
-  const count = 3 + (seed % 4);
-  return [...globalBoard].slice(0, count);
-}
-
-const SIM_PLAYERS = pickSimPlayers();
-
-function useSimPresence(emit) {
-  const timerRef = useRef(null);
-
-  useEffect(() => {
-    function scheduleNext() {
-      timerRef.current = setTimeout(() => {
-        const p = SIM_PLAYERS[Math.floor(Math.random() * SIM_PLAYERS.length)];
-        const action = SIM_ACTIONS[Math.floor(Math.random() * SIM_ACTIONS.length)];
-        emit({ type: 'live', player: p, action });
-        scheduleNext();
-      }, 22000 + Math.random() * 28000);
-    }
-    const delay = 10000 + Math.random() * 15000;
-    timerRef.current = setTimeout(scheduleNext, delay);
-    return () => clearTimeout(timerRef.current);
-  }, [emit]);
-
-  return { players: SIM_PLAYERS, count: 8 + Math.floor(Math.random() * 18) };
-}
 
 // ─── Real Firebase presence ──────────────────────────────────────────────────
 
@@ -61,10 +12,8 @@ function useRealPresence(emit) {
   const { state } = useGame();
   const [players, setPlayers] = useState([]);
   const prevPlayersRef = useRef([]);
-  const lastRealNotifRef = useRef(Date.now());
-  const simTimerRef = useRef(null);
 
-  // Push our own presence every 90s and on state changes
+  // Push our own presence on state changes and every 90s
   useEffect(() => {
     if (!state.name) return;
     updatePresence({ name: state.name, year: state.year, valuation: state.valuation, stress: state.stress });
@@ -78,7 +27,7 @@ function useRealPresence(emit) {
     return () => clearInterval(interval);
   }, [state.name, state.year, state.valuation, state.stress]);
 
-  // Subscribe to other players' presence
+  // Subscribe to other players' presence (own SESSION_ID already excluded in presence.js)
   useEffect(() => {
     const unsub = subscribePresence((live) => {
       const prev = prevPlayersRef.current;
@@ -95,15 +44,13 @@ function useRealPresence(emit) {
     return unsub;
   }, [emit]);
 
-  // Subscribe to real game-event notifications (buy, sell, achievements)
+  // Subscribe to real game-event notifications
   const lastSeenTsRef = useRef(Date.now());
   useEffect(() => {
     const unsub = subscribeLiveNotifications((notifs) => {
-      const newOnes = notifs
-        .filter(n => n.ts > lastSeenTsRef.current && n.sessionId !== SESSION_ID);
+      const newOnes = notifs.filter(n => n.ts > lastSeenTsRef.current && n.sessionId !== SESSION_ID);
       if (newOnes.length === 0) return;
       lastSeenTsRef.current = Math.max(...newOnes.map(n => n.ts));
-      lastRealNotifRef.current = Date.now();
       for (const n of newOnes) {
         emit({ type: 'live', player: { name: n.name }, action: n.action });
       }
@@ -111,24 +58,8 @@ function useRealPresence(emit) {
     return unsub;
   }, [emit]);
 
-  // Fallback simulated notifications when no real activity for 60s
-  useEffect(() => {
-    function scheduleSim() {
-      simTimerRef.current = setTimeout(() => {
-        const silentMs = Date.now() - lastRealNotifRef.current;
-        if (silentMs > 60000) {
-          const p = SIM_PLAYERS[Math.floor(Math.random() * SIM_PLAYERS.length)];
-          const action = SIM_ACTIONS[Math.floor(Math.random() * SIM_ACTIONS.length)];
-          emit({ type: 'live', player: p, action });
-        }
-        scheduleSim();
-      }, 28000 + Math.random() * 32000);
-    }
-    const firstDelay = setTimeout(scheduleSim, 20000 + Math.random() * 20000);
-    return () => { clearTimeout(firstDelay); clearTimeout(simTimerRef.current); };
-  }, [emit]);
-
-  return { players, count: Math.max(players.length, SIM_PLAYERS.length) };
+  // Count = only real Firebase players (never inflated)
+  return { players, count: players.length };
 }
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -136,20 +67,19 @@ function useRealPresence(emit) {
 export default function LivePresence() {
   const { emit } = useEffects();
 
-  const real = FIREBASE_ENABLED ? useRealPresence(emit) : null;
-  const sim  = !FIREBASE_ENABLED ? useSimPresence(emit) : null;
+  const { players, count } = FIREBASE_ENABLED
+    ? useRealPresence(emit)
+    : { players: [], count: 0 };
 
-  const { players, count } = real ?? sim ?? { players: [], count: 0 };
-  const displayCount = FIREBASE_ENABLED ? count : count;
-
-  if (displayCount === 0 && FIREBASE_ENABLED) return null;
+  // Hide when alone or Firebase disabled
+  if (count === 0) return null;
 
   const shownAvatars = players.slice(0, 4);
 
   return (
-    <div className="live-presence" title={FIREBASE_ENABLED ? 'Joueurs en ligne maintenant' : 'Joueurs actifs aujourd\'hui'}>
+    <div className="live-presence" title="Joueurs en ligne maintenant">
       <span className="live-dot" />
-      <span className="live-count">{displayCount} en ligne</span>
+      <span className="live-count">{count} en ligne</span>
       <div className="live-avatars">
         {shownAvatars.map((p, i) => (
           <span
@@ -161,9 +91,6 @@ export default function LivePresence() {
           </span>
         ))}
       </div>
-      {!FIREBASE_ENABLED && (
-        <span style={{ fontSize: 9, color: 'var(--muted)', opacity: .6 }}>sim.</span>
-      )}
     </div>
   );
 }
