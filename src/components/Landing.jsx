@@ -63,9 +63,12 @@ function PropStrip({ count }) {
 }
 
 // ─── Run Detail Modal ─────────────────────────────────────────────────────────
-function RunDetailModal({ run, rank, onClose }) {
+function RunDetailModal({ run, rank, onClose, onPlay }) {
   const ending = ENDINGS[run.endingKind] ?? ENDINGS.age_limit;
-  const totalWealth = (run.finalVal ?? 0) + (run.finalCash ?? 0) + (run.personalCash ?? 0);
+  const immo   = run.finalVal ?? 0;
+  const cash   = run.finalCash ?? 0;
+  const perso  = run.personalCash ?? 0;
+  const totalWealth = immo + cash + perso;
   const runAchievements = (run.achievements ?? [])
     .map(id => achievementsDef.find(a => a.id === id))
     .filter(Boolean);
@@ -74,6 +77,14 @@ function RunDetailModal({ run, rank, onClose }) {
     : null;
   const medalColor = MEDAL_COLORS[rank] ?? 'var(--muted)';
   const isActive = run._source === 'active';
+
+  const durationMin = run.durationMs ? Math.round(run.durationMs / 60000) : null;
+
+  // Patrimoine breakdown bar
+  const barTotal = Math.max(totalWealth, 1);
+  const immoPct  = Math.round((immo  / barTotal) * 100);
+  const cashPct  = Math.round((cash  / barTotal) * 100);
+  const persoPct = Math.max(0, 100 - immoPct - cashPct);
 
   return (
     <div className="modal-overlay" onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
@@ -109,29 +120,47 @@ function RunDetailModal({ run, rank, onClose }) {
           <button className="modal-close" onClick={onClose} aria-label="Fermer">✕</button>
         </div>
 
-        {/* Wealth headline */}
+        {/* Wealth headline + breakdown bar */}
         <div style={{
           background: 'var(--accent-soft)', border: '1px solid rgba(31,122,77,.25)',
-          borderRadius: 14, padding: '16px 20px', textAlign: 'center',
+          borderRadius: 14, padding: '16px 20px',
         }}>
-          <div style={{ fontSize: 11, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.07em', marginBottom: 6 }}>Patrimoine total</div>
-          <div style={{ fontSize: 36, fontWeight: 900, fontFamily: 'monospace', color: 'var(--accent)' }}>
+          <div style={{ fontSize: 11, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.07em', marginBottom: 4, textAlign: 'center' }}>Patrimoine total</div>
+          <div style={{ fontSize: 36, fontWeight: 900, fontFamily: 'monospace', color: 'var(--accent)', textAlign: 'center', marginBottom: 14 }}>
             {fmtCash(totalWealth)}
           </div>
-          <StatChart run={run} />
+
+          {/* Progress bar */}
+          <div style={{ display: 'flex', height: 10, borderRadius: 6, overflow: 'hidden', gap: 2, marginBottom: 10 }}>
+            {immoPct > 0 && <div style={{ width: `${immoPct}%`, background: 'var(--accent)', borderRadius: 4 }} />}
+            {cashPct > 0 && <div style={{ width: `${cashPct}%`, background: 'var(--amber)', borderRadius: 4 }} />}
+            {persoPct > 0 && <div style={{ width: `${persoPct}%`, background: '#6366f1', borderRadius: 4 }} />}
+          </div>
+
+          {/* 3 currency details */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+            {[
+              { label: '🏘️ Immo',  value: fmtCash(immo),  color: 'var(--accent)' },
+              { label: '💰 Cash',  value: fmtCash(cash),  color: 'var(--amber)' },
+              { label: '💶 Perso', value: fmtCash(perso), color: '#6366f1' },
+            ].map(({ label, value, color }) => (
+              <div key={label} style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 2 }}>{label}</div>
+                <div style={{ fontSize: 15, fontWeight: 800, fontFamily: 'monospace', color }}>{value}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Stats grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
           {[
-            { emoji: '🏘️', label: 'Patrimoine immo', value: fmtCash(run.finalVal ?? 0), accent: true },
-            { emoji: '💰', label: 'Cash final',       value: fmtCash(run.finalCash ?? 0) },
-            { emoji: '👤', label: 'Épargne perso',    value: fmtCash(run.personalCash ?? 0) },
             { emoji: '📅', label: 'Années jouées',    value: `${run.years ?? '—'} ans` },
             { emoji: '🎂', label: 'Âge final',        value: `${run.age ?? '—'} ans` },
             { emoji: '🏠', label: 'Biens acquis',     value: run.propertiesOwned ?? '—' },
             { emoji: '🏆', label: 'Succès',           value: `${(run.achievements ?? []).length} / ${achievementsDef.length}` },
             { emoji: '⭐', label: 'Rang',             value: MEDAL[rank] ?? `#${rank + 1}` },
+            ...(durationMin !== null ? [{ emoji: '⏱️', label: 'Durée de partie', value: durationMin < 60 ? `${durationMin} min` : `${Math.floor(durationMin / 60)}h${String(durationMin % 60).padStart(2, '0')}` }] : []),
           ].map(({ emoji, label, value, accent }) => (
             <div key={label} style={{
               background: 'var(--surface2)', border: '1px solid var(--border)',
@@ -152,21 +181,40 @@ function RunDetailModal({ run, rank, onClose }) {
           </div>
         )}
 
-        {/* Achievements */}
+        {/* Achievements with emojis */}
         {runAchievements.length > 0 && (
           <div>
             <div style={{ fontSize: 10, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: 8 }}>Succès débloqués</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-              {runAchievements.map(ach => (
-                <span key={ach.id} style={{
-                  fontSize: 11, padding: '4px 10px', borderRadius: 20,
-                  background: 'var(--accent-soft)', border: '1px solid rgba(31,122,77,.25)',
-                  color: 'var(--accent)', fontWeight: 600,
-                }}>
-                  {ach.title}
-                </span>
-              ))}
+              {runAchievements.map(ach => {
+                const catEmoji = ach.category?.match(/^\S+/)?.[0] ?? '🏆';
+                return (
+                  <span key={ach.id} style={{
+                    fontSize: 11, padding: '4px 10px', borderRadius: 20,
+                    background: 'var(--accent-soft)', border: '1px solid rgba(31,122,77,.25)',
+                    color: 'var(--accent)', fontWeight: 600,
+                  }}>
+                    {catEmoji} {ach.title}
+                  </span>
+                );
+              })}
             </div>
+          </div>
+        )}
+
+        {/* CTA */}
+        {onPlay && (
+          <div style={{ textAlign: 'center', paddingTop: 4 }}>
+            <p style={{ fontSize: 13, color: 'var(--muted)', margin: '0 0 10px' }}>
+              Tu penses pouvoir faire mieux ?
+            </p>
+            <button
+              className="l-btn-primary"
+              style={{ fontSize: 14 }}
+              onClick={() => { onClose(); onPlay(); }}
+            >
+              🎯 Relever le défi →
+            </button>
           </div>
         )}
       </div>
@@ -363,11 +411,6 @@ export default function Landing() {
             ))}
           </div>
 
-          <div className="l-stat-strip">
-            {['💰 Trésorerie', '📈 Parc immo', '⭐ Réputation', '😰 Stress', '🏠 Biens'].map(s => (
-              <span key={s} className="l-stat-chip">{s}</span>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -478,12 +521,29 @@ export default function Landing() {
         </div>
       </div>
 
+      {/* ── Footer ── */}
+      <footer style={{
+        borderTop: '1px solid var(--border)',
+        padding: '20px 32px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        color: 'var(--muted)',
+        fontSize: 12,
+        gap: 12,
+        flexWrap: 'wrap',
+      }}>
+        <span>Créé avec ❤️ par <strong style={{ color: 'var(--text)' }}>Bubu</strong></span>
+        <span style={{ fontFamily: 'monospace', fontSize: 11 }}>v2.0.0</span>
+      </footer>
+
       {/* ── Run detail modal ── */}
       {selectedRun && (
         <RunDetailModal
           run={selectedRun.run}
           rank={selectedRun.rank === -1 ? 99 : selectedRun.rank}
           onClose={() => setSelectedRun(null)}
+          onPlay={() => setScreen('onboarding')}
         />
       )}
     </div>

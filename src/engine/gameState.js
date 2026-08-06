@@ -62,6 +62,9 @@ export function freshState({ name, companyName, gender, sector, traitId, challen
 
     // UI helpers
     maxAge: GAME_OVER_MAX_AGE,
+
+    // Session timing
+    sessionStart: Date.now(),
   };
 }
 
@@ -80,5 +83,6 @@ export function buildRunSummary(state) {
     endingKind:   state.endingKind,
     propertiesOwned: state.propertiesOwned,
     date:         Date.now(),
+    durationMs:   state.sessionStart ? Date.now() - state.sessionStart : null,
   };
 }
