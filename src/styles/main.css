@@ -212,9 +212,11 @@ body{
   background:var(--red);color:#fff;cursor:pointer;white-space:nowrap;
 }
 .portfolio-renovate-btn{
-  font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px;
-  background:var(--amber);color:#fff;cursor:pointer;white-space:nowrap;
+  font-size:12px;font-weight:700;padding:7px 10px;border-radius:8px;
+  background:var(--surface);color:var(--text);border:1px solid var(--border);
+  cursor:pointer;white-space:nowrap;
 }
+.portfolio-renovate-btn.amber{background:var(--amber);color:#fff;border-color:transparent;}
 .portfolio-renovate-choice{width:100%;text-align:left;white-space:normal;background:var(--surface2);color:var(--text);border:1px solid var(--border);}
 h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0;}
 .mono{font-family:'JetBrains Mono',monospace;}
