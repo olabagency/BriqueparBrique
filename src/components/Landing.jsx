@@ -13,6 +13,7 @@ const ENDINGS = {
   retirement:  { emoji: '🏖️', title: 'Retraite méritée', color: 'var(--accent)' },
   age_limit:   { emoji: '🎂', title: 'Fin de vie',        color: 'var(--muted)' },
   fatal_event: { emoji: '⚡', title: 'Coup du destin',    color: 'var(--amber)' },
+  insolvency:  { emoji: '💸', title: 'Faillite',          color: 'var(--red)' },
 };
 
 const MEDAL = ['🥇', '🥈', '🥉'];

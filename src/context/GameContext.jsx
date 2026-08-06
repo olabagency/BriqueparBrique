@@ -682,6 +682,19 @@ function advanceYear(state) {
   s.pendingEvents = pickEvents(s, s.eventsPerYear ?? 3);
   s.currentEventIndex = 0;
 
+  // Insolvency check: cash below what can be mobilised (30% of portfolio + personal savings)
+  const insolvencyThreshold = Math.min(-50, -((s.valuation ?? 0) * 0.3 + (s.personalCash ?? 0)));
+  if ((s.cash ?? 0) < insolvencyThreshold) {
+    const summary = buildRunSummary({ ...s, endingKind: 'insolvency', over: true });
+    appendHistory(summary);
+    pushGlobalScore(summary);
+    pushFinishedGame(summary);
+    removePresence();
+    removeActiveGame();
+    deleteSave();
+    return { ...s, over: true, endingKind: 'insolvency', screen: 'end' };
+  }
+
   if (s.stress >= STRESS_MAX) {
     const summary = buildRunSummary({ ...s, endingKind: 'burnout', over: true });
     appendHistory(summary);

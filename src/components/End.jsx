@@ -26,6 +26,11 @@ const ENDINGS = {
     title: 'Coup du destin',
     desc:  'Un événement imprévisible a tout changé du jour au lendemain.',
   },
+  insolvency: {
+    emoji: '💸',
+    title: 'Faillite',
+    desc:  'Ta trésorerie a plongé trop bas — même en vendant tout en urgence, tu ne pouvais plus faire face. La partie s\'arrête ici.',
+  },
 };
 
 export default function End() {
