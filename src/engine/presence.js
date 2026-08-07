@@ -20,18 +20,26 @@ export const SESSION_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 8
 
 /**
  * Write/update this player's presence.
- * @param {{ name: string, year: number, valuation: number, stress: number }} data
  */
 export function updatePresence(data) {
   const database = getDb();
   if (!database) return;
   const presenceRef = ref(database, `presence/${SESSION_ID}`);
   set(presenceRef, {
-    name:      data.name ?? 'Joueur',
-    year:      data.year ?? 1,
-    valuation: data.valuation ?? 0,
-    stress:    data.stress ?? 0,
-    lastSeen:  Date.now(),
+    sessionId:   SESSION_ID,
+    name:        data.name ?? 'Joueur',
+    year:        data.year ?? 1,
+    age:         data.age ?? 18,
+    valuation:   data.valuation ?? 0,
+    cash:        data.cash ?? 0,
+    personalCash: data.personalCash ?? 0,
+    stress:      data.stress ?? 0,
+    companyName: data.companyName ?? '',
+    genderEmoji: data.genderEmoji ?? '🙂',
+    luxuryItems: (data.luxuryItems ?? []).slice(0, 6).map(i => ({
+      id: i.id, name: i.name, icon: i.icon, image: i.image ?? null,
+    })),
+    lastSeen:    Date.now(),
   }).catch(() => {});
 }
 

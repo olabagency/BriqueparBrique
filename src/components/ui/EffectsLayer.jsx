@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffects } from '../../context/EffectsContext.jsx';
+import { useGame } from '../../context/GameContext.jsx';
+import { pushLiveNotification } from '../../engine/liveNotifications.js';
 
 export default function EffectsLayer({ stress = 0 }) {
   const { effects } = useEffects();
+  const { state } = useGame();
 
   return (
     <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 9000 }}>
@@ -20,7 +23,7 @@ export default function EffectsLayer({ stress = 0 }) {
           case 'float':       return <FloatNum key={e.id} {...e} />;
           case 'achievement': return <AchievementToast key={e.id} {...e} />;
           case 'year':        return <YearFlash key={e.id} {...e} />;
-          case 'live':        return <LiveToast key={e.id} {...e} />;
+          case 'live':        return <LiveToast key={e.id} {...e} myName={state.name} />;
           case 'flash':       return <ScreenFlash key={e.id} {...e} />;
           default:            return null;
         }
@@ -61,15 +64,40 @@ function YearFlash({ year }) {
   );
 }
 
-function LiveToast({ player, action }) {
+function LiveToast({ player, action, myName }) {
+  const [greeted, setGreeted] = useState(false);
   const initial = (player?.name ?? '?')[0].toUpperCase();
+  const isOtherPlayer = player?.name && player.name !== myName;
+
+  const handleGreet = (e) => {
+    e.stopPropagation();
+    if (!myName || greeted) return;
+    pushLiveNotification({ name: myName, action: `👋 salue ${player.name} !` });
+    setGreeted(true);
+  };
+
   return (
-    <div className="fx-live">
+    <div className="fx-live" style={{ pointerEvents: 'auto' }}>
       <div className="fx-live-avatar">{initial}</div>
-      <div>
+      <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--text)' }}>{player?.name}</div>
         <div style={{ fontSize: 10.5, color: 'var(--muted)', marginTop: 1 }}>{action}</div>
       </div>
+      {isOtherPlayer && (
+        <button
+          onClick={handleGreet}
+          disabled={greeted}
+          title={greeted ? 'Salutation envoyée !' : `Saluer ${player.name}`}
+          style={{
+            background: 'none', border: 'none', cursor: greeted ? 'default' : 'pointer',
+            fontSize: 16, padding: '2px 4px', borderRadius: 6,
+            opacity: greeted ? 0.5 : 1,
+            flexShrink: 0,
+          }}
+        >
+          {greeted ? '✅' : '👋'}
+        </button>
+      )}
     </div>
   );
 }

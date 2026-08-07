@@ -52,12 +52,13 @@ export default function EventCard() {
   const handleContinue = () => {
     const { eff, choice, targetProperty } = outcome;
 
-    // Fatal probability roll — only trigger if dice says so
+    // Fatal probability roll — capped at 8% max to avoid frustration
     let fatal = false;
     if (choice.fatal && typeof choice.fatal === 'object') {
-      fatal = Math.random() < (choice.fatal.chance ?? 0);
+      const cappedChance = Math.min(0.08, choice.fatal.chance ?? 0);
+      fatal = Math.random() < cappedChance;
     } else if (choice.fatal === true) {
-      fatal = true;
+      fatal = Math.random() < 0.05;
     }
 
     resolveEvent({

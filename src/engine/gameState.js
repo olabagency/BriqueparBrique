@@ -114,6 +114,7 @@ export function buildRunSummary(state) {
   const summary = {
     name:         state.name,
     companyName:  state.companyName,
+    gender:       state.gender,
     sector:       state.sector,
     traitId:      state.traitId,
     finalVal:     state.valuation,
@@ -124,6 +125,11 @@ export function buildRunSummary(state) {
     achievements: [...(state.achievements ?? [])],
     endingKind:   state.endingKind,
     propertiesOwned: state.propertiesOwned,
+    luxuryItems:  (state.luxuryItems ?? []).map(i => ({
+      id: i.id, name: i.name, category: i.category, icon: i.icon,
+      image: i.image ?? null, purchasePrice: i.purchasePrice ?? i.price,
+      currentValue: i.currentValue ?? i.price,
+    })),
     date:         Date.now(),
     durationMs:   state.sessionStart ? Date.now() - state.sessionStart : null,
     runId:        state.runId ?? crypto.randomUUID(),

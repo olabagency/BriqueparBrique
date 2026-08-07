@@ -119,12 +119,17 @@ export default function PortfolioModal({ onClose }) {
 
                 {/* Actions */}
                 <div style={{ display: 'flex', gap: 5, marginTop: 'auto' }}>
-                  {prop.condition === 'aRenover' && (
+                  {prop.condition === 'aRenover' && !prop.rented && (
                     <button
                       className="portfolio-renovate-btn amber"
                       onClick={() => setRenovatingProp(prop)}
                       style={{ flex: '0 0 auto' }}
                     >🔨 Rénover</button>
+                  )}
+                  {prop.condition === 'aRenover' && prop.rented && (
+                    <div style={{ flex: '0 0 auto', fontSize: 9, color: 'var(--amber)', padding: '6px 8px', border: '1px solid var(--amber)', borderRadius: 8, opacity: 0.7 }}>
+                      🔒 Délouer pour rénover
+                    </div>
                   )}
                   <button
                     className="portfolio-renovate-btn"

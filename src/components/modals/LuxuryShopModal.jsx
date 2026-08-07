@@ -66,25 +66,41 @@ export default function LuxuryShopModal({ onClose }) {
           </div>
         ) : (
           <div className="luxury-grid">
-            {owned.map(item => (
-              <div className="luxury-card" key={item.id}>
-                {item.image
-                  ? <img src={item.image} alt={item.name} className="luxury-card-img" />
-                  : <div className="luxury-card-icon">{item.icon}</div>}
-                <div className="luxury-card-body">
-                  <div className="luxury-card-name">{item.name}</div>
-                  <div className="luxury-card-brand">{item.brand}</div>
-                  <div className="luxury-card-desc">{item.description}</div>
+            {owned.map(item => {
+              const purchasePrice = item.purchasePrice ?? item.price ?? 0;
+              const currentValue = item.currentValue ?? purchasePrice;
+              const gain = purchasePrice > 0 ? Math.round(((currentValue - purchasePrice) / purchasePrice) * 100) : 0;
+              const netSale = Math.round(currentValue * 0.90);
+              return (
+                <div className="luxury-card" key={item.id}>
+                  {item.image
+                    ? <img src={item.image} alt={item.name} className="luxury-card-img" />
+                    : <div className="luxury-card-icon">{item.icon}</div>}
+                  <div className="luxury-card-body">
+                    <div className="luxury-card-name">{item.name}</div>
+                    <div className="luxury-card-brand">{item.brand}</div>
+                    <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginTop: 4 }}>
+                      <span style={{ fontSize: 10, color: 'var(--muted)' }}>Acheté {fmtCash(purchasePrice)}</span>
+                      <span style={{ fontSize: 10, fontWeight: 700, color: gain > 0 ? 'var(--accent)' : gain < 0 ? 'var(--red)' : 'var(--muted)' }}>
+                        → {fmtCash(currentValue)} ({gain > 0 ? '+' : ''}{gain}%)
+                      </span>
+                    </div>
+                    {item.yearlyDrift !== undefined && (
+                      <div style={{ fontSize: 9, color: 'var(--muted)', marginTop: 2 }}>
+                        {item.yearlyDrift >= 0 ? '📈' : '📉'} {item.yearlyDrift > 0 ? '+' : ''}{Math.round(item.yearlyDrift * 100)}%/an
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    className="luxury-card-buy"
+                    style={{ background: 'var(--red)' }}
+                    onClick={() => { if (window.confirm(`Revendre ${item.name} ?\nValeur actuelle : ${fmtCash(currentValue)}\nNet après frais (10%) : ${fmtCash(netSale)}`)) sellLuxury(item.id); }}
+                  >
+                    Revendre — {fmtCash(netSale)}
+                  </button>
                 </div>
-                <button
-                  className="luxury-card-buy"
-                  style={{ background: 'var(--red)' }}
-                  onClick={() => { if (window.confirm(`Revendre ${item.name} ?`)) sellLuxury(item.id); }}
-                >
-                  Revendre
-                </button>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )
       )}

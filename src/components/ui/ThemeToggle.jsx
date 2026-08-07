@@ -84,7 +84,7 @@ export default function SettingsButton() {
             onMouseLeave={e => !confirmQuit && (e.currentTarget.style.background = 'transparent')}
           >
             <span style={{ fontSize: 18 }}>🚪</span>
-            {confirmQuit ? 'Confirmer — quitter ?' : 'Quitter la partie'}
+            {confirmQuit ? 'Confirmer — terminer ?' : 'Terminer la partie'}
           </button>
         </div>
       )}

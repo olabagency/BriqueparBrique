@@ -205,6 +205,36 @@ function RunDetailModal({ run, rank, onClose, onPlay }) {
           </div>
         )}
 
+        {/* Luxury items */}
+        {(run.luxuryItems ?? []).length > 0 && (
+          <div>
+            <div style={{ fontSize: 10, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: 8 }}>✨ Biens de luxe</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {(run.luxuryItems ?? []).map((item, idx) => {
+                const gain = item.currentValue && item.purchasePrice ? Math.round(((item.currentValue - item.purchasePrice) / item.purchasePrice) * 100) : 0;
+                return (
+                  <div key={idx} style={{
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+                    background: 'var(--surface2)', border: '1px solid var(--border)',
+                    borderRadius: 10, padding: '8px 10px', minWidth: 80, maxWidth: 100,
+                  }}>
+                    {item.image
+                      ? <img src={item.image} alt={item.name} style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 6 }} />
+                      : <span style={{ fontSize: 28 }}>{item.icon ?? '✨'}</span>
+                    }
+                    <div style={{ fontSize: 9, fontWeight: 700, textAlign: 'center', color: 'var(--text)', lineHeight: 1.2 }}>{item.name}</div>
+                    {gain !== 0 && (
+                      <div style={{ fontSize: 9, fontWeight: 700, color: gain > 0 ? 'var(--accent)' : 'var(--red)' }}>
+                        {gain > 0 ? '+' : ''}{gain}%
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* CTA */}
         {onPlay && (
           <div style={{ textAlign: 'center', paddingTop: 4 }}>
@@ -355,12 +385,14 @@ export default function Landing() {
   };
 
   const firebaseScores = liveScores && liveScores.length > 0 ? liveScores : null;
-  const baseGlobal = firebaseScores ?? globalBoard;
+  // Only finished games in top 10 — filter out active/live sessions
+  const finishedOnly = (firebaseScores ?? globalBoard).filter(r => r._source !== 'active');
   const withScore = (r) => r.score ?? computeScore(r);
-  const merged = [...baseGlobal, ...history].sort((a, b) => withScore(b) - withScore(a));
+  const merged = [...finishedOnly, ...history].sort((a, b) => withScore(b) - withScore(a));
   const seen = new Set();
   const deduped = merged.filter(r => {
-    const key = r.sessionId ?? `${r.name}|${r.finalVal ?? r.valuation}|${r.date ?? ''}`;
+    // Prefer runId → sessionId → name+val+date composite
+    const key = r.runId ?? r.sessionId ?? `${r.name}|${r.finalVal ?? r.valuation}|${r.date ?? ''}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;

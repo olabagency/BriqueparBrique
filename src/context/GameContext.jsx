@@ -598,7 +598,7 @@ function reducer(state, action) {
 
     case 'SET_SALARY': {
       const { level } = action.payload;
-      if (!SALARY_AMOUNTS[level] !== undefined) return state;
+      if (SALARY_AMOUNTS[level] === undefined) return state;
       return { ...state, salary: level, lastSalaryChangeYear: state.year };
     }
 

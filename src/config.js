@@ -18,11 +18,11 @@ export const GAME_CONFIG = {
   // --- Multiplicateurs de stade ---
   STAGE_MULTIPLIERS: {
     'IDÉE':      1,
-    'LANCEMENT': 1.8,
-    'CROISSANCE': 3.5,
-    'EXPANSION': 7,
-    'MATURITÉ':  14,
-    'HÉRITAGE':  28,
+    'LANCEMENT': 1.4,
+    'CROISSANCE': 2.2,
+    'EXPANSION': 3.5,
+    'MATURITÉ':  5.5,
+    'HÉRITAGE':  8,
   },
 
   // --- Événements par année ---
