@@ -501,7 +501,7 @@ export default function Landing() {
             )}
           </div>
           <div className="l-hero-kpis">
-            <div className="l-kpi"><span className="l-kpi-val">534</span><span className="l-kpi-label">événements</span></div>
+            <div className="l-kpi"><span className="l-kpi-val">950+</span><span className="l-kpi-label">événements</span></div>
             <div className="l-kpi-sep" />
             <div className="l-kpi"><span className="l-kpi-val">23</span><span className="l-kpi-label">succès</span></div>
             <div className="l-kpi-sep" />
@@ -514,12 +514,12 @@ export default function Landing() {
         <div className="l-hero-right">
           <div className="l-feature-grid">
             {[
-              { icon: '🎲', title: '534+ situations', desc: 'Perso, immo, macro — jamais deux parties identiques' },
+              { icon: '🎲', title: '950+ situations', desc: 'Perso, immo, macro — jamais deux parties identiques' },
               { icon: '🏦', title: 'Vrais crédits', desc: 'Taux, durée, renégociation — la vraie finance' },
-              { icon: '🗺️', title: 'Carte du parc', desc: 'Visualise ton empire bien par bien' },
               { icon: '🏆', title: '23 succès', desc: 'Des défis cachés à débloquer au fil du jeu' },
               { icon: '🌐', title: 'Multijoueur live', desc: 'Compare-toi aux autres joueurs en temps réel' },
               { icon: '💼', title: 'Gestion complète', desc: 'Salaire, épargne, stress — tout compte' },
+              { icon: '🏘️', title: '118 emplacements', desc: 'Paris, Lyon, Côte d\'Azur, Alpes — tout le territoire' },
             ].map(f => (
               <div key={f.title} className="l-feature-card">
                 <span className="l-feature-icon">{f.icon}</span>
