@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { GameProvider, useGame } from './context/GameContext.jsx';
 import { EffectsProvider } from './context/EffectsContext.jsx';
-import { loadTheme, saveTheme } from './engine/saveLoad.js';
+import { loadTheme } from './engine/saveLoad.js';
 import Landing    from './components/Landing.jsx';
 import Onboarding from './components/Onboarding.jsx';
 import Game       from './components/Game.jsx';
 import End        from './components/End.jsx';
+import AdminPage  from './components/AdminPage.jsx';
 
 function AppShell() {
   const { state } = useGame();
@@ -26,6 +27,7 @@ function AppShell() {
 }
 
 export default function App() {
+  if (window.location.pathname === '/admin') return <AdminPage />;
   return (
     <GameProvider>
       <EffectsProvider>
