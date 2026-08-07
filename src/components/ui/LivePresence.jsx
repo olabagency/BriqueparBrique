@@ -69,20 +69,20 @@ function useRealPresence(emit) {
   }, [emit, state.name]);
 
   // Subscribe to real game-event notifications (including incoming crimes)
-  const lastSeenTsRef = useRef(0);
-  const notifInitializedRef = useRef(false);
+  // Uses Firebase push keys (seenKeysRef) to deduplicate and a 5s subscribe-time
+  // window to absorb clock skew between browsers without swallowing new notifications.
+  const seenKeysRef     = useRef(new Set());
+  const subscribeTimeRef = useRef(0);
   useEffect(() => {
+    subscribeTimeRef.current = Date.now();
     const unsub = subscribeLiveNotifications((notifs) => {
-      if (!notifInitializedRef.current) {
-        // First callback: mark all existing notifications as seen without displaying them
-        notifInitializedRef.current = true;
-        if (notifs.length > 0) lastSeenTsRef.current = Math.max(...notifs.map(n => n.ts ?? 0));
-        return;
-      }
-      const newOnes = notifs.filter(n => n.ts > lastSeenTsRef.current && n.sessionId !== SESSION_ID);
-      if (newOnes.length === 0) return;
-      lastSeenTsRef.current = Math.max(...newOnes.map(n => n.ts));
-      for (const n of newOnes) {
+      const toShow = notifs.filter(n =>
+        !seenKeysRef.current.has(n._key) &&
+        n.sessionId !== SESSION_ID &&
+        n.ts >= subscribeTimeRef.current - 5000   // 5 s buffer absorbs clock skew
+      );
+      notifs.forEach(n => seenKeysRef.current.add(n._key)); // mark all as seen
+      for (const n of toShow) {
         if (n.isCrime) {
           if (n.targetSessionId !== SESSION_ID) continue;
           dispatch({ type: 'RECEIVE_CRIME', payload: { type: n.crimeType, pct: n.pct, attackerCompany: n.attackerCompany } });

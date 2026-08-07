@@ -52,7 +52,7 @@ export function subscribeLiveNotifications(callback) {
     if (!snap.exists()) return;
     const now = Date.now();
     const entries = [];
-    snap.forEach(child => entries.push(child.val()));
+    snap.forEach(child => entries.push({ ...child.val(), _key: child.key }));
     callback(entries.filter(e => now - (e.ts ?? 0) < TTL_MS));
   });
 }
