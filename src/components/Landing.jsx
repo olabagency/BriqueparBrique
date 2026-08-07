@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useGame } from '../context/GameContext.jsx';
 import { loadGame, hasSave, loadHistory } from '../engine/saveLoad.js';
 import ThemeToggle from './ui/ThemeToggle.jsx';
@@ -8,6 +8,7 @@ import achievementsDef from '../data/achievements.json';
 import globalBoard from '../data/global_leaderboard.json';
 import { FIREBASE_ENABLED } from '../engine/firebaseConfig.js';
 import { fetchCombinedLeaderboard } from '../engine/firebaseGame.js';
+import { subscribePresence } from '../engine/presence.js';
 import { ShaderBackground } from './ui/shader-r.tsx';
 
 const ENDINGS = {
@@ -370,6 +371,9 @@ export default function Landing() {
   const [liveScores, setLiveScores]   = useState(null);
   const [loadingScores, setLoadingScores] = useState(FIREBASE_ENABLED);
   const [tab, setTab] = useState('top10');
+  const [onlinePlayers, setOnlinePlayers] = useState([]);
+  const [hoveredOnlinePlayer, setHoveredOnlinePlayer] = useState(null);
+  const hoverRef = useRef(null);
 
   useEffect(() => {
     if (!FIREBASE_ENABLED) return;
@@ -378,6 +382,22 @@ export default function Landing() {
       setLoadingScores(false);
     });
   }, []);
+
+  useEffect(() => {
+    if (!FIREBASE_ENABLED) return;
+    const unsub = subscribePresence(setOnlinePlayers);
+    return unsub;
+  }, []);
+
+  // Close hover modal on outside click
+  useEffect(() => {
+    if (!hoveredOnlinePlayer) return;
+    const handler = (e) => {
+      if (hoverRef.current && !hoverRef.current.contains(e.target)) setHoveredOnlinePlayer(null);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [hoveredOnlinePlayer]);
 
   const handleResume = () => {
     const saved = loadGame();
@@ -391,10 +411,11 @@ export default function Landing() {
   const merged = [...finishedOnly, ...history].sort((a, b) => withScore(b) - withScore(a));
   const seen = new Set();
   const deduped = merged.filter(r => {
-    // Prefer runId → sessionId → name+val+date composite
-    const key = r.runId ?? r.sessionId ?? `${r.name}|${r.finalVal ?? r.valuation}|${r.date ?? ''}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
+    // Build all candidate keys for this entry — check AND mark all of them
+    const composite = `${r.name}|${r.finalVal ?? r.valuation}|${r.date ?? ''}`;
+    const keys = [r.runId, r.sessionId, composite].filter(Boolean);
+    if (keys.some(k => seen.has(k))) return false;
+    keys.forEach(k => seen.add(k));
     return true;
   });
   const top10 = deduped.slice(0, 10);
@@ -483,6 +504,125 @@ export default function Landing() {
         </div>
       </section>
       </div>
+
+      {/* ── Online players ── */}
+      {FIREBASE_ENABLED && onlinePlayers.length > 0 && (
+        <section style={{ maxWidth: 960, margin: '0 auto', padding: '0 24px 32px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+            <span className="live-dot" style={{ display: 'inline-block' }} />
+            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 800 }}>
+              {onlinePlayers.length} joueur{onlinePlayers.length > 1 ? 's' : ''} en ligne maintenant
+            </h3>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }} ref={hoverRef}>
+            {onlinePlayers.map((player, i) => (
+              <div key={i} style={{ position: 'relative' }}>
+                <button
+                  onClick={() => setHoveredOnlinePlayer(hoveredOnlinePlayer?.name === player.name ? null : player)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 8,
+                    background: 'var(--surface2)', border: '1px solid var(--border)',
+                    borderRadius: 12, padding: '8px 12px', cursor: 'pointer',
+                    transition: 'border-color .15s',
+                    borderColor: hoveredOnlinePlayer?.name === player.name ? 'var(--accent)' : undefined,
+                  }}
+                >
+                  <div style={{
+                    width: 30, height: 30, borderRadius: '50%',
+                    background: 'var(--accent-soft)', border: '2px solid var(--accent)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 14, fontWeight: 700, color: 'var(--accent)', flexShrink: 0,
+                  }}>
+                    {(player.name ?? '?')[0].toUpperCase()}
+                  </div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{player.name}</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)' }}>
+                      {player.genderEmoji ?? ''} {player.age ? `${player.age} ans · ` : ''}An {player.year ?? 1} · {fmtCash(player.valuation ?? 0)}
+                    </div>
+                  </div>
+                </button>
+
+                {/* Hover detail modal */}
+                {hoveredOnlinePlayer?.name === player.name && (
+                  <div style={{
+                    position: 'absolute', top: '100%', left: 0, marginTop: 8, zIndex: 9100,
+                    background: 'var(--surface)', border: '1px solid var(--border)',
+                    borderRadius: 14, boxShadow: '0 8px 32px rgba(0,0,0,.2)',
+                    padding: '14px 16px', minWidth: 240, maxWidth: 300,
+                  }}
+                    onClick={e => e.stopPropagation()}
+                  >
+                    {/* Header */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                      <div style={{
+                        width: 36, height: 36, borderRadius: '50%',
+                        background: 'var(--accent-soft)', border: '2px solid var(--accent)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 18, fontWeight: 700, color: 'var(--accent)',
+                      }}>
+                        {(player.name ?? '?')[0].toUpperCase()}
+                      </div>
+                      <div>
+                        <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--text)' }}>{player.name}</div>
+                        {player.companyName && (
+                          <div style={{ fontSize: 10, color: 'var(--muted)' }}>🏢 {player.companyName}</div>
+                        )}
+                      </div>
+                      <div style={{ marginLeft: 'auto', fontSize: 20 }}>{player.genderEmoji ?? '🙂'}</div>
+                    </div>
+                    {/* Stats */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 10 }}>
+                      {player.age && (
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
+                          <span style={{ color: 'var(--muted)' }}>🎂 Âge</span>
+                          <span style={{ fontFamily: 'monospace', fontWeight: 700 }}>{player.age} ans</span>
+                        </div>
+                      )}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
+                        <span style={{ color: 'var(--muted)' }}>📈 Patrimoine immo</span>
+                        <span style={{ fontFamily: 'monospace', color: 'var(--accent)', fontWeight: 700 }}>{fmtCash(player.valuation ?? 0)}</span>
+                      </div>
+                      {player.cash !== undefined && (
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
+                          <span style={{ color: 'var(--muted)' }}>💰 Trésorerie</span>
+                          <span style={{ fontFamily: 'monospace', fontWeight: 700 }}>{fmtCash(player.cash)}</span>
+                        </div>
+                      )}
+                      {player.year && (
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
+                          <span style={{ color: 'var(--muted)' }}>📅 Année en cours</span>
+                          <span style={{ fontFamily: 'monospace', fontWeight: 700 }}>An {player.year}</span>
+                        </div>
+                      )}
+                    </div>
+                    {/* Luxury items */}
+                    {(player.luxuryItems ?? []).length > 0 && (
+                      <div>
+                        <div style={{ fontSize: 9, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: 6 }}>✨ Biens de luxe</div>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                          {(player.luxuryItems ?? []).map((item, j) => (
+                            <div key={j} title={item.name} style={{
+                              width: 36, height: 36, borderRadius: 6, overflow: 'hidden',
+                              background: 'var(--surface2)', border: '1px solid var(--border)',
+                              display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18,
+                            }}>
+                              {item.image
+                                ? <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                : <span>{item.icon ?? '✨'}</span>
+                              }
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── Leaderboard ── */}
       <section className="l-board">

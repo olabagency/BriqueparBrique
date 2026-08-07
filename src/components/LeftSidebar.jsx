@@ -9,12 +9,16 @@ const COND_EMOJI = {
   standing:  '💎',
 };
 
+const MAX_VISIBLE = 10;
+
 export default function LeftSidebar({ onOpenModal }) {
   const { state } = useGame();
   const { propertyList = [], valuation = 0, personalCash = 0, cash = 0, luxuryItems = [] } = state;
 
   const totalWealth = valuation + personalCash + cash;
   const luxuryVal = luxuryItems.reduce((s, i) => s + (i.currentValue ?? i.price ?? 0), 0);
+  const visibleProps = propertyList.slice(0, MAX_VISIBLE);
+  const hiddenCount = propertyList.length - visibleProps.length;
 
   return (
     <div className="left-column-wrapper">
@@ -27,7 +31,7 @@ export default function LeftSidebar({ onOpenModal }) {
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-            {propertyList.map(prop => (
+            {visibleProps.map(prop => (
               <div key={prop.id} style={{
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 fontSize: 11, padding: '4px 6px',
@@ -36,13 +40,25 @@ export default function LeftSidebar({ onOpenModal }) {
               }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                   <span>{COND_EMOJI[prop.condition] ?? '🏠'}</span>
-                  <span style={{ color: 'var(--text)' }}>{prop.type}</span>
+                  <span style={{ color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 110 }}>{prop.type}</span>
                 </span>
-                <span style={{ color: 'var(--muted)', fontSize: 10 }}>
+                <span style={{ color: 'var(--muted)', fontSize: 10, flexShrink: 0 }}>
                   {prop.rented ? '📬' : '🔓'} {fmtCash(prop.value ?? prop.baseValue)}
                 </span>
               </div>
             ))}
+            {hiddenCount > 0 && (
+              <button
+                onClick={() => onOpenModal('portfolio')}
+                style={{
+                  fontSize: 11, color: 'var(--accent)', fontWeight: 700,
+                  background: 'var(--accent-soft)', border: '1px solid var(--accent)',
+                  borderRadius: 6, padding: '4px 0', cursor: 'pointer', textAlign: 'center',
+                }}
+              >
+                +{hiddenCount} bien{hiddenCount > 1 ? 's' : ''} · Voir plus →
+              </button>
+            )}
           </div>
         )}
         <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
