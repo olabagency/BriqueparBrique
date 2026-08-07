@@ -1,11 +1,10 @@
-import React, { createContext, useContext, useReducer, useCallback } from 'react';
+import React, { createContext, useContext, useReducer, useCallback, useEffect } from 'react';
 import { freshState, buildRunSummary } from '../engine/gameState.js';
 import { saveGame, loadGame, deleteSave, appendHistory } from '../engine/saveLoad.js';
 import { pushGlobalScore } from '../engine/globalScores.js';
 import { syncActiveGame, removeActiveGame, pushFinishedGame } from '../engine/firebaseGame.js';
 import { removePresence } from '../engine/presence.js';
-import { pushLiveNotification } from '../engine/liveNotifications.js';
-import { sendCrime } from '../engine/firebaseInbox.js';
+import { pushLiveNotification, pushCrimeNotification } from '../engine/liveNotifications.js';
 import {
   generateMarketListings,
   collectRents,
@@ -587,6 +586,9 @@ function reducer(state, action) {
     case 'CLEAR_CRIME_RESULT':
       return { ...state, lastCrimeResult: null };
 
+    case 'CLEAR_PENDING_CRIME':
+      return { ...state, pendingCrimeSend: null };
+
     case 'BUY_INSURANCE': {
       const s = { ...state };
       if (s.hasInsurance) return s;
@@ -607,12 +609,12 @@ function reducer(state, action) {
       s.crimeUsedThisYear = true;
       const success = Math.random() < (crimeType === 'incendie' ? 0.55 : 0.60);
       if (success) {
-        const payload = { type: crimeType };
+        const crimePayload = { type: crimeType };
         if (crimeType === 'cambriolage') {
-          payload.pct = (Math.floor(Math.random() * 8) + 8) / 100; // 8-15%
-          payload.attackerCompany = Math.random() < 0.5 ? (s.companyName ?? null) : null;
+          crimePayload.pct = (Math.floor(Math.random() * 8) + 8) / 100; // 8-15%
+          crimePayload.attackerCompany = Math.random() < 0.5 ? (s.companyName ?? null) : null;
         }
-        sendCrime(targetSessionId, payload);
+        s.pendingCrimeSend = { targetSessionId, crimeType, pct: crimePayload.pct ?? null, attackerCompany: crimePayload.attackerCompany ?? null };
       }
       s.lastCrimeResult = { crimeType, success, cost, targetName };
       return s;
@@ -929,6 +931,13 @@ function advanceYear(state) {
 
 export function GameProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, { screen: 'landing' });
+
+  useEffect(() => {
+    const p = state.pendingCrimeSend;
+    if (!p) return;
+    pushCrimeNotification({ targetSessionId: p.targetSessionId, crimeType: p.crimeType, pct: p.pct, attackerCompany: p.attackerCompany });
+    dispatch({ type: 'CLEAR_PENDING_CRIME' });
+  }, [state.pendingCrimeSend]);
 
   const startGame    = useCallback((opts) => dispatch({ type: 'START_GAME',    payload: opts }), []);
   const loadSave     = useCallback((s)    => dispatch({ type: 'LOAD_SAVE',     payload: s }),    []);

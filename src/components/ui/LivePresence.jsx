@@ -4,7 +4,6 @@ import { useEffects } from '../../context/EffectsContext.jsx';
 import { FIREBASE_ENABLED } from '../../engine/firebaseConfig.js';
 import { updatePresence, subscribePresence, SESSION_ID } from '../../engine/presence.js';
 import { subscribeLiveNotifications, pushLiveNotification } from '../../engine/liveNotifications.js';
-import { subscribeInbox } from '../../engine/firebaseInbox.js';
 import { fmtCash } from '../../engine/utils.js';
 
 // ─── Real Firebase presence ──────────────────────────────────────────────────
@@ -69,7 +68,7 @@ function useRealPresence(emit) {
     return unsub;
   }, [emit, state.name]);
 
-  // Subscribe to real game-event notifications
+  // Subscribe to real game-event notifications (including incoming crimes)
   const lastSeenTsRef = useRef(Date.now());
   useEffect(() => {
     const unsub = subscribeLiveNotifications((notifs) => {
@@ -77,29 +76,18 @@ function useRealPresence(emit) {
       if (newOnes.length === 0) return;
       lastSeenTsRef.current = Math.max(...newOnes.map(n => n.ts));
       for (const n of newOnes) {
-        emit({ type: 'live', player: { name: n.name, sessionId: n.sessionId }, action: n.action });
+        if (n.isCrime) {
+          if (n.targetSessionId !== SESSION_ID) continue;
+          dispatch({ type: 'RECEIVE_CRIME', payload: { type: n.crimeType, pct: n.pct, attackerCompany: n.attackerCompany } });
+          emit({ type: 'crime', variant: 'victim', crimeType: n.crimeType, attackerCompany: n.attackerCompany ?? null, pct: n.pct });
+          emit({ type: 'flash', color: 'red' });
+        } else {
+          emit({ type: 'live', player: { name: n.name, sessionId: n.sessionId }, action: n.action });
+        }
       }
     });
     return unsub;
-  }, [emit]);
-
-  // Subscribe to crime inbox
-  useEffect(() => {
-    const unsub = subscribeInbox((payload) => {
-      dispatch({ type: 'RECEIVE_CRIME', payload });
-      // Emit the crime toast for the victim
-      emit({
-        type: 'crime',
-        variant: 'victim',
-        crimeType: payload.type,
-        attackerCompany: payload.attackerCompany ?? null,
-        pct: payload.pct,
-      });
-      // Flash red
-      emit({ type: 'flash', color: 'red' });
-    });
-    return unsub;
-  }, [dispatch, emit]);
+  }, [emit, dispatch]);
 
   return { players, count: players.length };
 }
