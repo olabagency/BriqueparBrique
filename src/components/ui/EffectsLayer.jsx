@@ -24,6 +24,7 @@ export default function EffectsLayer({ stress = 0 }) {
           case 'achievement': return <AchievementToast key={e.id} {...e} />;
           case 'year':        return <YearFlash key={e.id} {...e} />;
           case 'live':        return <LiveToast key={e.id} {...e} myName={state.name} />;
+          case 'crime':       return <CrimeToast key={e.id} {...e} />;
           case 'flash':       return <ScreenFlash key={e.id} {...e} />;
           default:            return null;
         }
@@ -98,6 +99,38 @@ function LiveToast({ player, action, myName }) {
           {greeted ? '✅' : '👋'}
         </button>
       )}
+    </div>
+  );
+}
+
+function CrimeToast({ variant, crimeType, targetName, stolen, attackerCompany, propertyLabel, insured }) {
+  const isVictim = variant === 'victim';
+  const icon = crimeType === 'incendie' ? '🔥' : '🔓';
+
+  let title, body;
+  if (!isVictim) {
+    title = crimeType === 'incendie' ? 'Incendie commandité' : 'Cambriolage commandité';
+    body  = variant === 'attacker_success'
+      ? `Mission accomplie contre ${targetName ?? 'ta cible'}.`
+      : `Échec — ${targetName ?? 'la cible'} s'en tire sans dommage.`;
+  } else if (crimeType === 'cambriolage') {
+    const who = attackerCompany ? `par ${attackerCompany}` : '(auteur inconnu)';
+    title = insured ? '🛡️ Cambriolage — assurance activée' : '🔓 Tu as été cambriolé·e !';
+    body  = `${stolen > 0 ? `−${stolen}k€` : 'Rien volé'} ${who}.`;
+  } else {
+    title = insured ? '🛡️ Incendie — assurance activée' : '🔥 Un de tes biens a brûlé !';
+    body  = propertyLabel ? `${propertyLabel} — délabré, locataire parti.` : 'Un bien endommagé, locataire parti.';
+  }
+
+  const isFailure = variant === 'attacker_fail';
+
+  return (
+    <div className={`fx-crime ${isVictim ? 'fx-crime-victim' : isFailure ? 'fx-crime-fail' : 'fx-crime-success'}`}>
+      <span style={{ fontSize: 20 }}>{isFailure ? '❌' : icon}</span>
+      <div>
+        <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: 2 }}>{title}</div>
+        <div style={{ fontSize: 11.5, opacity: 0.9 }}>{body}</div>
+      </div>
     </div>
   );
 }

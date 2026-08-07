@@ -63,6 +63,10 @@ export function freshState({ name, companyName, gender, sector, traitId, challen
     // UI helpers
     maxAge: GAME_OVER_MAX_AGE,
 
+    // Criminal actions
+    crimeUsedThisYear: false,
+    hasInsurance:      false,
+
     // Session timing
     sessionStart: Date.now(),
     runId: crypto.randomUUID(),

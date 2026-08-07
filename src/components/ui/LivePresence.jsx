@@ -4,12 +4,13 @@ import { useEffects } from '../../context/EffectsContext.jsx';
 import { FIREBASE_ENABLED } from '../../engine/firebaseConfig.js';
 import { updatePresence, subscribePresence, SESSION_ID } from '../../engine/presence.js';
 import { subscribeLiveNotifications, pushLiveNotification } from '../../engine/liveNotifications.js';
+import { subscribeInbox } from '../../engine/firebaseInbox.js';
 import { fmtCash } from '../../engine/utils.js';
 
 // ─── Real Firebase presence ──────────────────────────────────────────────────
 
 function useRealPresence(emit) {
-  const { state } = useGame();
+  const { state, dispatch } = useGame();
   const [players, setPlayers] = useState([]);
   const prevPlayersRef = useRef([]);
 
@@ -82,19 +83,55 @@ function useRealPresence(emit) {
     return unsub;
   }, [emit]);
 
+  // Subscribe to crime inbox
+  useEffect(() => {
+    const unsub = subscribeInbox((payload) => {
+      dispatch({ type: 'RECEIVE_CRIME', payload });
+      // Emit the crime toast for the victim
+      emit({
+        type: 'crime',
+        variant: 'victim',
+        crimeType: payload.type,
+        attackerCompany: payload.attackerCompany ?? null,
+        pct: payload.pct,
+      });
+      // Flash red
+      emit({ type: 'flash', color: 'red' });
+    });
+    return unsub;
+  }, [dispatch, emit]);
+
   return { players, count: players.length };
 }
 
 // ─── Player hover modal ──────────────────────────────────────────────────────
 
-function PlayerHoverModal({ player, myName, onClose, onGreet }) {
+function PlayerHoverModal({ player, myState, dispatch, emit, onClose, onGreet }) {
+  const canCrime  = !myState.crimeUsedThisYear;
+  const cash      = myState.cash ?? 0;
+  const val       = myState.valuation ?? 0;
+  const insuranceCost = Math.round(15 + val * 0.003);
+
+  const commitCrime = (crimeType) => {
+    dispatch({
+      type: 'COMMIT_CRIME',
+      payload: { crimeType, targetSessionId: player.sessionId, targetName: player.name },
+    });
+    onClose();
+  };
+
+  const buyInsurance = () => {
+    dispatch({ type: 'BUY_INSURANCE' });
+    onClose();
+  };
+
   return (
     <div
       style={{
         position: 'absolute', top: '100%', left: 0, marginTop: 8, zIndex: 9100,
         background: 'var(--surface)', border: '1px solid var(--border)',
         borderRadius: 14, boxShadow: '0 8px 32px rgba(0,0,0,.2)',
-        padding: '14px 16px', minWidth: 220, maxWidth: 280,
+        padding: '14px 16px', minWidth: 240, maxWidth: 300,
         pointerEvents: 'auto',
       }}
       onClick={e => e.stopPropagation()}
@@ -171,11 +208,65 @@ function PlayerHoverModal({ player, myName, onClose, onGreet }) {
         style={{
           width: '100%', padding: '7px 0', borderRadius: 8, fontSize: 12, fontWeight: 700,
           background: 'var(--accent-soft)', border: '1px solid var(--accent)',
-          color: 'var(--accent)', cursor: 'pointer',
+          color: 'var(--accent)', cursor: 'pointer', marginBottom: 10,
         }}
       >
         👋 Saluer {player.name?.split(' ')[0]}
       </button>
+
+      {/* Separator */}
+      <div style={{ borderTop: '1px solid var(--border)', marginBottom: 8 }} />
+
+      {/* Criminal actions */}
+      <div style={{ fontSize: 9, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: 6 }}>
+        ⚠️ Actions criminelles
+      </div>
+
+      {myState.crimeUsedThisYear ? (
+        <div style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center', padding: '6px 0', marginBottom: 6 }}>
+          Une action par an — attends l'année prochaine.
+        </div>
+      ) : (
+        <div style={{ display: 'flex', gap: 6, marginBottom: 8 }}>
+          <button
+            className="crime-btn"
+            disabled={cash < 50}
+            title={cash < 50 ? 'Fonds insuffisants (50k€)' : '55% de chance de succès'}
+            onClick={() => commitCrime('incendie')}
+          >
+            🔥 Incendie
+            <span className="crime-btn-cost">50k€</span>
+          </button>
+          <button
+            className="crime-btn"
+            disabled={cash < 25}
+            title={cash < 25 ? 'Fonds insuffisants (25k€)' : '60% de chance de succès'}
+            onClick={() => commitCrime('cambriolage')}
+          >
+            🔓 Cambriolage
+            <span className="crime-btn-cost">25k€</span>
+          </button>
+        </div>
+      )}
+
+      {/* Insurance */}
+      <div style={{ borderTop: '1px solid var(--border)', paddingTop: 8 }}>
+        {myState.hasInsurance ? (
+          <div style={{ fontSize: 11, color: 'var(--accent)', fontWeight: 700, textAlign: 'center', padding: '4px 0' }}>
+            🛡️ Tu es assuré·e cette année
+          </div>
+        ) : (
+          <button
+            className="crime-btn crime-btn-insurance"
+            disabled={cash < insuranceCost}
+            title={`Réduit de 50% les dégâts des attaques reçues`}
+            onClick={buyInsurance}
+          >
+            🛡️ Souscrire l'assurance
+            <span className="crime-btn-cost">{insuranceCost}k€/an</span>
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -183,10 +274,11 @@ function PlayerHoverModal({ player, myName, onClose, onGreet }) {
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function LivePresence() {
-  const { state } = useGame();
+  const { state, dispatch } = useGame();
   const { emit } = useEffects();
   const [hoveredPlayer, setHoveredPlayer] = useState(null);
   const hoverRef = useRef(null);
+  const lastCrimeResultRef = useRef(null);
 
   const { players, count } = FIREBASE_ENABLED
     ? useRealPresence(emit)
@@ -196,6 +288,20 @@ export default function LivePresence() {
     if (!state.name) return;
     pushLiveNotification({ name: state.name, action: `👋 salue ${player.name} !` });
   }, [state.name]);
+
+  // Emit crime result toast after COMMIT_CRIME resolves
+  useEffect(() => {
+    const result = state.lastCrimeResult;
+    if (!result || result === lastCrimeResultRef.current) return;
+    lastCrimeResultRef.current = result;
+    emit({
+      type: 'crime',
+      variant: result.success ? 'attacker_success' : 'attacker_fail',
+      crimeType: result.crimeType,
+      targetName: result.targetName,
+    });
+    dispatch({ type: 'CLEAR_CRIME_RESULT' });
+  }, [state.lastCrimeResult, emit, dispatch]);
 
   // Close hover modal on outside click
   useEffect(() => {
@@ -230,7 +336,9 @@ export default function LivePresence() {
         {hoveredPlayer && (
           <PlayerHoverModal
             player={hoveredPlayer}
-            myName={state.name}
+            myState={state}
+            dispatch={dispatch}
+            emit={emit}
             onClose={() => setHoveredPlayer(null)}
             onGreet={handleGreet}
           />

@@ -8,6 +8,7 @@ const DURATIONS = {
   year:         1600,
   flash:         700,
   float:        1800,
+  crime:       30000,
 };
 
 export function EffectsProvider({ children }) {

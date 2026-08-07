@@ -5,6 +5,7 @@ import { pushGlobalScore } from '../engine/globalScores.js';
 import { syncActiveGame, removeActiveGame, pushFinishedGame } from '../engine/firebaseGame.js';
 import { removePresence } from '../engine/presence.js';
 import { pushLiveNotification } from '../engine/liveNotifications.js';
+import { sendCrime } from '../engine/firebaseInbox.js';
 import {
   generateMarketListings,
   collectRents,
@@ -583,6 +584,66 @@ function reducer(state, action) {
     case 'CLEAR_RENEGOTIATION_RESULT':
       return { ...state, lastRenegotiationResult: null };
 
+    case 'CLEAR_CRIME_RESULT':
+      return { ...state, lastCrimeResult: null };
+
+    case 'BUY_INSURANCE': {
+      const s = { ...state };
+      if (s.hasInsurance) return s;
+      const insuranceCost = Math.round(15 + (s.valuation ?? 0) * 0.003);
+      if ((s.cash ?? 0) < insuranceCost) return s;
+      s.cash -= insuranceCost;
+      s.hasInsurance = true;
+      return s;
+    }
+
+    case 'COMMIT_CRIME': {
+      const { crimeType, targetSessionId, targetName } = action.payload;
+      const s = { ...state };
+      if (s.crimeUsedThisYear) return s;
+      const cost = crimeType === 'incendie' ? 50 : 25;
+      if ((s.cash ?? 0) < cost) return s;
+      s.cash -= cost;
+      s.crimeUsedThisYear = true;
+      const success = Math.random() < (crimeType === 'incendie' ? 0.55 : 0.60);
+      if (success) {
+        const payload = { type: crimeType };
+        if (crimeType === 'cambriolage') {
+          payload.pct = (Math.floor(Math.random() * 8) + 8) / 100; // 8-15%
+          payload.attackerCompany = Math.random() < 0.5 ? (s.companyName ?? null) : null;
+        }
+        sendCrime(targetSessionId, payload);
+      }
+      s.lastCrimeResult = { crimeType, success, cost, targetName };
+      return s;
+    }
+
+    case 'RECEIVE_CRIME': {
+      const { type, pct, attackerCompany } = action.payload;
+      const s = { ...state };
+      const insured = s.hasInsurance;
+      if (type === 'cambriolage') {
+        const effectivePct = insured ? (pct ?? 0.10) * 0.5 : (pct ?? 0.10);
+        const stolen = Math.max(0, Math.round((s.cash ?? 0) * effectivePct));
+        s.cash = (s.cash ?? 0) - stolen;
+        s.lastCrimeReceived = { type, stolen, attackerCompany, insured };
+      } else if (type === 'incendie') {
+        const rentedProps = (s.propertyList ?? []).filter(p => p.rented);
+        if (rentedProps.length > 0) {
+          const target = rentedProps[Math.floor(Math.random() * rentedProps.length)];
+          const drop = insured ? 0.10 : 0.20;
+          s.propertyList = (s.propertyList ?? []).map(p => {
+            if (p.id !== target.id) return p;
+            const newVal = Math.round((p.value ?? 0) * (1 - drop));
+            return { ...p, condition: 'aRenover', rented: false, value: newVal, baseValue: newVal };
+          });
+          s.valuation = (s.propertyList ?? []).reduce((sum, p) => sum + (p.value ?? 0), 0);
+          s.lastCrimeReceived = { type, propertyLabel: `${target.type} — ${target.place}`, insured, attackerCompany: null };
+        }
+      }
+      return s;
+    }
+
     case 'MASS_REPAY_LOANS': {
       const totalDebt = (state.loans ?? []).reduce((s, l) => s + Math.round((l.balance ?? 0) * 1.03), 0);
       if ((state.cash ?? 0) < totalDebt) return state;
@@ -678,6 +739,8 @@ function advanceYear(state) {
   s.age  += 1;
   s.bankOpsThisYear = 0;
   s.eventsPerYear = 3 + Math.floor(Math.random() * 3);
+  s.crimeUsedThisYear = false;
+  s.hasInsurance = false;
 
   s.economicCycle = nextEconomicCycle(s.economicCycle);
 

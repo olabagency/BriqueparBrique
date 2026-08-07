@@ -817,6 +817,38 @@ header.hud::before{
   font-size:13px;font-weight:700;color:#fff;
 }
 
+/* Crime toast */
+@keyframes crimeIn{0%{opacity:0;transform:translateX(24px);}100%{opacity:1;transform:translateX(0);}}
+@keyframes crimeOut{0%{opacity:1;}80%{opacity:1;}100%{opacity:0;transform:translateX(24px);}}
+.fx-crime{
+  position:fixed;bottom:calc(80px + env(safe-area-inset-bottom));right:14px;
+  z-index:9200;max-width:280px;
+  border-radius:12px;padding:10px 14px;
+  display:flex;align-items:flex-start;gap:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,.22);
+  animation:crimeIn .35s cubic-bezier(.22,1,.36,1) both, crimeOut 30s .5s forwards;
+  color:#fff;
+}
+.fx-crime-victim{background:linear-gradient(135deg,#8B1A0A,#B8402E);}
+.fx-crime-success{background:linear-gradient(135deg,#1a3a1a,#2d6a2d);}
+.fx-crime-fail{background:linear-gradient(135deg,#3a3520,#6a6030);}
+
+/* Crime buttons in player card */
+.crime-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:7px 8px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;
+  background:rgba(184,64,46,.10);border:1px solid rgba(184,64,46,.35);
+  color:var(--red);transition:background .15s,border-color .15s;
+}
+.crime-btn:hover:not(:disabled){background:rgba(184,64,46,.18);border-color:var(--red);}
+.crime-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.crime-btn-cost{font-size:9px;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.crime-btn-insurance{
+  width:100%;flex-direction:row;justify-content:space-between;
+  background:rgba(31,122,77,.09);border-color:rgba(31,122,77,.3);color:var(--accent);
+}
+.crime-btn-insurance:hover:not(:disabled){background:rgba(31,122,77,.16);border-color:var(--accent);}
+
 /* Live presence bar (in-game) */
 .live-presence{
   display:flex;align-items:center;gap:7px;
