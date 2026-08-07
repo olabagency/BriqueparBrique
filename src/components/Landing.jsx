@@ -7,7 +7,7 @@ import { computeScore, scoreGrade } from '../engine/gameState.js';
 import achievementsDef from '../data/achievements.json';
 import globalBoard from '../data/global_leaderboard.json';
 import { FIREBASE_ENABLED } from '../engine/firebaseConfig.js';
-import { fetchCombinedLeaderboard } from '../engine/firebaseGame.js';
+import { fetchCombinedLeaderboard, syncHistoryToFirebase } from '../engine/firebaseGame.js';
 import { subscribePresence } from '../engine/presence.js';
 import { ShaderBackground } from './ui/shader-r.tsx';
 
@@ -409,6 +409,8 @@ export default function Landing() {
       setLiveScores(scores);
       setLoadingScores(false);
     });
+    // Push any unsynced local history entries to Firebase
+    if (history.length > 0) syncHistoryToFirebase(history);
   }, []);
 
   useEffect(() => {

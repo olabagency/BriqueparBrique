@@ -9,6 +9,70 @@ function getDb() {
   return getDatabase(app);
 }
 
+// ─── History sync ────────────────────────────────────────────────────────────
+
+const SYNCED_KEY = 'bpb_synced_runs';
+
+function loadSyncedIds() {
+  try { return new Set(JSON.parse(localStorage.getItem(SYNCED_KEY) ?? '[]')); } catch { return new Set(); }
+}
+function saveSyncedIds(ids) {
+  try { localStorage.setItem(SYNCED_KEY, JSON.stringify([...ids])); } catch {}
+}
+
+/**
+ * Push localStorage history entries to Firebase leaderboard.
+ * Each run is stored under leaderboard/{runId} so it's idempotent.
+ * Already-synced runs are skipped via a localStorage Set.
+ */
+export async function syncHistoryToFirebase(runs) {
+  const db = getDb();
+  if (!db || !runs?.length) return;
+
+  const syncedIds = loadSyncedIds();
+  const pending = runs.filter(r => {
+    const id = r.runId ?? `${r.name}|${r.finalVal ?? 0}|${r.date ?? ''}`;
+    return !syncedIds.has(id);
+  });
+  if (!pending.length) return;
+
+  for (const run of pending) {
+    // Use runId as the Firebase key so the same run can't be duplicated
+    const key = run.runId ?? `hist-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    const localId = run.runId ?? `${run.name}|${run.finalVal ?? 0}|${run.date ?? ''}`;
+    try {
+      await set(ref(db, `leaderboard/${key}`), {
+        runId:          key,
+        sessionId:      key,            // use runId as sessionId — unique per run
+        name:           run.name ?? 'Joueur',
+        companyName:    run.companyName ?? '',
+        sector:         run.sector ?? null,
+        traitId:        run.traitId ?? null,
+        score:          run.score ?? 0,
+        finalVal:       run.finalVal ?? 0,
+        finalCash:      run.finalCash ?? 0,
+        personalCash:   run.personalCash ?? 0,
+        years:          run.years ?? 0,
+        age:            run.age ?? 18,
+        propertiesOwned: run.propertiesOwned ?? 0,
+        propertyList:   (run.propertyList ?? []).slice(0, 50),
+        achievements:   run.achievements ?? [],
+        endingKind:     run.endingKind ?? 'age_limit',
+        luxuryItems:    run.luxuryItems ?? [],
+        gender:         run.gender ?? null,
+        durationMs:     run.durationMs ?? null,
+        over:           true,
+        date:           typeof run.date === 'number' ? new Date(run.date).toISOString() : (run.date ?? new Date().toISOString()),
+        updatedAt:      Date.now(),
+      });
+      syncedIds.add(localId);
+    } catch (e) {
+      console.warn('syncHistoryToFirebase: failed for run', key, e);
+    }
+  }
+  saveSyncedIds(syncedIds);
+}
+
 // ─── Active game sync ─────────────────────────────────────────────────────────
 
 /**
