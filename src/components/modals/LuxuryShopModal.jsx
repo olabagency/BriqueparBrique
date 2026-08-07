@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '../ui/Modal.jsx';
 import { useGame } from '../../context/GameContext.jsx';
 import { fmtCash } from '../../engine/utils.js';
 import rawCatalog from '../../data/luxury_items.json';
+import { fetchShopOverrides } from '../../engine/adminOverrides.js';
 
 const CATEGORIES = ['Toutes', 'Montres', 'Voitures', 'Avions', 'Bateaux', 'Art', 'Bijoux', 'Mode', 'Vins & Spiritueux', 'Instruments'];
 
-function applyOverrides(items) {
-  try {
-    const overrides = JSON.parse(localStorage.getItem('bbq_admin_overrides') ?? '{}');
-    return items.map(item => {
-      const ov = overrides[item.id];
-      if (!ov) return item;
-      return { ...item, ...(ov.price !== undefined ? { price: ov.price } : {}), ...(ov.image !== undefined ? { image: ov.image } : {}) };
-    });
-  } catch { return items; }
+function applyOverrides(items, overrides) {
+  return items.map(item => {
+    const ov = overrides[item.id];
+    if (!ov) return item;
+    return {
+      ...item,
+      ...(ov.price !== undefined ? { price: Number(ov.price) } : {}),
+      ...(ov.image !== undefined && ov.image !== '' ? { image: ov.image } : {}),
+    };
+  });
 }
 
 export default function LuxuryShopModal({ onClose }) {
@@ -22,8 +24,13 @@ export default function LuxuryShopModal({ onClose }) {
   const { personalCash = 0, luxuryItems: owned = [] } = state;
   const [filterCat, setFilterCat] = useState('Toutes');
   const [tab, setTab] = useState('shop');
+  const [overrides, setOverrides] = useState({});
 
-  const catalog = applyOverrides(rawCatalog);
+  useEffect(() => {
+    fetchShopOverrides().then(setOverrides);
+  }, []);
+
+  const catalog = applyOverrides(rawCatalog, overrides);
   const ownedIds = owned.map(i => i.id);
   const filtered = filterCat === 'Toutes' ? catalog : catalog.filter(i => i.category === filterCat);
 

@@ -1,11 +1,11 @@
-import {
-  STARTING_CASH,
-  STARTING_AGE,
-  STARTING_STRESS,
-  GAME_OVER_MAX_AGE,
-} from '../config.js';
+import { getGameConfig } from './runtimeConfig.js';
 
 export function freshState({ name, companyName, gender, sector, traitId, challengeId } = {}) {
+  const cfg = getGameConfig();
+  const STARTING_CASH    = cfg.STARTING_CASH;
+  const STARTING_AGE     = cfg.STARTING_AGE;
+  const STARTING_STRESS  = cfg.STARTING_STRESS;
+  const GAME_OVER_MAX_AGE = cfg.GAME_OVER_MAX_AGE;
   return {
     // Meta
     name:         name        ?? 'Joueur',

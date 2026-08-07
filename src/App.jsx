@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GameProvider, useGame } from './context/GameContext.jsx';
 import { EffectsProvider } from './context/EffectsContext.jsx';
 import { loadTheme } from './engine/saveLoad.js';
+import { fetchConfigOverrides } from './engine/adminOverrides.js';
+import { applyGameConfigOverrides } from './engine/runtimeConfig.js';
 import Landing    from './components/Landing.jsx';
 import Onboarding from './components/Onboarding.jsx';
 import Game       from './components/Game.jsx';
@@ -27,6 +29,16 @@ function AppShell() {
 }
 
 export default function App() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    fetchConfigOverrides()
+      .then(overrides => applyGameConfigOverrides(overrides))
+      .finally(() => setReady(true));
+  }, []);
+
+  if (!ready) return null;
+
   if (window.location.pathname === '/admin') return <AdminPage />;
   return (
     <GameProvider>
