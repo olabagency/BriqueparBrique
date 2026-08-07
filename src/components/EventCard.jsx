@@ -52,13 +52,13 @@ export default function EventCard() {
   const handleContinue = () => {
     const { eff, choice, targetProperty } = outcome;
 
-    // Fatal probability roll — capped at 8% max to avoid frustration
+    // Fatal probability roll — capped at 1% max to avoid frustration
     let fatal = false;
     if (choice.fatal && typeof choice.fatal === 'object') {
-      const cappedChance = Math.min(0.08, choice.fatal.chance ?? 0);
+      const cappedChance = Math.min(0.01, choice.fatal.chance ?? 0);
       fatal = Math.random() < cappedChance;
     } else if (choice.fatal === true) {
-      fatal = Math.random() < 0.05;
+      fatal = Math.random() < 0.01;
     }
 
     resolveEvent({
