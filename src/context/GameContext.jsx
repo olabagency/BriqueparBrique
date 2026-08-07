@@ -201,7 +201,7 @@ function reducer(state, action) {
 
     case 'START_GAME': {
       const init = freshState(action.payload);
-      const marketListings = generateMarketListings(init.economicCycle, 6);
+      const marketListings = generateMarketListings(init.economicCycle, 18);
       const events = pickEvents(init, init.eventsPerYear ?? 3);
       return { ...init, marketListings, pendingEvents: events, currentEventIndex: 0, screen: 'game' };
     }
@@ -409,6 +409,7 @@ function reducer(state, action) {
       const gain = Math.round((prop.value ?? prop.baseValue ?? 0) * gainPct);
       s.cash = (s.cash ?? 0) - cost;
       s.currentYearFinance = { ...s.currentYearFinance, renovations: (s.currentYearFinance?.renovations ?? 0) - cost };
+      prop.lastRenovationYear = state.year;
       if (!keepUnrenovated) {
         prop.value = (prop.value ?? prop.baseValue ?? 0) + gain;
         prop.condition = 'renove';
@@ -580,7 +581,7 @@ function reducer(state, action) {
     case 'REFRESH_MARKET': {
       return {
         ...state,
-        marketListings: generateMarketListings(state.economicCycle, 6),
+        marketListings: generateMarketListings(state.economicCycle, 18),
       };
     }
 
@@ -719,7 +720,7 @@ function advanceYear(state) {
     courtierSaving: contacts.includes('courtier') ? (s.loans ?? []).length * 3 : 0,
   };
 
-  const listingCount = contacts.includes('notaire') ? 8 : 6;
+  const listingCount = contacts.includes('notaire') ? 24 : 18;
   s.marketListings = generateMarketListings(s.economicCycle, listingCount);
   s.pendingEvents = pickEvents(s, s.eventsPerYear ?? 3);
   s.currentEventIndex = 0;

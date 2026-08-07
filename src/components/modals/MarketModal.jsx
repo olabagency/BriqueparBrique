@@ -152,12 +152,15 @@ function PurchaseConfigurator({ listing, effectivePrice, cash, onConfirm, onCanc
 }
 
 const PRICE_TIERS = [
-  { id: 'all',       label: 'Tous',         unlock: 0   },
-  { id: 'budget',    label: '< 100 k€',     max: 100,   unlock: 0   },
-  { id: 'standard',  label: '100–300 k€',   min: 100, max: 300, unlock: 100 },
-  { id: 'premium',   label: '300–700 k€',   min: 300, max: 700, unlock: 300 },
-  { id: 'exception', label: '700 k€+',      min: 700,   unlock: 700 },
+  { id: 'all',       label: 'Tous',           unlock: 0    },
+  { id: 'budget',    label: '< 100 k€',       max: 100,    unlock: 0    },
+  { id: 'standard',  label: '100–300 k€',     min: 100,  max: 300,  unlock: 100  },
+  { id: 'premium',   label: '300–700 k€',     min: 300,  max: 700,  unlock: 300  },
+  { id: 'exception', label: '700k–1M€',       min: 700,  max: 1000, unlock: 700  },
+  { id: 'million',   label: '1M€+',           min: 1000,             unlock: 2000 },
 ];
+
+const PAGE_SIZE = 6;
 
 export default function MarketModal({ onClose }) {
   const { state, buyProperty, refreshMarket } = useGame();
@@ -165,6 +168,7 @@ export default function MarketModal({ onClose }) {
   const [filter, setFilter] = useState('');
   const [selectedId, setSelectedId] = useState(null);
   const [priceTier, setPriceTier] = useState('all');
+  const [page, setPage] = useState(0);
 
   const hasAgent = (state.contacts ?? []).includes('agent_immo');
 
@@ -179,6 +183,13 @@ export default function MarketModal({ onClose }) {
     }
     return true;
   });
+
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  const safePage = Math.min(page, Math.max(0, totalPages - 1));
+  const paginated = filtered.slice(safePage * PAGE_SIZE, (safePage + 1) * PAGE_SIZE);
+
+  const handleFilterChange = (newFilter) => { setFilter(newFilter); setPage(0); };
+  const handleTierChange = (newTier) => { setPriceTier(newTier); setPage(0); };
 
   const types = [...new Set(marketListings.map(l => l.type))];
 
@@ -195,9 +206,9 @@ export default function MarketModal({ onClose }) {
       </div>
 
       <div className="market-filters">
-        <button className={`market-filter-chip ${!filter ? 'active' : ''}`} onClick={() => setFilter('')}>Tous</button>
+        <button className={`market-filter-chip ${!filter ? 'active' : ''}`} onClick={() => handleFilterChange('')}>Tous</button>
         {types.map(t => (
-          <button key={t} className={`market-filter-chip ${filter === t ? 'active' : ''}`} onClick={() => setFilter(t)}>{t}</button>
+          <button key={t} className={`market-filter-chip ${filter === t ? 'active' : ''}`} onClick={() => handleFilterChange(t)}>{t}</button>
         ))}
       </div>
 
@@ -209,7 +220,7 @@ export default function MarketModal({ onClose }) {
             <button
               key={tier.id}
               className={`market-filter-chip ${active ? 'active' : ''}`}
-              onClick={() => unlocked && setPriceTier(active ? 'all' : tier.id)}
+              onClick={() => unlocked && handleTierChange(active ? 'all' : tier.id)}
               disabled={!unlocked}
               title={!unlocked ? `Débloqué à ${tier.unlock} k€ de patrimoine` : undefined}
               style={{ opacity: unlocked ? 1 : 0.4, cursor: unlocked ? 'pointer' : 'not-allowed' }}
@@ -220,8 +231,38 @@ export default function MarketModal({ onClose }) {
         })}
       </div>
 
+      {/* Pagination controls */}
+      {totalPages > 1 && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+          <button
+            onClick={() => setPage(p => Math.max(0, p - 1))}
+            disabled={safePage === 0}
+            style={{
+              fontSize: 12, padding: '5px 14px', borderRadius: 8,
+              background: 'var(--surface2)', border: '1px solid var(--border)',
+              color: safePage === 0 ? 'var(--muted)' : 'var(--text)',
+              cursor: safePage === 0 ? 'default' : 'pointer', opacity: safePage === 0 ? 0.4 : 1,
+            }}
+          >← Précédent</button>
+          <span style={{ fontSize: 11, color: 'var(--muted)' }}>
+            Page {safePage + 1} / {totalPages} · {filtered.length} biens
+          </span>
+          <button
+            onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+            disabled={safePage >= totalPages - 1}
+            style={{
+              fontSize: 12, padding: '5px 14px', borderRadius: 8,
+              background: 'var(--surface2)', border: '1px solid var(--border)',
+              color: safePage >= totalPages - 1 ? 'var(--muted)' : 'var(--text)',
+              cursor: safePage >= totalPages - 1 ? 'default' : 'pointer',
+              opacity: safePage >= totalPages - 1 ? 0.4 : 1,
+            }}
+          >Suivant →</button>
+        </div>
+      )}
+
       <div className="market-grid">
-        {filtered.map(listing => {
+        {paginated.map(listing => {
           const basePrice = listing.price;
           const effectivePrice = hasAgent ? Math.round(basePrice * 0.95) : basePrice;
           const minApport = Math.round(effectivePrice * MIN_APPORT_PCT / 100);

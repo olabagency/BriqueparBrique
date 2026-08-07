@@ -5,7 +5,8 @@ import { fmtCash } from '../../engine/utils.js';
 
 export default function LoansModal({ onClose }) {
   const { state, repayLoan, renegotiateLoan, clearRenegotiationResult, massRepayLoans } = useGame();
-  const { loans = [], propertyList = [], cash, lastRenegotiationResult } = state;
+  const { loans = [], propertyList = [], cash, lastRenegotiationResult, contacts = [] } = state;
+  const hasCourtier = contacts.includes('courtier');
 
   const [resultBanner, setResultBanner] = useState(null);
 
@@ -78,6 +79,23 @@ export default function LoansModal({ onClose }) {
 
   return (
     <Modal title={`💳 Mes crédits (${loans.length})`} onClose={onClose} wide>
+
+      {/* Courtier gate */}
+      {!hasCourtier && (
+        <div style={{
+          padding: '12px 14px', borderRadius: 10, fontSize: 12, fontWeight: 600,
+          background: 'rgba(184,64,46,.08)', border: '1px solid rgba(184,64,46,.25)',
+          color: 'var(--text)', display: 'flex', alignItems: 'flex-start', gap: 10,
+        }}>
+          <span style={{ fontSize: 20, flexShrink: 0 }}>🔒</span>
+          <div>
+            <div style={{ fontWeight: 700, marginBottom: 2 }}>Renégociation indisponible</div>
+            <div style={{ fontSize: 11, color: 'var(--muted)', lineHeight: 1.4 }}>
+              Tu dois rencontrer un <strong>courtier</strong> via un événement en jeu pour accéder à la renégociation de taux.
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Result banner */}
       {resultBanner && (
@@ -228,16 +246,16 @@ export default function LoansModal({ onClose }) {
               <div style={{ display: 'flex', gap: 6 }}>
                 <button
                   onClick={() => handleRenegotiate(loan)}
-                  disabled={alreadyNeg || !canReNeg}
+                  disabled={!hasCourtier || alreadyNeg || !canReNeg}
                   style={{
                     flex: 1, padding: '7px 0', borderRadius: 8, fontSize: 11.5, fontWeight: 600,
                     background: 'var(--surface)',
-                    border: `1px solid ${alreadyNeg ? 'var(--border)' : canReNeg ? 'var(--amber)' : 'var(--border)'}`,
-                    color: alreadyNeg ? 'var(--muted)' : canReNeg ? 'var(--amber)' : 'var(--muted)',
-                    cursor: (alreadyNeg || !canReNeg) ? 'not-allowed' : 'pointer',
-                    opacity: (alreadyNeg || !canReNeg) ? 0.5 : 1,
+                    border: `1px solid ${!hasCourtier || alreadyNeg ? 'var(--border)' : canReNeg ? 'var(--amber)' : 'var(--border)'}`,
+                    color: !hasCourtier || alreadyNeg ? 'var(--muted)' : canReNeg ? 'var(--amber)' : 'var(--muted)',
+                    cursor: (!hasCourtier || alreadyNeg || !canReNeg) ? 'not-allowed' : 'pointer',
+                    opacity: (!hasCourtier || alreadyNeg || !canReNeg) ? 0.5 : 1,
                   }}
-                  title={alreadyNeg ? 'Déjà renégocié cette année' : !canReNeg ? `Frais insuffisants (${fmtCash(reNegFee)})` : `Frais : ${fmtCash(reNegFee)}`}
+                  title={!hasCourtier ? 'Rencontrer un courtier via un événement' : alreadyNeg ? 'Déjà renégocié cette année' : !canReNeg ? `Frais insuffisants (${fmtCash(reNegFee)})` : `Frais : ${fmtCash(reNegFee)}`}
                 >
                   {alreadyNeg ? '🔄 Renégocié' : `🔄 Renégocier`}
                 </button>

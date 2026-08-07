@@ -66,6 +66,7 @@ export default function PortfolioModal({ onClose }) {
             const condLabel    = propertyData.conditionLabels?.[prop.condition] ?? prop.condition;
             const rent         = calcRentEngine(prop);
             const alreadyToggled = prop.lastRentToggleYear === currentYear;
+            const alreadyRenovatedThisYear = prop.lastRenovationYear === currentYear;
             const baseVal      = prop.value ?? prop.baseValue;
             const saleVal      = prop.rented ? Math.round(baseVal * 0.95) : baseVal;
             const loanBal      = prop.loanBalance ?? 0;
@@ -119,7 +120,7 @@ export default function PortfolioModal({ onClose }) {
 
                 {/* Actions */}
                 <div style={{ display: 'flex', gap: 5, marginTop: 'auto' }}>
-                  {prop.condition === 'aRenover' && !prop.rented && (
+                  {prop.condition === 'aRenover' && !prop.rented && !alreadyRenovatedThisYear && (
                     <button
                       className="portfolio-renovate-btn amber"
                       onClick={() => setRenovatingProp(prop)}
@@ -129,6 +130,11 @@ export default function PortfolioModal({ onClose }) {
                   {prop.condition === 'aRenover' && prop.rented && (
                     <div style={{ flex: '0 0 auto', fontSize: 9, color: 'var(--amber)', padding: '6px 8px', border: '1px solid var(--amber)', borderRadius: 8, opacity: 0.7 }}>
                       🔒 Délouer pour rénover
+                    </div>
+                  )}
+                  {prop.condition === 'aRenover' && !prop.rented && alreadyRenovatedThisYear && (
+                    <div style={{ flex: '0 0 auto', fontSize: 9, color: 'var(--muted)', padding: '6px 8px', border: '1px solid var(--border)', borderRadius: 8, opacity: 0.7 }}>
+                      🔒 Rénové cette année
                     </div>
                   )}
                   <button
