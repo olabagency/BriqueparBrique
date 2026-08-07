@@ -82,11 +82,6 @@ export default function RenovationModal({ property, onClose }) {
               onClick={() => handleChoice(choice)}
             >
               <div>{choice.label}</div>
-              <div style={{ fontSize: 11, marginTop: 4, color: 'var(--muted)', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                <span>💸 −{fmtCash(cost)}</span>
-                {gain > 0 && <span>📈 +{fmtCash(gain)}</span>}
-                {choice.stress !== 0 && <span>😰 {choice.stress > 0 ? '+' : ''}{choice.stress}</span>}
-              </div>
             </button>
           );
         })}
