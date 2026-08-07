@@ -50,8 +50,8 @@ export function freshState({ name, companyName, gender, sector, traitId, challen
     bankOpsThisYear: 0,
 
     // Finance tracking
-    currentYearFinance: { loyers: 0, ventes: 0, achats: 0, credits: 0, renovations: 0, evenements: 0, banque: 0, patrimoine: 0 },
-    priorYearsFinance:  { loyers: 0, ventes: 0, achats: 0, credits: 0, renovations: 0, evenements: 0, banque: 0, patrimoine: 0 },
+    currentYearFinance: { loyers: 0, ventes: 0, achats: 0, credits: 0, renovations: 0, evenements: 0, banque: 0, patrimoine: 0, taxes: 0 },
+    priorYearsFinance:  { loyers: 0, ventes: 0, achats: 0, credits: 0, renovations: 0, evenements: 0, banque: 0, patrimoine: 0, taxes: 0 },
 
     // End-game
     over:       false,

@@ -67,6 +67,9 @@ export const GAME_CONFIG = {
   },
   SALARY_REVIEW_INTERVAL: 3,
 
+  // --- Taxes foncières ---
+  PROPERTY_TAX_RATE: 0.008,   // 0.8 % de la valeur du portefeuille par an
+
   // --- Fin de partie ---
   RETIREMENT_MIN_AGE: 60,
   GAME_OVER_MAX_AGE: 80,
@@ -86,3 +89,4 @@ export const PROPERTY_LOAN_RATE   = GAME_CONFIG.PROPERTY_LOAN_RATE;
 export const PROPERTY_LOAN_INTEREST = GAME_CONFIG.PROPERTY_LOAN_INTEREST;
 export const PROPERTY_RENT_RATIO  = GAME_CONFIG.PROPERTY_RENT_RATIO;
 export const STAGE_MULTIPLIERS    = GAME_CONFIG.STAGE_MULTIPLIERS;
+export const PROPERTY_TAX_RATE    = GAME_CONFIG.PROPERTY_TAX_RATE;

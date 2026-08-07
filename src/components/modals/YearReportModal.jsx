@@ -17,10 +17,11 @@ function generateNarrative(report) {
   const ventes = finance.ventes ?? 0;
   const events = finance.evenements ?? 0;
   const credits = Math.abs(finance.credits ?? 0);
+  const taxes = Math.abs(finance.taxes ?? 0);
   const paras = [];
 
   // Bilan général
-  const netFlow = loyers + ventes + events - credits - achats;
+  const netFlow = loyers + ventes + events - credits - achats - taxes;
   if (netFlow > 80)       paras.push(`Une année exceptionnelle. Tes flux nets atteignent +${fmtCash(netFlow)} — le portefeuille travaille pour toi.`);
   else if (netFlow > 20)  paras.push(`Une bonne année dans le vert. La machine se met en route.`);
   else if (netFlow > -20) paras.push(`Une année équilibrée. Les investissements pèsent sur le cash, mais les actifs s'apprécient.`);
@@ -42,6 +43,10 @@ function generateNarrative(report) {
   if ((contacts ?? []).includes('courtier') && courtierSaving > 0) paras.push(`Baptiste Leroux a optimisé tes crédits — ${fmtCash(courtierSaving)} économisés.`);
   if ((contacts ?? []).includes('notaire')) paras.push(`Maître Chauvin t'a donné accès à ${propCount > 0 ? 'plus de' : 'des'} biens off-market.`);
   if ((contacts ?? []).includes('agent_immo')) paras.push(`Sofia Merlo a négocié tes achats à −5 %.`);
+
+  // Taxes foncières
+  if (taxes > 200) paras.push(`🏛️ Les taxes foncières s'élèvent à ${fmtCash(taxes)} — le prix à payer pour un parc de cette envergure.`);
+  else if (taxes > 30) paras.push(`🏛️ ${fmtCash(taxes)} de taxes foncières cette année.`);
 
   // Stress
   if (stress > 75)      paras.push(`⚠️ Le stress atteint ${Math.round(stress)}/100. Il faut agir avant que la jauge déborde.`);
@@ -73,6 +78,7 @@ export default function YearReportModal() {
     { label: '💸 Ventes',            value: `+${fmtCash(finance.ventes ?? 0)}`,            positive: true,  show: (finance.ventes ?? 0) > 0 },
     { label: '💳 Remboursements',    value: `−${fmtCash(Math.abs(finance.credits ?? 0))}`,positive: false, show: (finance.credits ?? 0) < 0 },
     { label: '⚡ Évènements',         value: `${(finance.evenements ?? 0) >= 0 ? '+' : ''}${fmtCash(finance.evenements ?? 0)}`, positive: (finance.evenements ?? 0) >= 0, show: (finance.evenements ?? 0) !== 0 },
+    { label: '🏛️ Taxes foncières',   value: `−${fmtCash(Math.abs(finance.taxes ?? 0))}`,  positive: false, show: (finance.taxes ?? 0) < 0 },
   ].filter(r => r.show);
 
   const stressColor = stress > 75 ? 'var(--red)' : stress > 45 ? 'var(--amber)' : 'var(--accent)';

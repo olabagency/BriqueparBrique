@@ -20,6 +20,7 @@ import {
   GAME_OVER_MAX_AGE,
   RETIREMENT_MIN_AGE,
   STAGE_MULTIPLIERS,
+  PROPERTY_TAX_RATE,
 } from '../config.js';
 
 const PROPERTY_TYPES  = ['Studio','Appartement T2','Appartement T3','Duplex','Maison','Loft','Immeuble de rapport','Local commercial','Terrain','Parking'];
@@ -624,7 +625,7 @@ function advanceYear(state) {
     priorYearsFinance[k] = (s.priorYearsFinance?.[k] ?? 0) + (s.currentYearFinance[k] ?? 0);
   }
   s.priorYearsFinance = priorYearsFinance;
-  s.currentYearFinance = { loyers: 0, ventes: 0, achats: 0, credits: 0, renovations: 0, evenements: 0, banque: 0, patrimoine: 0 };
+  s.currentYearFinance = { loyers: 0, ventes: 0, achats: 0, credits: 0, renovations: 0, evenements: 0, banque: 0, patrimoine: 0, taxes: 0 };
 
   s.year += 1;
   s.age  += 1;
@@ -645,6 +646,14 @@ function advanceYear(state) {
   const rentIncome = collectRents(s.propertyList ?? []);
   s.cash = (s.cash ?? 0) + rentIncome;
   if (rentIncome > 0) s.currentYearFinance.loyers += rentIncome;
+
+  // Taxe foncière — 0.8 % de la valeur totale du parc
+  const taxBase   = (s.propertyList ?? []).reduce((sum, p) => sum + (p.value ?? 0), 0);
+  const taxAmount = Math.round(taxBase * PROPERTY_TAX_RATE);
+  if (taxAmount > 0) {
+    s.cash = (s.cash ?? 0) - taxAmount;
+    s.currentYearFinance.taxes = (s.currentYearFinance.taxes ?? 0) - taxAmount;
+  }
 
   // Management stress: 1 point per rented property (capped at 8)
   const rentedCount = (s.propertyList ?? []).filter(p => p.rented).length;
