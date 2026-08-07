@@ -32,11 +32,17 @@ export default function App() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    let resolved = false;
     const unsub = subscribeConfigOverrides(overrides => {
+      resolved = true;
       applyGameConfigOverrides(overrides);
       setReady(true);
     });
-    return unsub;
+    // Fallback: if Firebase never responds, start with defaults after 5s
+    const timer = setTimeout(() => {
+      if (!resolved) { applyGameConfigOverrides({}); setReady(true); }
+    }, 5000);
+    return () => { unsub(); clearTimeout(timer); };
   }, []);
 
   if (!ready) return null;
