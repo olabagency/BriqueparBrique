@@ -3,6 +3,7 @@ import {
   PROPERTY_LOAN_RATE,
   PROPERTY_LOAN_INTEREST,
   PROPERTY_RENT_RATIO,
+  RENT_CYCLE_MULT,
 } from '../config.js';
 import propertyData from '../data/property_data.json';
 import { randInt, shuffleArray } from './utils.js';
@@ -163,11 +164,14 @@ export function nextEconomicCycle(current) {
 
 /**
  * Collect all rents from rented properties for the year.
+ * Applies an economic cycle multiplier (baisse = vacances, hausse = forte demande).
  * @param {object[]} properties
+ * @param {string}   cycle  'hausse' | 'neutre' | 'baisse'
  * @returns {number}  total rent in k€
  */
-export function collectRents(properties) {
+export function collectRents(properties, cycle = 'neutre') {
+  const cycleMult = RENT_CYCLE_MULT[cycle] ?? 0.95;
   return properties
     .filter((p) => p.rented)
-    .reduce((sum, p) => sum + (calcRent(p)), 0);
+    .reduce((sum, p) => sum + Math.round(calcRent(p) * cycleMult), 0);
 }

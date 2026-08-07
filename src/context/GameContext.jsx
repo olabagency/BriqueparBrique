@@ -12,6 +12,7 @@ import {
   appreciateProperties,
   nextEconomicCycle,
   calcLoanPayment,
+  calcRent,
 } from '../engine/market.js';
 import { applyTraitEffect } from '../engine/traitEffect.js';
 import { clamp, shuffleArray, stageFor, stageMultiplier } from '../engine/utils.js';
@@ -21,6 +22,18 @@ import {
   RETIREMENT_MIN_AGE,
   STAGE_MULTIPLIERS,
   PROPERTY_TAX_RATE,
+  LOAN_RATE_SCALE,
+  MAX_ACTIVE_LOANS,
+  LTV_MAX_RATIO,
+  RENTAL_INCOME_TAX_RATE,
+  NOTAIRE_FEES_PCT,
+  CAPITAL_GAINS_TAX_RATE,
+  CAPITAL_GAINS_EXEMPTION_YEARS,
+  DEBT_STRESS_PER_LOAN,
+  MANAGEMENT_FREE_LIMIT,
+  MANAGEMENT_COST_PCT,
+  VACANCY_RISK_THRESHOLD,
+  VACANCY_RISK_PCT,
 } from '../config.js';
 
 const PROPERTY_TYPES  = ['Studio','Appartement T2','Appartement T3','Duplex','Maison','Loft','Immeuble de rapport','Local commercial','Terrain','Parking'];
@@ -319,12 +332,32 @@ function reducer(state, action) {
       const hasAgent = (s.contacts ?? []).includes('agent_immo');
       const basePrice = listing.price ?? listing.baseValue ?? 0;
       const effectivePrice = hasAgent ? Math.round(basePrice * 0.95) : basePrice;
+
       // apportPct in [0,1]: fraction paid upfront. loanRate = 1 - apportPct
       const loanRate = apportPct != null ? Math.max(0, 1 - apportPct) : PROPERTY_LOAN_RATE;
-      const loanInfo = calcLoanPayment(effectivePrice, loanRate);
+      const wantsLoan = loanRate > 0;
+
+      // 8. Limite de crédits actifs
+      if (wantsLoan && (s.loans ?? []).length >= MAX_ACTIVE_LOANS) return s;
+
+      // 1. Taux variable selon endettement
+      const activeLoanCount = (s.loans ?? []).length;
+      const interestRate = LOAN_RATE_SCALE[Math.min(activeLoanCount, LOAN_RATE_SCALE.length - 1)];
+      const loanInfo = calcLoanPayment(effectivePrice, loanRate, interestRate);
       const downPayment = effectivePrice - loanInfo.loanAmount;
 
-      if (s.cash < downPayment) return s;
+      // 2. Vérification LTV (dette totale / patrimoine total après achat)
+      if (wantsLoan) {
+        const existingDebt = (s.loans ?? []).reduce((sum, l) => sum + (l.balance ?? 0), 0);
+        const newValuation = (s.valuation ?? 0) + effectivePrice;
+        if (newValuation > 0 && (existingDebt + loanInfo.loanAmount) / newValuation > LTV_MAX_RATIO) return s;
+      }
+
+      // 5. Frais de notaire (7,5 % du prix)
+      const notaireFees = Math.round(effectivePrice * NOTAIRE_FEES_PCT);
+      const totalUpfront = downPayment + notaireFees;
+
+      if (s.cash < totalUpfront) return s;
 
       const prop = {
         ...listing,
@@ -332,6 +365,7 @@ function reducer(state, action) {
         condition: listing.condition ?? 'bonEtat',
         value: effectivePrice,
         baseValue: effectivePrice,
+        purchasePrice: effectivePrice,
         rented: false,
         yearPurchased: s.year,
       };
@@ -352,13 +386,16 @@ function reducer(state, action) {
       const props = [...(s.propertyList ?? []), prop];
       const newState = {
         ...s,
-        cash: s.cash - downPayment,
+        cash: s.cash - totalUpfront,
         propertyList: props,
         propertiesOwned: (s.propertiesOwned ?? 0) + 1,
         loans: loanInfo.loanAmount > 0 ? [...(s.loans ?? []), newLoan] : s.loans,
         valuation: props.reduce((sum, p) => sum + (p.value ?? 0), 0),
         flags: { ...s.flags, everHadLoan: loanInfo.loanAmount > 0 ? true : s.flags?.everHadLoan },
-        currentYearFinance: { ...s.currentYearFinance, achats: (s.currentYearFinance?.achats ?? 0) - (prop.value ?? 0) },
+        currentYearFinance: {
+          ...s.currentYearFinance,
+          achats: (s.currentYearFinance?.achats ?? 0) - (prop.value ?? 0) - notaireFees,
+        },
       };
       const prevAchsBuy = s.achievements ?? [];
       newState.achievements = checkAchievements(newState);
@@ -375,15 +412,25 @@ function reducer(state, action) {
       if (!sold) return s;
 
       const loanToRepay = (s.loans ?? []).find(l => l.propertyId === propertyId);
-      // Rented property: 5% penalty (tenant in place = buyer discount)
       const baseValue = sold.value ?? 0;
       const saleValue = sold.rented ? Math.round(baseValue * 0.95) : baseValue;
       let cashGain = saleValue;
       if (loanToRepay) cashGain -= loanToRepay.balance;
 
+      // 6. Taxe sur plus-value (36,2 %, exemption progressive sur 22 ans)
+      const purchasePrice = sold.purchasePrice ?? sold.baseValue ?? saleValue;
+      const rawGain = Math.max(0, saleValue - purchasePrice);
+      if (rawGain > 0) {
+        const yearsHeld = Math.max(0, (s.year ?? 1) - (sold.yearPurchased ?? s.year ?? 1));
+        const exemptionFactor = Math.min(1, yearsHeld / CAPITAL_GAINS_EXEMPTION_YEARS);
+        const taxableGain = Math.round(rawGain * (1 - exemptionFactor));
+        const capitalGainsTax = Math.round(taxableGain * CAPITAL_GAINS_TAX_RATE);
+        cashGain -= capitalGainsTax;
+      }
+
       const loans = (s.loans ?? []).filter(l => l.propertyId !== propertyId);
       const pctGain = sold.value > 0 && sold.yearPurchased
-        ? Math.round(((saleValue - (sold.baseValue ?? sold.value)) / (sold.baseValue ?? sold.value)) * 100)
+        ? Math.round(((saleValue - (sold.purchasePrice ?? sold.baseValue ?? sold.value)) / (sold.purchasePrice ?? sold.baseValue ?? sold.value)) * 100)
         : null;
       if (s.name) {
         const gainStr = pctGain !== null && pctGain !== 0 ? ` (${pctGain > 0 ? '+' : ''}${pctGain}%)` : '';
@@ -625,7 +672,7 @@ function advanceYear(state) {
     priorYearsFinance[k] = (s.priorYearsFinance?.[k] ?? 0) + (s.currentYearFinance[k] ?? 0);
   }
   s.priorYearsFinance = priorYearsFinance;
-  s.currentYearFinance = { loyers: 0, ventes: 0, achats: 0, credits: 0, renovations: 0, evenements: 0, banque: 0, patrimoine: 0, taxes: 0 };
+  s.currentYearFinance = { loyers: 0, ventes: 0, achats: 0, credits: 0, renovations: 0, evenements: 0, banque: 0, patrimoine: 0, taxes: 0, ir: 0, gestion: 0 };
 
   s.year += 1;
   s.age  += 1;
@@ -643,22 +690,62 @@ function advanceYear(state) {
     s.personalCash = (s.personalCash ?? 0) + salaryDraw;
   }
 
-  const rentIncome = collectRents(s.propertyList ?? []);
+  // 10. Loyers ajustés au cycle économique
+  const rentIncome = collectRents(s.propertyList ?? [], s.economicCycle);
   s.cash = (s.cash ?? 0) + rentIncome;
   if (rentIncome > 0) s.currentYearFinance.loyers += rentIncome;
 
+  // 4. Impôt sur revenus locatifs (35 %)
+  const irAmount = Math.round(rentIncome * RENTAL_INCOME_TAX_RATE);
+  if (irAmount > 0) {
+    s.cash = (s.cash ?? 0) - irAmount;
+    s.currentYearFinance.ir -= irAmount;
+  }
+
+  // 9. Frais de gestion pour les biens au-delà du palier libre (10)
+  const allPropsForGestion = s.propertyList ?? [];
+  if (allPropsForGestion.length > MANAGEMENT_FREE_LIMIT) {
+    const rentedSorted = [...allPropsForGestion.filter(p => p.rented)]
+      .sort((a, b) => (a.yearPurchased ?? 0) - (b.yearPurchased ?? 0));
+    const excessRented = rentedSorted.slice(MANAGEMENT_FREE_LIMIT);
+    const gestionCost  = excessRented.reduce((sum, p) => sum + Math.round(calcRent(p) * MANAGEMENT_COST_PCT), 0);
+    if (gestionCost > 0) {
+      s.cash = (s.cash ?? 0) - gestionCost;
+      s.currentYearFinance.gestion -= gestionCost;
+    }
+  }
+
   // Taxe foncière — 0.8 % de la valeur totale du parc
-  const taxBase   = (s.propertyList ?? []).reduce((sum, p) => sum + (p.value ?? 0), 0);
+  const taxBase   = allPropsForGestion.reduce((sum, p) => sum + (p.value ?? 0), 0);
   const taxAmount = Math.round(taxBase * PROPERTY_TAX_RATE);
   if (taxAmount > 0) {
     s.cash = (s.cash ?? 0) - taxAmount;
     s.currentYearFinance.taxes = (s.currentYearFinance.taxes ?? 0) - taxAmount;
   }
 
+  // 3. Vacance locative progressive (au-delà du seuil, 15 % de chance/bien)
+  let vacanciesLost = 0;
+  const rentedBeforeVacancy = (s.propertyList ?? []).filter(p => p.rented);
+  if (rentedBeforeVacancy.length > VACANCY_RISK_THRESHOLD) {
+    const sortedRented = [...rentedBeforeVacancy].sort((a, b) => (a.yearPurchased ?? 0) - (b.yearPurchased ?? 0));
+    const atRiskIds = new Set(sortedRented.slice(VACANCY_RISK_THRESHOLD).map(p => p.id));
+    s.propertyList = (s.propertyList ?? []).map(p => {
+      if (!atRiskIds.has(p.id)) return p;
+      if (Math.random() < VACANCY_RISK_PCT) { vacanciesLost++; return { ...p, rented: false }; }
+      return p;
+    });
+  }
+
   // Management stress: 1 point per rented property (capped at 8)
   const rentedCount = (s.propertyList ?? []).filter(p => p.rented).length;
   const mgmtStress  = Math.min(rentedCount, 8);
   if (mgmtStress > 0) s.stress = clamp((s.stress ?? 0) + mgmtStress, 0, STRESS_MAX);
+
+  // 7. Stress lié à la dette : 2 pts par crédit actif
+  const activeLoansForStress = (s.loans ?? []).length;
+  if (activeLoansForStress > 0) {
+    s.stress = clamp((s.stress ?? 0) + activeLoansForStress * DEBT_STRESS_PER_LOAN, 0, STRESS_MAX);
+  }
 
   // Debt stress: negative cash adds stress every year
   const cashAfterRent = s.cash ?? 0;
@@ -727,6 +814,8 @@ function advanceYear(state) {
     rentedCount: (s.propertyList ?? []).filter(p => p.rented).length,
     contacts: [...contacts],
     courtierSaving: contacts.includes('courtier') ? (s.loans ?? []).length * 3 : 0,
+    vacanciesLost,
+    activeLoans: (s.loans ?? []).length,
   };
 
   const listingCount = contacts.includes('notaire') ? 24 : 18;

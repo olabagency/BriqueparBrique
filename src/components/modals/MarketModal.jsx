@@ -4,6 +4,7 @@ import { useGame } from '../../context/GameContext.jsx';
 import { fmtCash, fmtMonthly } from '../../engine/utils.js';
 import { calcLoanPayment } from '../../engine/market.js';
 import propertyData from '../../data/property_data.json';
+import { LOAN_RATE_SCALE, MAX_ACTIVE_LOANS, LTV_MAX_RATIO, NOTAIRE_FEES_PCT } from '../../config.js';
 
 const CYCLE_LABELS = { hausse: '📈 Marché haussier', neutre: '➡️ Marché neutre', baisse: '📉 Marché baissier' };
 const MIN_APPORT_PCT = 10;
@@ -20,14 +21,36 @@ const TYPE_EMOJI = {
   'Parking':              '🚗',
 };
 
-function PurchaseConfigurator({ listing, effectivePrice, cash, onConfirm, onCancel }) {
+function PurchaseConfigurator({ listing, effectivePrice, cash, loans, valuation, onConfirm, onCancel }) {
   const [apportPct, setApportPct] = useState(20);
 
   const loanPct = Math.max(0, 100 - apportPct) / 100;
-  const loanInfo = useMemo(() => calcLoanPayment(effectivePrice, loanPct), [effectivePrice, loanPct]);
-  const downPayment = effectivePrice - loanInfo.loanAmount;
-  const canAfford = cash >= downPayment;
   const isCash = apportPct >= 100;
+
+  // 1. Taux variable selon nb de crédits actifs
+  const activeLoanCount = (loans ?? []).length;
+  const interestRate = LOAN_RATE_SCALE[Math.min(activeLoanCount, LOAN_RATE_SCALE.length - 1)];
+  const loanInfo = useMemo(
+    () => calcLoanPayment(effectivePrice, loanPct, interestRate),
+    [effectivePrice, loanPct, interestRate],
+  );
+  const downPayment = effectivePrice - loanInfo.loanAmount;
+
+  // 5. Frais de notaire
+  const notaireFees = Math.round(effectivePrice * NOTAIRE_FEES_PCT);
+  const totalUpfront = downPayment + notaireFees;
+  const canAfford = cash >= totalUpfront;
+
+  // 2. LTV check
+  const existingDebt = (loans ?? []).reduce((sum, l) => sum + (l.balance ?? 0), 0);
+  const newValuation = (valuation ?? 0) + effectivePrice;
+  const ltv = !isCash && newValuation > 0 ? (existingDebt + loanInfo.loanAmount) / newValuation : 0;
+  const ltvExceeded = !isCash && ltv > LTV_MAX_RATIO;
+
+  // 8. Max crédits actifs
+  const maxLoansReached = !isCash && activeLoanCount >= MAX_ACTIVE_LOANS;
+
+  const canBuy = canAfford && !ltvExceeded && !maxLoansReached;
 
   return (
     <div style={{
@@ -62,6 +85,26 @@ function PurchaseConfigurator({ listing, effectivePrice, cash, onConfirm, onCanc
         </div>
       </div>
 
+      {/* Blocages */}
+      {maxLoansReached && (
+        <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', padding: '10px 12px', borderRadius: 10, background: 'rgba(239,68,68,.08)', border: '1px solid rgba(239,68,68,.25)', marginBottom: 10 }}>
+          <span style={{ fontSize: 16 }}>🔒</span>
+          <div style={{ fontSize: 12 }}>
+            <div style={{ fontWeight: 700, color: 'var(--red)' }}>Limite de {MAX_ACTIVE_LOANS} crédits atteinte</div>
+            <div style={{ color: 'var(--muted)', marginTop: 2 }}>Remboursez un crédit ou achetez comptant.</div>
+          </div>
+        </div>
+      )}
+      {ltvExceeded && !maxLoansReached && (
+        <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', padding: '10px 12px', borderRadius: 10, background: 'rgba(239,68,68,.08)', border: '1px solid rgba(239,68,68,.25)', marginBottom: 10 }}>
+          <span style={{ fontSize: 16 }}>⚠️</span>
+          <div style={{ fontSize: 12 }}>
+            <div style={{ fontWeight: 700, color: 'var(--red)' }}>Ratio d'endettement dépassé ({Math.round(ltv * 100)}% / {Math.round(LTV_MAX_RATIO * 100)}% max)</div>
+            <div style={{ color: 'var(--muted)', marginTop: 2 }}>Augmentez l'apport ou remboursez des crédits.</div>
+          </div>
+        </div>
+      )}
+
       {/* Breakdown */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 14 }}>
         <div style={{ background: 'var(--surface2)', borderRadius: 10, padding: '10px 12px' }}>
@@ -71,9 +114,12 @@ function PurchaseConfigurator({ listing, effectivePrice, cash, onConfirm, onCanc
           <div style={{ fontSize: 16, fontWeight: 800, fontFamily: 'monospace', color: canAfford ? 'var(--accent)' : 'var(--red)' }}>
             {fmtCash(downPayment)}
           </div>
+          <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}>
+            + {fmtCash(notaireFees)} notaire = <strong>{fmtCash(totalUpfront)}</strong>
+          </div>
           {!canAfford && (
             <div style={{ fontSize: 10, color: 'var(--red)', marginTop: 2 }}>
-              Manque {fmtCash(downPayment - cash)}
+              Manque {fmtCash(totalUpfront - cash)}
             </div>
           )}
         </div>
@@ -99,9 +145,14 @@ function PurchaseConfigurator({ listing, effectivePrice, cash, onConfirm, onCanc
               <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.04em', marginBottom: 4 }}>
                 Taux · Durée
               </div>
-              <div style={{ fontSize: 16, fontWeight: 800, fontFamily: 'monospace', color: 'var(--text)' }}>
-                {(loanInfo.rate * 100).toFixed(1)}% · 20 ans
+              <div style={{ fontSize: 16, fontWeight: 800, fontFamily: 'monospace', color: activeLoanCount >= 2 ? 'var(--red)' : 'var(--text)' }}>
+                {(interestRate * 100).toFixed(1)}% · 20 ans
               </div>
+              {activeLoanCount > 0 && (
+                <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}>
+                  ({activeLoanCount} crédit{activeLoanCount > 1 ? 's' : ''} actif{activeLoanCount > 1 ? 's' : ''})
+                </div>
+              )}
             </div>
           </>
         )}
@@ -117,7 +168,7 @@ function PurchaseConfigurator({ listing, effectivePrice, cash, onConfirm, onCanc
             cursor: 'pointer', marginBottom: 8,
           }}
         >
-          💰 Acheter comptant à {fmtCash(effectivePrice)}
+          💰 Acheter comptant à {fmtCash(effectivePrice)} (+ {fmtCash(notaireFees)} notaire)
         </button>
       )}
 
@@ -133,18 +184,18 @@ function PurchaseConfigurator({ listing, effectivePrice, cash, onConfirm, onCanc
           Annuler
         </button>
         <button
-          onClick={() => canAfford && onConfirm(apportPct / 100)}
-          disabled={!canAfford}
+          onClick={() => canBuy && onConfirm(apportPct / 100)}
+          disabled={!canBuy}
           style={{
             flex: 2, padding: '9px 0', borderRadius: 9, fontSize: 13, fontWeight: 700,
-            background: canAfford ? 'var(--accent)' : 'var(--surface2)',
-            border: 'none', color: canAfford ? '#fff' : 'var(--muted)',
-            cursor: canAfford ? 'pointer' : 'not-allowed',
+            background: canBuy ? 'var(--accent)' : 'var(--surface2)',
+            border: 'none', color: canBuy ? '#fff' : 'var(--muted)',
+            cursor: canBuy ? 'pointer' : 'not-allowed',
           }}
         >
           {isCash
-            ? `✅ Acheter comptant — ${fmtCash(effectivePrice)}`
-            : `✅ Confirmer — apport ${fmtCash(downPayment)}`}
+            ? `✅ Acheter comptant — ${fmtCash(totalUpfront)}`
+            : `✅ Confirmer — total ${fmtCash(totalUpfront)}`}
         </button>
       </div>
     </div>
@@ -164,7 +215,7 @@ const PAGE_SIZE = 6;
 
 export default function MarketModal({ onClose }) {
   const { state, buyProperty, refreshMarket } = useGame();
-  const { marketListings = [], cash, economicCycle, valuation = 0 } = state;
+  const { marketListings = [], cash, economicCycle, valuation = 0, loans = [] } = state;
   const [filter, setFilter] = useState('');
   const [selectedId, setSelectedId] = useState(null);
   const [priceTier, setPriceTier] = useState('all');
@@ -266,7 +317,8 @@ export default function MarketModal({ onClose }) {
           const basePrice = listing.price;
           const effectivePrice = hasAgent ? Math.round(basePrice * 0.95) : basePrice;
           const minApport = Math.round(effectivePrice * MIN_APPORT_PCT / 100);
-          const canAffordMin = cash >= minApport;
+          const notaireMin = Math.round(effectivePrice * NOTAIRE_FEES_PCT);
+          const canAffordMin = cash >= minApport + notaireMin && loans.length < MAX_ACTIVE_LOANS;
           const condLabel = propertyData.conditionLabels?.[listing.condition] ?? listing.condition;
           const isSelected = selectedId === listing.id;
           const emoji = TYPE_EMOJI[listing.type] ?? '🏠';
@@ -289,6 +341,8 @@ export default function MarketModal({ onClose }) {
                     listing={listing}
                     effectivePrice={effectivePrice}
                     cash={cash}
+                    loans={loans}
+                    valuation={valuation}
                     onConfirm={(apportPct) => { buyProperty(listing, apportPct); onClose(); }}
                     onCancel={() => setSelectedId(null)}
                   />

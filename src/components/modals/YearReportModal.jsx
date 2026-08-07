@@ -11,17 +11,19 @@ const CONTACT_NAMES = {
 };
 
 function generateNarrative(report) {
-  const { year, age, finance, stress, valuation, propCount, rentedCount, contacts, courtierSaving } = report;
+  const { year, age, finance, stress, valuation, propCount, rentedCount, contacts, courtierSaving, vacanciesLost, activeLoans } = report;
   const loyers = finance.loyers ?? 0;
   const achats = Math.abs(finance.achats ?? 0);
   const ventes = finance.ventes ?? 0;
   const events = finance.evenements ?? 0;
   const credits = Math.abs(finance.credits ?? 0);
   const taxes = Math.abs(finance.taxes ?? 0);
+  const ir = Math.abs(finance.ir ?? 0);
+  const gestion = Math.abs(finance.gestion ?? 0);
   const paras = [];
 
   // Bilan général
-  const netFlow = loyers + ventes + events - credits - achats - taxes;
+  const netFlow = loyers + ventes + events - credits - achats - taxes - ir - gestion;
   if (netFlow > 80)       paras.push(`Une année exceptionnelle. Tes flux nets atteignent +${fmtCash(netFlow)} — le portefeuille travaille pour toi.`);
   else if (netFlow > 20)  paras.push(`Une bonne année dans le vert. La machine se met en route.`);
   else if (netFlow > -20) paras.push(`Une année équilibrée. Les investissements pèsent sur le cash, mais les actifs s'apprécient.`);
@@ -44,9 +46,20 @@ function generateNarrative(report) {
   if ((contacts ?? []).includes('notaire')) paras.push(`Maître Chauvin t'a donné accès à ${propCount > 0 ? 'plus de' : 'des'} biens off-market.`);
   if ((contacts ?? []).includes('agent_immo')) paras.push(`Sofia Merlo a négocié tes achats à −5 %.`);
 
-  // Taxes foncières
+  // Taxes foncières + IR
   if (taxes > 200) paras.push(`🏛️ Les taxes foncières s'élèvent à ${fmtCash(taxes)} — le prix à payer pour un parc de cette envergure.`);
   else if (taxes > 30) paras.push(`🏛️ ${fmtCash(taxes)} de taxes foncières cette année.`);
+  if (ir > 100) paras.push(`💶 ${fmtCash(ir)} d'IR foncier prélevés sur tes loyers. La fiscalité pèse sur les grosses rentes.`);
+  else if (ir > 0) paras.push(`💶 ${fmtCash(ir)} d'impôt sur tes revenus locatifs.`);
+
+  // Frais de gestion
+  if (gestion > 0) paras.push(`🏢 ${fmtCash(gestion)} de frais de gestion pour ton parc étendu — au-delà de 10 biens loués, un gestionnaire devient incontournable.`);
+
+  // Vacance locative
+  if ((vacanciesLost ?? 0) > 0) paras.push(`🏚️ ${vacanciesLost} locataire${vacanciesLost > 1 ? 's ont' : ' a'} quitté${vacanciesLost > 1 ? '' : ''} un bien — ton taux d'occupation en pâtit pour l'an prochain.`);
+
+  // Dette
+  if ((activeLoans ?? 0) >= 3) paras.push(`🏦 ${activeLoans} crédits actifs génèrent un stress supplémentaire chaque année. Rembourser allège la pression.`);
 
   // Stress
   if (stress > 75)      paras.push(`⚠️ Le stress atteint ${Math.round(stress)}/100. Il faut agir avant que la jauge déborde.`);
@@ -79,6 +92,8 @@ export default function YearReportModal() {
     { label: '💳 Remboursements',    value: `−${fmtCash(Math.abs(finance.credits ?? 0))}`,positive: false, show: (finance.credits ?? 0) < 0 },
     { label: '⚡ Évènements',         value: `${(finance.evenements ?? 0) >= 0 ? '+' : ''}${fmtCash(finance.evenements ?? 0)}`, positive: (finance.evenements ?? 0) >= 0, show: (finance.evenements ?? 0) !== 0 },
     { label: '🏛️ Taxes foncières',   value: `−${fmtCash(Math.abs(finance.taxes ?? 0))}`,  positive: false, show: (finance.taxes ?? 0) < 0 },
+    { label: '💶 IR foncier (35 %)', value: `−${fmtCash(Math.abs(finance.ir ?? 0))}`,     positive: false, show: (finance.ir ?? 0) < 0 },
+    { label: '🏢 Frais de gestion',  value: `−${fmtCash(Math.abs(finance.gestion ?? 0))}`,positive: false, show: (finance.gestion ?? 0) < 0 },
   ].filter(r => r.show);
 
   const stressColor = stress > 75 ? 'var(--red)' : stress > 45 ? 'var(--amber)' : 'var(--accent)';

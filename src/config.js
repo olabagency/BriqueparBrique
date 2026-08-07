@@ -70,6 +70,37 @@ export const GAME_CONFIG = {
   // --- Taxes foncières ---
   PROPERTY_TAX_RATE: 0.008,   // 0.8 % de la valeur du portefeuille par an
 
+  // --- 1. Taux d'intérêt variable (indexé par nb de crédits actifs, 0-based) ---
+  LOAN_RATE_SCALE: [0.020, 0.028, 0.036, 0.046, 0.058, 0.070],
+
+  // --- 2. Ratio d'endettement max (LTV) ---
+  MAX_ACTIVE_LOANS: 4,
+  LTV_MAX_RATIO: 0.80,
+
+  // --- 4. Impôt sur revenus locatifs ---
+  RENTAL_INCOME_TAX_RATE: 0.35,
+
+  // --- 5. Frais de notaire à l'achat ---
+  NOTAIRE_FEES_PCT: 0.075,
+
+  // --- 6. Taxe sur plus-value à la revente ---
+  CAPITAL_GAINS_TAX_RATE: 0.362,
+  CAPITAL_GAINS_EXEMPTION_YEARS: 22,
+
+  // --- 7. Stress lié à la dette ---
+  DEBT_STRESS_PER_LOAN: 2,
+
+  // --- 9. Frais de gestion grands parcs ---
+  MANAGEMENT_FREE_LIMIT: 10,
+  MANAGEMENT_COST_PCT: 0.08,
+
+  // --- 3. Vacance locative progressive ---
+  VACANCY_RISK_THRESHOLD: 5,
+  VACANCY_RISK_PCT: 0.15,
+
+  // --- 10. Cycle économique sur les loyers ---
+  RENT_CYCLE_MULT: { hausse: 1.05, neutre: 0.95, baisse: 0.75 },
+
   // --- Fin de partie ---
   RETIREMENT_MIN_AGE: 60,
   GAME_OVER_MAX_AGE: 80,
@@ -89,4 +120,17 @@ export const PROPERTY_LOAN_RATE   = GAME_CONFIG.PROPERTY_LOAN_RATE;
 export const PROPERTY_LOAN_INTEREST = GAME_CONFIG.PROPERTY_LOAN_INTEREST;
 export const PROPERTY_RENT_RATIO  = GAME_CONFIG.PROPERTY_RENT_RATIO;
 export const STAGE_MULTIPLIERS    = GAME_CONFIG.STAGE_MULTIPLIERS;
-export const PROPERTY_TAX_RATE    = GAME_CONFIG.PROPERTY_TAX_RATE;
+export const PROPERTY_TAX_RATE          = GAME_CONFIG.PROPERTY_TAX_RATE;
+export const LOAN_RATE_SCALE            = GAME_CONFIG.LOAN_RATE_SCALE;
+export const MAX_ACTIVE_LOANS           = GAME_CONFIG.MAX_ACTIVE_LOANS;
+export const LTV_MAX_RATIO              = GAME_CONFIG.LTV_MAX_RATIO;
+export const RENTAL_INCOME_TAX_RATE     = GAME_CONFIG.RENTAL_INCOME_TAX_RATE;
+export const NOTAIRE_FEES_PCT           = GAME_CONFIG.NOTAIRE_FEES_PCT;
+export const CAPITAL_GAINS_TAX_RATE     = GAME_CONFIG.CAPITAL_GAINS_TAX_RATE;
+export const CAPITAL_GAINS_EXEMPTION_YEARS = GAME_CONFIG.CAPITAL_GAINS_EXEMPTION_YEARS;
+export const DEBT_STRESS_PER_LOAN       = GAME_CONFIG.DEBT_STRESS_PER_LOAN;
+export const MANAGEMENT_FREE_LIMIT      = GAME_CONFIG.MANAGEMENT_FREE_LIMIT;
+export const MANAGEMENT_COST_PCT        = GAME_CONFIG.MANAGEMENT_COST_PCT;
+export const VACANCY_RISK_THRESHOLD     = GAME_CONFIG.VACANCY_RISK_THRESHOLD;
+export const VACANCY_RISK_PCT           = GAME_CONFIG.VACANCY_RISK_PCT;
+export const RENT_CYCLE_MULT            = GAME_CONFIG.RENT_CYCLE_MULT;
