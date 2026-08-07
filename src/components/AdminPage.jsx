@@ -165,25 +165,25 @@ function ShopTab() {
 
 /* ── Config tab ──────────────────────────────────────── */
 const CONFIG_FIELDS = [
-  { key: 'STARTING_CASH',              label: 'Tréso de départ (k€)',       type: 'number' },
-  { key: 'STARTING_AGE',               label: 'Âge de départ',              type: 'number' },
-  { key: 'STARTING_STRESS',            label: 'Stress de départ',           type: 'number' },
-  { key: 'CASH_CRISIS_THRESHOLD',      label: 'Seuil crise tréso (k€)',     type: 'number' },
-  { key: 'STRESS_CRISIS_THRESHOLD',    label: 'Seuil crise stress',         type: 'number' },
-  { key: 'EVENTS_PER_YEAR_MIN',        label: 'Événements/an (min)',        type: 'number' },
-  { key: 'EVENTS_PER_YEAR_MAX',        label: 'Événements/an (max)',        type: 'number' },
-  { key: 'MARKET_SIZE',                label: 'Taille du marché immobilier', type: 'number' },
-  { key: 'MARKET_MAX_REFRESH',         label: 'Actualisations marché/an',   type: 'number' },
-  { key: 'BANK_OPS_PER_YEAR_MAX',      label: 'Opérations bancaires/an',    type: 'number' },
-  { key: 'PROPERTY_LOAN_RATE',         label: 'LTV crédit immobilier (%)',  type: 'pct' },
-  { key: 'PROPERTY_LOAN_INTEREST',     label: 'Taux intérêt crédit (%)',    type: 'pct' },
-  { key: 'PROPERTY_RENT_RATIO',        label: 'Rendement locatif (%)',      type: 'pct' },
-  { key: 'RETIREMENT_MIN_AGE',         label: 'Âge retraite minimum',       type: 'number' },
-  { key: 'GAME_OVER_MAX_AGE',          label: 'Âge maximum (game over)',    type: 'number' },
-  { key: 'GOLD_INGOT_PRICE',           label: 'Prix lingot or (k€)',        type: 'number' },
-  { key: 'ECONOMIC_CYCLE_FIRST_YEAR_MIN', label: 'Premier cycle éco (an min)', type: 'number' },
-  { key: 'ECONOMIC_CYCLE_DURATION_MIN',   label: 'Durée cycle éco (min)',      type: 'number' },
-  { key: 'ECONOMIC_CYCLE_DURATION_MAX',   label: 'Durée cycle éco (max)',      type: 'number' },
+  { key: 'STARTING_CASH',                 label: 'Tréso de départ (k€)',        type: 'number', hint: 'Montant en k€ disponible dans la trésorerie d\'entreprise au début de chaque partie. Valeur typique : 25 k€.' },
+  { key: 'STARTING_AGE',                  label: 'Âge de départ',               type: 'number', hint: 'Âge du joueur à la création de sa partie. Influe sur le temps restant avant la retraite.' },
+  { key: 'STARTING_STRESS',               label: 'Stress de départ',            type: 'number', hint: 'Niveau de stress initial (0–100). Plus c\'est élevé, plus le joueur démarre sous pression.' },
+  { key: 'CASH_CRISIS_THRESHOLD',         label: 'Seuil crise tréso (k€)',      type: 'number', hint: 'En dessous de cette valeur (k€), la trésorerie est considérée en crise et peut déclencher un game over. Mettre négatif pour tolérer un découvert.' },
+  { key: 'STRESS_CRISIS_THRESHOLD',       label: 'Seuil crise stress',          type: 'number', hint: 'Au-dessus de ce seuil (0–100), le joueur entre en zone de burn-out et risque un game over.' },
+  { key: 'EVENTS_PER_YEAR_MIN',           label: 'Événements/an (min)',         type: 'number', hint: 'Nombre minimum d\'événements aléatoires tirés chaque année. Augmenter pour plus d\'intensité.' },
+  { key: 'EVENTS_PER_YEAR_MAX',           label: 'Événements/an (max)',         type: 'number', hint: 'Nombre maximum d\'événements aléatoires par an. Le nombre réel est tiré entre min et max.' },
+  { key: 'MARKET_SIZE',                   label: 'Biens affichés au marché',    type: 'number', hint: 'Nombre d\'annonces immobilières générées à chaque chargement du marché. Plus = plus de choix.' },
+  { key: 'MARKET_MAX_REFRESH',            label: 'Actualisations marché/an',    type: 'number', hint: 'Nombre maximum de fois que le joueur peut rafraîchir le marché immobilier par année.' },
+  { key: 'BANK_OPS_PER_YEAR_MAX',         label: 'Opérations bancaires/an',     type: 'number', hint: 'Nombre de transferts autorisés entre trésorerie et épargne personnelle par an (retraits + injections cumulés).' },
+  { key: 'PROPERTY_LOAN_RATE',            label: 'LTV crédit immobilier (%)',   type: 'pct',    hint: 'Quotité maximale financée par emprunt (loan-to-value). À 80 %, un bien à 100 k€ peut être financé jusqu\'à 80 k€ en crédit.' },
+  { key: 'PROPERTY_LOAN_INTEREST',        label: 'Taux d\'intérêt crédit (%)', type: 'pct',    hint: 'Taux d\'intérêt annuel appliqué aux crédits immobiliers. Modifiable pour simuler un marché tendu ou favorable.' },
+  { key: 'PROPERTY_RENT_RATIO',           label: 'Rendement locatif (%)',       type: 'pct',    hint: 'Loyer annuel brut exprimé en % de la valeur du bien. À 9 %, un bien à 100 k€ génère 9 k€/an en loyer.' },
+  { key: 'RETIREMENT_MIN_AGE',            label: 'Âge minimum retraite',        type: 'number', hint: 'Âge à partir duquel le joueur peut volontairement prendre sa retraite et clôturer la partie.' },
+  { key: 'GAME_OVER_MAX_AGE',             label: 'Âge maximum (game over)',     type: 'number', hint: 'Âge auquel la partie se termine automatiquement si le joueur n\'a pas encore pris sa retraite.' },
+  { key: 'GOLD_INGOT_PRICE',              label: 'Prix lingot d\'or (k€)',      type: 'number', hint: 'Prix d\'achat d\'un lingot d\'or en k€. À la revente, le prix varie aléatoirement entre min et max return.' },
+  { key: 'ECONOMIC_CYCLE_FIRST_YEAR_MIN', label: 'Premier cycle éco (an min)', type: 'number', hint: 'Année minimale à partir de laquelle le premier changement de cycle économique (hausse/baisse) peut survenir.' },
+  { key: 'ECONOMIC_CYCLE_DURATION_MIN',   label: 'Durée cycle éco (min, ans)', type: 'number', hint: 'Durée minimale en années d\'un cycle économique (haussier, neutre ou baissier) avant qu\'il ne change.' },
+  { key: 'ECONOMIC_CYCLE_DURATION_MAX',   label: 'Durée cycle éco (max, ans)', type: 'number', hint: 'Durée maximale en années d\'un cycle économique. La durée réelle est tirée entre min et max.' },
 ];
 
 function ConfigTab() {
@@ -231,27 +231,27 @@ function ConfigTab() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 10, marginBottom: 24 }}>
-        {CONFIG_FIELDS.map(({ key, label, type }) => {
+        {CONFIG_FIELDS.map(({ key, label, type, hint }) => {
           const isModified = values[key] !== undefined;
           const defaultVal = type === 'pct' ? Math.round(GAME_CONFIG[key] * 100) : GAME_CONFIG[key];
           const currentVal = getVal(key, type);
 
           return (
             <div key={key} style={{ ...S.card, borderColor: isModified ? 'rgba(27,107,68,.5)' : '#2d3d2d' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, display: 'flex', gap: 6, alignItems: 'center' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
+                <div style={{ flex: 1, marginRight: 8 }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
                     {label}
                     {isModified && <span style={S.badge}>modifié</span>}
                   </div>
                   <div style={{ fontSize: 9, color: '#3a4a3a', fontFamily: 'monospace', marginTop: 2 }}>{key}</div>
                 </div>
                 <button onClick={() => reset(key)} disabled={!isModified}
-                  style={{ fontSize: 11, padding: '3px 8px', borderRadius: 6, background: 'transparent', border: `1px solid ${isModified ? '#c0392b44' : '#2d3d2d'}`, color: isModified ? '#e74c3c' : '#3a4a3a', cursor: isModified ? 'pointer' : 'default' }}>
+                  style={{ fontSize: 11, padding: '3px 8px', borderRadius: 6, background: 'transparent', border: `1px solid ${isModified ? '#c0392b44' : '#2d3d2d'}`, color: isModified ? '#e74c3c' : '#3a4a3a', cursor: isModified ? 'pointer' : 'default', flexShrink: 0 }}>
                   ↩
                 </button>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                 <input
                   type="number"
                   step={type === 'pct' ? '0.1' : '1'}
@@ -261,8 +261,11 @@ function ConfigTab() {
                 />
                 {type === 'pct' && <span style={{ fontSize: 12, color: '#6b7c6b' }}>%</span>}
               </div>
+              <div style={{ fontSize: 10, color: '#5a7a5a', lineHeight: 1.5, borderTop: '1px solid #1e2e1e', paddingTop: 7 }}>
+                {hint}
+              </div>
               {isModified && Number(currentVal) !== Number(defaultVal) && (
-                <div style={{ fontSize: 9, color: '#6b7c6b', marginTop: 6 }}>
+                <div style={{ fontSize: 9, color: '#6b7c6b', marginTop: 5 }}>
                   défaut : {defaultVal}{type === 'pct' ? ' %' : ''}
                 </div>
               )}
