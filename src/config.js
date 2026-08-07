@@ -21,8 +21,8 @@ export const GAME_CONFIG = {
     'LANCEMENT': 1.4,
     'CROISSANCE': 2.2,
     'EXPANSION': 3.5,
-    'MATURITÉ':  5.5,
-    'HÉRITAGE':  8,
+    'MATURITÉ':  9,
+    'HÉRITAGE':  18,
   },
 
   // --- Événements par année ---
