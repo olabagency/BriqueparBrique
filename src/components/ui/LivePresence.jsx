@@ -127,13 +127,7 @@ function PlayerHoverModal({ player, myState, dispatch, emit, onClose, onGreet })
 
   return (
     <div
-      style={{
-        position: 'absolute', top: '100%', left: 0, marginTop: 8, zIndex: 9100,
-        background: 'var(--surface)', border: '1px solid var(--border)',
-        borderRadius: 14, boxShadow: '0 8px 32px rgba(0,0,0,.2)',
-        padding: '14px 16px', minWidth: 240, maxWidth: 300,
-        pointerEvents: 'auto',
-      }}
+      className="player-hover-modal"
       onClick={e => e.stopPropagation()}
     >
       {/* Header */}

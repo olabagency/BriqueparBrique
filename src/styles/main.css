@@ -817,6 +817,24 @@ header.hud::before{
   font-size:13px;font-weight:700;color:#fff;
 }
 
+/* Player hover modal */
+.player-hover-modal{
+  position:absolute;top:100%;left:0;margin-top:8px;z-index:9100;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.2);
+  padding:14px 16px;min-width:240px;max-width:300px;
+  pointer-events:auto;
+}
+@media (max-width:900px){
+  .player-hover-modal{
+    position:fixed;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    margin-top:0;
+    width:calc(100vw - 40px);max-width:340px;
+    max-height:80vh;overflow-y:auto;
+  }
+}
+
 /* Crime toast */
 @keyframes crimeIn{0%{opacity:0;transform:translateX(24px);}100%{opacity:1;transform:translateX(0);}}
 @keyframes crimeOut{0%{opacity:1;}80%{opacity:1;}100%{opacity:0;transform:translateX(24px);}}
