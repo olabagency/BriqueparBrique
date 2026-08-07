@@ -177,13 +177,41 @@ function RunDetailModal({ run, rank, onClose, onPlay }) {
           ))}
         </div>
 
-        {/* Property strip */}
-        {(run.propertiesOwned ?? 0) > 0 && (
+        {/* Property list */}
+        {(run.propertyList ?? []).length > 0 ? (
+          <div>
+            <div style={{ fontSize: 10, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: 8 }}>
+              🏘️ Parc immobilier · {(run.propertyList ?? []).length} bien{(run.propertyList ?? []).length > 1 ? 's' : ''}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: 200, overflowY: 'auto' }}>
+              {(run.propertyList ?? []).sort((a, b) => (b.value ?? 0) - (a.value ?? 0)).map((prop, idx) => {
+                const condEmoji = { bonEtat: '✅', aRenover: '🔨', renove: '⭐', standing: '💎' }[prop.condition] ?? '🏠';
+                return (
+                  <div key={idx} style={{
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                    background: 'var(--surface2)', border: '1px solid var(--border)',
+                    borderRadius: 8, padding: '6px 10px', fontSize: 11,
+                  }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <span>{condEmoji}</span>
+                      <span style={{ color: 'var(--text)', fontWeight: 600 }}>{prop.type}</span>
+                      <span style={{ color: 'var(--muted)' }}>· {prop.place}</span>
+                    </span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+                      {prop.rented && <span style={{ fontSize: 9, color: 'var(--accent)', fontWeight: 700 }}>📬 loué</span>}
+                      <span style={{ fontFamily: 'monospace', fontWeight: 700, color: 'var(--accent)' }}>{fmtCash(prop.value ?? 0)}</span>
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : (run.propertiesOwned ?? 0) > 0 ? (
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.05em' }}>Biens construits</div>
             <PropStrip count={run.propertiesOwned} />
           </div>
-        )}
+        ) : null}
 
         {/* Achievements with emojis */}
         {runAchievements.length > 0 && (

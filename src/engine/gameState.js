@@ -125,6 +125,11 @@ export function buildRunSummary(state) {
     achievements: [...(state.achievements ?? [])],
     endingKind:   state.endingKind,
     propertiesOwned: state.propertiesOwned,
+    propertyList: (state.propertyList ?? []).map(p => ({
+      id: p.id, type: p.type, place: p.place,
+      value: p.value ?? p.baseValue ?? 0,
+      condition: p.condition, rented: !!p.rented,
+    })),
     luxuryItems:  (state.luxuryItems ?? []).map(i => ({
       id: i.id, name: i.name, category: i.category, icon: i.icon,
       image: i.image ?? null, purchasePrice: i.purchasePrice ?? i.price,

@@ -3,11 +3,11 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 const EffectsContext = createContext(null);
 
 const DURATIONS = {
-  achievement: 3800,
-  live:        4500,
-  year:        1600,
-  flash:        700,
-  float:       1800,
+  achievement: 10000,
+  live:        10000,
+  year:         1600,
+  flash:         700,
+  float:        1800,
 };
 
 export function EffectsProvider({ children }) {
