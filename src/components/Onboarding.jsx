@@ -51,11 +51,13 @@ export default function Onboarding() {
     return true;
   };
 
+  const ctaLabel = slide === TOTAL_SLIDES - 1 ? '🚀 Lancer l\'aventure' : 'Continuer →';
+
   return (
     <div className="onb-root">
       <ThemeToggle />
 
-      {/* ── Left decorative panel ── */}
+      {/* ── Left decorative panel (desktop only) ── */}
       <div className="onb-left">
         <div className="onb-brand">
           <span className="onb-brand-emoji">🏘️</span>
@@ -96,6 +98,15 @@ export default function Onboarding() {
 
       {/* ── Right form panel ── */}
       <div className="onb-right">
+        {/* Mobile-only top bar */}
+        <div className="onb-mobile-header">
+          <button className="onb-mobile-back-btn" onClick={goBack} aria-label="Retour">
+            ←
+          </button>
+          <span className="onb-mobile-brand">🏘️ Brique par Brique</span>
+          <div style={{ width: 40 }} />
+        </div>
+
         {/* Progress bar */}
         <div className="onb-progress">
           {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
@@ -104,108 +115,111 @@ export default function Onboarding() {
           <span className="onb-progress-label">Étape {slide + 1} / {TOTAL_SLIDES}</span>
         </div>
 
-        {/* Slide 0 — Pseudo */}
-        {slide === 0 && (
-          <div className="onb-step">
-            <div className="onb-step-icon">👤</div>
-            <h2 className="onb-step-title">Comment tu t'appelles ?</h2>
-            <p className="onb-step-hint">
-              Ton pseudonyme de bâtisseur. Il apparaîtra dans le classement mondial.
-            </p>
-            <input
-              type="text"
-              className="text-input"
-              placeholder="Ton pseudo"
-              maxLength={20}
-              value={name}
-              onChange={e => setName(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && canContinue() && goNext()}
-              autoFocus
-            />
+        {/* Scrollable slide content */}
+        <div className="onb-scroll-area">
+          {/* Slide 0 — Pseudo */}
+          {slide === 0 && (
+            <div className="onb-step">
+              <div className="onb-step-icon">👤</div>
+              <h2 className="onb-step-title">Comment tu t'appelles ?</h2>
+              <p className="onb-step-hint">
+                Ton pseudonyme de bâtisseur. Il apparaîtra dans le classement mondial.
+              </p>
+              <input
+                type="text"
+                className="text-input"
+                placeholder="Ton pseudo"
+                maxLength={20}
+                value={name}
+                onChange={e => setName(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && canContinue() && goNext()}
+                autoFocus
+              />
+            </div>
+          )}
+
+          {/* Slide 1 — Nom de l'entreprise */}
+          {slide === 1 && (
+            <div className="onb-step">
+              <div className="onb-step-icon">🏢</div>
+              <h2 className="onb-step-title">Ton entreprise ?</h2>
+              <p className="onb-step-hint">
+                Le nom qui figurera sur tous tes actes de propriété et dans ton empire.
+              </p>
+              <div className="name-suggestions">
+                {NAME_SUGGESTIONS.map(s => (
+                  <button
+                    key={s}
+                    className={companyName === s ? 'selected' : ''}
+                    onClick={() => setCompanyName(s)}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+              <input
+                type="text"
+                className="text-input"
+                placeholder="...ou écris ton propre nom"
+                maxLength={24}
+                value={companyName}
+                onChange={e => setCompanyName(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && canContinue() && goNext()}
+              />
+            </div>
+          )}
+
+          {/* Slide 2 — Genre */}
+          {slide === 2 && (
+            <div className="onb-step">
+              <div className="onb-step-icon">🎭</div>
+              <h2 className="onb-step-title">Tu es...</h2>
+              <p className="onb-step-hint">
+                Cela influencera les dialogues et certains événements de ta vie.
+              </p>
+              <div className="card-grid">
+                {genders.map(g => (
+                  <button
+                    key={g.id}
+                    className={`card-select ${gender?.id === g.id ? 'selected' : ''}`}
+                    onClick={() => { setGender(g); setSlide(3); }}
+                  >
+                    <span className="emoji">{g.emoji}</span>
+                    <h3>{g.name}</h3>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Slide 3 — Révélation du trait */}
+          {slide === 3 && (
+            <div className="onb-step">
+              <div className="onb-step-icon">🌟</div>
+              <h2 className="onb-step-title">Ta personnalité se révèle...</h2>
+              <p className="onb-step-hint">
+                Ce trait t'accompagnera toute ta vie et amplifie certains événements clés.
+              </p>
+              <div className="trait-card">
+                <div className="trait-emoji">{trait.emoji}</div>
+                <h3>{trait.name}</h3>
+                <p>{trait.desc}</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Sticky CTA bar */}
+        <div className="onb-cta-bar">
+          {slide !== 2 && (
             <button className="btn-primary" onClick={goNext} disabled={!canContinue()}>
-              Continuer →
+              {ctaLabel}
             </button>
-          </div>
-        )}
-
-        {/* Slide 1 — Nom de l'entreprise */}
-        {slide === 1 && (
-          <div className="onb-step">
-            <div className="onb-step-icon">🏢</div>
-            <h2 className="onb-step-title">Ton entreprise ?</h2>
-            <p className="onb-step-hint">
-              Le nom qui figurera sur tous tes actes de propriété et dans ton empire.
-            </p>
-            <div className="name-suggestions">
-              {NAME_SUGGESTIONS.map(s => (
-                <button
-                  key={s}
-                  className={companyName === s ? 'selected' : ''}
-                  onClick={() => setCompanyName(s)}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-            <input
-              type="text"
-              className="text-input"
-              placeholder="...ou écris ton propre nom"
-              maxLength={24}
-              value={companyName}
-              onChange={e => setCompanyName(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && canContinue() && goNext()}
-            />
-            <button className="btn-primary" onClick={goNext} disabled={!canContinue()}>
-              Continuer →
-            </button>
+          )}
+          {slide > 0 && (
             <button className="btn-ghost" onClick={goBack}>← Retour</button>
-          </div>
-        )}
-
-        {/* Slide 2 — Genre */}
-        {slide === 2 && (
-          <div className="onb-step">
-            <div className="onb-step-icon">🎭</div>
-            <h2 className="onb-step-title">Tu es...</h2>
-            <p className="onb-step-hint">
-              Cela influencera les dialogues et certains événements de ta vie.
-            </p>
-            <div className="card-grid">
-              {genders.map(g => (
-                <button
-                  key={g.id}
-                  className={`card-select ${gender?.id === g.id ? 'selected' : ''}`}
-                  onClick={() => { setGender(g); setSlide(3); }}
-                >
-                  <span className="emoji">{g.emoji}</span>
-                  <h3>{g.name}</h3>
-                </button>
-              ))}
-            </div>
-            <button className="btn-ghost" onClick={goBack}>← Retour</button>
-          </div>
-        )}
-
-        {/* Slide 3 — Révélation du trait */}
-        {slide === 3 && (
-          <div className="onb-step">
-            <div className="onb-step-icon">🌟</div>
-            <h2 className="onb-step-title">Ta personnalité se révèle...</h2>
-            <p className="onb-step-hint">
-              Ce trait t'accompagnera toute ta vie et amplifie certains événements clés.
-            </p>
-            <div className="trait-card">
-              <div className="trait-emoji">{trait.emoji}</div>
-              <h3>{trait.name}</h3>
-              <p>{trait.desc}</p>
-            </div>
-            <button className="btn-primary" onClick={goNext}>
-              🚀 Lancer l'aventure
-            </button>
-            <button className="btn-ghost" onClick={goBack}>← Retour</button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
