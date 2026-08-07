@@ -42,6 +42,15 @@ export function subscribeConfigOverrides(callback) {
   return unsub;
 }
 
+export function subscribeShopOverrides(callback) {
+  const db = getDb();
+  if (!db) { callback({}); return () => {}; }
+  const unsub = onValue(ref(db, 'admin/shopOverrides'), snap => {
+    callback(snap.exists() ? snap.val() : {});
+  }, () => callback({}));
+  return unsub;
+}
+
 export async function saveConfigOverrides(overrides) {
   const db = getDb();
   if (!db) return;

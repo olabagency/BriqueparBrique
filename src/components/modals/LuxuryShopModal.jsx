@@ -3,7 +3,7 @@ import Modal from '../ui/Modal.jsx';
 import { useGame } from '../../context/GameContext.jsx';
 import { fmtCash } from '../../engine/utils.js';
 import rawCatalog from '../../data/luxury_items.json';
-import { fetchShopOverrides } from '../../engine/adminOverrides.js';
+import { subscribeShopOverrides } from '../../engine/adminOverrides.js';
 
 const CATEGORIES = ['Toutes', 'Montres', 'Voitures', 'Avions', 'Bateaux', 'Art', 'Bijoux', 'Mode', 'Vins & Spiritueux', 'Instruments'];
 
@@ -27,7 +27,8 @@ export default function LuxuryShopModal({ onClose }) {
   const [overrides, setOverrides] = useState({});
 
   useEffect(() => {
-    fetchShopOverrides().then(setOverrides);
+    const unsub = subscribeShopOverrides(setOverrides);
+    return unsub;
   }, []);
 
   const catalog = applyOverrides(rawCatalog, overrides);
