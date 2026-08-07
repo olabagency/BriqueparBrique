@@ -69,9 +69,16 @@ function useRealPresence(emit) {
   }, [emit, state.name]);
 
   // Subscribe to real game-event notifications (including incoming crimes)
-  const lastSeenTsRef = useRef(Date.now());
+  const lastSeenTsRef = useRef(0);
+  const notifInitializedRef = useRef(false);
   useEffect(() => {
     const unsub = subscribeLiveNotifications((notifs) => {
+      if (!notifInitializedRef.current) {
+        // First callback: mark all existing notifications as seen without displaying them
+        notifInitializedRef.current = true;
+        if (notifs.length > 0) lastSeenTsRef.current = Math.max(...notifs.map(n => n.ts ?? 0));
+        return;
+      }
       const newOnes = notifs.filter(n => n.ts > lastSeenTsRef.current && n.sessionId !== SESSION_ID);
       if (newOnes.length === 0) return;
       lastSeenTsRef.current = Math.max(...newOnes.map(n => n.ts));
