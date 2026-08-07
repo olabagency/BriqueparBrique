@@ -117,7 +117,107 @@
     "Château Viticole AOC",
     "Immeuble de Prestige Entier",
     "Villa d'Architecte Côte Basque",
-    "Domaine Privé avec Héliport"
+    "Domaine Privé avec Héliport",
+    "Chambre de Bonne Paris Intramuros",
+    "Niche Commerciale Galerie Marchande",
+    "Cellier Aménagé Centre-Ville",
+    "Parking Deux-Roues Couvert",
+    "Caravane Résidence Permanente",
+    "Studio Canal Saint-Martin",
+    "T1 Bis Parquet Ancien",
+    "Terrain Nu Campagne",
+    "Terrain Loisirs Sans Construction",
+    "Mazet Provençal à Rénover",
+    "Maison Ouvrière à Rénover",
+    "Studio Quartier Étudiant Rénové",
+    "Studio Hypercentre Montagne",
+    "Box Double Garage Pavillon",
+    "Appartement T2 Vue Cathédrale",
+    "Appartement T2 Jardin Partagé",
+    "Appartement T2 Plein Sud",
+    "Appartement T2 Art Déco",
+    "Appartement T3 Balcon Filant",
+    "Appartement T3 Bâtiment Classé",
+    "Logement Intermédiaire Accession",
+    "Résidence avec Gardien et Piscine",
+    "Studio Cosy Station Montagne",
+    "Maison Girondine Vignoble",
+    "Maison Périgourdine en Pierre",
+    "Maison Vendéenne Bord Marais",
+    "Maison Camargaise Gardiane",
+    "Maison Corse Typique Village",
+    "Villa Années 60 à Moderniser",
+    "Villa Patio Contemporaine",
+    "Maison Architecte Passive Énergétique",
+    "Maison Bioclimatique Ossature Bois",
+    "Ferme Réhabilitée en Gîtes",
+    "Bergerie Reconvertie en Loft",
+    "Prieuré à Restaurer",
+    "Presbytère Converti en Habitation",
+    "Moulin à Vent Réhabilité",
+    "Bâtiment Industriel Reconverti Lofts",
+    "Hôtel de Tourisme 2 étoiles",
+    "Camping 3 étoiles Bord Rivière",
+    "Hôtel Résidence Appart Tourisme",
+    "Villa Corse Bord de Mer",
+    "Chalet Prestige Courchevel",
+    "Villa Méditerranéenne Port Privé",
+    "Appartement Prestige Quai des Orfèvres",
+    "Grand Appartement Avenue Foch Paris",
+    "Immeuble de Rapport 20 Logements",
+    "Résidence Hôtelière 4 étoiles",
+    "Hôtel Boutique 20 Chambres",
+    "Parc de Stationnement 100 Places",
+    "Domaine Gascon avec Armagnac",
+    "Propriété de Prestige Île de Ré",
+    "Villa Belle Époque Côte d'Azur",
+    "Château Bordelais Grand Domaine",
+    "Yacht Club avec Marina Privée",
+    "Résidence Diplomatique Paris 7e",
+    "Hôtel Particulier Renaissance",
+    "Abbaye Médiévale Restaurée",
+    "Hôtel Palace 5 étoiles Régional",
+    "Immeuble Boulevard Saint-Germain",
+    "Domaine de Chasse Exclusive",
+    "Château Médocain Grand Cru Classé",
+    "Villa Monaco Bord de Mer",
+    "Tour Résidentielle Penthouse Paris",
+    "Île Privée Aménagée",
+    "Complexe Thermal et Spa Prestige",
+    "Haras National Reconverti",
+    "Pigeonnier Gascon Restauré",
+    "Tour Médiévale Reconvertie Habitation",
+    "Phare Désaffecté Habitable",
+    "Ancienne Gare Reconvertie Lofts",
+    "Maison sur Pilotis Étang",
+    "Cave Voûtée Classée Habitable",
+    "Distillerie Artisanale avec Logement",
+    "Maison Troglodyte Val de Loire",
+    "Cabane dans les Arbres Prestige",
+    "Péniche Bar Reconvertie Habitable",
+    "Réserve Naturelle Privée Aménagée",
+    "Appartement T4 Vue Jardin Privatif",
+    "Appartement T5 Duplex avec Terrasse",
+    "Résidence Secondaire Île Privée",
+    "Serre Agricole Premium Convertie",
+    "Villa Réunionnaise Vue Océan",
+    "Villa Martiniquaise Plantation",
+    "Centre Commercial de Proximité",
+    "Maison Gironde Avec Chai",
+    "Bastide Luberon Pierres Sèches",
+    "Chalet de Luxe Méga Résidence",
+    "Résidence Royale de Prestige",
+    "Logement Social Racheté Rénové",
+    "Résidence Éco-Quartier Neuf",
+    "Appartement T2 Duplex Mezzanine",
+    "Appartement T3 Triplex en Ville",
+    "Appartement Neuf Smart Home",
+    "Studio Design Hypercentre",
+    "Micro-Appartement Optimisé",
+    "Bureaux Premium Centre d'Affaires",
+    "Entrepôt Logistique Urbain",
+    "Appartement T2 Investisseur Meublé Pinel",
+    "Villa Landaise Forêt de Pins"
   ],
   "places": [
     "rue des Lilas",
@@ -736,6 +836,406 @@
     "Domaine Privé avec Héliport": {
       "min": 4000,
       "max": 15000
+    },
+    "Chambre de Bonne Paris Intramuros": {
+      "min": 25,
+      "max": 70
+    },
+    "Niche Commerciale Galerie Marchande": {
+      "min": 15,
+      "max": 45
+    },
+    "Cellier Aménagé Centre-Ville": {
+      "min": 20,
+      "max": 50
+    },
+    "Parking Deux-Roues Couvert": {
+      "min": 8,
+      "max": 25
+    },
+    "Caravane Résidence Permanente": {
+      "min": 15,
+      "max": 45
+    },
+    "Studio Canal Saint-Martin": {
+      "min": 100,
+      "max": 220
+    },
+    "T1 Bis Parquet Ancien": {
+      "min": 80,
+      "max": 160
+    },
+    "Terrain Nu Campagne": {
+      "min": 20,
+      "max": 75
+    },
+    "Terrain Loisirs Sans Construction": {
+      "min": 15,
+      "max": 55
+    },
+    "Mazet Provençal à Rénover": {
+      "min": 90,
+      "max": 220
+    },
+    "Maison Ouvrière à Rénover": {
+      "min": 75,
+      "max": 190
+    },
+    "Studio Quartier Étudiant Rénové": {
+      "min": 65,
+      "max": 140
+    },
+    "Studio Hypercentre Montagne": {
+      "min": 70,
+      "max": 155
+    },
+    "Box Double Garage Pavillon": {
+      "min": 28,
+      "max": 68
+    },
+    "Appartement T2 Vue Cathédrale": {
+      "min": 150,
+      "max": 300
+    },
+    "Appartement T2 Jardin Partagé": {
+      "min": 120,
+      "max": 250
+    },
+    "Appartement T2 Plein Sud": {
+      "min": 130,
+      "max": 270
+    },
+    "Appartement T2 Art Déco": {
+      "min": 160,
+      "max": 320
+    },
+    "Appartement T3 Balcon Filant": {
+      "min": 200,
+      "max": 380
+    },
+    "Appartement T3 Bâtiment Classé": {
+      "min": 260,
+      "max": 500
+    },
+    "Logement Intermédiaire Accession": {
+      "min": 140,
+      "max": 300
+    },
+    "Résidence avec Gardien et Piscine": {
+      "min": 200,
+      "max": 420
+    },
+    "Studio Cosy Station Montagne": {
+      "min": 80,
+      "max": 180
+    },
+    "Maison Girondine Vignoble": {
+      "min": 200,
+      "max": 450
+    },
+    "Maison Périgourdine en Pierre": {
+      "min": 180,
+      "max": 400
+    },
+    "Maison Vendéenne Bord Marais": {
+      "min": 160,
+      "max": 380
+    },
+    "Maison Camargaise Gardiane": {
+      "min": 200,
+      "max": 480
+    },
+    "Maison Corse Typique Village": {
+      "min": 220,
+      "max": 500
+    },
+    "Villa Années 60 à Moderniser": {
+      "min": 280,
+      "max": 580
+    },
+    "Villa Patio Contemporaine": {
+      "min": 350,
+      "max": 750
+    },
+    "Maison Architecte Passive Énergétique": {
+      "min": 350,
+      "max": 700
+    },
+    "Maison Bioclimatique Ossature Bois": {
+      "min": 280,
+      "max": 580
+    },
+    "Ferme Réhabilitée en Gîtes": {
+      "min": 300,
+      "max": 700
+    },
+    "Bergerie Reconvertie en Loft": {
+      "min": 250,
+      "max": 600
+    },
+    "Prieuré à Restaurer": {
+      "min": 400,
+      "max": 1000
+    },
+    "Presbytère Converti en Habitation": {
+      "min": 300,
+      "max": 700
+    },
+    "Moulin à Vent Réhabilité": {
+      "min": 200,
+      "max": 550
+    },
+    "Bâtiment Industriel Reconverti Lofts": {
+      "min": 400,
+      "max": 900
+    },
+    "Hôtel de Tourisme 2 étoiles": {
+      "min": 500,
+      "max": 1100
+    },
+    "Camping 3 étoiles Bord Rivière": {
+      "min": 400,
+      "max": 1000
+    },
+    "Hôtel Résidence Appart Tourisme": {
+      "min": 600,
+      "max": 1400
+    },
+    "Villa Corse Bord de Mer": {
+      "min": 600,
+      "max": 1500
+    },
+    "Chalet Prestige Courchevel": {
+      "min": 1500,
+      "max": 4000
+    },
+    "Villa Méditerranéenne Port Privé": {
+      "min": 1200,
+      "max": 3500
+    },
+    "Appartement Prestige Quai des Orfèvres": {
+      "min": 800,
+      "max": 2500
+    },
+    "Grand Appartement Avenue Foch Paris": {
+      "min": 1000,
+      "max": 3500
+    },
+    "Immeuble de Rapport 20 Logements": {
+      "min": 1500,
+      "max": 4000
+    },
+    "Résidence Hôtelière 4 étoiles": {
+      "min": 1200,
+      "max": 3500
+    },
+    "Hôtel Boutique 20 Chambres": {
+      "min": 800,
+      "max": 2500
+    },
+    "Parc de Stationnement 100 Places": {
+      "min": 400,
+      "max": 1200
+    },
+    "Domaine Gascon avec Armagnac": {
+      "min": 1500,
+      "max": 5000
+    },
+    "Propriété de Prestige Île de Ré": {
+      "min": 2000,
+      "max": 6000
+    },
+    "Villa Belle Époque Côte d'Azur": {
+      "min": 2500,
+      "max": 7000
+    },
+    "Château Bordelais Grand Domaine": {
+      "min": 3000,
+      "max": 9000
+    },
+    "Yacht Club avec Marina Privée": {
+      "min": 2000,
+      "max": 7000
+    },
+    "Résidence Diplomatique Paris 7e": {
+      "min": 2500,
+      "max": 8000
+    },
+    "Hôtel Particulier Renaissance": {
+      "min": 2000,
+      "max": 7000
+    },
+    "Abbaye Médiévale Restaurée": {
+      "min": 1500,
+      "max": 5000
+    },
+    "Hôtel Palace 5 étoiles Régional": {
+      "min": 3000,
+      "max": 10000
+    },
+    "Immeuble Boulevard Saint-Germain": {
+      "min": 2000,
+      "max": 7000
+    },
+    "Domaine de Chasse Exclusive": {
+      "min": 3000,
+      "max": 12000
+    },
+    "Château Médocain Grand Cru Classé": {
+      "min": 5000,
+      "max": 18000
+    },
+    "Villa Monaco Bord de Mer": {
+      "min": 8000,
+      "max": 20000
+    },
+    "Tour Résidentielle Penthouse Paris": {
+      "min": 5000,
+      "max": 15000
+    },
+    "Île Privée Aménagée": {
+      "min": 6000,
+      "max": 20000
+    },
+    "Complexe Thermal et Spa Prestige": {
+      "min": 3000,
+      "max": 10000
+    },
+    "Haras National Reconverti": {
+      "min": 2500,
+      "max": 8000
+    },
+    "Pigeonnier Gascon Restauré": {
+      "min": 120,
+      "max": 350
+    },
+    "Tour Médiévale Reconvertie Habitation": {
+      "min": 200,
+      "max": 600
+    },
+    "Phare Désaffecté Habitable": {
+      "min": 300,
+      "max": 900
+    },
+    "Ancienne Gare Reconvertie Lofts": {
+      "min": 250,
+      "max": 700
+    },
+    "Maison sur Pilotis Étang": {
+      "min": 180,
+      "max": 480
+    },
+    "Cave Voûtée Classée Habitable": {
+      "min": 150,
+      "max": 400
+    },
+    "Distillerie Artisanale avec Logement": {
+      "min": 400,
+      "max": 1100
+    },
+    "Maison Troglodyte Val de Loire": {
+      "min": 150,
+      "max": 400
+    },
+    "Cabane dans les Arbres Prestige": {
+      "min": 80,
+      "max": 250
+    },
+    "Péniche Bar Reconvertie Habitable": {
+      "min": 200,
+      "max": 580
+    },
+    "Réserve Naturelle Privée Aménagée": {
+      "min": 500,
+      "max": 2000
+    },
+    "Appartement T4 Vue Jardin Privatif": {
+      "min": 320,
+      "max": 620
+    },
+    "Appartement T5 Duplex avec Terrasse": {
+      "min": 420,
+      "max": 850
+    },
+    "Résidence Secondaire Île Privée": {
+      "min": 1000,
+      "max": 3000
+    },
+    "Serre Agricole Premium Convertie": {
+      "min": 150,
+      "max": 450
+    },
+    "Villa Réunionnaise Vue Océan": {
+      "min": 700,
+      "max": 1800
+    },
+    "Villa Martiniquaise Plantation": {
+      "min": 800,
+      "max": 2000
+    },
+    "Centre Commercial de Proximité": {
+      "min": 700,
+      "max": 2000
+    },
+    "Maison Gironde Avec Chai": {
+      "min": 350,
+      "max": 800
+    },
+    "Bastide Luberon Pierres Sèches": {
+      "min": 500,
+      "max": 1300
+    },
+    "Chalet de Luxe Méga Résidence": {
+      "min": 900,
+      "max": 2500
+    },
+    "Résidence Royale de Prestige": {
+      "min": 5000,
+      "max": 18000
+    },
+    "Logement Social Racheté Rénové": {
+      "min": 60,
+      "max": 150
+    },
+    "Résidence Éco-Quartier Neuf": {
+      "min": 180,
+      "max": 380
+    },
+    "Appartement T2 Duplex Mezzanine": {
+      "min": 155,
+      "max": 300
+    },
+    "Appartement T3 Triplex en Ville": {
+      "min": 240,
+      "max": 460
+    },
+    "Appartement Neuf Smart Home": {
+      "min": 200,
+      "max": 420
+    },
+    "Studio Design Hypercentre": {
+      "min": 110,
+      "max": 240
+    },
+    "Micro-Appartement Optimisé": {
+      "min": 45,
+      "max": 100
+    },
+    "Bureaux Premium Centre d'Affaires": {
+      "min": 400,
+      "max": 1000
+    },
+    "Entrepôt Logistique Urbain": {
+      "min": 300,
+      "max": 800
+    },
+    "Appartement T2 Investisseur Meublé Pinel": {
+      "min": 130,
+      "max": 260
+    },
+    "Villa Landaise Forêt de Pins": {
+      "min": 260,
+      "max": 560
     }
   }
 }
