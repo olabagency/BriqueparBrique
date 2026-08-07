@@ -321,7 +321,7 @@ function PodiumCard({ run, rank, onClick }) {
       </div>
       <div className="l-podium-meta">
         {isActive
-          ? `An ${run.year ?? '?'} · ${run.age ?? '?'} ans`
+          ? `${run.year ?? '?'} ans · ${run.age ?? '?'} ans`
           : `${run.years ?? '?'} ans · ${run.age ?? '?'} ans`}
         {' · '}
         <span>{(run.achievements ?? []).length} 🏆</span>
@@ -349,7 +349,7 @@ function ListRow({ run, rank, onClick }) {
         {isActive && <span className="l-live-badge">● live</span>}
       </span>
       <span className="l-list-meta">
-        {isActive ? `An ${run.year ?? '?'}` : `${run.years ?? '?'} ans`}
+        {isActive ? `${run.year ?? '?'} ans` : `${run.years ?? '?'} ans`}
         {' · '}{(run.achievements ?? []).length} 🏆
       </span>
       <span style={{ display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0 }}>
@@ -566,7 +566,7 @@ export default function Landing() {
                   <div style={{ textAlign: 'left' }}>
                     <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{player.name}</div>
                     <div style={{ fontSize: 10, color: 'var(--muted)' }}>
-                      {player.genderEmoji ?? ''} {player.age ? `${player.age} ans · ` : ''}An {player.year ?? 1} · {fmtCash(player.valuation ?? 0)}
+                      {player.genderEmoji ?? ''} {player.age ? `${player.age} ans · ` : ''}{player.year ?? 1} ans · {fmtCash(player.valuation ?? 0)}
                     </div>
                   </div>
                 </button>
@@ -620,7 +620,7 @@ export default function Landing() {
                       {player.year && (
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
                           <span style={{ color: 'var(--muted)' }}>📅 Année en cours</span>
-                          <span style={{ fontFamily: 'monospace', fontWeight: 700 }}>An {player.year}</span>
+                          <span style={{ fontFamily: 'monospace', fontWeight: 700 }}>{player.year} ans</span>
                         </div>
                       )}
                     </div>
