@@ -47,7 +47,6 @@ export default function LoansModal({ onClose }) {
     if (window.confirm(
       `Renégocier le taux ?\n\n` +
       `• Frais : ${fmtCash(fee)} (1% du capital restant, prélevés immédiatement)\n` +
-      `• Succès : ~65% de chance\n` +
       `• En cas de réussite : taux réduit de −0.3 % à −0.5 %\n` +
       `• En cas d'échec : frais perdus, taux inchangé\n\n` +
       `Cette action est irréversible.`
@@ -221,7 +220,7 @@ export default function LoansModal({ onClose }) {
               {/* Renegotiate info */}
               {!alreadyNeg && (
                 <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 6, padding: '5px 8px', background: 'var(--surface)', borderRadius: 6 }}>
-                  Renégociation : frais {fmtCash(reNegFee)} · 65% de succès · −0.3 à −0.5% si accepté
+                  Renégociation : frais {fmtCash(reNegFee)} · −0.3 à −0.5% si accepté
                 </div>
               )}
 
@@ -238,7 +237,7 @@ export default function LoansModal({ onClose }) {
                     cursor: (alreadyNeg || !canReNeg) ? 'not-allowed' : 'pointer',
                     opacity: (alreadyNeg || !canReNeg) ? 0.5 : 1,
                   }}
-                  title={alreadyNeg ? 'Déjà renégocié cette année' : !canReNeg ? `Frais insuffisants (${fmtCash(reNegFee)})` : `Frais : ${fmtCash(reNegFee)} · 65% de succès`}
+                  title={alreadyNeg ? 'Déjà renégocié cette année' : !canReNeg ? `Frais insuffisants (${fmtCash(reNegFee)})` : `Frais : ${fmtCash(reNegFee)}`}
                 >
                   {alreadyNeg ? '🔄 Renégocié' : `🔄 Renégocier`}
                 </button>
