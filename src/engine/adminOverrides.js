@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from 'firebase/app';
-import { getDatabase, ref, set, get } from 'firebase/database';
+import { getDatabase, ref, set, get, onValue } from 'firebase/database';
 import { FIREBASE_CONFIG, FIREBASE_ENABLED } from './firebaseConfig.js';
 
 function getDb() {
@@ -30,6 +30,16 @@ export async function fetchConfigOverrides() {
     const snap = await get(ref(db, 'admin/gameConfig'));
     return snap.exists() ? snap.val() : {};
   } catch { return {}; }
+}
+
+// Returns an unsubscribe function. Calls callback immediately + on every change.
+export function subscribeConfigOverrides(callback) {
+  const db = getDb();
+  if (!db) { callback({}); return () => {}; }
+  const unsub = onValue(ref(db, 'admin/gameConfig'), snap => {
+    callback(snap.exists() ? snap.val() : {});
+  }, () => callback({}));
+  return unsub;
 }
 
 export async function saveConfigOverrides(overrides) {
