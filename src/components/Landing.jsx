@@ -505,8 +505,6 @@ export default function Landing() {
             <div className="l-kpi-sep" />
             <div className="l-kpi"><span className="l-kpi-val">23</span><span className="l-kpi-label">succès</span></div>
             <div className="l-kpi-sep" />
-            <div className="l-kpi"><span className="l-kpi-val">62</span><span className="l-kpi-label">ans à simuler</span></div>
-            <div className="l-kpi-sep" />
             <div className="l-kpi"><span className="l-kpi-val">10+</span><span className="l-kpi-label">types de biens</span></div>
           </div>
         </div>
