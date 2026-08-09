@@ -158,7 +158,7 @@ export default function BankModal({ onClose }) {
           background: 'rgba(239,68,68,.07)', border: '1px solid rgba(239,68,68,.25)',
           fontSize: 11,
         }}>
-          <span style={{ color: 'var(--muted)' }}>🏛️ IFI estimé cette année <span style={{ color: 'var(--red)' }}>({(ifiMargRate * 100).toFixed(1)} % tranche marginale)</span></span>
+          <span style={{ color: 'var(--muted)' }}>🏛️ IFI calculé sur <strong style={{ color: 'var(--text)' }}>{fmtCash(state.valuation ?? 0)}</strong> de patrimoine brut <span style={{ color: 'var(--red)' }}>({(ifiMargRate * 100).toFixed(1)} % tranche marginale)</span></span>
           <span style={{ fontFamily: 'monospace', fontWeight: 800, color: 'var(--red)' }}>−{fmtCash(ifiAmount)}</span>
         </div>
       )}

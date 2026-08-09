@@ -107,16 +107,25 @@ export default function LuxuryShopModal({ onClose }) {
 
       {tab === 'shop' && (
         <>
-          <div className="market-filters" style={{ marginBottom: 10, flexWrap: 'wrap' }}>
-            {CATEGORIES.map(cat => (
-              <button
-                key={cat}
-                className={`market-filter-chip${filterCat === cat ? ' active' : ''}`}
-                onClick={() => setFilterCat(cat)}
-              >
-                {cat}
-              </button>
-            ))}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
+            {CATEGORIES.map(cat => {
+              const isActive = filterCat === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setFilterCat(cat)}
+                  style={{
+                    fontSize: 11, fontWeight: 700, padding: '6px 10px', borderRadius: 20,
+                    background: isActive ? 'var(--accent-soft)' : 'var(--surface2)',
+                    border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border)'}`,
+                    color: isActive ? 'var(--accent)' : 'var(--muted)',
+                    cursor: 'pointer', whiteSpace: 'nowrap',
+                  }}
+                >
+                  {cat}
+                </button>
+              );
+            })}
           </div>
           <div className="luxury-grid">
             {filtered.map(item => {
