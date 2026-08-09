@@ -5,17 +5,26 @@
     "choices": [
       {
         "label": "Lancer une procédure d'expulsion (long et coûteux)",
-        "eff": { "cash": -20, "stress": 22 },
+        "eff": {
+          "cash": -20,
+          "stress": 22
+        },
         "out": "Six mois de procédure, des frais d'huissier et d'avocat — mais il finit par partir. Le bien est enfin récupéré, abîmé."
       },
       {
         "label": "Proposer un accord à l'amiable : effacer la dette contre départ",
-        "eff": { "cash": -8, "stress": 10 },
+        "eff": {
+          "cash": -8,
+          "stress": 10
+        },
         "out": "Moins de pertes, moins de stress. Le locataire accepte et libère les lieux rapidement."
       },
       {
         "label": "Lui accorder un délai supplémentaire de 3 mois",
-        "eff": { "cash": -5, "stress": 5 },
+        "eff": {
+          "cash": -5,
+          "stress": 5
+        },
         "flag": "tenant_grace",
         "out": "Il promet de régulariser. Peut-être. La situation reste fragile."
       }
@@ -27,18 +36,28 @@
     "choices": [
       {
         "label": "Faire constater par huissier et retenir le dépôt de garantie",
-        "eff": { "cash": -12, "stress": 15 },
+        "eff": {
+          "cash": -12,
+          "stress": 15
+        },
         "gainPct": 0,
         "out": "Le dépôt couvre une partie. Le reste sera réclamé en justice. Chronophage mais nécessaire."
       },
       {
         "label": "Régler soi-même et passer à autre chose",
-        "eff": { "cash": -25, "stress": 8 },
+        "eff": {
+          "cash": -25,
+          "stress": 8
+        },
         "out": "Tu paies de ta poche pour remettre le bien en état. Plus vite réglé, plus vite re-loué."
       },
       {
         "label": "Ignorer et relooker le bien entre deux locataires",
-        "eff": { "cash": -6, "stress": 4, "val": -10 },
+        "eff": {
+          "cash": -6,
+          "stress": 4,
+          "val": -10
+        },
         "out": "Quelques rustines cosmétiques. La valeur du bien en prend un coup sur le long terme."
       }
     ]
@@ -49,17 +68,27 @@
     "choices": [
       {
         "label": "Lui proposer un loyer bloqué 3 ans en échange de sa fidélité",
-        "eff": { "cash": 8, "stress": -10 },
+        "eff": {
+          "cash": 5,
+          "stress": -10
+        },
         "out": "Un accord gagnant-gagnant. Taux de vacance zéro garanti et zéro souci de gestion."
       },
       {
         "label": "Profiter de l'occasion pour revoir le loyer à la hausse",
-        "eff": { "cash": 18, "stress": 5 },
+        "eff": {
+          "cash": 11,
+          "stress": 5
+        },
         "out": "Il accepte, un peu déçu. Les revenus augmentent, la relation reste correcte."
       },
       {
         "label": "Lui proposer de racheter le bien (vente directe sans agence)",
-        "eff": { "cash": 30, "val": -20, "stress": -5 },
+        "eff": {
+          "cash": 18,
+          "val": -20,
+          "stress": -5
+        },
         "out": "Une transaction rapide et sans commission d'agence. Il est ravi, toi aussi."
       }
     ]
@@ -70,17 +99,26 @@
     "choices": [
       {
         "label": "Saisir le tribunal d'instance — procédure longue",
-        "eff": { "cash": -30, "stress": 30 },
+        "eff": {
+          "cash": -30,
+          "stress": 30
+        },
         "out": "Un an de procédure. Tu récupères le bien mais épuisé et sans revenus pendant toute cette période."
       },
       {
         "label": "Lui proposer une indemnité de départ (relogement)",
-        "eff": { "cash": -20, "stress": 12 },
+        "eff": {
+          "cash": -20,
+          "stress": 12
+        },
         "out": "Il accepte contre 2 000 €. Cher, mais bien plus rapide que la justice."
       },
       {
         "label": "Remettre en cause ta décision et lui laisser le bien loué",
-        "eff": { "cash": 5, "stress": 5 },
+        "eff": {
+          "cash": 3,
+          "stress": 5
+        },
         "out": "Finalement c'est un bon locataire. Tu annules le congé et encaisses les loyers."
       }
     ]
@@ -91,17 +129,26 @@
     "choices": [
       {
         "label": "Faire les travaux rapidement pour éviter le litige",
-        "eff": { "cash": -22, "stress": 10 },
+        "eff": {
+          "cash": -22,
+          "stress": 10
+        },
         "out": "Une facture salée mais un bien amélioré et un locataire satisfait."
       },
       {
         "label": "Négocier un délai de 6 mois et faire les travaux en douceur",
-        "eff": { "cash": -14, "stress": 15 },
+        "eff": {
+          "cash": -14,
+          "stress": 15
+        },
         "out": "Il accepte sous conditions. Les travaux sont étalés et le coût réduit."
       },
       {
         "label": "Contester l'expertise — risque juridique",
-        "eff": { "cash": -35, "stress": 25 },
+        "eff": {
+          "cash": -35,
+          "stress": 25
+        },
         "out": "Le tribunal te donne tort. Tu paies les travaux ET les frais de justice. Coûteux."
       }
     ]
@@ -112,17 +159,26 @@
     "choices": [
       {
         "label": "Mettre en demeure et exiger l'arrêt immédiat",
-        "eff": { "cash": -8, "stress": 18 },
+        "eff": {
+          "cash": -8,
+          "stress": 18
+        },
         "out": "Il cède sous la pression mais la relation est abîmée. Tu perdras ce locataire à la prochaine échéance."
       },
       {
         "label": "Régulariser la situation et prendre une partie des revenus",
-        "eff": { "cash": 15, "stress": 5 },
+        "eff": {
+          "cash": 9,
+          "stress": 5
+        },
         "out": "Un accord inédit mais pratique. Tu touches un supplément de loyer et fermes les yeux."
       },
       {
         "label": "Saisir la justice pour résiliation du bail",
-        "eff": { "cash": -20, "stress": 20 },
+        "eff": {
+          "cash": -20,
+          "stress": 20
+        },
         "out": "Le bail est résilié mais la procédure dure 8 mois. Rentable uniquement si tu avais un meilleur projet pour le bien."
       }
     ]
@@ -133,17 +189,26 @@
     "choices": [
       {
         "label": "Mandater un plombier en urgence et régler — puis se retourner contre l'assurance",
-        "eff": { "cash": -18, "stress": 12 },
+        "eff": {
+          "cash": -18,
+          "stress": 12
+        },
         "out": "Rapide et efficace. L'assurance rembourse la moitié quelques mois après. Bon compromis."
       },
       {
         "label": "Attendre l'expertise de l'assurance avant de décider",
-        "eff": { "cash": -5, "stress": 20 },
+        "eff": {
+          "cash": -5,
+          "stress": 20
+        },
         "out": "Deux mois de délai, un locataire en colère et un bien dégradé. La lenteur coûte cher."
       },
       {
         "label": "Faire les travaux et contester l'assurance en justice",
-        "eff": { "cash": -12, "stress": 8 },
+        "eff": {
+          "cash": -12,
+          "stress": 8
+        },
         "out": "Tu obtiens gain de cause après 6 mois. Presque rentable au total."
       }
     ]
@@ -154,17 +219,27 @@
     "choices": [
       {
         "label": "Accepter gracieusement et l'aider à trouver un successeur",
-        "eff": { "cash": -4, "stress": -5 },
+        "eff": {
+          "cash": -4,
+          "stress": -5
+        },
         "out": "Un départ propre. Son successeur emménage deux semaines plus tard. Presque pas de vacance."
       },
       {
         "label": "Exiger le respect du préavis complet",
-        "eff": { "cash": 8, "stress": 10 },
+        "eff": {
+          "cash": 5,
+          "stress": 10
+        },
         "out": "Il respecte le préavis à contrecœur, mais l'appartement est rendu dans un état limite."
       },
       {
         "label": "Profiter de la vacance pour rénover et relever le loyer",
-        "eff": { "cash": -15, "stress": 5, "val": 20 },
+        "eff": {
+          "cash": -15,
+          "stress": 5,
+          "val": 20
+        },
         "out": "Un mois de travaux et un loyer augmenté de 15 %. La vacance se transforme en opportunité."
       }
     ]
@@ -175,17 +250,28 @@
     "choices": [
       {
         "label": "Accepter — vente directe, pas de commission d'agence",
-        "eff": { "cash": 40, "val": -30, "stress": -8 },
+        "eff": {
+          "cash": 24,
+          "val": -30,
+          "stress": -8
+        },
         "out": "Transaction fluide. Tu économises la commission d'agence et il connaît déjà chaque recoin."
       },
       {
         "label": "Refuser — tu penses que le bien va encore beaucoup prendre de valeur",
-        "eff": { "cash": 5, "stress": 2 },
+        "eff": {
+          "cash": 3,
+          "stress": 2
+        },
         "out": "Il reste locataire mais un peu déçu. Tu conserves un actif potentiellement sous-évalué."
       },
       {
         "label": "Négocier une vente légèrement au-dessus du marché",
-        "eff": { "cash": 50, "val": -40, "stress": -5 },
+        "eff": {
+          "cash": 30,
+          "val": -40,
+          "stress": -5
+        },
         "out": "Il tenait tellement à cet appartement qu'il a accepté le prix majoré. Une belle sortie."
       }
     ]
@@ -196,17 +282,26 @@
     "choices": [
       {
         "label": "Plaider ta cause avec photos et constats",
-        "eff": { "cash": -5, "stress": 12 },
+        "eff": {
+          "cash": -5,
+          "stress": 12
+        },
         "out": "La commission te donne partiellement raison. Tu récupères les deux tiers de la retenue."
       },
       {
         "label": "Rembourser intégralement pour clore le dossier",
-        "eff": { "cash": -10, "stress": 3 },
+        "eff": {
+          "cash": -10,
+          "stress": 3
+        },
         "out": "Fin du litige immédiatement. Une perte sèche, mais zéro énergie gaspillée."
       },
       {
         "label": "Aller jusqu'au tribunal si la commission ne tranche pas en ta faveur",
-        "eff": { "cash": -18, "stress": 22 },
+        "eff": {
+          "cash": -18,
+          "stress": 22
+        },
         "out": "Le juge décide en ta faveur sur le fond mais les frais effacent le gain. Victoire morale."
       }
     ]

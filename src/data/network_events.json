@@ -8,13 +8,18 @@
         "label": "Rejoindre son réseau — taux négociés",
         "contact": "courtier",
         "flag": "seen_courtier",
-        "eff": { "cash": -2, "stress": -4 },
+        "eff": {
+          "cash": -2,
+          "stress": -4
+        },
         "out": "Baptiste devient ton courtier attitré. Chaque année, il optimise tes remboursements et te fait économiser sur chaque crédit en cours."
       },
       {
         "label": "Garder ton indépendance bancaire",
         "flag": "seen_courtier",
-        "eff": { "stress": -1 },
+        "eff": {
+          "stress": -1
+        },
         "out": "Tu préfères traiter directement avec les banques. Peut-être une autre fois."
       }
     ]
@@ -28,13 +33,18 @@
         "label": "Entrer dans son carnet de contacts",
         "contact": "notaire",
         "flag": "seen_notaire",
-        "eff": { "cash": -3, "stress": -2 },
+        "eff": {
+          "cash": -3,
+          "stress": -2
+        },
         "out": "Maître Chauvin t'envoie désormais les biens off-market en avant-première. Le marché que tu vois chaque année sera plus riche et plus varié."
       },
       {
         "label": "Décliner poliment",
         "flag": "seen_notaire",
-        "eff": { "stress": -1 },
+        "eff": {
+          "stress": -1
+        },
         "out": "Pas le bon moment. Elle comprend — et ne recontactera pas."
       }
     ]
@@ -48,13 +58,18 @@
         "label": "La prendre en mission (abonnement annuel)",
         "contact": "expert_comptable",
         "flag": "seen_comptable",
-        "eff": { "cash": -5, "stress": -6 },
+        "eff": {
+          "cash": -5,
+          "stress": -6
+        },
         "out": "Claire prend en charge tes obligations fiscales et comptables. Son suivi te retire 3 points de stress chaque année — une charge mentale en moins."
       },
       {
         "label": "Continuer à te débrouiller seul",
         "flag": "seen_comptable",
-        "eff": { "stress": 4 },
+        "eff": {
+          "stress": 4
+        },
         "out": "Tu gères encore seul. La prochaine déclaration va quand même te coûter des nuits blanches."
       }
     ]
@@ -68,13 +83,18 @@
         "label": "Travailler exclusivement avec elle",
         "contact": "agent_immo",
         "flag": "seen_agent",
-        "eff": { "cash": -2, "stress": -3 },
+        "eff": {
+          "cash": -2,
+          "stress": -3
+        },
         "out": "Sofia devient ta chasseuse officielle. Chaque bien que tu achètes via elle te revient 5 % moins cher — elle négocie à ta place."
       },
       {
         "label": "Refuser — tu préfères choisir librement",
         "flag": "seen_agent",
-        "eff": { "stress": 0 },
+        "eff": {
+          "stress": 0
+        },
         "out": "Tu continues seul. Plus de liberté, mais tu paies toujours le prix affiché."
       }
     ]

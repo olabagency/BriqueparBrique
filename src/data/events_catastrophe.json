@@ -6,13 +6,19 @@
       {
         "label": "Payer sans broncher et régulariser",
         "tag": "prudent",
-        "eff": { "cashPct": -0.20, "stress": 5 },
+        "eff": {
+          "cashPct": -0.2,
+          "stress": 5
+        },
         "out": "Douloureux, mais la situation est soldée. L'administration repart sans autre procédure."
       },
       {
         "label": "Contester avec un avocat fiscaliste (50k€)",
         "tag": "risque",
-        "eff": { "cash": -50, "stress": 15 },
+        "eff": {
+          "cash": -50,
+          "stress": 15
+        },
         "out": "Le recours aboutit partiellement — tu limites les dégâts mais paies quand même les frais juridiques."
       }
     ]
@@ -24,13 +30,21 @@
       {
         "label": "Faire intervenir tes assurances immédiatement",
         "tag": "prudent",
-        "eff": { "valPct": -0.08, "cash": -30, "stress": 10 },
+        "eff": {
+          "valPct": -0.08,
+          "cash": -30,
+          "stress": 10
+        },
         "out": "Les assurances couvrent une partie. Tes biens perdent de la valeur mais restent exploitables."
       },
       {
         "label": "Vendre en urgence les biens les plus touchés",
         "tag": "risque",
-        "eff": { "valPct": -0.18, "cash": 40, "stress": 20 },
+        "eff": {
+          "valPct": -0.18,
+          "cash": 24,
+          "stress": 20
+        },
         "out": "Tu sauves des liquidités mais perds une partie de ton patrimoine à vil prix."
       }
     ]
@@ -42,13 +56,20 @@
       {
         "label": "Transiger — payer les dédommagements (80k€)",
         "tag": "prudent",
-        "eff": { "cash": -80, "stress": 8 },
+        "eff": {
+          "cash": -80,
+          "stress": 8
+        },
         "out": "L'affaire est close. Cher, mais ta réputation est préservée et l'activité reprend."
       },
       {
         "label": "Aller au tribunal — risque total",
         "tag": "risque",
-        "eff": { "cashPct": -0.30, "stress": 25, "valPct": -0.10 },
+        "eff": {
+          "cashPct": -0.3,
+          "stress": 25,
+          "valPct": -0.1
+        },
         "out": "Tu perds le procès. Condamnation lourde, dévalorisation de tes actifs et couverture presse négative."
       }
     ]
@@ -60,13 +81,20 @@
       {
         "label": "Tenir et attendre la reprise",
         "tag": "prudent",
-        "eff": { "valPct": -0.22, "stress": 12 },
+        "eff": {
+          "valPct": -0.22,
+          "stress": 12
+        },
         "out": "Ton patrimoine perd un quart de sa valeur. La reprise viendra peut-être, mais dans combien de temps ?"
       },
       {
         "label": "Vendre massivement et réinvestir ailleurs",
         "tag": "creatif",
-        "eff": { "valPct": -0.12, "cash": -20, "stress": 18 },
+        "eff": {
+          "valPct": -0.12,
+          "cash": -20,
+          "stress": 18
+        },
         "out": "Tu encaisses la perte mais tu préserves l'essentiel en diversifiant ailleurs."
       }
     ]
@@ -78,13 +106,21 @@
       {
         "label": "Attendre la fin de la crise environnementale",
         "tag": "prudent",
-        "eff": { "valPct": -0.15, "cash": -40, "stress": 15 },
+        "eff": {
+          "valPct": -0.15,
+          "cash": -40,
+          "stress": 15
+        },
         "out": "Deux ans d'absence de revenus locatifs et une décote durable sur ces actifs."
       },
       {
         "label": "Mettre en vente rapidement",
         "tag": "risque",
-        "eff": { "valPct": -0.25, "cash": 20, "stress": 10 },
+        "eff": {
+          "valPct": -0.25,
+          "cash": 12,
+          "stress": 10
+        },
         "out": "Tu t'en sors avec des liquidités, mais les acheteurs ont imposé une forte décote."
       }
     ]

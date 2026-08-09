@@ -9,7 +9,7 @@
         "eff": {
           "stress": -15,
           "val": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Tu ralentis un peu au travail, mais tu te sens beaucoup mieux.",
         "flag": "hasPartner"
@@ -52,7 +52,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une gêne s'installe entre vous, mais ton argent reste où il est."
       },
@@ -77,7 +77,7 @@
         "eff": {
           "stress": -15,
           "val": -3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Ça fait du bien de lâcher prise un week-end entier."
       },
@@ -108,7 +108,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -20,
-          "cash": 15,
+          "cash": 9,
           "val": -5
         },
         "out": "Quelques semaines plus calmes, mais tu te sens enfin bien."
@@ -151,7 +151,7 @@
         "eff": {
           "val": -5,
           "stress": -10,
-          "cash": 6
+          "cash": 4
         },
         "out": "Tu perds un peu d'élan, mais tu gardes ce qui compte pour toi."
       },
@@ -175,7 +175,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une parenthèse agréable dans un emploi du temps chargé."
       },
@@ -185,7 +185,7 @@
         "eff": {
           "stress": 5,
           "val": 3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Le salon est un succès professionnel. Le reste attendra."
       },
@@ -209,7 +209,7 @@
         "eff": {
           "val": -8,
           "stress": -20,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un changement difficile à tenir, mais qui sauve beaucoup de choses."
       },
@@ -243,7 +243,7 @@
         "eff": {
           "stress": -25,
           "val": -15,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un moment précieux, que l'entreprise finit par absorber.",
         "flag": "hasChild"
@@ -280,7 +280,7 @@
         "eff": {
           "stress": -20,
           "val": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Tu reviens plus tard, mais avec les idées bien plus claires."
       },
@@ -313,7 +313,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -15,
-          "cash": 5
+          "cash": 3
         },
         "out": "Tu réalises que beaucoup d'autres traversent la même chose."
       },
@@ -353,7 +353,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Certains le prennent mal, mais tu protèges ton énergie."
       },
@@ -386,7 +386,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -3,
-          "cash": 5
+          "cash": 3
         },
         "out": "Tu avances à ton rythme, sans raccourci."
       },
@@ -410,7 +410,7 @@
         "eff": {
           "val": -10,
           "stress": -15,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un moment précieux que tu ne regretteras jamais d'avoir vécu."
       },
@@ -444,7 +444,7 @@
         "eff": {
           "stress": -20,
           "val": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un premier pas difficile, mais qui change vraiment la donne."
       },
@@ -475,7 +475,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un poids que tu portais depuis longtemps s'allège enfin."
       },
@@ -506,7 +506,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -25,
-          "cash": 15
+          "cash": 9
         },
         "out": "Un espace précieux pour déposer ce que tu portais seul·e."
       },
@@ -538,7 +538,7 @@
         "eff": {
           "stress": -15,
           "val": -3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un vrai bol d'air qui recharge les batteries sur la durée."
       },
@@ -572,7 +572,7 @@
         "eff": {
           "val": -12,
           "stress": -10,
-          "cash": 8
+          "cash": 5
         },
         "out": "Une période plus calme professionnellement, mais où tu es là."
       },
@@ -622,7 +622,7 @@
         "eff": {
           "val": 12,
           "stress": 10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Tu transformes la trahison en carburant, à ta manière."
       }
@@ -638,7 +638,7 @@
         "eff": {
           "val": -10,
           "stress": -15,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un nouveau décor, un nouveau souffle, quelques repères en moins."
       },
@@ -678,7 +678,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -3,
-          "cash": 5
+          "cash": 3
         },
         "out": "Tu restes concentré·e sur ton propre chemin."
       },
@@ -703,7 +703,7 @@
         "eff": {
           "stress": -15,
           "val": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un vieux rêve enfin honoré, même si tout n'est pas parfait."
       },
@@ -734,7 +734,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -18,
-          "cash": 4
+          "cash": 2
         },
         "out": "Mettre des mots dessus allège vraiment le poids du doute."
       },
@@ -767,7 +767,7 @@
         "eff": {
           "val": -8,
           "stress": -15,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une belle journée, sans un regard pour le téléphone."
       },
@@ -818,7 +818,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un équilibre trouvé, sans tout sacrifier d'un côté."
       }
@@ -834,7 +834,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un vrai pas franchi, qui rééquilibre pas mal de choses."
       },
@@ -874,7 +874,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 5,
-          "cash": 3
+          "cash": 2
         },
         "out": "L'envie s'efface, remplacée par la routine habituelle."
       },
@@ -898,7 +898,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une conversation qui remet beaucoup de choses en perspective."
       },
@@ -937,7 +937,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "L'affaire s'essouffle d'elle-même, sans intervention de ta part."
       },
@@ -960,7 +960,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un lien précieux se construit, presque sans effort."
       },
@@ -990,7 +990,7 @@
         "label": "Adopter sans plus attendre",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -15
         },
         "out": "Une présence simple qui change beaucoup de choses au quotidien."
@@ -1021,7 +1021,7 @@
         "label": "Aider financièrement, sans hésiter",
         "tag": "prudent",
         "eff": {
-          "cash": 3,
+          "cash": 2,
           "stress": 3
         },
         "out": "Un geste généreux, sans arrière-pensée particulière."
@@ -1039,7 +1039,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -3,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un compromis qui t'engage sans ouvrir ton compte en banque."
       }
@@ -1055,7 +1055,7 @@
         "eff": {
           "stress": -15,
           "val": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un vrai changement, qui demande de la discipline sur la durée."
       },
@@ -1087,7 +1087,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une soirée qui rappelle qui tu étais avant tout ça."
       },
@@ -1118,7 +1118,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une réflexion qui clarifie beaucoup de choses pour la suite."
       },
@@ -1149,7 +1149,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un nouveau rôle qui te touche plus que tu ne l'imaginais."
       },
@@ -1180,7 +1180,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une discussion difficile, mais qui libère beaucoup de non-dits."
       },
@@ -1211,7 +1211,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un espace de légèreté qui n'a rien à voir avec le travail."
       },
@@ -1251,7 +1251,7 @@
         "label": "Le mettre de côté, séparé de tes affaires",
         "tag": "prudent",
         "eff": {
-          "cash": 40,
+          "cash": 24,
           "stress": -5
         },
         "out": "Une sécurité personnelle bienvenue, à l'abri des aléas de l'entreprise."
@@ -1260,7 +1260,7 @@
         "label": "En profiter pour t'offrir quelque chose qui te tient à cœur",
         "tag": "creatif",
         "eff": {
-          "cash": 20,
+          "cash": 12,
           "stress": -10
         },
         "out": "Un plaisir personnel, mérité après tant d'efforts."
@@ -1276,7 +1276,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 10,
-          "cash": 8
+          "cash": 5
         },
         "out": "Un vrai dépassement de toi-même, dont tu ressors grandi·e."
       },
@@ -1285,7 +1285,7 @@
         "tag": "risque",
         "eff": {
           "stress": -3,
-          "cash": 4
+          "cash": 2
         },
         "out": "Tu restes dans ta zone de confort, sans regret excessif."
       },
@@ -1309,7 +1309,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un voyage qui remet beaucoup de choses en perspective."
       },
@@ -1341,7 +1341,7 @@
         "eff": {
           "val": -15,
           "stress": -25,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une coupure salutaire, qui change vraiment la donne sur la durée."
       },
@@ -1374,7 +1374,7 @@
         "eff": {
           "val": -8,
           "stress": -18,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un silence numérique qui fait un bien immense, difficile à croire avant de l'essayer."
       },
@@ -1407,7 +1407,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une conversation qui remet les choses à plat, avec soulagement."
       },
@@ -1440,7 +1440,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une conversation essentielle, qui clarifie une direction commune."
       },
@@ -1472,7 +1472,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 8
+          "cash": 5
         },
         "out": "Une redécouverte douce, qui remet certaines choses en perspective."
       },
@@ -1490,7 +1490,7 @@
         "eff": {
           "stress": -15,
           "val": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un vrai chamboulement, qui redistribue tes priorités."
       }
@@ -1505,7 +1505,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 8
+          "cash": 5
         },
         "out": "Une réflexion qui, contre toute attente, te fait du bien."
       },
@@ -1537,7 +1537,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un rôle qui te va bien, même s'il prend du temps."
       },
@@ -1546,7 +1546,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Certains le prennent mal, mais tu protèges ton énergie."
       },
@@ -1568,7 +1568,7 @@
         "label": "En parler à un professionnel du sommeil ou un thérapeute",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -15
         },
         "out": "Un accompagnement qui t'aide à mieux comprendre cette angoisse."
@@ -1601,7 +1601,7 @@
         "eff": {
           "personalCash": -20,
           "stress": -20,
-          "cash": 15
+          "cash": 9
         },
         "out": "Un vrai bol d'air, qui recharge complètement les batteries."
       },
@@ -1619,7 +1619,7 @@
         "eff": {
           "personalCash": -8,
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un compromis qui fait quand même beaucoup de bien."
       }
@@ -1648,7 +1648,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un geste qui te fait du bien autant qu'il inspire d'autres personnes."
       }
@@ -1663,7 +1663,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Le conflit se résout, avec un peu de patience."
       },
@@ -1695,7 +1695,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un vrai espace de respiration qui n'a rien à voir avec le travail."
       },
@@ -1726,7 +1726,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une réconciliation sincère qui allège un poids porté depuis longtemps."
       },
@@ -1757,7 +1757,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une clarté nouvelle sur ce qui compte vraiment pour toi."
       },
@@ -1789,7 +1789,7 @@
         "eff": {
           "val": -10,
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un engagement qui bouleverse ton quotidien, mais qui a un sens profond."
       },
@@ -1798,7 +1798,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -3,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un équilibre trouvé, sans tout porter seul·e."
       },
@@ -1821,7 +1821,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un tiers neutre qui aide à apaiser une situation explosive."
       },
@@ -1855,7 +1855,7 @@
         "eff": {
           "personalCash": -20,
           "stress": -10,
-          "cash": 8
+          "cash": 5
         },
         "out": "Un choix personnel assumé, qui te fait du bien."
       },
@@ -1873,7 +1873,7 @@
         "eff": {
           "personalCash": -8,
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un premier pas plus mesuré, avant d'aller plus loin ou non."
       }
@@ -1888,7 +1888,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un rôle qui te rappelle des liens précieux, loin de l'entreprise."
       },
@@ -1919,7 +1919,7 @@
         "tag": "risque",
         "eff": {
           "stress": -20,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une vraie soupape, qui comporte aussi sa part de risque physique."
       },
@@ -1928,7 +1928,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 8
+          "cash": 5
         },
         "out": "Un compromis plus sage, tout aussi libérateur."
       },
@@ -1951,7 +1951,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un vrai changement d'habitude, qui améliore ton quotidien."
       },
@@ -1998,7 +1998,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une conversation difficile, mais qui referme enfin ce vieux chapitre."
       }
@@ -2015,7 +2015,7 @@
         "eff": {
           "personalCash": -10,
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une indépendance nouvelle, grisante et un peu vertigineuse."
       },
@@ -2048,7 +2048,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une conversation qui apaise une bonne partie de leurs craintes."
       },
@@ -2080,7 +2080,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment de légèreté qui fait vraiment du bien."
       },
@@ -2112,7 +2112,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une joie partagée, qui te fait aussi du bien à toi."
       },
@@ -2145,7 +2145,7 @@
         "eff": {
           "personalCash": -10,
           "stress": -10,
-          "cash": 8
+          "cash": 5
         },
         "out": "Une belle soirée qui rappelle tout ce que tu as construit, professionnellement et personnellement."
       },
@@ -2154,7 +2154,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment simple, mais tout aussi précieux."
       },
@@ -2179,7 +2179,7 @@
         "eff": {
           "personalCash": -10,
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment de gratitude sincère, qui vous rapproche."
       },
@@ -2196,7 +2196,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une conversation qui change la nature de votre relation, pour le mieux."
       }
@@ -2212,7 +2212,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un vrai changement d'habitudes, qui te fait du bien sur la durée."
       },
@@ -2244,7 +2244,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un rapprochement sincère, qui demande de l'humilité mais qui paie."
       },
@@ -2261,7 +2261,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un geste qui les touche et qui recrée vraiment du lien."
       }
@@ -2277,7 +2277,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une transmission qui te fait autant de bien qu'à tes étudiants."
       },
@@ -2292,7 +2292,7 @@
         "tag": "risque",
         "eff": {
           "stress": -3,
-          "cash": 4
+          "cash": 2
         },
         "out": "Tu restes concentré·e sur ton entreprise, sans cette activité annexe."
       }
@@ -2308,7 +2308,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une paix inattendue qui allège un poids porté depuis longtemps."
       },
@@ -2340,7 +2340,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un premier vote réfléchi, qui te fait sentir pleinement citoyen·ne."
       },
@@ -2357,7 +2357,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une implication qui te fait découvrir un intérêt nouveau pour la chose publique."
       }
@@ -2374,7 +2374,7 @@
         "eff": {
           "stress": -10,
           "val": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une tentation forte, qui bouscule complètement tes plans."
       },
@@ -2383,7 +2383,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Tu restes fidèle à ton engagement actuel, avec un brin de regret."
       },
@@ -2408,7 +2408,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une réconciliation sincère qui allège un poids porté depuis longtemps."
       },
@@ -2440,7 +2440,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une prise de conscience qui améliore vraiment certains de tes comportements."
       },
@@ -2473,7 +2473,7 @@
         "eff": {
           "personalCash": -10,
           "stress": 5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un rôle qui inverse les générations, avec toute la responsabilité que ça implique."
       },
@@ -2482,7 +2482,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un compromis qui les aide sans que tu portes tout le poids seul·e."
       },
@@ -2505,7 +2505,7 @@
         "label": "Consulter sérieusement un spécialiste",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -10
         },
         "out": "Une prise en charge qui améliore vraiment ton quotidien."
@@ -2539,7 +2539,7 @@
         "eff": {
           "stress": -15,
           "val": -10,
-          "cash": 6
+          "cash": 4
         },
         "out": "Un vrai vertige, mais aussi une liberté nouvelle qui s'ouvre."
       },
@@ -2570,7 +2570,7 @@
         "label": "Commencer à préparer activement quelqu'un en interne",
         "tag": "prudent",
         "eff": {
-          "cash": 3,
+          "cash": 2,
           "stress": -8
         },
         "out": "Une transition anticipée qui rassure toute l'organisation."
@@ -2604,7 +2604,7 @@
         "eff": {
           "val": -30,
           "stress": -25,
-          "cash": 12
+          "cash": 7
         },
         "out": "Un vrai choix de vie, qui coûte cher professionnellement mais sauve l'essentiel."
       },
@@ -2651,7 +2651,7 @@
         "eff": {
           "val": -20,
           "stress": -18,
-          "cash": 8
+          "cash": 5
         },
         "out": "Un temps nécessaire, qui coûte en productivité mais protège ta santé mentale.",
         "unsetFlag": "hasPartner"
@@ -2698,7 +2698,7 @@
         "eff": {
           "val": -15,
           "stress": -18,
-          "cash": 10
+          "cash": 6
         },
         "out": "Un vrai test de confiance envers ton équipe, qui répond magnifiquement présente."
       }
@@ -2713,7 +2713,7 @@
         "label": "Chercher immédiatement une vraie aide professionnelle",
         "tag": "prudent",
         "eff": {
-          "cash": 25,
+          "cash": 15,
           "val": -15,
           "stress": -30
         },
@@ -2748,7 +2748,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une franchise qui coûte cher sur le moment, mais qui limite les dégâts à long terme."
       },
@@ -2781,7 +2781,7 @@
         "tag": "audacieux",
         "eff": {
           "personalCash": -80,
-          "cash": 70,
+          "cash": 42,
           "val": 20
         },
         "out": "Un coup d'accélérateur inattendu pour ton entreprise."
@@ -2817,7 +2817,7 @@
         "eff": {
           "personalCash": -25,
           "stress": -15,
-          "cash": 8
+          "cash": 5
         },
         "out": "Un accord difficile à obtenir, mais qui préserve une vraie place pour toi."
       },
@@ -2861,7 +2861,7 @@
         "eff": {
           "val": -8,
           "stress": -20,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une coupure salutaire, même si elle t'éloigne un temps de ton audience."
       },
@@ -2905,7 +2905,7 @@
         "eff": {
           "val": -12,
           "stress": -8,
-          "cash": 10
+          "cash": 6
         },
         "out": "Un compromis qui maintient un lien avec l'entreprise, sans forcer la guérison."
       }
@@ -2921,7 +2921,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une rencontre bouleversante, qui répond à des questions que tu portais depuis toujours."
       },
@@ -2954,7 +2954,7 @@
         "eff": {
           "val": -20,
           "stress": -25,
-          "cash": 15
+          "cash": 9
         },
         "out": "Un vrai effort commun qui transforme profondément votre relation, pour le mieux."
       },
@@ -2995,7 +2995,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -18,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un processus long et douloureux, mais qui t'apprend énormément sur toi-même."
       },
@@ -3039,7 +3039,7 @@
         "eff": {
           "personalCash": -15,
           "stress": -18,
-          "cash": 6
+          "cash": 4
         },
         "out": "Un compromis qui ne remplace pas tout, mais qui apaise vraiment quelque chose."
       }
@@ -3075,7 +3075,7 @@
         "eff": {
           "val": -15,
           "stress": -10,
-          "cash": 10
+          "cash": 6
         },
         "out": "Un compromis fragile, entre deux vies qui tirent chacune de leur côté."
       }
@@ -3100,7 +3100,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une transparence qui enlève l'effet de surprise, mais qui évite tout malentendu."
       },
@@ -3126,7 +3126,7 @@
         "eff": {
           "stress": -10,
           "val": -5,
-          "cash": 8
+          "cash": 5
         },
         "out": "Un compromis qui apaise la relation, au prix d'un rythme de recherche ralenti."
       },
@@ -3143,7 +3143,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une activité transformée en moment à deux, presque comme une chasse au trésor."
       }
@@ -3159,7 +3159,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment complice qui leur fait enfin comprendre concrètement ce que tu fais."
       },
@@ -3191,7 +3191,7 @@
         "label": "L'héberger temporairement dans un de tes biens vacants",
         "tag": "prudent",
         "eff": {
-          "cash": 3,
+          "cash": 2,
           "stress": -8
         },
         "out": "Un geste généreux qui soulage immédiatement ton ami."
@@ -3224,7 +3224,7 @@
         "label": "T'inscrire à une formation d'architecture d'intérieur",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -10
         },
         "out": "Une passion retrouvée qui enrichit aussi, indirectement, ton métier."
@@ -3243,7 +3243,7 @@
         "eff": {
           "val": 8,
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une première tentative personnelle, entre amateurisme et vraie fierté."
       }
@@ -3259,7 +3259,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment léger qui désamorce la remarque avec humour."
       },
@@ -3276,7 +3276,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -15,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un effort conscient qui te fait vraiment du bien, et rassure tes proches."
       }
@@ -3292,7 +3292,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un petit plaisir gratuit, sans conséquence sur tes finances."
       },
@@ -3325,7 +3325,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un moment de transmission qui te fait redécouvrir ton métier avec un regard neuf."
       },
@@ -3358,7 +3358,7 @@
         "eff": {
           "personalCash": -25,
           "stress": -10,
-          "cash": 8
+          "cash": 5
         },
         "out": "Un geste généreux qui rassure toute la famille, sans contrepartie attendue."
       },
@@ -3368,7 +3368,7 @@
         "eff": {
           "personalCash": -10,
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un compromis qui aide sans que ce soit un pur don."
       },
@@ -3393,7 +3393,7 @@
         "eff": {
           "personalCash": -15,
           "stress": -10,
-          "cash": 8
+          "cash": 5
         },
         "out": "Une tranquillité d'esprit retrouvée chez toi, enfin sécurisée comme tu le fais pour tes locataires."
       },
@@ -3410,7 +3410,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une prise de conscience utile, qui rééquilibre enfin tes priorités personnelles."
       }
@@ -3434,7 +3434,7 @@
         "tag": "risque",
         "eff": {
           "stress": -3,
-          "cash": 5
+          "cash": 3
         },
         "out": "Tu protèges ton temps, au risque de sembler un peu distant."
       },
@@ -3458,7 +3458,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un moment précieux qui te rappelle d'où tu es parti·e."
       },
@@ -3490,7 +3490,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un moment humain qui te rappelle la fragilité de certains parcours de vie."
       },
@@ -3524,7 +3524,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une conversation honnête qui désamorce une bonne partie du malaise."
       },
@@ -3556,7 +3556,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une pratique qui t'aide à prendre du recul sur ton propre parcours."
       },
@@ -3588,7 +3588,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un moment familial simple, loin de tes tableurs habituels."
       },
@@ -3621,7 +3621,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une conversation sincère qui fait un bien fou."
       },
@@ -3638,7 +3638,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une discussion qui clarifie sincèrement tes priorités."
       }
@@ -3655,7 +3655,7 @@
         "eff": {
           "val": -5,
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une priorité affective qui prime, sans grande conséquence financière."
       },
@@ -3688,7 +3688,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un trait de caractère assumé avec le sourire."
       },
@@ -3705,7 +3705,7 @@
         "tag": "risque",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un effort de déconnexion qui te fait vraiment du bien."
       }
@@ -3722,7 +3722,7 @@
         "eff": {
           "personalCash": -15,
           "stress": -3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un geste familial qui rassure, même sans garantie de retour rapide."
       },
@@ -3731,7 +3731,7 @@
         "tag": "risque",
         "eff": {
           "stress": 5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une décision qui protège tes finances, au prix d'une petite tension."
       },
@@ -3756,7 +3756,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment valorisant, même si ce n'était pas prévu."
       },
@@ -3765,7 +3765,7 @@
         "tag": "risque",
         "eff": {
           "stress": -3,
-          "cash": 4
+          "cash": 2
         },
         "out": "Tu réussis à ramener un peu de légèreté dans la soirée."
       },
@@ -3789,7 +3789,7 @@
         "eff": {
           "stress": -8,
           "personalCash": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une étape importante qui renforce la relation, avec quelques frais d'installation."
       },
@@ -3806,7 +3806,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un compromis qui teste la cohabitation en douceur."
       }
@@ -3822,7 +3822,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une remise en question qui améliore vos échanges par la suite."
       },
@@ -3839,7 +3839,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un effort qui redonne de l'air à cette amitié précieuse."
       }
@@ -3871,7 +3871,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un engagement sincère qui enrichit vraiment ta vie personnelle."
       }
@@ -3888,7 +3888,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une conversation difficile mais nécessaire, qui clarifie les choses."
       },
@@ -3920,7 +3920,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une priorité assumée, avec un peu de culpabilité en prime."
       },
@@ -3954,7 +3954,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment qui les aide à comprendre ce que tu fais vraiment."
       },
@@ -3971,7 +3971,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un moment ludique qui transforme une habitude en vrai moment partagé."
       }
@@ -3987,7 +3987,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -3,
-          "cash": 5
+          "cash": 3
         },
         "out": "Des retrouvailles chaleureuses, teintées d'un vrai coup de main."
       },
@@ -4019,7 +4019,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -18,
-          "cash": 8
+          "cash": 5
         },
         "out": "Un vrai repos qui te fait un bien immense."
       },
@@ -4052,7 +4052,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un cadre simple qui améliore sensiblement votre quotidien à deux."
       },
@@ -4067,7 +4067,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un rituel qui renforce durablement votre relation."
       }
@@ -4100,7 +4100,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -3,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un conseil avisé qui protège la relation sans t'impliquer financièrement."
       }
@@ -4116,7 +4116,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un moment précieux qui te rappelle d'où tu es parti·e."
       },
@@ -4148,7 +4148,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un soutien précieux qui pèse un peu sur ton énergie, mais qui compte vraiment."
       },
@@ -4181,7 +4181,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une conversation sincère qui clarifie ce qui compte vraiment pour vous."
       },
@@ -4213,7 +4213,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une amitié retrouvée qui te fait chaud au cœur."
       },
@@ -4230,7 +4230,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment de retrouvailles qui efface instantanément les années écoulées."
       }
@@ -4245,7 +4245,7 @@
         "label": "T'inscrire à cette formation par pure curiosité",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -10
         },
         "out": "Un vrai bol d'air qui nourrit une autre part de toi-même."
@@ -4279,7 +4279,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une démarche rassurante, quel qu'en soit le résultat."
       },
@@ -4312,7 +4312,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un vrai changement de rythme qui te fait un bien fou."
       },
@@ -4345,7 +4345,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un soutien sincère qui renforce profondément votre relation."
       },
@@ -4377,7 +4377,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une soirée agréable, où le passé reste sagement à sa place."
       },
@@ -4410,7 +4410,7 @@
         "eff": {
           "personalCash": -25,
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un geste généreux qui pourrait changer durablement son parcours."
       },
@@ -4419,7 +4419,7 @@
         "tag": "risque",
         "eff": {
           "stress": 3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une distance qui protège ton épargne, non sans un peu de regret."
       },
@@ -4452,7 +4452,7 @@
         "tag": "risque",
         "eff": {
           "stress": 3,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un soutien moral, sans engagement financier de ta part."
       },
@@ -4476,7 +4476,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une réconciliation qui allège un poids porté depuis trop longtemps."
       },
@@ -4509,7 +4509,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un bonheur immense qui relativise instantanément bien des soucis."
       },
@@ -4542,7 +4542,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une rivalité transformée en bon souvenir partagé."
       },
@@ -4572,7 +4572,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un projet qui t'aide à prendre du recul sur des décennies de parcours."
       },
@@ -4604,7 +4604,7 @@
         "label": "Accepter et bloquer vraiment le temps nécessaire",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -15
         },
         "out": "Un voyage mémorable qui rappelle l'essentiel de l'amitié."
@@ -4639,7 +4639,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une relation qui atteint une nouvelle maturité, précieuse pour vous deux."
       },
@@ -4654,7 +4654,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un rituel qui approfondit durablement votre relation."
       }
@@ -4670,7 +4670,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 5,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une conversation difficile mais salutaire pour la relation."
       },
@@ -4702,7 +4702,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une transmission qui te fait autant de bien qu'à la personne accompagnée."
       },
@@ -4734,7 +4734,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un moment léger qui te fait sourire sur le chemin parcouru."
       },
@@ -4766,7 +4766,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une réflexion qui clarifie ce qui compte vraiment pour la suite."
       },
@@ -4798,7 +4798,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Des retrouvailles qui rouvrent des souvenirs enfouis depuis longtemps."
       },
@@ -4815,7 +4815,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un compromis qui satisfait la curiosité sans trop bouleverser ton présent."
       }
@@ -4832,7 +4832,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un bonheur rare qui donne une perspective toute nouvelle sur ta vie."
       },
@@ -4865,7 +4865,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un temps de recueillement qui t'aide à traverser cette épreuve."
       },
@@ -4898,7 +4898,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une sérénité durable qui change vraiment ton rapport au temps qui reste."
       },
@@ -4931,7 +4931,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un moment de transmission précieux entre générations."
       },
@@ -4961,7 +4961,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une reconnaissance qui valorise sincèrement des décennies de parcours."
       },
@@ -4989,7 +4989,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un vrai bonheur retrouvé, loin du rythme effréné d'avant."
       },
@@ -5021,7 +5021,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un portrait qui inspire sincèrement, bien au-delà de tes seuls chiffres."
       },
@@ -5049,7 +5049,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un lâcher-prise qui t'apporte une vraie tranquillité d'esprit."
       },
@@ -5080,7 +5080,7 @@
         "label": "Organiser ce voyage avec le plus grand soin",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -15
         },
         "out": "Un moment inoubliable qui rassemble sincèrement toute la famille."
@@ -5114,7 +5114,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une paix intérieure rare, après toute une vie de constructions et de choix."
       },
@@ -5146,7 +5146,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un soutien sincère face à un choix de vie audacieux."
       },
@@ -5175,7 +5175,7 @@
         "label": "T'investir sérieusement dans cette nouvelle passion",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -12
         },
         "out": "Un vrai espace de calme qui équilibre bien ta vie bien remplie."
@@ -5208,7 +5208,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un moment de nostalgie douce qui te fait vraiment du bien."
       },
@@ -5240,7 +5240,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une transparence qui rapproche, sans créer de malaise."
       },
@@ -5257,7 +5257,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une fierté partagée qui rapproche vraiment toute la famille."
       }
@@ -5272,7 +5272,7 @@
         "label": "Lui donner un conseil sincère et direct",
         "tag": "prudent",
         "eff": {
-          "cash": 4
+          "cash": 2
         },
         "out": "Un conseil honnête qui pourrait vraiment l'aider."
       },
@@ -5304,7 +5304,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un repos forcé qui, finalement, te fait aussi du bien."
       },
@@ -5353,7 +5353,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un test qui permet de juger avant de s'engager pleinement."
       }
@@ -5369,7 +5369,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un défi qui t'apporte une vraie discipline et un bel accomplissement."
       },
@@ -5401,7 +5401,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une exploration qui nourrit ta réflexion, sans tout bouleverser."
       },
@@ -5433,7 +5433,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un honneur qui te touche sincèrement."
       },
@@ -5466,7 +5466,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un faux pas reconnu qui apaise en partie la déception."
       },
@@ -5474,7 +5474,7 @@
         "label": "Minimiser l'incident",
         "tag": "risque",
         "eff": {
-          "cash": 3
+          "cash": 2
         },
         "out": "Une réaction qui n'aide pas vraiment à réparer la situation."
       },
@@ -5514,7 +5514,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un moment convivial qui amuse tout le monde."
       }
@@ -5531,7 +5531,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un rééquilibrage qui améliore vraiment votre quotidien commun."
       },
@@ -5578,7 +5578,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un partage qui allège vraiment ce poids ancien."
       }
@@ -5595,7 +5595,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un changement qui améliore sensiblement votre relation."
       },
@@ -5642,7 +5642,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un moment inattendu qui te fait vraiment plaisir."
       }
@@ -5658,7 +5658,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une clarification qui évite tout malentendu durable."
       },
@@ -5689,7 +5689,7 @@
         "label": "Prendre rendez-vous sans plus attendre",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -15
         },
         "out": "Une démarche qui t'apporte un vrai soulagement mental."
@@ -5723,7 +5723,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment de douceur qui te fait vraiment du bien."
       },
@@ -5756,7 +5756,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un soutien précieux pendant cette période de doute."
       },
@@ -5764,7 +5764,7 @@
         "label": "Lui suggérer de trouver rapidement une solution",
         "tag": "risque",
         "eff": {
-          "cash": 3
+          "cash": 2
         },
         "out": "Un conseil qui manque peut-être un peu d'empathie."
       },
@@ -5788,7 +5788,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un coup de main précieux qui pourrait vraiment l'aider."
       },
@@ -5796,7 +5796,7 @@
         "label": "L'écouter sans intervenir concrètement",
         "tag": "risque",
         "eff": {
-          "cash": 4
+          "cash": 2
         },
         "out": "Un soutien moral, sans action concrète de ta part."
       },
@@ -5819,7 +5819,7 @@
         "label": "Reprendre une activité physique régulière",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -12
         },
         "out": "Un vrai changement d'habitude qui te fait un bien fou."
@@ -5853,7 +5853,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une réponse honnête qui te fait aussi réfléchir sur ta propre réussite."
       },
@@ -5886,7 +5886,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un engagement qui renforce profondément votre relation."
       },
@@ -5916,7 +5916,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un soutien précieux dans un moment particulièrement dur."
       },
@@ -5924,7 +5924,7 @@
         "label": "Envoyer tes condoléances à distance",
         "tag": "risque",
         "eff": {
-          "cash": 3
+          "cash": 2
         },
         "out": "Un geste correct, mais peut-être un peu distant."
       },
@@ -5962,7 +5962,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un rituel qui structure agréablement la transmission entre générations."
       }
@@ -5978,7 +5978,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un apaisement temporaire, le sujet restant à traiter plus tard."
       },
@@ -6011,7 +6011,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un voyage dans le temps qui te fait voir ton parcours autrement."
       },
@@ -6043,7 +6043,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une vieille rivalité enfin apaisée, pour de bon."
       },
@@ -6076,7 +6076,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Des mots qui comptent énormément pour eux, venant de toi."
       },
@@ -6109,7 +6109,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une conversation longtemps repoussée qui apaise enfin les choses."
       },
@@ -6142,7 +6142,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un vrai moment de paix qui recharge complètement tes batteries."
       },
@@ -6174,7 +6174,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une reconnaissance touchante pour un geste que tu avais presque oublié."
       },
@@ -6205,7 +6205,7 @@
         "label": "Transmettre en douceur, avec un vrai accompagnement",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -15
         },
         "out": "Une transmission réussie qui assure la pérennité de ce projet cher."
@@ -6239,7 +6239,7 @@
         "label": "Organiser ce moment avec le plus grand soin",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -15
         },
         "out": "Une fête mémorable qui rassemble sincèrement toutes les générations."
@@ -6273,7 +6273,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -18,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une paix profonde qui couronne magnifiquement tout ton parcours."
       },
@@ -6305,7 +6305,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une relation ancienne qui reprend vie avec plaisir."
       },
@@ -6322,7 +6322,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment de nostalgie sincère et agréable."
       }
@@ -6337,7 +6337,7 @@
         "label": "T'inscrire à des cours réguliers",
         "tag": "prudent",
         "eff": {
-          "cash": 3,
+          "cash": 2,
           "stress": -8
         },
         "out": "Un vrai projet personnel qui stimule agréablement ton esprit."
@@ -6387,7 +6387,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une discussion qui clarifie une situation sans doute moins grave que tu ne le pensais."
       }
@@ -6404,7 +6404,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 4
+          "cash": 2
         },
         "out": "Un vrai effort qui change positivement l'ambiance des vacances familiales."
       },
@@ -6434,7 +6434,7 @@
         "label": "Garder ce secret précieusement, sans jamais le trahir",
         "tag": "prudent",
         "eff": {
-          "cash": 3
+          "cash": 2
         },
         "out": "Une confiance honorée qui renforce durablement votre amitié."
       },
@@ -6466,7 +6466,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un moment doux qui te fait du bien, sans raison particulière."
       },
@@ -6498,7 +6498,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une réflexion qui clarifie sincèrement ce qui compte encore pour toi."
       },
@@ -6530,7 +6530,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment chaleureux qui ravive de bons souvenirs d'enfance."
       },
@@ -6562,7 +6562,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une gratitude sincère qui renforce cette relation précieuse."
       },
@@ -6592,7 +6592,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 4
+          "cash": 2
         },
         "out": "Une paix intérieure précieuse face au temps qui file."
       },
@@ -6624,7 +6624,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un moment de nostalgie douce, sans conséquence particulière."
       },
@@ -6657,7 +6657,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -15,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un instant précieux qui vaut plus que n'importe quel bien immobilier."
       },
@@ -6688,7 +6688,7 @@
         "label": "Poursuivre sérieusement cette découverte",
         "tag": "prudent",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -10
         },
         "out": "Une passion naissante qui t'apporte un vrai équilibre inattendu."
@@ -6721,7 +6721,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une reconnaissance touchante pour un geste presque oublié."
       },
@@ -6753,7 +6753,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une famille élargie inattendue qui enrichit sincèrement ton histoire."
       },
@@ -6786,7 +6786,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment nostalgique qui ravive joliment vos débuts."
       },
@@ -6819,7 +6819,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -8,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment doux qui te rappelle qui tu étais avant tout ça."
       },
@@ -6868,7 +6868,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une démarche qui aboutit à une rencontre aussi improbable qu'agréable."
       }
@@ -6885,7 +6885,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -5,
-          "cash": 5
+          "cash": 3
         },
         "out": "Une bonne soirée malgré tout, transformée en anecdote familiale."
       },
@@ -6918,7 +6918,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -10,
-          "cash": 5
+          "cash": 3
         },
         "out": "Un moment fort qui rapproche encore votre relation."
       },
@@ -6949,7 +6949,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un moment intime et émouvant face à qui tu étais autrefois."
       },
@@ -6990,7 +6990,7 @@
         "tag": "prudent",
         "eff": {
           "stress": 3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Une envie mise de côté, sans regret excessif."
       },
@@ -7016,7 +7016,7 @@
         "eff": {
           "setSalary": "modest",
           "stress": -3,
-          "cash": 3
+          "cash": 2
         },
         "out": "Un petit filet de sécurité, suffisant pour tenir sans te mettre en danger."
       },
@@ -7025,7 +7025,7 @@
         "eff": {
           "setSalary": "comfortable",
           "stress": -5,
-          "cash": 4
+          "cash": 2
         },
         "out": "Tu respires. Une rémunération correcte qui sécurise ta vie personnelle."
       },
@@ -7047,7 +7047,7 @@
       {
         "label": "Accepter et facturer 25 k€",
         "eff": {
-          "cash": 25,
+          "cash": 15,
           "stress": 8
         },
         "out": "Mission accomplie. 25 k€ rentrent directement dans la tréso."
@@ -7055,7 +7055,7 @@
       {
         "label": "Accepter pour 40 k€ (négocier haut)",
         "eff": {
-          "cash": 40,
+          "cash": 24,
           "stress": 15
         },
         "out": "Ambitieux. Ça passe — mais les nuits ont été courtes."
@@ -7080,7 +7080,7 @@
         "eff": {
           "setSalary": "high",
           "stress": -8,
-          "cash": 4
+          "cash": 2
         },
         "out": "Enfin une rémunération à la hauteur de l'investissement personnel. Le moral remonte."
       },
@@ -7103,7 +7103,7 @@
       {
         "label": "Encaisser les 35 k€ dans la tréso",
         "eff": {
-          "cash": 35
+          "cash": 21
         },
         "out": "Un coup de pouce bienvenu. La trésorerie respire."
       },
@@ -7125,14 +7125,14 @@
       {
         "label": "Encaisser le bonus (20 k€)",
         "eff": {
-          "cash": 20
+          "cash": 12
         },
         "out": "20 k€ directement en tréso. Une récompense méritée."
       },
       {
         "label": "Reinvestir le bonus dans un nouveau bien",
         "eff": {
-          "cash": 5,
+          "cash": 3,
           "val": 30,
           "stress": 8
         },
@@ -7149,7 +7149,7 @@
       {
         "label": "Utiliser les 30 k€ pour la trésorerie",
         "eff": {
-          "cash": 30
+          "cash": 18
         },
         "out": "L'État te rend ce qu'il te devait. La tréso salue."
       },
@@ -7170,7 +7170,7 @@
         "label": "Accepter et facturer au taux fort",
         "tag": "risque",
         "eff": {
-          "cash": 28,
+          "cash": 17,
           "stress": 8
         },
         "out": "Deux semaines intenses, mais la facture est salée — dans le bon sens."
@@ -7179,7 +7179,7 @@
         "label": "Accepter à tarif raisonnable pour construire la relation",
         "tag": "prudent",
         "eff": {
-          "cash": 15,
+          "cash": 9,
           "stress": 3
         },
         "out": "Moins sur le coup, mais une relation durable se construit."
@@ -7203,7 +7203,7 @@
         "label": "Réinjecter en trésorerie d'exploitation",
         "tag": "prudent",
         "eff": {
-          "cash": 22
+          "cash": 13
         },
         "out": "Un coup de pouce bienvenu pour la trésorerie."
       },
@@ -7226,7 +7226,7 @@
         "label": "Encaisser et réinvestir",
         "tag": "risque",
         "eff": {
-          "cash": 35,
+          "cash": 21,
           "stress": 5
         },
         "out": "L'argent rentre et repart aussitôt vers de nouveaux projets."
@@ -7235,7 +7235,7 @@
         "label": "Encaisser et souffler",
         "tag": "prudent",
         "eff": {
-          "cash": 35,
+          "cash": 21,
           "stress": -5
         },
         "out": "Pour une fois, tu profites du fruit de tes efforts."
@@ -7251,7 +7251,7 @@
         "label": "Signer et mobiliser ton équipe",
         "tag": "risque",
         "eff": {
-          "cash": 40,
+          "cash": 24,
           "stress": 12
         },
         "out": "Le contrat est signé. L'argent rentre, la pression aussi."
@@ -7260,7 +7260,7 @@
         "label": "Négocier un périmètre plus réduit pour rester serein",
         "tag": "prudent",
         "eff": {
-          "cash": 20,
+          "cash": 12,
           "stress": 4
         },
         "out": "Moins ambitieux, mais exécuté proprement."
@@ -7269,7 +7269,7 @@
         "label": "Sous-traiter une partie et encaisser la marge",
         "tag": "creatif",
         "eff": {
-          "cash": 28,
+          "cash": 17,
           "stress": 7
         },
         "out": "Tu délègues, tu marges, tu dors mieux."
@@ -7284,7 +7284,7 @@
         "label": "Tout encaisser en trésorerie",
         "tag": "prudent",
         "eff": {
-          "cash": 30
+          "cash": 18
         },
         "out": "La trésorerie prend un beau coup de pouce."
       },
@@ -7292,7 +7292,7 @@
         "label": "Te verser une partie et garder le reste dans la structure",
         "tag": "creatif",
         "eff": {
-          "cash": 18,
+          "cash": 11,
           "personalCash": 12
         },
         "out": "Un équilibre entre toi et ta structure."
@@ -7317,7 +7317,7 @@
         "label": "Encaisser et continuer",
         "tag": "prudent",
         "eff": {
-          "cash": 18
+          "cash": 11
         },
         "out": "De l'argent qui rentre sans effort — le meilleur genre."
       },
@@ -7325,7 +7325,7 @@
         "label": "Réinvestir dans un autre actif",
         "tag": "risque",
         "eff": {
-          "cash": 5,
+          "cash": 3,
           "val": 15,
           "stress": 6
         },
@@ -7342,7 +7342,7 @@
         "label": "Encaisser le remboursement avec intérêts",
         "tag": "prudent",
         "eff": {
-          "cash": 12,
+          "cash": 7,
           "stress": -5
         },
         "out": "La justice a rendu son verdict. Tu récupères ton dû."
@@ -7351,7 +7351,7 @@
         "label": "Faire un don caritatif avec une partie",
         "tag": "creatif",
         "eff": {
-          "cash": 6,
+          "cash": 4,
           "stress": -10
         },
         "out": "Tu gagnes sur les deux tableaux — argent et sérénité."
@@ -7367,7 +7367,7 @@
         "label": "Encaisser la distribution",
         "tag": "prudent",
         "eff": {
-          "cash": 16
+          "cash": 10
         },
         "out": "Un retour sur investissement appréciable."
       },
@@ -7391,7 +7391,7 @@
         "label": "Accepter la mission",
         "tag": "prudent",
         "eff": {
-          "cash": 20,
+          "cash": 12,
           "stress": 5
         },
         "out": "Les honoraires d'expert sont tombés. Travail propre, rémunération nette."
@@ -7415,7 +7415,7 @@
         "label": "Accepter le contrat de speaker",
         "tag": "risque",
         "eff": {
-          "cash": 24,
+          "cash": 14,
           "stress": 8
         },
         "out": "Exigeant mais gratifiant — et rémunérateur."
@@ -7424,7 +7424,7 @@
         "label": "Négocier une seule session pour tester",
         "tag": "prudent",
         "eff": {
-          "cash": 10,
+          "cash": 6,
           "stress": 3
         },
         "out": "Un pied dans la porte, sans surcharger l'agenda."
@@ -7439,7 +7439,7 @@
         "label": "Encaisser le bonus",
         "tag": "prudent",
         "eff": {
-          "cash": 8
+          "cash": 5
         },
         "out": "Un petit extra inattendu — le réseau paie."
       },
@@ -7447,7 +7447,7 @@
         "label": "Partager avec ton ami",
         "tag": "creatif",
         "eff": {
-          "cash": 4,
+          "cash": 2,
           "stress": -4
         },
         "out": "Tu renforces la relation. Le réseau s'en souviendra."
@@ -7463,7 +7463,7 @@
         "label": "Encaisser le chèque",
         "tag": "prudent",
         "eff": {
-          "cash": 14
+          "cash": 8
         },
         "out": "L'assurance joue son rôle. La trésorerie respire."
       },
@@ -7488,7 +7488,7 @@
         "label": "Prendre l'économie en trésorerie",
         "tag": "prudent",
         "eff": {
-          "cash": 12
+          "cash": 7
         },
         "out": "Les coûts baissent, la marge monte."
       },
@@ -7547,7 +7547,7 @@
         "tag": "prudent",
         "eff": {
           "stress": -12,
-          "cash": 5
+          "cash": 3
         },
         "out": "Vous êtes officiellement ensemble. La stabilité fait du bien.",
         "flag": "coupleOfficiel"
@@ -7682,7 +7682,7 @@
         "label": "Trouver un appartement commun (loyer partagé)",
         "tag": "prudent",
         "eff": {
-          "cash": 6,
+          "cash": 4,
           "stress": -10
         },
         "out": "Moins de charges, plus de lien. Vous avancez ensemble.",
@@ -7693,7 +7693,7 @@
         "tag": "creatif",
         "eff": {
           "stress": -5,
-          "cash": 3
+          "cash": 2
         },
         "out": "Pratique mais parfois à l'étroit. L'espace de vie demande adaptation.",
         "flag": "vieTogether"
@@ -8417,7 +8417,7 @@
         "label": "Placer l'argent en sécurité",
         "tag": "prudent",
         "eff": {
-          "cash": 20
+          "cash": 12
         },
         "out": "Sage. Tu laisses cet argent fructifier à ton rythme."
       },
@@ -8425,7 +8425,7 @@
         "label": "Partager avec le reste de la famille",
         "tag": "creatif",
         "eff": {
-          "cash": 8,
+          "cash": 5,
           "stress": -10
         },
         "out": "Un geste généreux. La famille le reconnaît."
@@ -8787,7 +8787,7 @@
         "label": "Autopartage ou transports en commun",
         "tag": "creatif",
         "eff": {
-          "cash": 6,
+          "cash": 4,
           "stress": -3
         },
         "out": "Tu économises et tu décarbonatises. Cohérent avec tes valeurs."
@@ -9191,20 +9191,29 @@
       {
         "label": "Mettre en place une SCI familiale (honoraires 80k€)",
         "tag": "prudent",
-        "eff": { "cash": -80, "stress": -5 },
+        "eff": {
+          "cash": -80,
+          "stress": -5
+        },
         "flag": "hasSCI",
         "out": "La SCI est créée. Tu dors mieux, et tes héritiers aussi."
       },
       {
         "label": "Faire des donations anticipées partielles",
         "tag": "creatif",
-        "eff": { "cash": -40, "valPct": -0.05, "stress": -8 },
+        "eff": {
+          "cash": -40,
+          "valPct": -0.05,
+          "stress": -8
+        },
         "out": "Une partie du patrimoine passe aux enfants. Tu réduis l'exposition fiscale à la succession."
       },
       {
         "label": "Repousser — tu verras ça plus tard",
         "tag": "risque",
-        "eff": { "stress": 8 },
+        "eff": {
+          "stress": 8
+        },
         "out": "L'inquiétude reste. Et les lois fiscales ne s'amélioreront probablement pas."
       }
     ]
@@ -9217,19 +9226,30 @@
       {
         "label": "Payer un médiateur familial et un notaire (60k€)",
         "tag": "prudent",
-        "eff": { "cash": -60, "stress": 10 },
+        "eff": {
+          "cash": -60,
+          "stress": 10
+        },
         "out": "La paix familiale est rétablie, au prix d'une belle facture."
       },
       {
         "label": "Racheter les parts de la branche contestataire",
         "tag": "risque",
-        "eff": { "cash": -120, "valPct": 0.03, "stress": 20 },
+        "eff": {
+          "cash": -120,
+          "valPct": 0.03,
+          "stress": 20
+        },
         "out": "Tu consolides le contrôle, mais à quel prix humain et financier."
       },
       {
         "label": "Vendre un bien pour partager le produit",
         "tag": "creatif",
-        "eff": { "valPct": -0.08, "cash": 30, "stress": -5 },
+        "eff": {
+          "valPct": -0.08,
+          "cash": 18,
+          "stress": -5
+        },
         "out": "Le conflit s'éteint avec la vente. Le patrimoine rétrécit un peu, mais la famille respire."
       }
     ]
@@ -9243,13 +9263,20 @@
       {
         "label": "Payer la contribution patrimoniale anticipée (100k€)",
         "tag": "prudent",
-        "eff": { "cash": -100, "stress": 5 },
+        "eff": {
+          "cash": -100,
+          "stress": 5
+        },
         "out": "Tu sécurises la situation juridique. Coûteux mais prévisible."
       },
       {
         "label": "Contester via un avocat — risque judiciaire",
         "tag": "risque",
-        "eff": { "cash": -30, "cashPct": -0.10, "stress": 18 },
+        "eff": {
+          "cash": -30,
+          "cashPct": -0.1,
+          "stress": 18
+        },
         "out": "Le recours échoue partiellement. Tu paies quand même, plus les frais."
       }
     ]
@@ -9263,13 +9290,18 @@
       {
         "label": "Engager un mandataire professionnel (40k€/an, stress −10)",
         "tag": "prudent",
-        "eff": { "cash": -40, "stress": -10 },
+        "eff": {
+          "cash": -40,
+          "stress": -10
+        },
         "out": "La gestion est fluide. Ça coûte, mais tu délègues sereinement."
       },
       {
         "label": "Gérer en solo malgré les contraintes",
         "tag": "risque",
-        "eff": { "stress": 20 },
+        "eff": {
+          "stress": 20
+        },
         "out": "Épuisant. Les démarches administratives s'accumulent et ta santé en pâtit."
       }
     ]
