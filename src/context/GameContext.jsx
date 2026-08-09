@@ -4,7 +4,8 @@ import { saveGame, loadGame, deleteSave, appendHistory } from '../engine/saveLoa
 import { pushGlobalScore } from '../engine/globalScores.js';
 import { syncActiveGame, removeActiveGame, pushFinishedGame } from '../engine/firebaseGame.js';
 import { removePresence } from '../engine/presence.js';
-import { pushLiveNotification, pushCrimeNotification } from '../engine/liveNotifications.js';
+import { pushLiveNotification } from '../engine/liveNotifications.js';
+import { sendToInbox } from '../engine/firebaseInbox.js';
 import {
   generateMarketListings,
   collectRents,
@@ -935,7 +936,12 @@ export function GameProvider({ children }) {
   useEffect(() => {
     const p = state.pendingCrimeSend;
     if (!p) return;
-    pushCrimeNotification({ targetSessionId: p.targetSessionId, crimeType: p.crimeType, pct: p.pct, attackerCompany: p.attackerCompany });
+    sendToInbox(p.targetSessionId, {
+      kind:            'crime',
+      crimeType:       p.crimeType,
+      pct:             p.pct ?? null,
+      attackerCompany: p.attackerCompany ?? null,
+    });
     dispatch({ type: 'CLEAR_PENDING_CRIME' });
   }, [state.pendingCrimeSend]);
 

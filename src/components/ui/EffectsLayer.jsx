@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffects } from '../../context/EffectsContext.jsx';
 import { useGame } from '../../context/GameContext.jsx';
-import { pushLiveNotification } from '../../engine/liveNotifications.js';
+import { sendToInbox } from '../../engine/firebaseInbox.js';
 
 export default function EffectsLayer({ stress = 0 }) {
   const { effects } = useEffects();
@@ -72,8 +72,8 @@ function LiveToast({ player, action, myName }) {
 
   const handleGreet = (e) => {
     e.stopPropagation();
-    if (!myName || greeted) return;
-    pushLiveNotification({ name: myName, action: `👋 salue ${player.name} !` });
+    if (!myName || greeted || !player?.sessionId) return;
+    sendToInbox(player.sessionId, { kind: 'greet', fromName: myName });
     setGreeted(true);
   };
 

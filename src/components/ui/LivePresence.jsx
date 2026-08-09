@@ -3,7 +3,8 @@ import { useGame } from '../../context/GameContext.jsx';
 import { useEffects } from '../../context/EffectsContext.jsx';
 import { FIREBASE_ENABLED } from '../../engine/firebaseConfig.js';
 import { updatePresence, subscribePresence, SESSION_ID } from '../../engine/presence.js';
-import { subscribeLiveNotifications, pushLiveNotification } from '../../engine/liveNotifications.js';
+import { subscribeLiveNotifications } from '../../engine/liveNotifications.js';
+import { sendToInbox, subscribeInbox } from '../../engine/firebaseInbox.js';
 import { fmtCash } from '../../engine/utils.js';
 
 // ─── Real Firebase presence ──────────────────────────────────────────────────
@@ -68,9 +69,7 @@ function useRealPresence(emit) {
     return unsub;
   }, [emit, state.name]);
 
-  // Subscribe to real game-event notifications (including incoming crimes)
-  // Uses Firebase push keys (seenKeysRef) to deduplicate and a 5s subscribe-time
-  // window to absorb clock skew between browsers without swallowing new notifications.
+  // Public broadcast events (achievements, purchases, etc.) from /notifications
   const seenKeysRef     = useRef(new Set());
   const subscribeTimeRef = useRef(0);
   useEffect(() => {
@@ -79,18 +78,25 @@ function useRealPresence(emit) {
       const toShow = notifs.filter(n =>
         !seenKeysRef.current.has(n._key) &&
         n.sessionId !== SESSION_ID &&
-        n.ts >= subscribeTimeRef.current - 5000   // 5 s buffer absorbs clock skew
+        n.ts >= subscribeTimeRef.current - 5000
       );
-      notifs.forEach(n => seenKeysRef.current.add(n._key)); // mark all as seen
+      notifs.forEach(n => seenKeysRef.current.add(n._key));
       for (const n of toShow) {
-        if (n.isCrime) {
-          if (n.targetSessionId !== SESSION_ID) continue;
-          dispatch({ type: 'RECEIVE_CRIME', payload: { type: n.crimeType, pct: n.pct, attackerCompany: n.attackerCompany } });
-          emit({ type: 'crime', variant: 'victim', crimeType: n.crimeType, attackerCompany: n.attackerCompany ?? null, pct: n.pct });
-          emit({ type: 'flash', color: 'red' });
-        } else {
-          emit({ type: 'live', player: { name: n.name, sessionId: n.sessionId }, action: n.action });
-        }
+        emit({ type: 'live', player: { name: n.name, sessionId: n.sessionId }, action: n.action });
+      }
+    });
+    return unsub;
+  }, [emit]);
+
+  // Targeted events (greetings + crimes) delivered via /inbox/{SESSION_ID}
+  useEffect(() => {
+    const unsub = subscribeInbox((msg) => {
+      if (msg.kind === 'crime') {
+        dispatch({ type: 'RECEIVE_CRIME', payload: { type: msg.crimeType, pct: msg.pct, attackerCompany: msg.attackerCompany } });
+        emit({ type: 'crime', variant: 'victim', crimeType: msg.crimeType, attackerCompany: msg.attackerCompany ?? null, pct: msg.pct });
+        emit({ type: 'flash', color: 'red' });
+      } else if (msg.kind === 'greet') {
+        emit({ type: 'live', player: { name: msg.fromName, sessionId: msg.fromSessionId }, action: '👋 vous salue !' });
       }
     });
     return unsub;
@@ -274,8 +280,8 @@ export default function LivePresence() {
     : { players: [], count: 0 };
 
   const handleGreet = useCallback((player) => {
-    if (!state.name) return;
-    pushLiveNotification({ name: state.name, action: `👋 salue ${player.name} !` });
+    if (!state.name || !player?.sessionId) return;
+    sendToInbox(player.sessionId, { kind: 'greet', fromName: state.name });
   }, [state.name]);
 
   // Emit crime result toast after COMMIT_CRIME resolves

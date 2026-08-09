@@ -26,24 +26,6 @@ export async function pushLiveNotification({ name, action }) {
   }
 }
 
-export async function pushCrimeNotification({ targetSessionId, crimeType, pct, attackerCompany }) {
-  const db = getDb();
-  if (!db || !targetSessionId) return;
-  try {
-    await push(ref(db, 'notifications'), {
-      isCrime:       true,
-      targetSessionId,
-      crimeType,
-      pct:           pct ?? null,
-      attackerCompany: attackerCompany ?? null,
-      ts:            Date.now(),
-      sessionId:     SESSION_ID,
-    });
-  } catch (e) {
-    console.warn('pushCrimeNotification failed', e);
-  }
-}
-
 export function subscribeLiveNotifications(callback) {
   const db = getDb();
   if (!db) return () => {};
