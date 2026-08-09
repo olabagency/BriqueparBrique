@@ -2,13 +2,14 @@ import React from 'react';
 import { useGame } from '../context/GameContext.jsx';
 import { fmtCash, stageFor } from '../engine/utils.js';
 import achievements from '../data/achievements.json';
+import traitsData from '../data/traits.json';
 
 export default function HUD({ onOpenModal, stress: stressProp }) {
   const { state } = useGame();
   const {
     name, companyName, gender, sector,
     year, age, cash, personalCash, stress: stateStress,
-    valuation, propertyList, propertiesOwned,
+    valuation, propertyList, propertiesOwned, traitId,
   } = state;
   const stress = stressProp ?? stateStress ?? 0;
 
@@ -27,6 +28,7 @@ export default function HUD({ onOpenModal, stress: stressProp }) {
   const sectorLabel = companyName
     ? `🏢 ${companyName} — ${sector?.name ?? ''}`
     : `🏢 ${sector?.name ?? ''}`;
+  const trait = traitsData.find(t => t.id === traitId) ?? null;
 
   const hudStressClass = stress >= 90 ? 'hud-stress-critical' : stress >= 70 ? 'hud-stress-high' : '';
 
@@ -35,7 +37,20 @@ export default function HUD({ onOpenModal, stress: stressProp }) {
       <div className="hud-row1">
         <div className="avatar-circle" id="avatarCircle">{avatarEmoji}</div>
         <div className="hud-id">
-          <div className="name" id="hudName">{name ?? '—'}</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div className="name" id="hudName">{name ?? '—'}</div>
+            {trait && (
+              <span
+                data-tip={`${trait.name} — ${trait.desc}`}
+                style={{
+                  fontSize: 13, lineHeight: 1, cursor: 'default',
+                  padding: '1px 5px', borderRadius: 6,
+                  background: 'var(--accent-soft)',
+                  border: '1px solid rgba(31,122,77,.2)',
+                }}
+              >{trait.emoji}</span>
+            )}
+          </div>
           <div className="sector-tag" id="hudSector">{sectorLabel}</div>
         </div>
         <div className="stage-pill" id="hudStage" data-stage={stage}>{stage}</div>

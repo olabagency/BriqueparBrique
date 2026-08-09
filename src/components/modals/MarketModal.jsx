@@ -7,6 +7,8 @@ import propertyData from '../../data/property_data.json';
 import { LOAN_RATE_SCALE, MAX_ACTIVE_LOANS, LTV_MAX_RATIO, NOTAIRE_FEES_PCT } from '../../config.js';
 
 const CYCLE_LABELS = { boom: '🚀 Boom immobilier', hausse: '📈 Marché haussier', neutre: '➡️ Marché neutre', baisse: '📉 Marché baissier', crash: '💥 Krach immobilier' };
+const COND_EMOJI = { bonEtat: '✅', aRenover: '🔨', renove: '⭐', standing: '💎', incendie: '🔥' };
+const ENERGY_COLOR = { A:'#22c55e',B:'#84cc16',C:'#a3e635',D:'#facc15',E:'#fb923c',F:'#f87171',G:'#ef4444' };
 const MIN_APPORT_PCT = 10;
 const TYPE_EMOJI = {
   'Studio':               '🛏️',
@@ -256,30 +258,33 @@ export default function MarketModal({ onClose }) {
         </button>
       </div>
 
-      <div className="market-filters">
-        <button className={`market-filter-chip ${!filter ? 'active' : ''}`} onClick={() => handleFilterChange('')}>Tous</button>
-        {types.map(t => (
-          <button key={t} className={`market-filter-chip ${filter === t ? 'active' : ''}`} onClick={() => handleFilterChange(t)}>{t}</button>
-        ))}
-      </div>
-
-      <div className="market-filters" style={{ marginTop: 0 }}>
-        {PRICE_TIERS.map(tier => {
-          const unlocked = valuation >= tier.unlock;
-          const active = priceTier === tier.id;
-          return (
-            <button
-              key={tier.id}
-              className={`market-filter-chip ${active ? 'active' : ''}`}
-              onClick={() => unlocked && handleTierChange(active ? 'all' : tier.id)}
-              disabled={!unlocked}
-              title={!unlocked ? `Débloqué à ${tier.unlock} k€ de patrimoine` : undefined}
-              style={{ opacity: unlocked ? 1 : 0.4, cursor: unlocked ? 'pointer' : 'not-allowed' }}
-            >
-              {tier.label}{!unlocked && ' 🔒'}
-            </button>
-          );
-        })}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div className="market-filters">
+          <span style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 700, alignSelf: 'center', flexShrink: 0, textTransform: 'uppercase', letterSpacing: '.05em' }}>Type</span>
+          <button className={`market-filter-chip ${!filter ? 'active' : ''}`} onClick={() => handleFilterChange('')}>Tous</button>
+          {types.map(t => (
+            <button key={t} className={`market-filter-chip ${filter === t ? 'active' : ''}`} onClick={() => handleFilterChange(t)}>{t}</button>
+          ))}
+        </div>
+        <div className="market-filters">
+          <span style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 700, alignSelf: 'center', flexShrink: 0, textTransform: 'uppercase', letterSpacing: '.05em' }}>Prix</span>
+          {PRICE_TIERS.map(tier => {
+            const unlocked = valuation >= tier.unlock;
+            const active = priceTier === tier.id;
+            return (
+              <button
+                key={tier.id}
+                className={`market-filter-chip ${active ? 'active' : ''}`}
+                onClick={() => unlocked && handleTierChange(active ? 'all' : tier.id)}
+                disabled={!unlocked}
+                title={!unlocked ? `Débloqué à ${tier.unlock} k€ de patrimoine` : undefined}
+                style={{ opacity: unlocked ? 1 : 0.4, cursor: unlocked ? 'pointer' : 'not-allowed' }}
+              >
+                {tier.label}{!unlocked && ' 🔒'}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Pagination controls */}
@@ -320,8 +325,10 @@ export default function MarketModal({ onClose }) {
           const notaireMin = Math.round(effectivePrice * NOTAIRE_FEES_PCT);
           const canAffordMin = cash >= minApport + notaireMin && loans.length < MAX_ACTIVE_LOANS;
           const condLabel = propertyData.conditionLabels?.[listing.condition] ?? listing.condition;
+          const condEmoji = COND_EMOJI[listing.condition] ?? '';
           const isSelected = selectedId === listing.id;
           const emoji = TYPE_EMOJI[listing.type] ?? '🏠';
+          const dpeClass = listing.energyClass ?? null;
 
           return (
             <div className={`market-grid-card${isSelected ? ' market-grid-card--selected' : ''}`} key={listing.id}>
@@ -356,8 +363,17 @@ export default function MarketModal({ onClose }) {
                     {fmtCash(effectivePrice)}
                   </div>
                   <div className="market-grid-card-meta">📍 {listing.place}</div>
-                  <div className="market-grid-card-meta">
-                    {condLabel}{hasAgent && <span style={{ color: 'var(--accent)', marginLeft: 4, fontWeight: 700 }}>−5%</span>}
+                  <div className="market-grid-card-meta" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+                    <span>{condEmoji} {condLabel}</span>
+                    {dpeClass && (
+                      <span style={{
+                        fontSize: 9, fontWeight: 800, padding: '1px 4px', borderRadius: 3,
+                        background: (ENERGY_COLOR[dpeClass] ?? '#888') + '22',
+                        border: `1px solid ${ENERGY_COLOR[dpeClass] ?? '#888'}`,
+                        color: ENERGY_COLOR[dpeClass] ?? '#888',
+                      }}>DPE {dpeClass}</span>
+                    )}
+                    {hasAgent && <span style={{ color: 'var(--accent)', fontWeight: 700 }}>−5%</span>}
                   </div>
                   <button
                     className="market-listing-buy-btn"

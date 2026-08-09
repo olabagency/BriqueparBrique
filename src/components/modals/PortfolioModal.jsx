@@ -147,44 +147,48 @@ export default function PortfolioModal({ onClose }) {
                 )}
 
                 {/* Actions */}
-                <div style={{ display: 'flex', gap: 5, marginTop: 'auto' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginTop: 'auto' }}>
+                  {/* Renovation row */}
                   {(prop.condition === 'aRenover' || prop.condition === 'incendie') && !prop.rented && !alreadyRenovatedThisYear && (
                     <button
                       className="portfolio-renovate-btn amber"
                       onClick={() => setRenovatingProp(prop)}
-                      style={{ flex: '0 0 auto' }}
+                      style={{ width: '100%' }}
                     >{prop.condition === 'incendie' ? '🔥 Reconstruire' : '🔨 Rénover'}</button>
                   )}
                   {(prop.condition === 'aRenover' || prop.condition === 'incendie') && prop.rented && (
-                    <div style={{ flex: '0 0 auto', fontSize: 9, color: 'var(--amber)', padding: '6px 8px', border: '1px solid var(--amber)', borderRadius: 8, opacity: 0.7 }}>
-                      🔒 Délouer pour rénover
+                    <div style={{ fontSize: 9, color: 'var(--amber)', padding: '5px 8px', border: '1px solid var(--amber)', borderRadius: 8, opacity: 0.7, textAlign: 'center' }}>
+                      🔒 Délouer d'abord pour rénover
                     </div>
                   )}
                   {(prop.condition === 'aRenover' || prop.condition === 'incendie') && !prop.rented && alreadyRenovatedThisYear && (
-                    <div style={{ flex: '0 0 auto', fontSize: 9, color: 'var(--muted)', padding: '6px 8px', border: '1px solid var(--border)', borderRadius: 8, opacity: 0.7 }}>
-                      🔒 Rénové cette année
+                    <div style={{ fontSize: 9, color: 'var(--muted)', padding: '5px 8px', border: '1px solid var(--border)', borderRadius: 8, opacity: 0.7, textAlign: 'center' }}>
+                      🔒 Déjà rénové cette année
                     </div>
                   )}
-                  <button
-                    className="portfolio-renovate-btn"
-                    onClick={() => toggleRent(prop.id)}
-                    disabled={alreadyToggled}
-                    style={{ opacity: alreadyToggled ? 0.4 : 1, cursor: alreadyToggled ? 'not-allowed' : 'pointer', flex: 1 }}
-                  >
-                    {prop.rented ? '🔓 Délouer' : '📬 Louer'}
-                  </button>
-                  <button
-                    className="portfolio-sell-btn"
-                    style={{ flex: 1 }}
-                    onClick={() => {
-                      const msg = prop.rented
-                        ? `Vendre ${prop.type} loué ?\nPrix : ${fmtCash(saleVal)} (−5 % locataire en place)`
-                        : `Vendre ${prop.type} pour ${fmtCash(saleVal)} ?`;
-                      if (window.confirm(msg)) sellProperty(prop.id);
-                    }}
-                  >
-                    Vendre
-                  </button>
+                  {/* Rent + Sell row */}
+                  <div style={{ display: 'flex', gap: 5 }}>
+                    <button
+                      className="portfolio-renovate-btn"
+                      onClick={() => toggleRent(prop.id)}
+                      disabled={alreadyToggled || prop.energyBlocked}
+                      style={{ opacity: (alreadyToggled || prop.energyBlocked) ? 0.4 : 1, cursor: (alreadyToggled || prop.energyBlocked) ? 'not-allowed' : 'pointer', flex: 1 }}
+                    >
+                      {prop.rented ? '🔓 Délouer' : '📬 Louer'}
+                    </button>
+                    <button
+                      className="portfolio-sell-btn"
+                      style={{ flex: 1 }}
+                      onClick={() => {
+                        const msg = prop.rented
+                          ? `Vendre ${prop.type} loué ?\nPrix : ${fmtCash(saleVal)} (−5 % locataire en place)`
+                          : `Vendre ${prop.type} pour ${fmtCash(saleVal)} ?`;
+                        if (window.confirm(msg)) sellProperty(prop.id);
+                      }}
+                    >
+                      Vendre
+                    </button>
+                  </div>
                 </div>
               </div>
             );

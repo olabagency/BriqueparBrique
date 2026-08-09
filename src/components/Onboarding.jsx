@@ -9,12 +9,12 @@ const SECTOR = { id: 'immo', emoji: '🏘️', name: 'Entrepreneur Immobilier', 
 const TOTAL_SLIDES = 4;
 
 const PREVIEW_ITEMS = [
-  { icon: '🏠', text: 'Achetez votre premier studio à 25 000 €' },
-  { icon: '🔨', text: 'Rénovez pour valoriser vos biens' },
-  { icon: '📬', text: 'Louez et percevez des loyers chaque année' },
-  { icon: '📈', text: 'Gérez crédits, salaire et épargne' },
-  { icon: '🎲', text: '534 événements imprévus à traverser' },
-  { icon: '🏆', text: 'Défiez les autres joueurs en temps réel' },
+  { icon: '🏠', text: 'Premier studio dès 25 000 €' },
+  { icon: '🔨', text: 'Rénover pour valoriser' },
+  { icon: '📬', text: 'Louer et percevoir des loyers' },
+  { icon: '📈', text: 'Gérer crédits, salaire, épargne' },
+  { icon: '🎲', text: '950+ événements imprévus' },
+  { icon: '🏆', text: 'Défi multijoueur en temps réel' },
 ];
 
 export default function Onboarding() {
