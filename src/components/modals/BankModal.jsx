@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from '../ui/Modal.jsx';
 import { useGame } from '../../context/GameContext.jsx';
-import { fmtCash } from '../../engine/utils.js';
+import { fmtCash, stageFor, stageMultiplier } from '../../engine/utils.js';
 import { RETIREMENT_MIN_AGE, RETIREMENT_MIN_EQUITY, IFI_BRACKETS } from '../../config.js';
 import { retirementScoreMult } from '../../engine/gameState.js';
 
@@ -61,16 +61,22 @@ function CondRow({ ok, label }) {
   );
 }
 
-const SALARY_LEVELS = [
-  { id: 'none',        label: 'Aucun salaire',   annual: 0,   desc: 'Tout reste en trésorerie' },
-  { id: 'modest',      label: 'Modeste',          annual: 8,   desc: '8 k€/an → épargne perso' },
-  { id: 'comfortable', label: 'Confortable',      annual: 20,  desc: '20 k€/an → épargne perso' },
-  { id: 'high',        label: 'Élevé',            annual: 45,  desc: '45 k€/an → épargne perso' },
+const SALARY_BASE = [
+  { id: 'none',        label: 'Aucun salaire', base: 0  },
+  { id: 'modest',      label: 'Modeste',       base: 8  },
+  { id: 'comfortable', label: 'Confortable',   base: 20 },
+  { id: 'high',        label: 'Élevé',         base: 45 },
 ];
 
 export default function BankModal({ onClose }) {
   const { state, retire, bankWithdraw, bankInject, changeSalary } = useGame();
   const { cash, personalCash, age, bankOpsThisYear = 0, salary = 'none', year = 1, lastSalaryChangeYear = 0 } = state;
+  const scale = stageMultiplier(stageFor(year));
+  const SALARY_LEVELS = SALARY_BASE.map(lvl => ({
+    ...lvl,
+    annual: Math.round(lvl.base * scale),
+    desc: lvl.base === 0 ? 'Tout reste en trésorerie' : `${fmtCash(Math.round(lvl.base * scale))}/an → épargne perso`,
+  }));
   const SALARY_COOLDOWN = 3;
   const canChangeSalary = (year - lastSalaryChangeYear) >= SALARY_COOLDOWN || lastSalaryChangeYear === 0;
 
