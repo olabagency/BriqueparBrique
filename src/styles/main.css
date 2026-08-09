@@ -348,7 +348,7 @@ header.hud{
   border:1px solid var(--border);border-radius:14px;
   padding:8px 14px 7px;width:100%;
   box-shadow:0 2px 0 rgba(0,0,0,.04), 0 6px 14px rgba(34,38,31,.06);
-  position:relative;overflow:hidden;
+  position:relative;overflow:visible;
 }
 header.hud::before{
   content:'';position:absolute;top:0;left:0;right:0;height:3px;

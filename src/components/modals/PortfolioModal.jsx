@@ -7,8 +7,8 @@ import propertyData from '../../data/property_data.json';
 import RenovationModal from './RenovationModal.jsx';
 import WealthChart from '../ui/WealthChart.jsx';
 
-const COND_EMOJI  = { bonEtat: '✅', aRenover: '🔨', renove: '⭐', standing: '💎' };
-const COND_COLOR  = { bonEtat: 'var(--muted)', aRenover: 'var(--red)', renove: 'var(--accent)', standing: 'var(--amber)' };
+const COND_EMOJI  = { bonEtat: '✅', aRenover: '🔨', renove: '⭐', standing: '💎', incendie: '🔥' };
+const COND_COLOR  = { bonEtat: 'var(--muted)', aRenover: 'var(--red)', renove: 'var(--accent)', standing: 'var(--amber)', incendie: 'var(--red)' };
 
 export default function PortfolioModal({ onClose }) {
   const { state, sellProperty, toggleRent } = useGame();
@@ -44,7 +44,7 @@ export default function PortfolioModal({ onClose }) {
                 paddingLeft: i > 0 ? 12 : 0,
               }}>
                 <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 2 }}>{item.label}</div>
-                <div style={{ fontSize: 14, fontWeight: 800, fontFamily: 'monospace', color: item.green ? 'var(--accent)' : item.accent ? 'var(--text)' : 'var(--text)' }}>
+                <div style={{ fontSize: 13, fontWeight: 800, fontFamily: 'monospace', color: item.green ? 'var(--accent)' : 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {item.value}
                 </div>
               </div>
@@ -79,7 +79,7 @@ export default function PortfolioModal({ onClose }) {
                 key={prop.id}
                 style={{
                   background: 'var(--surface2)',
-                  border: `1.5px solid ${prop.rented ? 'var(--accent)' : 'var(--border)'}`,
+                  border: `1.5px solid ${prop.condition === 'incendie' ? 'var(--red)' : prop.rented ? 'var(--accent)' : 'var(--border)'}`,
                   borderRadius: 12, padding: '11px 12px',
                   display: 'flex', flexDirection: 'column', gap: 0,
                 }}
@@ -91,6 +91,8 @@ export default function PortfolioModal({ onClose }) {
                     fontSize: 9, fontWeight: 700, color: condColor,
                     background: 'var(--surface)', border: `1px solid ${condColor}`,
                     borderRadius: 5, padding: '2px 6px', opacity: .85,
+                    whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                    maxWidth: 'calc(100% - 28px)',
                   }}>
                     {condLabel}
                   </span>
@@ -120,19 +122,19 @@ export default function PortfolioModal({ onClose }) {
 
                 {/* Actions */}
                 <div style={{ display: 'flex', gap: 5, marginTop: 'auto' }}>
-                  {prop.condition === 'aRenover' && !prop.rented && !alreadyRenovatedThisYear && (
+                  {(prop.condition === 'aRenover' || prop.condition === 'incendie') && !prop.rented && !alreadyRenovatedThisYear && (
                     <button
                       className="portfolio-renovate-btn amber"
                       onClick={() => setRenovatingProp(prop)}
                       style={{ flex: '0 0 auto' }}
-                    >🔨 Rénover</button>
+                    >{prop.condition === 'incendie' ? '🔥 Reconstruire' : '🔨 Rénover'}</button>
                   )}
-                  {prop.condition === 'aRenover' && prop.rented && (
+                  {(prop.condition === 'aRenover' || prop.condition === 'incendie') && prop.rented && (
                     <div style={{ flex: '0 0 auto', fontSize: 9, color: 'var(--amber)', padding: '6px 8px', border: '1px solid var(--amber)', borderRadius: 8, opacity: 0.7 }}>
                       🔒 Délouer pour rénover
                     </div>
                   )}
-                  {prop.condition === 'aRenover' && !prop.rented && alreadyRenovatedThisYear && (
+                  {(prop.condition === 'aRenover' || prop.condition === 'incendie') && !prop.rented && alreadyRenovatedThisYear && (
                     <div style={{ flex: '0 0 auto', fontSize: 9, color: 'var(--muted)', padding: '6px 8px', border: '1px solid var(--border)', borderRadius: 8, opacity: 0.7 }}>
                       🔒 Rénové cette année
                     </div>

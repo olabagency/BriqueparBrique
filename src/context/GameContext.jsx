@@ -638,7 +638,7 @@ function reducer(state, action) {
           s.propertyList = (s.propertyList ?? []).map(p => {
             if (p.id !== target.id) return p;
             const newVal = Math.round((p.value ?? 0) * (1 - drop));
-            return { ...p, condition: 'aRenover', rented: false, value: newVal, baseValue: newVal };
+            return { ...p, condition: 'incendie', rented: false, value: newVal, baseValue: newVal };
           });
           s.valuation = (s.propertyList ?? []).reduce((sum, p) => sum + (p.value ?? 0), 0);
           s.lastCrimeReceived = { type, propertyLabel: `${target.type} — ${target.place}`, insured, attackerCompany: null };

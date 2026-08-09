@@ -27,6 +27,7 @@ function useRealPresence(emit) {
       stress: state.stress,
       companyName: state.companyName,
       genderEmoji: state.gender?.emoji ?? '🙂',
+      propertiesOwned: (state.propertyList ?? []).length,
       luxuryItems: state.luxuryItems ?? [],
     });
   }, [state.year, state.valuation, state.stress, state.name, state.cash, state.personalCash]);
@@ -44,6 +45,7 @@ function useRealPresence(emit) {
         stress: state.stress,
         companyName: state.companyName,
         genderEmoji: state.gender?.emoji ?? '🙂',
+        propertiesOwned: (state.propertyList ?? []).length,
         luxuryItems: state.luxuryItems ?? [],
       });
     }, 90000);
@@ -108,8 +110,9 @@ function useRealPresence(emit) {
 // ─── Player hover modal ──────────────────────────────────────────────────────
 
 function PlayerHoverModal({ player, myState, dispatch, emit, onClose, onGreet }) {
-  const canCrime  = !myState.crimeUsedThisYear;
-  const cash      = myState.cash ?? 0;
+  const canCrime       = !myState.crimeUsedThisYear;
+  const targetHasProps = (player.propertiesOwned ?? 0) > 0;
+  const cash           = myState.cash ?? 0;
   const val       = myState.valuation ?? 0;
   const insuranceCost = Math.round(15 + val * 0.003);
 
@@ -220,6 +223,10 @@ function PlayerHoverModal({ player, myState, dispatch, emit, onClose, onGreet })
       {myState.crimeUsedThisYear ? (
         <div style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center', padding: '6px 0', marginBottom: 6 }}>
           Une action par an — attends l'année prochaine.
+        </div>
+      ) : !targetHasProps ? (
+        <div style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center', padding: '6px 0', marginBottom: 6 }}>
+          Cette cible n'a aucun bien à attaquer.
         </div>
       ) : (
         <div style={{ display: 'flex', gap: 6, marginBottom: 8 }}>

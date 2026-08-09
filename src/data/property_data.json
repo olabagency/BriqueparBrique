@@ -362,7 +362,8 @@
   "conditionLabels": {
     "aRenover": "À rénover",
     "bonEtat": "Bon état",
-    "renove": "Rénové"
+    "renove": "Rénové",
+    "incendie": "Incendié"
   },
   "baseValues": {
     "Studio Haussmannien": {

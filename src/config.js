@@ -35,7 +35,7 @@ export const GAME_CONFIG = {
   BANK_OPS_PER_YEAR_MAX: 3,
 
   // --- Biens ---
-  PROPERTY_CONDITION_VALUES: { 'aRenover': 0.55, 'bonEtat': 0.85, 'renove': 1.05 },
+  PROPERTY_CONDITION_VALUES: { 'aRenover': 0.55, 'incendie': 0.55, 'bonEtat': 0.85, 'renove': 1.05 },
   PROPERTY_LOAN_RATE: 0.35,
   PROPERTY_LOAN_INTEREST: 0.02,
   PROPERTY_RENT_RATIO: 0.09,

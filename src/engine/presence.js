@@ -35,7 +35,8 @@ export function updatePresence(data) {
     personalCash: data.personalCash ?? 0,
     stress:      data.stress ?? 0,
     companyName: data.companyName ?? '',
-    genderEmoji: data.genderEmoji ?? '🙂',
+    genderEmoji:     data.genderEmoji ?? '🙂',
+    propertiesOwned: data.propertiesOwned ?? 0,
     luxuryItems: (data.luxuryItems ?? []).slice(0, 6).map(i => ({
       id: i.id, name: i.name, icon: i.icon, image: i.image ?? null,
     })),
