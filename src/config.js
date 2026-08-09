@@ -67,6 +67,17 @@ export const GAME_CONFIG = {
   },
   SALARY_REVIEW_INTERVAL: 3,
 
+  // --- IFI (Impôt sur la Fortune Immobilière) progressif ---
+  IFI_BRACKETS: [
+    { min: 0,    max: 200,      rate: 0     },
+    { min: 200,  max: 500,      rate: 0.005 },
+    { min: 500,  max: 1000,     rate: 0.010 },
+    { min: 1000, max: Infinity, rate: 0.018 },
+  ],
+
+  // --- Vieillissement des biens (années sans rénovation avant dégradation) ---
+  PROPERTY_DEGRADE_YEARS: 10,
+
   // --- Taxes foncières ---
   PROPERTY_TAX_RATE: 0.008,   // 0.8 % de la valeur du portefeuille par an
 
@@ -98,8 +109,8 @@ export const GAME_CONFIG = {
   VACANCY_RISK_THRESHOLD: 5,
   VACANCY_RISK_PCT: 0.15,
 
-  // --- 10. Cycle économique sur les loyers ---
-  RENT_CYCLE_MULT: { hausse: 1.05, neutre: 0.95, baisse: 0.75 },
+  // --- 10. Cycle économique sur les loyers (boom/crash ajoutés) ---
+  RENT_CYCLE_MULT: { boom: 1.15, hausse: 1.05, neutre: 0.95, baisse: 0.75, crash: 0.45 },
 
   // --- Fin de partie ---
   RETIREMENT_MIN_AGE: 60,
@@ -136,3 +147,5 @@ export const MANAGEMENT_COST_PCT        = GAME_CONFIG.MANAGEMENT_COST_PCT;
 export const VACANCY_RISK_THRESHOLD     = GAME_CONFIG.VACANCY_RISK_THRESHOLD;
 export const VACANCY_RISK_PCT           = GAME_CONFIG.VACANCY_RISK_PCT;
 export const RENT_CYCLE_MULT            = GAME_CONFIG.RENT_CYCLE_MULT;
+export const IFI_BRACKETS               = GAME_CONFIG.IFI_BRACKETS;
+export const PROPERTY_DEGRADE_YEARS     = GAME_CONFIG.PROPERTY_DEGRADE_YEARS;

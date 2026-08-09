@@ -36,11 +36,22 @@ import {
   MANAGEMENT_COST_PCT,
   VACANCY_RISK_THRESHOLD,
   VACANCY_RISK_PCT,
+  IFI_BRACKETS,
+  PROPERTY_DEGRADE_YEARS,
 } from '../config.js';
 
 const PROPERTY_TYPES  = ['Studio','Appartement T2','Appartement T3','Duplex','Maison','Loft','Immeuble de rapport','Local commercial','Terrain','Parking'];
 const PROPERTY_PLACES = ['rue des Lilas','avenue de la République','quartier des Tanneurs','impasse Voltaire','rue du Vieux-Port','allée des Platanes','quartier de la Gare','rue Saint-Michel','chemin des Vignes','boulevard Gambetta','rue des Acacias','place du Marché'];
 const SALARY_AMOUNTS  = { none: 0, modest: 8, comfortable: 20, high: 45 };
+
+function computeIFI(valuation) {
+  let tax = 0;
+  for (const { min, max, rate } of IFI_BRACKETS) {
+    if (valuation <= min) break;
+    tax += (Math.min(valuation, max) - min) * rate;
+  }
+  return Math.round(tax);
+}
 
 function genPropertyRecord(value) {
   const type  = PROPERTY_TYPES[Math.floor(Math.random() * PROPERTY_TYPES.length)];
@@ -54,6 +65,7 @@ import renovationEvents from '../data/renovation_events.json';
 import tenantEvents from '../data/tenant_events.json';
 import networkEvents from '../data/network_events.json';
 import econEvents from '../data/economic_events.json';
+import catastropheEvents from '../data/events_catastrophe.json';
 import achievements from '../data/achievements.json';
 
 const GameContext = createContext(null);
@@ -207,6 +219,12 @@ function pickEvents(state, count = 3) {
     result.push({ ...econ, _pool: 'economic' });
   }
 
+  // Événements catastrophiques — après année 15, 12% de chance, minimum 3 biens
+  if (state.year >= 15 && (state.propertyList ?? []).length >= 3 && Math.random() < 0.12) {
+    const cat = catastropheEvents[Math.floor(Math.random() * catastropheEvents.length)];
+    result.push({ ...cat, _pool: 'catastrophe' });
+  }
+
   return result;
 }
 
@@ -247,6 +265,11 @@ function reducer(state, action) {
         s.valuation = s.propertyList.reduce((sum, p) => sum + (p.value ?? 0), 0);
       }
 
+      if (eff.cashPct) s.cash = (s.cash ?? 0) + Math.round((s.cash ?? 0) * eff.cashPct);
+      if (eff.valPct && (s.propertyList ?? []).length > 0) {
+        s.propertyList = s.propertyList.map(p => ({ ...p, value: Math.max(1, Math.round((p.value ?? 0) * (1 + eff.valPct))) }));
+        s.valuation = s.propertyList.reduce((sum, p) => sum + (p.value ?? 0), 0);
+      }
       if (eff.cash)         s.cash         = (s.cash ?? 0) + eff.cash;
       if (eff.personalCash) s.personalCash = Math.max(0, (s.personalCash ?? 0) + eff.personalCash);
       if (eff.stress)       s.stress       = clamp((s.stress ?? 0) + eff.stress, 0, STRESS_MAX);
@@ -741,7 +764,7 @@ function advanceYear(state) {
     priorYearsFinance[k] = (s.priorYearsFinance?.[k] ?? 0) + (s.currentYearFinance[k] ?? 0);
   }
   s.priorYearsFinance = priorYearsFinance;
-  s.currentYearFinance = { loyers: 0, ventes: 0, achats: 0, credits: 0, renovations: 0, evenements: 0, banque: 0, patrimoine: 0, taxes: 0, ir: 0, gestion: 0 };
+  s.currentYearFinance = { loyers: 0, ventes: 0, achats: 0, credits: 0, renovations: 0, evenements: 0, banque: 0, patrimoine: 0, taxes: 0, ir: 0, gestion: 0, ifi: 0 };
 
   s.year += 1;
   s.age  += 1;
@@ -750,7 +773,7 @@ function advanceYear(state) {
   s.crimeUsedThisYear = false;
   s.hasInsurance = false;
 
-  s.economicCycle = nextEconomicCycle(s.economicCycle);
+  s.economicCycle = nextEconomicCycle(s.economicCycle, s.year);
 
   // Salary draw (cash → personalCash), scaled by stage
   const salaryBase  = SALARY_AMOUNTS[s.salary ?? s.salaryLevel ?? 'none'] ?? 0;
@@ -793,6 +816,35 @@ function advanceYear(state) {
     s.cash = (s.cash ?? 0) - taxAmount;
     s.currentYearFinance.taxes = (s.currentYearFinance.taxes ?? 0) - taxAmount;
   }
+
+  // IFI progressif (sur la valeur brute du parc)
+  const ifiAmount = computeIFI(s.valuation ?? 0);
+  if (ifiAmount > 0) {
+    s.cash = (s.cash ?? 0) - ifiAmount;
+    s.currentYearFinance.ifi = -(ifiAmount);
+  }
+
+  // Vieillissement des biens : dégradation après PROPERTY_DEGRADE_YEARS sans rénovation
+  let degradedCount = 0;
+  s.propertyList = (s.propertyList ?? []).map(p => {
+    if (p.condition !== 'bonEtat' && p.condition !== 'renove') return p;
+    const lastTouch = Math.max(p.yearPurchased ?? 0, p.lastRenovationYear ?? 0);
+    if ((s.year - lastTouch) >= PROPERTY_DEGRADE_YEARS) {
+      degradedCount++;
+      return { ...p, condition: 'aRenover', rented: false };
+    }
+    return p;
+  });
+
+  // Blocage locatif classes énergie F/G non rénovées depuis 10 ans
+  let energyBlockedCount = 0;
+  s.propertyList = (s.propertyList ?? []).map(p => {
+    if (!['F','G'].includes(p.energyClass ?? '')) return { ...p, energyBlocked: false };
+    const lastTouch = Math.max(p.yearPurchased ?? 0, p.lastRenovationYear ?? 0);
+    const blocked = (s.year - lastTouch) >= 10;
+    if (blocked && p.rented) { energyBlockedCount++; return { ...p, rented: false, energyBlocked: true }; }
+    return { ...p, energyBlocked: blocked };
+  });
 
   // 3. Vacance locative progressive (au-delà du seuil, 15 % de chance/bien)
   let vacanciesLost = 0;

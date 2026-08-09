@@ -9,9 +9,11 @@ import propertyData from '../data/property_data.json';
 import { randInt, shuffleArray } from './utils.js';
 
 const CYCLE_MULT = {
+  boom:   1.25,
   hausse: 1.15,
   neutre: 1.0,
   baisse: 0.85,
+  crash:  0.65,
 };
 
 /**
@@ -34,6 +36,12 @@ function generateListing(cycle) {
 
   const price = Math.round(base * condMult * cycleMult);
 
+  // Energy class: weighted towards lower ratings (most old properties are E-G)
+  const energyWeights = [['A',2],['B',4],['C',10],['D',18],['E',28],['F',23],['G',15]];
+  const totalW = energyWeights.reduce((s,[,w]) => s + w, 0);
+  let rng = Math.random() * totalW, energyClass = 'E';
+  for (const [cls, w] of energyWeights) { rng -= w; if (rng <= 0) { energyClass = cls; break; } }
+
   return {
     id:        crypto.randomUUID(),
     type,
@@ -41,6 +49,7 @@ function generateListing(cycle) {
     condition,
     price,              // ask price in k€
     baseValue: price,   // market value used for rent/loan calc
+    energyClass,
   };
 }
 
@@ -138,7 +147,7 @@ export function amortizeLoans(loans, cash) {
  * @returns {object[]}  updated properties
  */
 export function appreciateProperties(properties, cycle = 'neutre') {
-  const baseDrift = { hausse: 0.05, neutre: 0.02, baisse: -0.03 }[cycle] ?? 0.02;
+  const baseDrift = { boom: 0.12, hausse: 0.05, neutre: 0.02, baisse: -0.03, crash: -0.15 }[cycle] ?? 0.02;
 
   return properties.map((p) => {
     const noise   = (Math.random() - 0.5) * 0.04;
@@ -151,14 +160,17 @@ export function appreciateProperties(properties, cycle = 'neutre') {
 
 /**
  * Pick the next economic cycle randomly.
- * Weighted: neutre 50%, hausse 25%, baisse 25%.
+ * Late game (year >= 15): 8% crash risk, 5% boom.
  * @param {string} current — current cycle
+ * @param {number} year    — current game year
  * @returns {string}
  */
-export function nextEconomicCycle(current) {
+export function nextEconomicCycle(current, year = 1) {
   const r = Math.random();
-  if (r < 0.25) return 'hausse';
-  if (r < 0.50) return 'baisse';
+  if (year >= 15 && r < 0.08) return 'crash';
+  if (r < 0.05) return 'boom';
+  if (r < 0.28) return 'hausse';
+  if (r < 0.55) return 'baisse';
   return 'neutre';
 }
 

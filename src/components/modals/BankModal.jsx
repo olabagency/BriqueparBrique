@@ -2,8 +2,24 @@ import React from 'react';
 import Modal from '../ui/Modal.jsx';
 import { useGame } from '../../context/GameContext.jsx';
 import { fmtCash } from '../../engine/utils.js';
-import { RETIREMENT_MIN_AGE, RETIREMENT_MIN_EQUITY } from '../../config.js';
+import { RETIREMENT_MIN_AGE, RETIREMENT_MIN_EQUITY, IFI_BRACKETS } from '../../config.js';
 import { retirementScoreMult } from '../../engine/gameState.js';
+
+function computeIFI(val) {
+  let tax = 0;
+  for (const { min, max, rate } of IFI_BRACKETS) {
+    if (val <= min) break;
+    tax += (Math.min(val, max) - min) * rate;
+  }
+  return Math.round(tax);
+}
+
+function ifiRate(val) {
+  for (let i = IFI_BRACKETS.length - 1; i >= 0; i--) {
+    if (val > IFI_BRACKETS[i].min) return IFI_BRACKETS[i].rate;
+  }
+  return 0;
+}
 
 const BANK_MAX_OPS = 2;
 const WITHDRAW_FEE = 0.08;
@@ -63,6 +79,8 @@ export default function BankModal({ onClose }) {
 
   const totalLoanBal = (state.loans ?? []).reduce((s, l) => s + (l.balance ?? 0), 0);
   const netEquity    = (state.valuation ?? 0) - totalLoanBal;
+  const ifiAmount    = computeIFI(state.valuation ?? 0);
+  const ifiMargRate  = ifiRate(state.valuation ?? 0);
   const yearsLeft    = Math.max(0, RETIREMENT_MIN_AGE - age);
 
   const condAge     = age >= RETIREMENT_MIN_AGE;
@@ -131,6 +149,19 @@ export default function BankModal({ onClose }) {
           <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}>Compte personnel</div>
         </div>
       </div>
+
+      {/* IFI indicator */}
+      {ifiAmount > 0 && (
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '8px 12px', borderRadius: 8,
+          background: 'rgba(239,68,68,.07)', border: '1px solid rgba(239,68,68,.25)',
+          fontSize: 11,
+        }}>
+          <span style={{ color: 'var(--muted)' }}>🏛️ IFI estimé cette année <span style={{ color: 'var(--red)' }}>({(ifiMargRate * 100).toFixed(1)} % tranche marginale)</span></span>
+          <span style={{ fontFamily: 'monospace', fontWeight: 800, color: 'var(--red)' }}>−{fmtCash(ifiAmount)}</span>
+        </div>
+      )}
 
       {/* Ops counter */}
       <div style={{

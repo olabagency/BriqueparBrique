@@ -73,6 +73,12 @@ export default function PortfolioModal({ onClose }) {
             const netEquity    = baseVal - loanBal;
             const condColor    = COND_COLOR[prop.condition] ?? 'var(--muted)';
             const emoji        = COND_EMOJI[prop.condition] ?? '🏠';
+            const lastTouch    = Math.max(prop.yearPurchased ?? 0, prop.lastRenovationYear ?? 0);
+            const yearsSince   = lastTouch > 0 ? currentYear - lastTouch : null;
+            const agingWarn    = yearsSince !== null && yearsSince >= 7 && (prop.condition === 'bonEtat' || prop.condition === 'renove');
+            const energyClass  = prop.energyClass ?? null;
+            const energyBlocked = prop.energyBlocked ?? false;
+            const ENERGY_COLOR = { A:'#22c55e',B:'#84cc16',C:'#a3e635',D:'#facc15',E:'#fb923c',F:'#f87171',G:'#ef4444' };
 
             return (
               <div
@@ -100,7 +106,27 @@ export default function PortfolioModal({ onClose }) {
 
                 {/* Type + place */}
                 <div style={{ fontSize: 12, fontWeight: 700, lineHeight: 1.2, marginBottom: 2 }}>{prop.type}</div>
-                <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 8 }}>📍 {prop.place}</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 6 }}>
+                  <span style={{ fontSize: 10, color: 'var(--muted)' }}>📍 {prop.place}</span>
+                  {energyClass && (
+                    <span style={{
+                      fontSize: 9, fontWeight: 800, padding: '1px 5px', borderRadius: 4,
+                      background: (ENERGY_COLOR[energyClass] ?? '#888') + '22',
+                      border: `1px solid ${ENERGY_COLOR[energyClass] ?? '#888'}`,
+                      color: ENERGY_COLOR[energyClass] ?? '#888',
+                    }}>DPE {energyClass}</span>
+                  )}
+                </div>
+                {agingWarn && (
+                  <div style={{ fontSize: 9, color: 'var(--amber)', marginBottom: 4 }}>
+                    ⏳ {yearsSince} ans sans rénovation — risque de dégradation
+                  </div>
+                )}
+                {energyBlocked && (
+                  <div style={{ fontSize: 9, color: 'var(--red)', marginBottom: 4 }}>
+                    🚫 Classe {energyClass} — location interdite sans mise aux normes
+                  </div>
+                )}
 
                 {/* Accounting rows */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 3, borderTop: '1px solid var(--border)', paddingTop: 8, marginBottom: 8 }}>

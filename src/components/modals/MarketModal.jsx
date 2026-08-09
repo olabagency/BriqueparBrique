@@ -6,7 +6,7 @@ import { calcLoanPayment } from '../../engine/market.js';
 import propertyData from '../../data/property_data.json';
 import { LOAN_RATE_SCALE, MAX_ACTIVE_LOANS, LTV_MAX_RATIO, NOTAIRE_FEES_PCT } from '../../config.js';
 
-const CYCLE_LABELS = { hausse: '📈 Marché haussier', neutre: '➡️ Marché neutre', baisse: '📉 Marché baissier' };
+const CYCLE_LABELS = { boom: '🚀 Boom immobilier', hausse: '📈 Marché haussier', neutre: '➡️ Marché neutre', baisse: '📉 Marché baissier', crash: '💥 Krach immobilier' };
 const MIN_APPORT_PCT = 10;
 const TYPE_EMOJI = {
   'Studio':               '🛏️',

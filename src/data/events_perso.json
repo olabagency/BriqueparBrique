@@ -9182,5 +9182,96 @@
         "out": "Pas le moment. Mais peut-être qu'on passera à côté de ce qui compte vraiment."
       }
     ]
+  },
+  {
+    "title": "⚖️ Planification successorale urgente",
+    "body": "Un notaire spécialisé te contacte : sans montage successoral, tes héritiers devront payer jusqu'à 45 % de droits sur ton patrimoine immobilier. Il est temps d'agir.",
+    "minAge": 65,
+    "choices": [
+      {
+        "label": "Mettre en place une SCI familiale (honoraires 80k€)",
+        "tag": "prudent",
+        "eff": { "cash": -80, "stress": -5 },
+        "flag": "hasSCI",
+        "out": "La SCI est créée. Tu dors mieux, et tes héritiers aussi."
+      },
+      {
+        "label": "Faire des donations anticipées partielles",
+        "tag": "creatif",
+        "eff": { "cash": -40, "valPct": -0.05, "stress": -8 },
+        "out": "Une partie du patrimoine passe aux enfants. Tu réduis l'exposition fiscale à la succession."
+      },
+      {
+        "label": "Repousser — tu verras ça plus tard",
+        "tag": "risque",
+        "eff": { "stress": 8 },
+        "out": "L'inquiétude reste. Et les lois fiscales ne s'amélioreront probablement pas."
+      }
+    ]
+  },
+  {
+    "title": "👨‍👩‍👧 Litige successoral entre tes héritiers",
+    "body": "Deux membres de ta famille s'opposent ouvertement sur la gestion du patrimoine immobilier après ta retraite prévue. Le conflit s'envenime.",
+    "minAge": 67,
+    "choices": [
+      {
+        "label": "Payer un médiateur familial et un notaire (60k€)",
+        "tag": "prudent",
+        "eff": { "cash": -60, "stress": 10 },
+        "out": "La paix familiale est rétablie, au prix d'une belle facture."
+      },
+      {
+        "label": "Racheter les parts de la branche contestataire",
+        "tag": "risque",
+        "eff": { "cash": -120, "valPct": 0.03, "stress": 20 },
+        "out": "Tu consolides le contrôle, mais à quel prix humain et financier."
+      },
+      {
+        "label": "Vendre un bien pour partager le produit",
+        "tag": "creatif",
+        "eff": { "valPct": -0.08, "cash": 30, "stress": -5 },
+        "out": "Le conflit s'éteint avec la vente. Le patrimoine rétrécit un peu, mais la famille respire."
+      }
+    ]
+  },
+  {
+    "title": "🏛️ Nouvelle loi sur les droits de succession",
+    "body": "Le gouvernement annonce un alourdissement des droits de succession sur les patrimoines immobiliers dépassant 500 k€. Un impôt anticipé peut être négocié.",
+    "minAge": 68,
+    "excludeFlag": "hasSCI",
+    "choices": [
+      {
+        "label": "Payer la contribution patrimoniale anticipée (100k€)",
+        "tag": "prudent",
+        "eff": { "cash": -100, "stress": 5 },
+        "out": "Tu sécurises la situation juridique. Coûteux mais prévisible."
+      },
+      {
+        "label": "Contester via un avocat — risque judiciaire",
+        "tag": "risque",
+        "eff": { "cash": -30, "cashPct": -0.10, "stress": 18 },
+        "out": "Le recours échoue partiellement. Tu paies quand même, plus les frais."
+      }
+    ]
+  },
+  {
+    "title": "💼 Obligation de mandataire pour ton parc",
+    "body": "À ton âge, les banques et les notaires exigent désormais un mandataire légal pour toute décision sur ton parc immobilier si tu n'as pas de structure juridique.",
+    "minAge": 72,
+    "excludeFlag": "hasSCI",
+    "choices": [
+      {
+        "label": "Engager un mandataire professionnel (40k€/an, stress −10)",
+        "tag": "prudent",
+        "eff": { "cash": -40, "stress": -10 },
+        "out": "La gestion est fluide. Ça coûte, mais tu délègues sereinement."
+      },
+      {
+        "label": "Gérer en solo malgré les contraintes",
+        "tag": "risque",
+        "eff": { "stress": 20 },
+        "out": "Épuisant. Les démarches administratives s'accumulent et ta santé en pâtit."
+      }
+    ]
   }
 ]
