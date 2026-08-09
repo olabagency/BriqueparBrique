@@ -2,7 +2,8 @@ import React from 'react';
 import Modal from '../ui/Modal.jsx';
 import { useGame } from '../../context/GameContext.jsx';
 import { fmtCash } from '../../engine/utils.js';
-import { RETIREMENT_MIN_AGE } from '../../config.js';
+import { RETIREMENT_MIN_AGE, RETIREMENT_MIN_EQUITY } from '../../config.js';
+import { retirementScoreMult } from '../../engine/gameState.js';
 
 const BANK_MAX_OPS = 2;
 const WITHDRAW_FEE = 0.08;
@@ -35,6 +36,15 @@ function TransferButton({ label, amount, disabled, onClick, variant = 'neutral' 
   );
 }
 
+function CondRow({ ok, label }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 11 }}>
+      <span style={{ fontSize: 13, lineHeight: 1 }}>{ok ? '✅' : '❌'}</span>
+      <span style={{ color: ok ? 'var(--accent)' : 'var(--muted)' }}>{label}</span>
+    </div>
+  );
+}
+
 const SALARY_LEVELS = [
   { id: 'none',        label: 'Aucun salaire',   annual: 0,   desc: 'Tout reste en trésorerie' },
   { id: 'modest',      label: 'Modeste',          annual: 8,   desc: '8 k€/an → épargne perso' },
@@ -50,8 +60,17 @@ export default function BankModal({ onClose }) {
 
   const opsRemaining = Math.max(0, BANK_MAX_OPS - bankOpsThisYear);
   const canOperate   = opsRemaining > 0;
-  const canRetire    = age >= RETIREMENT_MIN_AGE;
+
+  const totalLoanBal = (state.loans ?? []).reduce((s, l) => s + (l.balance ?? 0), 0);
+  const netEquity    = (state.valuation ?? 0) - totalLoanBal;
   const yearsLeft    = Math.max(0, RETIREMENT_MIN_AGE - age);
+
+  const condAge     = age >= RETIREMENT_MIN_AGE;
+  const condEquity  = netEquity >= RETIREMENT_MIN_EQUITY;
+  const condCash    = (cash ?? 0) >= 0;
+  const canRetire   = condAge && condEquity && condCash;
+
+  const mult = retirementScoreMult(state.year ?? 1);
 
   const handleWithdraw = (pct) => {
     if (!canOperate) { alert("Limite d'opérations bancaires atteinte pour cette année."); return; }
@@ -214,10 +233,24 @@ export default function BankModal({ onClose }) {
 
       {/* Retirement */}
       <div style={{ borderTop: '1px solid var(--border)', paddingTop: 14 }}>
+        <div style={{ fontSize: 11, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: 8, fontWeight: 700 }}>
+          🏖️ Retraite anticipée
+        </div>
+
+        {/* Conditions checklist */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginBottom: 12 }}>
+          <CondRow ok={condAge}
+            label={condAge ? `Âge ≥ ${RETIREMENT_MIN_AGE} ans ✓` : `Âge ${age} ans — encore ${yearsLeft} an${yearsLeft > 1 ? 's' : ''}`} />
+          <CondRow ok={condEquity}
+            label={`Équité nette ≥ ${RETIREMENT_MIN_EQUITY} k€ (actuellement ${Math.round(netEquity)} k€)`} />
+          <CondRow ok={condCash}
+            label={`Trésorerie positive (${Math.round(cash ?? 0)} k€)`} />
+        </div>
+
         {canRetire ? (
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 10 }}>
-              Tu as {age} ans — la retraite est possible. Clôture la partie pour découvrir ton bilan.
+          <div>
+            <div style={{ fontSize: 12, color: 'var(--accent)', fontWeight: 700, textAlign: 'center', marginBottom: 8 }}>
+              ✨ Multiplicateur score × {mult.toFixed(1)} — retraite à {age} ans !
             </div>
             <button
               onClick={handleRetire}
@@ -230,9 +263,8 @@ export default function BankModal({ onClose }) {
             </button>
           </div>
         ) : (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: 'var(--muted)', fontSize: 12 }}>
-            <span style={{ fontSize: 20 }}>🏖️</span>
-            <span>Retraite disponible à {RETIREMENT_MIN_AGE} ans — encore <strong style={{ color: 'var(--text)' }}>{yearsLeft} an{yearsLeft > 1 ? 's' : ''}</strong></span>
+          <div style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center' }}>
+            Remplis les 3 conditions pour pouvoir partir à la retraite.
           </div>
         )}
       </div>

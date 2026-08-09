@@ -42,7 +42,7 @@ export default function HUD({ onOpenModal, stress: stressProp }) {
       </div>
 
       <div className="hud-row2">
-        <span className="mini-stat has-bar" data-tip={`${age ?? 18} ans — retraite possible à 60 ans`}>
+        <span className="mini-stat has-bar" data-tip={`${age ?? 18} ans`}>
           <span className="mi-icon">🎂</span>
           <span className="mi-val mono" id="statAge">{age ?? 18}</span>
           <span className="mi-bar">

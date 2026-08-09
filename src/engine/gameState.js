@@ -74,12 +74,21 @@ export function freshState({ name, companyName, gender, sector, traitId, challen
 }
 
 const ENDING_MULT = {
-  retirement:  1.30,
   age_limit:   1.00,
   fatal_event: 0.90,
   burnout:     0.85,
   insolvency:  0.70,
 };
+
+// Bonus retraite anticipée — plus tôt = plus grand multiplicateur
+function retirementMult(years) {
+  const age = 18 + years;
+  if (age <= 62) return 2.2;
+  if (age <= 67) return 1.8;
+  if (age <= 72) return 1.5;
+  if (age <= 77) return 1.3;
+  return 1.1;
+}
 
 /**
  * Multi-dimensional game score:
@@ -87,7 +96,7 @@ const ENDING_MULT = {
  *  - Efficiency (wealth per year played)
  *  - Achievements (mastery)
  *  - Portfolio size (diversification)
- *  - Ending multiplier (retirement rewarded, bankruptcy penalised)
+ *  - Ending multiplier (early retirement heavily rewarded, bankruptcy penalised)
  */
 export function computeScore({ finalVal = 0, finalCash = 0, personalCash = 0,
                                years = 1, achievements = [], propertiesOwned = 0,
@@ -100,9 +109,11 @@ export function computeScore({ finalVal = 0, finalCash = 0, personalCash = 0,
   const achievementScore = (achievements?.length ?? 0) * 400;
   const portfolioScore  = (propertiesOwned ?? 0) * 120;
 
-  const mult = ENDING_MULT[endingKind] ?? 1.0;
+  const mult = endingKind === 'retirement' ? retirementMult(yrs) : (ENDING_MULT[endingKind] ?? 1.0);
   return Math.max(0, Math.round((wealthScore + efficiencyScore + achievementScore + portfolioScore) * mult));
 }
+
+export function retirementScoreMult(years) { return retirementMult(years); }
 
 export function scoreGrade(score) {
   if (score >= 15000) return { label: 'S+', color: '#C084FC' };

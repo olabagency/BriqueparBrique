@@ -4,7 +4,7 @@ import { fmtCash } from '../engine/utils.js';
 import { loadHistory } from '../engine/saveLoad.js';
 import ThemeToggle from './ui/ThemeToggle.jsx';
 import achievementsDef from '../data/achievements.json';
-import { computeScore, scoreGrade } from '../engine/gameState.js';
+import { computeScore, scoreGrade, retirementScoreMult } from '../engine/gameState.js';
 
 const ENDINGS = {
   burnout: {
@@ -14,8 +14,8 @@ const ENDINGS = {
   },
   retirement: {
     emoji: '🏖️',
-    title: 'Bien mérité !',
-    desc:  'Tu as décidé de lever le pied et de profiter de ce que tu as construit. Félicitations !',
+    title: 'Retraite anticipée !',
+    desc:  null, // built dynamically below
   },
   age_limit: {
     emoji: '🎂',
@@ -41,6 +41,10 @@ export default function End() {
   const history  = loadHistory();
 
   const { name, year, age, valuation, cash, personalCash, achievements = [] } = state;
+  const retireMult = endingId === 'retirement' ? retirementScoreMult(year ?? 1) : null;
+  const retirementDesc = retireMult
+    ? `Tu as pris ta retraite à ${age} ans avec un patrimoine solide. Multiplicateur de score × ${retireMult.toFixed(1)} — plus tôt c'est, plus grand le bonus !`
+    : null;
   const pseudo = name ?? state.pseudo ?? '—';
   const totalWealth = (valuation ?? 0) + (cash ?? 0) + (personalCash ?? 0);
   const propertiesCount = state.propertiesOwned ?? (state.propertyList ?? state.properties ?? []).length;
@@ -58,7 +62,7 @@ export default function End() {
         <div style={{ fontSize: 48 }}>{ending.emoji}</div>
         <span className="eyebrow-pill">{pseudo} · {age} ans · An {year}</span>
         <h2>{ending.title}</h2>
-        <p className="desc">{ending.desc}</p>
+        <p className="desc">{retirementDesc ?? ending.desc}</p>
 
         {/* Score principal */}
         <div style={{

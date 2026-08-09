@@ -21,6 +21,7 @@ import {
   STRESS_MAX,
   GAME_OVER_MAX_AGE,
   RETIREMENT_MIN_AGE,
+  RETIREMENT_MIN_EQUITY,
   STAGE_MULTIPLIERS,
   PROPERTY_TAX_RATE,
   LOAN_RATE_SCALE,
@@ -448,7 +449,7 @@ function reducer(state, action) {
     }
 
     case 'RENOVATE_PROPERTY': {
-      const { propertyId, costPct, gainPct, keepUnrenovated, stress: renoStress } = action.payload;
+      const { propertyId, costPct, gainPct, keepUnrenovated, stress: renoStress, targetCondition } = action.payload;
       const s = { ...state };
       const props = [...(s.propertyList ?? [])];
       const idx = props.findIndex(p => p.id === propertyId);
@@ -461,7 +462,7 @@ function reducer(state, action) {
       prop.lastRenovationYear = state.year;
       if (!keepUnrenovated) {
         prop.value = (prop.value ?? prop.baseValue ?? 0) + gain;
-        prop.condition = 'renove';
+        prop.condition = targetCondition ?? 'renove';
         s.flags = { ...s.flags, everRenovated: true };
       }
       if (renoStress) s.stress = clamp((s.stress ?? 0) + renoStress, 0, STRESS_MAX);
@@ -678,6 +679,10 @@ function reducer(state, action) {
 
     case 'RETIRE': {
       if (state.age < RETIREMENT_MIN_AGE) return state;
+      const totalLoanBal = (state.loans ?? []).reduce((s, l) => s + (l.balance ?? 0), 0);
+      const netEquity = (state.valuation ?? 0) - totalLoanBal;
+      if (netEquity < RETIREMENT_MIN_EQUITY) return state;
+      if ((state.cash ?? 0) < 0) return state;
       const newState = { ...state, over: true, endingKind: 'retirement' };
       newState.achievements = checkAchievements(newState);
       const summary = buildRunSummary(newState);
