@@ -487,6 +487,10 @@ function reducer(state, action) {
         prop.value = (prop.value ?? prop.baseValue ?? 0) + gain;
         prop.condition = targetCondition ?? 'renove';
         s.flags = { ...s.flags, everRenovated: true };
+        // Rénovation améliore la classe énergie (F→D, G→E)
+        if (prop.energyClass === 'F') prop.energyClass = 'D';
+        else if (prop.energyClass === 'G') prop.energyClass = 'E';
+        prop.energyBlocked = false;
       }
       if (renoStress) s.stress = clamp((s.stress ?? 0) + renoStress, 0, STRESS_MAX);
       props[idx] = prop;
@@ -719,9 +723,10 @@ function reducer(state, action) {
     }
 
     case 'REFRESH_MARKET': {
+      const hasNotaire = (state.contacts ?? []).includes('notaire');
       return {
         ...state,
-        marketListings: generateMarketListings(state.economicCycle, 18),
+        marketListings: generateMarketListings(state.economicCycle, 18, hasNotaire ? 6 : 0),
       };
     }
 
@@ -941,8 +946,8 @@ function advanceYear(state) {
     activeLoans: (s.loans ?? []).length,
   };
 
-  const listingCount = contacts.includes('notaire') ? 24 : 18;
-  s.marketListings = generateMarketListings(s.economicCycle, listingCount);
+  const hasNotaire = contacts.includes('notaire');
+  s.marketListings = generateMarketListings(s.economicCycle, 18, hasNotaire ? 6 : 0);
   s.pendingEvents = pickEvents(s, s.eventsPerYear ?? 3);
   s.currentEventIndex = 0;
 

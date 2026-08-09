@@ -77,7 +77,7 @@ export default function PortfolioModal({ onClose }) {
             const yearsSince   = lastTouch > 0 ? currentYear - lastTouch : null;
             const agingWarn    = yearsSince !== null && yearsSince >= 7 && (prop.condition === 'bonEtat' || prop.condition === 'renove');
             const energyClass  = prop.energyClass ?? null;
-            const energyBlocked = prop.energyBlocked ?? false;
+            const energyBlocked = prop.energyBlocked || prop.energyClass === 'F' || prop.energyClass === 'G';
             const ENERGY_COLOR = { A:'#22c55e',B:'#84cc16',C:'#a3e635',D:'#facc15',E:'#fb923c',F:'#f87171',G:'#ef4444' };
 
             return (
@@ -122,9 +122,9 @@ export default function PortfolioModal({ onClose }) {
                     ⏳ {yearsSince} ans sans rénovation — risque de dégradation
                   </div>
                 )}
-                {energyBlocked && (
+                {energyBlocked && !prop.rented && (
                   <div style={{ fontSize: 9, color: 'var(--red)', marginBottom: 4 }}>
-                    🚫 Classe {energyClass} — location interdite sans mise aux normes
+                    🚫 DPE {energyClass} — location interdite · rénover pour débloquer
                   </div>
                 )}
 
@@ -171,8 +171,9 @@ export default function PortfolioModal({ onClose }) {
                     <button
                       className="portfolio-renovate-btn"
                       onClick={() => toggleRent(prop.id)}
-                      disabled={alreadyToggled || prop.energyBlocked}
-                      style={{ opacity: (alreadyToggled || prop.energyBlocked) ? 0.4 : 1, cursor: (alreadyToggled || prop.energyBlocked) ? 'not-allowed' : 'pointer', flex: 1 }}
+                      disabled={alreadyToggled || energyBlocked}
+                      style={{ opacity: (alreadyToggled || energyBlocked) ? 0.4 : 1, cursor: (alreadyToggled || energyBlocked) ? 'not-allowed' : 'pointer', flex: 1 }}
+                      title={energyBlocked ? `DPE ${energyClass} — location interdite sans rénovation énergétique` : undefined}
                     >
                       {prop.rented ? '🔓 Délouer' : '📬 Louer'}
                     </button>

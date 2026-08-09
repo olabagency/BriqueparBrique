@@ -53,16 +53,30 @@ function generateListing(cycle) {
   };
 }
 
+function generateOffMarketListing(cycle) {
+  const listing = generateListing(cycle);
+  // Off-market: 8-14% below ask price (negotiated privately)
+  const discount = 0.08 + Math.random() * 0.06;
+  listing.price = Math.round(listing.price * (1 - discount));
+  listing.baseValue = listing.price;
+  listing.offMarket = true;
+  return listing;
+}
+
 /**
  * Generate a fresh set of market listings.
- * @param {string} cycle   economic cycle
- * @param {number} count   number of listings to generate
+ * @param {string} cycle         economic cycle
+ * @param {number} count         number of listings to generate
+ * @param {number} offMarketCount extra off-market listings (notaire)
  * @returns {object[]}
  */
-export function generateMarketListings(cycle = 'neutre', count = 6) {
+export function generateMarketListings(cycle = 'neutre', count = 6, offMarketCount = 0) {
   const listings = [];
   for (let i = 0; i < count; i++) {
     listings.push(generateListing(cycle));
+  }
+  for (let i = 0; i < offMarketCount; i++) {
+    listings.push(generateOffMarketListing(cycle));
   }
   return listings;
 }

@@ -11,9 +11,16 @@ const COND_EMOJI = {
 
 const MAX_VISIBLE = 10;
 
+const CONTACT_INFO = {
+  agent_immo:       { emoji: '🏡', label: 'Agent immobilier', desc: '−5% sur tous les biens du marché' },
+  courtier:         { emoji: '💳', label: 'Courtier',          desc: 'Économise sur les intérêts chaque année' },
+  expert_comptable: { emoji: '📊', label: 'Expert-comptable', desc: 'Réduit les impôts annuels' },
+  notaire:          { emoji: '📜', label: 'Notaire',           desc: 'Accès aux biens off-market 🔑' },
+};
+
 export default function LeftSidebar({ onOpenModal }) {
   const { state } = useGame();
-  const { propertyList = [], valuation = 0, personalCash = 0, cash = 0, luxuryItems = [] } = state;
+  const { propertyList = [], valuation = 0, personalCash = 0, cash = 0, luxuryItems = [], contacts = [] } = state;
 
   const totalWealth = valuation + personalCash + cash;
   const luxuryVal = luxuryItems.reduce((s, i) => s + (i.currentValue ?? i.price ?? 0), 0);
@@ -128,6 +135,36 @@ export default function LeftSidebar({ onOpenModal }) {
         >
           🛍️ Boutique
         </button>
+
+        {contacts.length > 0 && (
+          <div style={{ marginTop: 10 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: 6 }}>
+              🤝 Mes contacts
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              {contacts.map(id => {
+                const info = CONTACT_INFO[id];
+                if (!info) return null;
+                return (
+                  <div
+                    key={id}
+                    data-tip={info.desc}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 6,
+                      fontSize: 11, padding: '4px 6px',
+                      background: 'var(--accent-soft)', borderRadius: 6,
+                      border: '1px solid rgba(31,122,77,.2)',
+                      cursor: 'default',
+                    }}
+                  >
+                    <span>{info.emoji}</span>
+                    <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{info.label}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

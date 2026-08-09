@@ -356,8 +356,24 @@ export default function MarketModal({ onClose }) {
                 </>
               ) : (
                 <>
-                  <div className="market-grid-card-emoji">{emoji}</div>
-                  <div className="market-grid-card-type">{listing.type}</div>
+                  <div style={{ position: 'relative' }}>
+                    <div className="market-grid-card-emoji">{emoji}</div>
+                    {listing.offMarket && (
+                      <span
+                        data-tip="Bien off-market : négocié en direct via ton notaire, prix inférieur au marché"
+                        style={{
+                          position: 'absolute', top: 0, right: 0,
+                          fontSize: 14, cursor: 'default',
+                          background: 'var(--accent-soft)', borderRadius: 6,
+                          padding: '1px 4px', border: '1px solid rgba(31,122,77,.3)',
+                        }}
+                      >🔑</span>
+                    )}
+                  </div>
+                  <div className="market-grid-card-type" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
+                    {listing.type}
+                    {listing.offMarket && <span style={{ fontSize: 9, color: 'var(--accent)', fontWeight: 700 }}>OFF-MARKET</span>}
+                  </div>
                   <div className="market-grid-card-price">
                     {hasAgent && <span style={{ textDecoration: 'line-through', opacity: .5, marginRight: 4, fontSize: 11 }}>{fmtCash(basePrice)}</span>}
                     {fmtCash(effectivePrice)}
