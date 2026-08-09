@@ -148,17 +148,17 @@ export default function LeftSidebar({ onOpenModal }) {
                 return (
                   <div
                     key={id}
-                    data-tip={info.desc}
                     style={{
-                      display: 'flex', alignItems: 'center', gap: 6,
-                      fontSize: 11, padding: '4px 6px',
+                      fontSize: 11, padding: '5px 7px',
                       background: 'var(--accent-soft)', borderRadius: 6,
                       border: '1px solid rgba(31,122,77,.2)',
-                      cursor: 'default',
                     }}
                   >
-                    <span>{info.emoji}</span>
-                    <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{info.label}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                      <span>{info.emoji}</span>
+                      <span style={{ color: 'var(--accent)', fontWeight: 700 }}>{info.label}</span>
+                    </div>
+                    <div style={{ fontSize: 9, color: 'var(--muted)', marginTop: 2, lineHeight: 1.3 }}>{info.desc}</div>
                   </div>
                 );
               })}

@@ -350,8 +350,11 @@ header.hud{
   border:1px solid var(--border);border-radius:14px;
   padding:8px 14px 7px;width:100%;
   box-shadow:0 2px 0 rgba(0,0,0,.04), 0 6px 14px rgba(34,38,31,.06);
-  position:relative;overflow:visible;
+  position:relative;overflow:visible;z-index:500;
 }
+/* Tooltip in HUD opens rightward to avoid left sidebar */
+header.hud [data-tip]:hover::after{left:0;transform:none;white-space:normal;max-width:220px;}
+header.hud [data-tip]:hover::before{left:12px;transform:none;}
 header.hud::before{
   content:'';position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg, var(--accent), var(--blue), var(--perso), var(--amber));

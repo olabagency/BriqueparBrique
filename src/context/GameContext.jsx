@@ -16,7 +16,7 @@ import {
   calcRent,
 } from '../engine/market.js';
 import { applyTraitEffect } from '../engine/traitEffect.js';
-import { clamp, shuffleArray, stageFor, stageMultiplier } from '../engine/utils.js';
+import { clamp, shuffleArray, stageFor, stageMultiplier, fmtCash } from '../engine/utils.js';
 import {
   STRESS_MAX,
   GAME_OVER_MAX_AGE,
@@ -950,6 +950,24 @@ function advanceYear(state) {
   s.marketListings = generateMarketListings(s.economicCycle, 18, hasNotaire ? 6 : 0);
   s.pendingEvents = pickEvents(s, s.eventsPerYear ?? 3);
   s.currentEventIndex = 0;
+
+  // Salary review every 5 years
+  if (s.year % 5 === 0) {
+    const stageScale = STAGE_MULTIPLIERS[stageFor(s.year)] ?? 1;
+    const amt = (base) => fmtCash(Math.round(base * stageScale));
+    const salaryReview = {
+      id: `salary_review_y${s.year}`,
+      title: '💼 Révision de ta rémunération',
+      body: `Tous les 5 ans, tu réévalues ta rémunération. Quel salaire vas-tu te verser cette année ? Il sera prélevé chaque année sur la trésorerie de ta société.`,
+      choices: [
+        { label: `Aucun salaire`, out: 'Tu renonces à tout salaire. Toute la trésorerie reste dans la société.', eff: { setSalary: 'none' } },
+        { label: `Modeste — ${amt(8)}/an`, out: 'Un petit salaire pour assurer le minimum.', eff: { setSalary: 'modest' } },
+        { label: `Confortable — ${amt(20)}/an`, out: 'Un beau salaire pour vivre sereinement.', eff: { setSalary: 'comfortable' } },
+        { label: `Élevé — ${amt(45)}/an`, out: 'Tu te verses un salaire généreux. La trésorerie sera mise à contribution.', eff: { setSalary: 'high' } },
+      ],
+    };
+    s.pendingEvents = [salaryReview, ...s.pendingEvents];
+  }
 
   // Insolvency check: cash below what can be mobilised (30% of portfolio + personal savings)
   const insolvencyThreshold = Math.min(-50, -((s.valuation ?? 0) * 0.3 + (s.personalCash ?? 0)));

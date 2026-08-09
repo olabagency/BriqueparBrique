@@ -41,14 +41,15 @@ export default function HUD({ onOpenModal, stress: stressProp }) {
             <div className="name" id="hudName">{name ?? '—'}</div>
             {trait && (
               <span
-                data-tip={`${trait.name} — ${trait.desc}`}
+                data-tip={trait.desc}
                 style={{
-                  fontSize: 13, lineHeight: 1, cursor: 'default',
-                  padding: '1px 5px', borderRadius: 6,
+                  fontSize: 10, fontWeight: 700, lineHeight: 1, cursor: 'default',
+                  padding: '2px 6px', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 3,
                   background: 'var(--accent-soft)',
                   border: '1px solid rgba(31,122,77,.2)',
+                  color: 'var(--accent)', flexShrink: 0,
                 }}
-              >{trait.emoji}</span>
+              >{trait.emoji} {trait.name}</span>
             )}
           </div>
           <div className="sector-tag" id="hudSector">{sectorLabel}</div>

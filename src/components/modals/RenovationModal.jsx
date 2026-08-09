@@ -141,29 +141,16 @@ function NormalRenovationModal({ property, onClose }) {
       <p className="body-text" style={{ marginBottom: 12 }}>{event.body}</p>
 
       <div className="choices">
-        {event.choices.map((choice, i) => {
-          const cost = Math.round(propVal * choice.costPct);
-          const gain = Math.round(propVal * choice.gainPct);
-          const net  = gain - cost;
-          return (
-            <button
-              key={i}
-              className="choice-card choice-card-animated"
-              style={{ animationDelay: `${i * 80}ms`, textAlign: 'left' }}
-              onClick={() => handleChoice(choice)}
-            >
-              <div style={{ fontWeight: 600 }}>{choice.label}</div>
-              <div style={{ display: 'flex', gap: 10, marginTop: 6, fontSize: 11, flexWrap: 'wrap' }}>
-                <span style={{ color: 'var(--red)' }}>💸 −{fmtCash(cost)}</span>
-                {gain > 0 && <span style={{ color: 'var(--accent)' }}>📈 +{fmtCash(gain)}</span>}
-                <span style={{ color: net >= 0 ? 'var(--accent)' : 'var(--red)', fontWeight: 700 }}>
-                  net {net >= 0 ? '+' : ''}{fmtCash(net)}
-                </span>
-                {choice.keepUnrenovated && <span style={{ color: 'var(--amber)' }}>⚠️ reste à rénover</span>}
-              </div>
-            </button>
-          );
-        })}
+        {event.choices.map((choice, i) => (
+          <button
+            key={i}
+            className="choice-card choice-card-animated"
+            style={{ animationDelay: `${i * 80}ms` }}
+            onClick={() => handleChoice(choice)}
+          >
+            {choice.label}
+          </button>
+        ))}
       </div>
     </Modal>
   );

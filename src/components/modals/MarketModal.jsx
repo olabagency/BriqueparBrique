@@ -375,7 +375,7 @@ export default function MarketModal({ onClose }) {
                     {listing.offMarket && <span style={{ fontSize: 9, color: 'var(--accent)', fontWeight: 700 }}>OFF-MARKET</span>}
                   </div>
                   <div className="market-grid-card-price">
-                    {hasAgent && <span style={{ textDecoration: 'line-through', opacity: .5, marginRight: 4, fontSize: 11 }}>{fmtCash(basePrice)}</span>}
+                    {listing.offMarket && <span style={{ textDecoration: 'line-through', opacity: .5, marginRight: 4, fontSize: 11 }}>{fmtCash(basePrice)}</span>}
                     {fmtCash(effectivePrice)}
                   </div>
                   <div className="market-grid-card-meta">📍 {listing.place}</div>

@@ -107,7 +107,7 @@ export default function LuxuryShopModal({ onClose }) {
 
       {tab === 'shop' && (
         <>
-          <div className="market-filters" style={{ marginBottom: 10 }}>
+          <div className="market-filters" style={{ marginBottom: 10, flexWrap: 'wrap' }}>
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
