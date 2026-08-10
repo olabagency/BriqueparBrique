@@ -11,7 +11,7 @@ function getProgress(ach, state) {
 
   switch (checkType) {
     case 'propertiesOwned': {
-      const cur = state.propertiesOwned ?? 0;
+      const cur = (state.propertyList?.length) ?? (state.propertiesOwned ?? 0);
       return {
         pct: Math.min(1, cur / checkValue),
         label: `${cur} / ${checkValue} biens`,

@@ -82,7 +82,7 @@ function evalAchievement(ach, state) {
   const props = state.propertyList ?? [];
   const loans = state.loans ?? [];
   switch (ach.checkType) {
-    case 'propertiesOwned':   return (state.propertiesOwned ?? props.length) >= ach.checkValue;
+    case 'propertiesOwned':   return props.length >= ach.checkValue;
     case 'valuation':         return state.valuation >= ach.checkValue;
     case 'stressBelow':       return state.stress <= ach.checkValue;
     case 'flag':              return !!state.flags?.[ach.checkFlag];
@@ -470,6 +470,7 @@ function reducer(state, action) {
         ...s,
         cash: (s.cash ?? 0) + cashGain,
         propertyList: props,
+        propertiesOwned: props.length,
         loans,
         valuation: props.reduce((sum, p) => sum + (p.value ?? 0), 0),
         currentYearFinance: { ...s.currentYearFinance, ventes: (s.currentYearFinance?.ventes ?? 0) + cashGain },
@@ -918,7 +919,7 @@ function advanceYear(state) {
   if (!s.flags?.billionaireBefore45 && s.valuation >= 10000 && s.age < 45) {
     s.flags = { ...s.flags, billionaireBefore45: true };
   }
-  if (!s.flags?.twentyPropsBefore50 && (s.propertiesOwned ?? 0) >= 20 && s.age < 50) {
+  if (!s.flags?.twentyPropsBefore50 && (s.propertyList ?? []).length >= 20 && s.age < 50) {
     s.flags = { ...s.flags, twentyPropsBefore50: true };
   }
 
