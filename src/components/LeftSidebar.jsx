@@ -11,21 +11,21 @@ const COND_EMOJI = {
 
 const MAX_VISIBLE = 10;
 
-const CONTACT_INFO = {
-  agent_immo:             { emoji: '🏡', label: 'Agent immobilier',         desc: '−5% sur tous les biens du marché' },
-  courtier:               { emoji: '💳', label: 'Courtier',                  desc: 'Économise sur les intérêts chaque année' },
-  expert_comptable:       { emoji: '📊', label: 'Expert-comptable',          desc: 'Réduit les impôts annuels' },
-  notaire:                { emoji: '📜', label: 'Notaire',                   desc: 'Accès aux biens off-market 🔑' },
-  gestionnaire_patrimoine:{ emoji: '📈', label: 'Gestionnaire de patrimoine',desc: '−20% sur l\'IFI annuel' },
-  banquier_prive:         { emoji: '🏦', label: 'Banquier privé',            desc: '−0,5% sur les taux de crédit' },
-  architecte_interieur:   { emoji: '🎨', label: 'Architecte d\'intérieur',   desc: '+15% sur les gains de rénovation' },
-  promoteur:              { emoji: '🏗️', label: 'Promoteur immobilier',      desc: '+12k€/an de commissions partagées' },
-  chasseur_exception:     { emoji: '💎', label: 'Chasseur d\'exception',     desc: 'Accès aux biens >50M€ en exclusivité' },
-};
+const ALL_CONTACTS = [
+  { id: 'agent_immo',             emoji: '🏡', label: 'Agent immobilier',          desc: '−5% sur tous les biens du marché',       minYear: 3  },
+  { id: 'courtier',               emoji: '💳', label: 'Courtier',                   desc: 'Économise sur les intérêts chaque année', minYear: 3  },
+  { id: 'expert_comptable',       emoji: '📊', label: 'Expert-comptable',           desc: 'Réduit les impôts annuels',               minYear: 3  },
+  { id: 'notaire',                emoji: '📜', label: 'Notaire',                    desc: 'Biens off-market 🔑 en avant-première',   minYear: 3  },
+  { id: 'gestionnaire_patrimoine',emoji: '📈', label: 'Gestionnaire de patrimoine', desc: '−20% sur l\'IFI annuel',                  minYear: 30 },
+  { id: 'banquier_prive',         emoji: '🏦', label: 'Banquier privé',             desc: '−0,5% sur les taux de crédit',            minYear: 30 },
+  { id: 'architecte_interieur',   emoji: '🎨', label: 'Architecte d\'intérieur',    desc: '+15% sur les gains de rénovation',        minYear: 30 },
+  { id: 'promoteur',              emoji: '🏗️', label: 'Promoteur immobilier',       desc: '+12k€/an de revenus passifs',             minYear: 30 },
+  { id: 'chasseur_exception',     emoji: '💎', label: 'Chasseur d\'exception',      desc: 'Accès aux biens >50M€ en exclusivité',    minYear: 40 },
+];
 
 export default function LeftSidebar({ onOpenModal }) {
   const { state } = useGame();
-  const { propertyList = [], valuation = 0, personalCash = 0, cash = 0, luxuryItems = [], contacts = [] } = state;
+  const { propertyList = [], valuation = 0, personalCash = 0, cash = 0, luxuryItems = [], contacts = [], year = 1 } = state;
 
   const totalWealth = valuation + personalCash + cash;
   const luxuryVal = luxuryItems.reduce((s, i) => s + (i.currentValue ?? i.price ?? 0), 0);
@@ -141,24 +141,23 @@ export default function LeftSidebar({ onOpenModal }) {
           🛍️ Boutique
         </button>
 
-        {contacts.length > 0 && (
-          <div style={{ marginTop: 10 }}>
-            <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: 6 }}>
-              🤝 Mes contacts
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {contacts.map(id => {
-                const info = CONTACT_INFO[id];
-                if (!info) return null;
+        <div style={{ marginTop: 10 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: 6 }}>
+            🤝 Réseau
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            {ALL_CONTACTS.map(info => {
+              const isActive = contacts.includes(info.id);
+              const isAvailable = year >= info.minYear;
+              const yearsLeft = info.minYear - year;
+
+              if (isActive) {
                 return (
-                  <div
-                    key={id}
-                    style={{
-                      fontSize: 11, padding: '5px 7px',
-                      background: 'var(--accent-soft)', borderRadius: 6,
-                      border: '1px solid rgba(31,122,77,.2)',
-                    }}
-                  >
+                  <div key={info.id} style={{
+                    fontSize: 11, padding: '5px 7px',
+                    background: 'var(--accent-soft)', borderRadius: 6,
+                    border: '1px solid rgba(31,122,77,.2)',
+                  }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                       <span>{info.emoji}</span>
                       <span style={{ color: 'var(--accent)', fontWeight: 700 }}>{info.label}</span>
@@ -166,10 +165,45 @@ export default function LeftSidebar({ onOpenModal }) {
                     <div style={{ fontSize: 9, color: 'var(--muted)', marginTop: 2, lineHeight: 1.3 }}>{info.desc}</div>
                   </div>
                 );
-              })}
-            </div>
+              }
+
+              if (!isAvailable) {
+                return (
+                  <div key={info.id} style={{
+                    fontSize: 11, padding: '5px 7px',
+                    background: 'var(--surface2)', borderRadius: 6,
+                    border: '1px solid var(--border)',
+                    opacity: 0.4,
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                      <span style={{ filter: 'grayscale(1)' }}>{info.emoji}</span>
+                      <span style={{ color: 'var(--muted)', fontWeight: 700 }}>{info.label}</span>
+                      <span style={{ marginLeft: 'auto', fontSize: 9, color: 'var(--muted)' }}>an {info.minYear}</span>
+                    </div>
+                    <div style={{ fontSize: 9, color: 'var(--muted)', marginTop: 2, lineHeight: 1.3 }}>{info.desc}</div>
+                  </div>
+                );
+              }
+
+              // Available but not yet met
+              return (
+                <div key={info.id} style={{
+                  fontSize: 11, padding: '5px 7px',
+                  background: 'var(--surface2)', borderRadius: 6,
+                  border: '1px dashed var(--border)',
+                  opacity: 0.7,
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <span style={{ filter: 'grayscale(0.7)' }}>{info.emoji}</span>
+                    <span style={{ color: 'var(--muted)', fontWeight: 700 }}>{info.label}</span>
+                    <span style={{ marginLeft: 'auto', fontSize: 9, color: 'var(--muted)' }}>🔒</span>
+                  </div>
+                  <div style={{ fontSize: 9, color: 'var(--muted)', marginTop: 2, lineHeight: 1.3 }}>{info.desc}</div>
+                </div>
+              );
+            })}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

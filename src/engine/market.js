@@ -104,20 +104,39 @@ function generateExceptionalListing(cycle) {
 
 /**
  * Generate a fresh set of market listings.
+ * Always appends locked teaser listings when the player lacks the contact,
+ * so they're visible but blurred in the UI to give motivation.
+ *
  * @param {string} cycle           economic cycle
  * @param {number} count           number of standard listings
- * @param {number} offMarketCount  off-market listings (notaire)
- * @param {number} exceptionalCount exceptional >50M€ listings (chasseur)
+ * @param {number} offMarketCount  unlocked off-market listings (notaire); 0 = no notaire
+ * @param {number} exceptionalCount unlocked exceptional listings (chasseur); 0 = no chasseur
  * @returns {object[]}
  */
 export function generateMarketListings(cycle = 'neutre', count = 6, offMarketCount = 0, exceptionalCount = 0) {
   const listings = [];
   for (let i = 0; i < count; i++) listings.push(generateListing(cycle));
+
+  // Off-market (notaire): real unlocked listings, then locked teasers if none
   for (let i = 0; i < offMarketCount; i++) listings.push(generateOffMarketListing(cycle));
+  if (offMarketCount === 0) {
+    for (let i = 0; i < 2; i++) {
+      const l = generateOffMarketListing(cycle);
+      l.locked = 'notaire';
+      listings.push(l);
+    }
+  }
+
+  // Exceptional (chasseur): real unlocked listings, then 1 locked teaser if none
   for (let i = 0; i < exceptionalCount; i++) {
     const l = generateExceptionalListing(cycle);
     if (l) listings.push(l);
   }
+  if (exceptionalCount === 0) {
+    const l = generateExceptionalListing(cycle);
+    if (l) { l.locked = 'chasseur_exception'; listings.push(l); }
+  }
+
   return listings;
 }
 

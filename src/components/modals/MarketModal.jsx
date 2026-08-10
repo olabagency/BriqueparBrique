@@ -227,7 +227,11 @@ export default function MarketModal({ onClose }) {
   const hasAgent    = (state.contacts ?? []).includes('agent_immo');
   const hasChasseur = (state.contacts ?? []).includes('chasseur_exception');
 
-  const filtered = marketListings.filter(l => {
+  // Locked teasers are shown separately, always visible regardless of filters
+  const lockedListings = marketListings.filter(l => !!l.locked);
+  const activeListings = marketListings.filter(l => !l.locked);
+
+  const filtered = activeListings.filter(l => {
     if (filter && l.type !== filter && l.condition !== filter) return false;
     if (priceTier !== 'all') {
       const tier = PRICE_TIERS.find(t => t.id === priceTier);
@@ -246,7 +250,7 @@ export default function MarketModal({ onClose }) {
   const handleFilterChange = (newFilter) => { setFilter(newFilter); setPage(0); };
   const handleTierChange = (newTier) => { setPriceTier(newTier); setPage(0); };
 
-  const types = [...new Set(marketListings.map(l => l.type))];
+  const types = [...new Set(activeListings.map(l => l.type))];
 
   return (
     <Modal title="🛒 Marché immobilier" onClose={onClose} wide>
@@ -450,6 +454,63 @@ export default function MarketModal({ onClose }) {
           );
         })}
       </div>
+
+      {/* Locked teaser listings — always visible, blurred */}
+      {lockedListings.length > 0 && (
+        <div style={{ marginTop: 4 }}>
+          {/* Group by lock type */}
+          {['notaire', 'chasseur_exception'].map(lockType => {
+            const group = lockedListings.filter(l => l.locked === lockType);
+            if (group.length === 0) return null;
+            const isEx = lockType === 'chasseur_exception';
+            const accentColor = isEx ? '#b8860b' : 'var(--accent)';
+            const label = isEx
+              ? '💎 Biens d\'exception — contact requis'
+              : '🔑 Biens off-market — contact requis';
+            const hint = isEx
+              ? 'Rencontre un Chasseur de biens d\'exception (à partir de l\'an 40) pour débloquer ces propriétés ultra-premium.'
+              : 'Rencontre un Notaire pour accéder aux biens off-market négociés en avant-première.';
+            return (
+              <div key={lockType} style={{ marginBottom: 10 }}>
+                <div style={{
+                  fontSize: 10, fontWeight: 700, color: accentColor,
+                  textTransform: 'uppercase', letterSpacing: '.05em',
+                  marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6,
+                }}>
+                  <span>🔒</span>
+                  <span>{label}</span>
+                </div>
+                <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 8, lineHeight: 1.4 }}>{hint}</div>
+                <div className="market-grid" style={{ opacity: 0.55, filter: 'grayscale(0.6) blur(1.5px)', pointerEvents: 'none', userSelect: 'none' }}>
+                  {group.map(listing => (
+                    <div
+                      key={listing.id}
+                      className="market-grid-card"
+                      style={{
+                        border: `1.5px dashed ${accentColor}44`,
+                        background: isEx
+                          ? 'rgba(218,165,32,.04)'
+                          : 'var(--surface)',
+                      }}
+                    >
+                      <div className="market-grid-card-emoji">{isEx ? '💎' : '🔑'}</div>
+                      <div className="market-grid-card-type">{listing.type}</div>
+                      <div className="market-grid-card-price">{'█'.repeat(6)}</div>
+                      <div className="market-grid-card-meta">📍 {listing.place}</div>
+                      <div className="market-grid-card-meta">
+                        {isEx ? '💎 Exception' : '🔑 Off-market'}
+                      </div>
+                      <button className="market-listing-buy-btn" disabled style={{ marginTop: 'auto' }}>
+                        🔒 Verrouillé
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </Modal>
   );
 }
