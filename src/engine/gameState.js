@@ -37,7 +37,7 @@ export function freshState({ name, companyName, gender, sector, traitId, challen
 
     // Market
     marketListings: [],
-    economicCycle:  'neutre',
+    economicCycle:  (['hausse', 'neutre', 'neutre', 'baisse', 'hausse'])[Math.floor(Math.random() * 5)],
 
     // Rival
     rival: null,

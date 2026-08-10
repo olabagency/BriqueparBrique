@@ -241,11 +241,20 @@ export function appreciateProperties(properties, cycle = 'neutre') {
  */
 export function nextEconomicCycle(current, year = 1) {
   const r = Math.random();
-  if (year >= 15 && r < 0.08) return 'crash';
-  if (r < 0.05) return 'boom';
-  if (r < 0.28) return 'hausse';
-  if (r < 0.55) return 'baisse';
-  return 'neutre';
+  // Late game: higher crash/boom risk
+  if (year >= 15) {
+    if (r < 0.10) return 'crash';
+    if (r < 0.18) return 'boom';
+    if (r < 0.43) return 'hausse';
+    if (r < 0.70) return 'baisse';
+    return 'neutre';
+  }
+  // Early/mid game: neutre reduced from 45% to 20%, more hausse/baisse
+  if (r < 0.04) return 'boom';
+  if (r < 0.34) return 'hausse';
+  if (r < 0.64) return 'baisse';
+  if (r < 0.84) return 'neutre';
+  return current === 'baisse' ? 'crash' : 'hausse'; // momentum continuation
 }
 
 /**
