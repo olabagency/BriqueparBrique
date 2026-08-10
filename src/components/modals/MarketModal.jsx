@@ -340,7 +340,9 @@ export default function MarketModal({ onClose }) {
           const effectivePrice = hasAgent ? Math.round(basePrice * 0.95) : basePrice;
           const minApport = Math.round(effectivePrice * MIN_APPORT_PCT / 100);
           const notaireMin = Math.round(effectivePrice * NOTAIRE_FEES_PCT);
-          const canAffordMin = cash >= minApport + notaireMin && loans.length < MAX_ACTIVE_LOANS;
+          const canAffordCredit = cash >= minApport + notaireMin && loans.length < MAX_ACTIVE_LOANS;
+          const canAffordCash   = cash >= Math.round(effectivePrice * (1 + NOTAIRE_FEES_PCT));
+          const canAffordMin    = canAffordCredit || canAffordCash;
           const condLabel = propertyData.conditionLabels?.[listing.condition] ?? listing.condition;
           const condEmoji = COND_EMOJI[listing.condition] ?? '';
           const isSelected = selectedId === listing.id;
@@ -419,7 +421,7 @@ export default function MarketModal({ onClose }) {
                     {listing.offMarket && !isExceptional && <span style={{ fontSize: 9, color: 'var(--accent)', fontWeight: 700 }}>OFF-MARKET</span>}
                   </div>
                   <div className="market-grid-card-price" style={isExceptional ? { color: '#b8860b' } : {}}>
-                    {listing.offMarket && !isExceptional && <span style={{ textDecoration: 'line-through', opacity: .5, marginRight: 4, fontSize: 11 }}>{fmtCash(basePrice)}</span>}
+                    {listing.offMarket && !isExceptional && effectivePrice < basePrice && <span style={{ textDecoration: 'line-through', opacity: .5, marginRight: 4, fontSize: 11 }}>{fmtCash(basePrice)}</span>}
                     {fmtCash(effectivePrice)}
                   </div>
                   <div className="market-grid-card-meta">📍 {listing.place}</div>

@@ -216,8 +216,17 @@ export async function fetchCombinedLeaderboard() {
       if (!existing || e._source === 'finished') bySession.set(key, e);
     }
 
-    return [...bySession.values()]
-      .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+    // Second dedup: keep best finalVal per player name (catches legacy push() entries)
+    const byName = new Map();
+    for (const e of [...bySession.values()]) {
+      const nameKey = (e.name ?? '').trim().toLowerCase();
+      if (!nameKey) continue;
+      const existing = byName.get(nameKey);
+      if (!existing || (e.finalVal ?? 0) > (existing.finalVal ?? 0)) byName.set(nameKey, e);
+    }
+
+    return [...byName.values()]
+      .sort((a, b) => (b.score ?? b.finalVal ?? 0) - (a.score ?? a.finalVal ?? 0));
   } catch (e) {
     console.warn('fetchCombinedLeaderboard failed:', e.message);
     return null;
