@@ -206,7 +206,8 @@ export function amortizeLoans(loans, cash) {
       const payment = loan.annualPayment ?? loan.totalYearly ?? 0;
       cashDelta -= payment;
       const balance = Math.max(0, (loan.balance ?? loan.remaining ?? loan.loanAmount ?? 0) - payment);
-      return { ...loan, balance, remaining: balance };
+      const yearsRemaining = Math.max(1, (loan.yearsRemaining ?? loan.termYears ?? 20) - 1);
+      return { ...loan, balance, remaining: balance, yearsRemaining };
     })
     .filter((loan) => loan.balance > 0);
 

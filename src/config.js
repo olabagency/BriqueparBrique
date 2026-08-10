@@ -82,10 +82,10 @@ export const GAME_CONFIG = {
   PROPERTY_TAX_RATE: 0.008,   // 0.8 % de la valeur du portefeuille par an
 
   // --- 1. Taux d'intérêt variable (indexé par nb de crédits actifs, 0-based) ---
-  LOAN_RATE_SCALE: [0.020, 0.028, 0.036, 0.046, 0.058, 0.070],
+  LOAN_RATE_SCALE: [0.020, 0.028, 0.036, 0.046, 0.058, 0.070, 0.085, 0.100, 0.120, 0.145, 0.170],
 
   // --- 2. Ratio d'endettement max (LTV) ---
-  MAX_ACTIVE_LOANS: 4,
+  MAX_ACTIVE_LOANS: 10,
   LTV_MAX_RATIO: 0.80,
 
   // --- 4. Impôt sur revenus locatifs ---
