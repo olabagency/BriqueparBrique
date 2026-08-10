@@ -45,6 +45,11 @@ function generateNarrative(report) {
   if ((contacts ?? []).includes('courtier') && courtierSaving > 0) paras.push(`Baptiste Leroux a optimisé tes crédits — ${fmtCash(courtierSaving)} économisés.`);
   if ((contacts ?? []).includes('notaire')) paras.push(`Maître Chauvin t'a donné accès à ${propCount > 0 ? 'plus de' : 'des'} biens off-market.`);
   if ((contacts ?? []).includes('agent_immo')) paras.push(`Sofia Merlo a négocié tes achats à −5 %.`);
+  if ((contacts ?? []).includes('gestionnaire_patrimoine')) paras.push(`Arnaud Vidal a optimisé ton IFI — 20 % de réduction sur ta taxe patrimoniale.`);
+  if ((contacts ?? []).includes('banquier_prive')) paras.push(`Édouard Fontaine garantit des taux préférentiels (−0,5 %) sur tes nouveaux crédits.`);
+  if ((contacts ?? []).includes('architecte_interieur')) paras.push(`Camille Rousseau booste tes rénovations — +15 % sur chaque gain de valeur.`);
+  if ((contacts ?? []).includes('promoteur')) paras.push(`Marc Delacroix t'a reversé ses commissions — +12k€ en trésorerie.`);
+  if ((contacts ?? []).includes('chasseur_exception')) paras.push(`Théodore Kastner surveille le marché ultra-premium pour toi — accès exclusif aux biens >50M€.`);
 
   // Taxes foncières + IR
   if (taxes > 200) paras.push(`🏛️ Les taxes foncières s'élèvent à ${fmtCash(taxes)} — le prix à payer pour un parc de cette envergure.`);

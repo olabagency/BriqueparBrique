@@ -12,10 +12,15 @@ const COND_EMOJI = {
 const MAX_VISIBLE = 10;
 
 const CONTACT_INFO = {
-  agent_immo:       { emoji: '🏡', label: 'Agent immobilier', desc: '−5% sur tous les biens du marché' },
-  courtier:         { emoji: '💳', label: 'Courtier',          desc: 'Économise sur les intérêts chaque année' },
-  expert_comptable: { emoji: '📊', label: 'Expert-comptable', desc: 'Réduit les impôts annuels' },
-  notaire:          { emoji: '📜', label: 'Notaire',           desc: 'Accès aux biens off-market 🔑' },
+  agent_immo:             { emoji: '🏡', label: 'Agent immobilier',         desc: '−5% sur tous les biens du marché' },
+  courtier:               { emoji: '💳', label: 'Courtier',                  desc: 'Économise sur les intérêts chaque année' },
+  expert_comptable:       { emoji: '📊', label: 'Expert-comptable',          desc: 'Réduit les impôts annuels' },
+  notaire:                { emoji: '📜', label: 'Notaire',                   desc: 'Accès aux biens off-market 🔑' },
+  gestionnaire_patrimoine:{ emoji: '📈', label: 'Gestionnaire de patrimoine',desc: '−20% sur l\'IFI annuel' },
+  banquier_prive:         { emoji: '🏦', label: 'Banquier privé',            desc: '−0,5% sur les taux de crédit' },
+  architecte_interieur:   { emoji: '🎨', label: 'Architecte d\'intérieur',   desc: '+15% sur les gains de rénovation' },
+  promoteur:              { emoji: '🏗️', label: 'Promoteur immobilier',      desc: '+12k€/an de commissions partagées' },
+  chasseur_exception:     { emoji: '💎', label: 'Chasseur d\'exception',     desc: 'Accès aux biens >50M€ en exclusivité' },
 };
 
 export default function LeftSidebar({ onOpenModal }) {

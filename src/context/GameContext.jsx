@@ -207,7 +207,10 @@ function pickEvents(state, count = 3) {
 
   // Network contact events — one-time introductions, 30% chance/year after year 3
   if (state.year >= 3) {
-    const unseen = networkEvents.filter(e => e.excludeFlag && !state.flags?.[e.excludeFlag]);
+    const unseen = networkEvents.filter(e =>
+      e.excludeFlag && !state.flags?.[e.excludeFlag] &&
+      (!e.minYear || state.year >= e.minYear)
+    );
     if (unseen.length > 0 && Math.random() < 0.30) {
       result.push({ ...unseen[0], _pool: 'network' });
     }
@@ -367,7 +370,9 @@ function reducer(state, action) {
 
       // 1. Taux variable selon endettement
       const activeLoanCount = (s.loans ?? []).length;
-      const interestRate = LOAN_RATE_SCALE[Math.min(activeLoanCount, LOAN_RATE_SCALE.length - 1)];
+      const baseRate = LOAN_RATE_SCALE[Math.min(activeLoanCount, LOAN_RATE_SCALE.length - 1)];
+      const hasBanquier = (s.contacts ?? []).includes('banquier_prive');
+      const interestRate = hasBanquier ? Math.max(0.005, baseRate - 0.005) : baseRate;
       const loanInfo = calcLoanPayment(effectivePrice, loanRate, interestRate);
       const downPayment = effectivePrice - loanInfo.loanAmount;
 
@@ -479,7 +484,9 @@ function reducer(state, action) {
       if (idx === -1) return s;
       const prop = { ...props[idx] };
       const cost = Math.round((prop.value ?? prop.baseValue ?? 0) * costPct);
-      const gain = Math.round((prop.value ?? prop.baseValue ?? 0) * gainPct);
+      const hasArchitecte = (s.contacts ?? []).includes('architecte_interieur');
+      const effectiveGainPct = hasArchitecte ? gainPct * 1.15 : gainPct;
+      const gain = Math.round((prop.value ?? prop.baseValue ?? 0) * effectiveGainPct);
       s.cash = (s.cash ?? 0) - cost;
       s.currentYearFinance = { ...s.currentYearFinance, renovations: (s.currentYearFinance?.renovations ?? 0) - cost };
       prop.lastRenovationYear = state.year;
@@ -723,10 +730,12 @@ function reducer(state, action) {
     }
 
     case 'REFRESH_MARKET': {
-      const hasNotaire = (state.contacts ?? []).includes('notaire');
+      const hasNotaire  = (state.contacts ?? []).includes('notaire');
+      const hasChasseur = (state.contacts ?? []).includes('chasseur_exception');
+      const exceptionalCount = hasChasseur ? (Math.random() < 0.5 ? 1 : 2) : 0;
       return {
         ...state,
-        marketListings: generateMarketListings(state.economicCycle, 18, hasNotaire ? 6 : 0),
+        marketListings: generateMarketListings(state.economicCycle, 18, hasNotaire ? 6 : 0, exceptionalCount),
       };
     }
 
@@ -824,9 +833,11 @@ function advanceYear(state) {
 
   // IFI progressif (sur la valeur brute du parc)
   const ifiAmount = computeIFI(s.valuation ?? 0);
-  if (ifiAmount > 0) {
-    s.cash = (s.cash ?? 0) - ifiAmount;
-    s.currentYearFinance.ifi = -(ifiAmount);
+  const ifiNet = (s.contacts ?? []).includes('gestionnaire_patrimoine')
+    ? Math.round(ifiAmount * 0.80) : ifiAmount;
+  if (ifiNet > 0) {
+    s.cash = (s.cash ?? 0) - ifiNet;
+    s.currentYearFinance.ifi = -(ifiNet);
   }
 
   // Vieillissement des biens : dégradation après PROPERTY_DEGRADE_YEARS sans rénovation
@@ -921,6 +932,9 @@ function advanceYear(state) {
     const courtierSaving = (s.loans ?? []).length * 3;
     s.cash = (s.cash ?? 0) + courtierSaving;
   }
+  if (contacts.includes('promoteur')) {
+    s.cash = (s.cash ?? 0) + 12;
+  }
 
   s.achievements = checkAchievements(s);
 
@@ -946,8 +960,10 @@ function advanceYear(state) {
     activeLoans: (s.loans ?? []).length,
   };
 
-  const hasNotaire = contacts.includes('notaire');
-  s.marketListings = generateMarketListings(s.economicCycle, 18, hasNotaire ? 6 : 0);
+  const hasNotaire  = contacts.includes('notaire');
+  const hasChasseur = contacts.includes('chasseur_exception');
+  const exCount = hasChasseur ? (Math.random() < 0.5 ? 1 : 2) : 0;
+  s.marketListings = generateMarketListings(s.economicCycle, 18, hasNotaire ? 6 : 0, exCount);
   s.pendingEvents = pickEvents(s, s.eventsPerYear ?? 3);
   s.currentEventIndex = 0;
 

@@ -98,5 +98,135 @@
         "out": "Tu continues seul. Plus de liberté, mais tu paies toujours le prix affiché."
       }
     ]
+  },
+  {
+    "title": "Un gestionnaire de patrimoine te sollicite",
+    "body": "Arnaud Vidal gère les fortunes de familles aisées depuis 20 ans. Spécialiste de l'IFI et des montages patrimoniaux, il peut réduire significativement ta charge fiscale annuelle. Il cherche un nouveau dossier ambitieux.",
+    "excludeFlag": "seen_gestionnaire",
+    "minYear": 30,
+    "choices": [
+      {
+        "label": "Confier ta gestion patrimoniale",
+        "contact": "gestionnaire_patrimoine",
+        "flag": "seen_gestionnaire",
+        "eff": {
+          "cash": -8,
+          "stress": -5
+        },
+        "out": "Arnaud optimise ta structure patrimoniale. Chaque année, il te fait économiser 20 % sur ton IFI — une économie qui devient massive à mesure que ton patrimoine grandit."
+      },
+      {
+        "label": "Gérer seul ta fiscalité",
+        "flag": "seen_gestionnaire",
+        "eff": {
+          "stress": 2
+        },
+        "out": "Tu continues à payer l'IFI au taux plein. La prochaine déclaration sera douloureuse."
+      }
+    ]
+  },
+  {
+    "title": "Un banquier privé te contacte",
+    "body": "Édouard Fontaine dirige la cellule Grandes Fortunes d'une banque privée genevoise. Ses taux préférentiels sont réservés aux patrimoines significatifs. Il a entendu parler de ton parcours.",
+    "excludeFlag": "seen_banquier_prive",
+    "minYear": 30,
+    "choices": [
+      {
+        "label": "Devenir client de la banque privée",
+        "contact": "banquier_prive",
+        "flag": "seen_banquier_prive",
+        "eff": {
+          "cash": -10,
+          "stress": -4
+        },
+        "out": "Édouard te donne accès à des taux de crédit négociés. Chaque nouveau prêt bénéficiera d'un taux réduit de 0,5 % — une économie considérable sur les montants que tu empruntes."
+      },
+      {
+        "label": "Rester avec ta banque habituelle",
+        "flag": "seen_banquier_prive",
+        "eff": {
+          "stress": 1
+        },
+        "out": "Tu conserves ta banque actuelle. L'offre était belle, mais tu préfères l'indépendance."
+      }
+    ]
+  },
+  {
+    "title": "Un architecte d'intérieur te propose ses services",
+    "body": "Camille Rousseau a rénové des hôtels particuliers et des villas de prestige dans toute la France. Son carnet de sous-traitants est exceptionnel et ses rénovations valorisent les biens bien au-delà du marché.",
+    "excludeFlag": "seen_architecte",
+    "minYear": 30,
+    "choices": [
+      {
+        "label": "Travailler avec Camille",
+        "contact": "architecte_interieur",
+        "flag": "seen_architecte",
+        "eff": {
+          "cash": -5,
+          "stress": -3
+        },
+        "out": "Camille intègre ton équipe de rénovation. Ses méthodes et son réseau boostent la valeur créée : +15 % sur chaque gain de rénovation."
+      },
+      {
+        "label": "Continuer avec tes prestataires habituels",
+        "flag": "seen_architecte",
+        "eff": {
+          "stress": 0
+        },
+        "out": "Tu gardes tes artisans. Camille comprend — elle a d'autres dossiers sur le feu."
+      }
+    ]
+  },
+  {
+    "title": "Un promoteur immobilier cherche un partenaire",
+    "body": "Marc Delacroix développe des résidences haut de gamme depuis 15 ans. Il cherche un investisseur sérieux pour co-financer ses projets et partager les bénéfices sur chaque opération réalisée.",
+    "excludeFlag": "seen_promoteur",
+    "minYear": 30,
+    "choices": [
+      {
+        "label": "Entrer en partenariat",
+        "contact": "promoteur",
+        "flag": "seen_promoteur",
+        "eff": {
+          "cash": -12,
+          "stress": -2
+        },
+        "out": "Marc te reverse sa quote-part de commissions chaque année. +12k€ de revenus passifs annuels — son carnet de clients travaille pour toi."
+      },
+      {
+        "label": "Décliner le partenariat",
+        "flag": "seen_promoteur",
+        "eff": {
+          "stress": 0
+        },
+        "out": "Tu n'entres pas dans ce partenariat. Marc trouvera un autre associé."
+      }
+    ]
+  },
+  {
+    "title": "Un chasseur de biens d'exception te contacte",
+    "body": "Théodore Kastner travaille discrètement pour les 0,1 % les plus fortunés. Il déniche des propriétés exceptionnelles — palais, îles privées, penthouses signés — avant même qu'elles existent sur le marché. Il ne collabore qu'avec des fortunes établies.",
+    "excludeFlag": "seen_chasseur_exception",
+    "minYear": 40,
+    "choices": [
+      {
+        "label": "Rejoindre son cercle très fermé",
+        "contact": "chasseur_exception",
+        "flag": "seen_chasseur_exception",
+        "eff": {
+          "cash": -25,
+          "stress": -8
+        },
+        "out": "Théodore t'ouvre l'accès à un marché invisible. Chaque année, 1 à 2 biens d'exception — valorisés à plus de 50M€ — apparaissent discrètement dans ton marché immobilier."
+      },
+      {
+        "label": "Décliner — ce niveau ne t'intéresse pas",
+        "flag": "seen_chasseur_exception",
+        "eff": {
+          "stress": 0
+        },
+        "out": "Théodore disparaît aussi discrètement qu'il est apparu. Ces opportunités ne reviennent pas."
+      }
+    ]
   }
 ]

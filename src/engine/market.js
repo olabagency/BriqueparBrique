@@ -63,20 +63,60 @@ function generateOffMarketListing(cycle) {
   return listing;
 }
 
+const EXCEPTIONAL_PLACES = [
+  'Monaco Port Hercule',
+  'Cap d\'Antibes prestige',
+  'Saint-Jean-Cap-Ferrat',
+  'avenue Montaigne Paris 8e',
+  'Courchevel 1850 Domaine',
+  'Saint-Tropez Pampelonne',
+  'île de Ré prestige',
+  'Megève Grand Hôtel',
+  'parc Monceau Paris 8e',
+  'Cannes Croisette privée',
+];
+
+function generateExceptionalListing(cycle) {
+  const types = propertyData.exceptionalTypes ?? [];
+  if (types.length === 0) return null;
+  const type  = types[randInt(0, types.length - 1)];
+  const place = EXCEPTIONAL_PLACES[randInt(0, EXCEPTIONAL_PLACES.length - 1)];
+
+  const range = propertyData.baseValues[type];
+  if (!range) return null;
+  const base      = randInt(range.min, range.max);
+  const cycleMult = CYCLE_MULT[cycle] ?? 1;
+  const price     = Math.round(base * cycleMult);
+
+  const energyClass = Math.random() < 0.65 ? 'A' : 'B';
+
+  return {
+    id:         crypto.randomUUID(),
+    type,
+    place,
+    condition:  'standing',
+    price,
+    baseValue:  price,
+    energyClass,
+    exceptional: true,
+  };
+}
+
 /**
  * Generate a fresh set of market listings.
- * @param {string} cycle         economic cycle
- * @param {number} count         number of listings to generate
- * @param {number} offMarketCount extra off-market listings (notaire)
+ * @param {string} cycle           economic cycle
+ * @param {number} count           number of standard listings
+ * @param {number} offMarketCount  off-market listings (notaire)
+ * @param {number} exceptionalCount exceptional >50M€ listings (chasseur)
  * @returns {object[]}
  */
-export function generateMarketListings(cycle = 'neutre', count = 6, offMarketCount = 0) {
+export function generateMarketListings(cycle = 'neutre', count = 6, offMarketCount = 0, exceptionalCount = 0) {
   const listings = [];
-  for (let i = 0; i < count; i++) {
-    listings.push(generateListing(cycle));
-  }
-  for (let i = 0; i < offMarketCount; i++) {
-    listings.push(generateOffMarketListing(cycle));
+  for (let i = 0; i < count; i++) listings.push(generateListing(cycle));
+  for (let i = 0; i < offMarketCount; i++) listings.push(generateOffMarketListing(cycle));
+  for (let i = 0; i < exceptionalCount; i++) {
+    const l = generateExceptionalListing(cycle);
+    if (l) listings.push(l);
   }
   return listings;
 }

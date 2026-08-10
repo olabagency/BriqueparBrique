@@ -210,7 +210,8 @@ const PRICE_TIERS = [
   { id: 'standard',  label: '100–300 k€',     min: 100,  max: 300,  unlock: 100  },
   { id: 'premium',   label: '300–700 k€',     min: 300,  max: 700,  unlock: 300  },
   { id: 'exception', label: '700k–1M€',       min: 700,  max: 1000, unlock: 700  },
-  { id: 'million',   label: '1M€+',           min: 1000,             unlock: 2000 },
+  { id: 'million',   label: '1M€+',           min: 1000, max: 50000, unlock: 2000 },
+  { id: 'ultra',     label: '💎 >50M€',       min: 50000,            unlock: 0, requiresContact: 'chasseur_exception' },
 ];
 
 const PAGE_SIZE = 6;
@@ -223,7 +224,8 @@ export default function MarketModal({ onClose }) {
   const [priceTier, setPriceTier] = useState('all');
   const [page, setPage] = useState(0);
 
-  const hasAgent = (state.contacts ?? []).includes('agent_immo');
+  const hasAgent    = (state.contacts ?? []).includes('agent_immo');
+  const hasChasseur = (state.contacts ?? []).includes('chasseur_exception');
 
   const filtered = marketListings.filter(l => {
     if (filter && l.type !== filter && l.condition !== filter) return false;
@@ -269,6 +271,9 @@ export default function MarketModal({ onClose }) {
         <div className="market-filters">
           <span style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 700, alignSelf: 'center', flexShrink: 0, textTransform: 'uppercase', letterSpacing: '.05em' }}>Prix</span>
           {PRICE_TIERS.map(tier => {
+            const contactRequired = tier.requiresContact;
+            const hasContact = !contactRequired || (state.contacts ?? []).includes(contactRequired);
+            if (contactRequired && !hasContact) return null;
             const unlocked = valuation >= tier.unlock;
             const active = priceTier === tier.id;
             return (
@@ -278,7 +283,15 @@ export default function MarketModal({ onClose }) {
                 onClick={() => unlocked && handleTierChange(active ? 'all' : tier.id)}
                 disabled={!unlocked}
                 title={!unlocked ? `Débloqué à ${tier.unlock} k€ de patrimoine` : undefined}
-                style={{ opacity: unlocked ? 1 : 0.4, cursor: unlocked ? 'pointer' : 'not-allowed' }}
+                style={{
+                  opacity: unlocked ? 1 : 0.4,
+                  cursor: unlocked ? 'pointer' : 'not-allowed',
+                  ...(tier.id === 'ultra' ? {
+                    background: active ? 'linear-gradient(135deg,#b8860b,#ffd700)' : 'rgba(218,165,32,.12)',
+                    border: '1px solid #b8860b',
+                    color: active ? '#fff' : '#b8860b',
+                  } : {}),
+                }}
               >
                 {tier.label}{!unlocked && ' 🔒'}
               </button>
@@ -330,20 +343,39 @@ export default function MarketModal({ onClose }) {
           const emoji = TYPE_EMOJI[listing.type] ?? '🏠';
           const dpeClass = listing.energyClass ?? null;
 
+          const isExceptional = !!listing.exceptional;
+
           return (
-            <div className={`market-grid-card${isSelected ? ' market-grid-card--selected' : ''}`} key={listing.id}>
+            <div
+              className={`market-grid-card${isSelected ? ' market-grid-card--selected' : ''}${isExceptional ? ' market-grid-card--exceptional' : ''}`}
+              key={listing.id}
+              style={isExceptional ? {
+                border: '1.5px solid #b8860b',
+                background: 'linear-gradient(145deg, rgba(218,165,32,.06) 0%, var(--surface) 60%)',
+                boxShadow: '0 0 12px rgba(184,134,11,.18)',
+              } : {}}
+            >
               {isSelected ? (
                 <>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-                    <span style={{ fontSize: 28 }}>{emoji}</span>
+                    <span style={{ fontSize: 28 }}>{isExceptional ? '💎' : emoji}</span>
                     <div>
                       <div style={{ fontWeight: 700, fontSize: 13 }}>{listing.type}</div>
                       <div style={{ fontSize: 11, color: 'var(--muted)' }}>📍 {listing.place} · {condLabel}</div>
                     </div>
-                    <div style={{ marginLeft: 'auto', fontWeight: 800, fontFamily: 'monospace', color: 'var(--accent)' }}>
+                    <div style={{ marginLeft: 'auto', fontWeight: 800, fontFamily: 'monospace', color: isExceptional ? '#b8860b' : 'var(--accent)' }}>
                       {fmtCash(effectivePrice)}
                     </div>
                   </div>
+                  {isExceptional && (
+                    <div style={{
+                      padding: '6px 10px', marginBottom: 8, borderRadius: 8,
+                      background: 'rgba(239,68,68,.07)', border: '1px solid rgba(239,68,68,.25)',
+                      fontSize: 10, color: 'var(--red)',
+                    }}>
+                      ⚠️ <strong>IFI massif</strong> — ce bien génèrera une taxe patrimoniale annuelle très élevée (1,8% sur la valeur brute).
+                    </div>
+                  )}
                   <PurchaseConfigurator
                     listing={listing}
                     effectivePrice={effectivePrice}
@@ -357,8 +389,8 @@ export default function MarketModal({ onClose }) {
               ) : (
                 <>
                   <div style={{ position: 'relative' }}>
-                    <div className="market-grid-card-emoji">{emoji}</div>
-                    {listing.offMarket && (
+                    <div className="market-grid-card-emoji">{isExceptional ? '💎' : emoji}</div>
+                    {listing.offMarket && !isExceptional && (
                       <span
                         data-tip="Bien off-market : négocié en direct via ton notaire, prix inférieur au marché"
                         style={{
@@ -369,13 +401,21 @@ export default function MarketModal({ onClose }) {
                         }}
                       >🔑</span>
                     )}
+                    {isExceptional && (
+                      <span style={{
+                        position: 'absolute', top: 0, right: 0,
+                        fontSize: 9, fontWeight: 800, cursor: 'default',
+                        background: 'linear-gradient(135deg,#b8860b,#ffd700)',
+                        color: '#fff', borderRadius: 6, padding: '2px 5px', letterSpacing: '.04em',
+                      }}>EXCEPTION</span>
+                    )}
                   </div>
                   <div className="market-grid-card-type" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
-                    {listing.type}
-                    {listing.offMarket && <span style={{ fontSize: 9, color: 'var(--accent)', fontWeight: 700 }}>OFF-MARKET</span>}
+                    <span style={isExceptional ? { color: '#b8860b' } : {}}>{listing.type}</span>
+                    {listing.offMarket && !isExceptional && <span style={{ fontSize: 9, color: 'var(--accent)', fontWeight: 700 }}>OFF-MARKET</span>}
                   </div>
-                  <div className="market-grid-card-price">
-                    {listing.offMarket && <span style={{ textDecoration: 'line-through', opacity: .5, marginRight: 4, fontSize: 11 }}>{fmtCash(basePrice)}</span>}
+                  <div className="market-grid-card-price" style={isExceptional ? { color: '#b8860b' } : {}}>
+                    {listing.offMarket && !isExceptional && <span style={{ textDecoration: 'line-through', opacity: .5, marginRight: 4, fontSize: 11 }}>{fmtCash(basePrice)}</span>}
                     {fmtCash(effectivePrice)}
                   </div>
                   <div className="market-grid-card-meta">📍 {listing.place}</div>
@@ -391,9 +431,14 @@ export default function MarketModal({ onClose }) {
                     )}
                     {hasAgent && <span style={{ color: 'var(--accent)', fontWeight: 700 }}>−5%</span>}
                   </div>
+                  {isExceptional && (
+                    <div style={{ fontSize: 9, color: 'var(--red)', textAlign: 'center', marginTop: 2 }}>
+                      ⚠️ IFI très élevé
+                    </div>
+                  )}
                   <button
                     className="market-listing-buy-btn"
-                    style={{ marginTop: 'auto' }}
+                    style={{ marginTop: 'auto', ...(isExceptional ? { background: 'linear-gradient(135deg,#b8860b,#ffd700)', color: '#fff', border: 'none' } : {}) }}
                     disabled={!canAffordMin}
                     onClick={() => setSelectedId(listing.id)}
                   >

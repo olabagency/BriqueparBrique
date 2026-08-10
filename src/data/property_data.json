@@ -1237,6 +1237,48 @@
     "Villa Landaise Forêt de Pins": {
       "min": 260,
       "max": 560
+    },
+    "Palais Monégasque Front de Mer": {
+      "min": 100000,
+      "max": 280000
+    },
+    "Villa d'Exception Cap d'Antibes": {
+      "min": 55000,
+      "max": 130000
+    },
+    "Hôtel Particulier Paris Prestige": {
+      "min": 60000,
+      "max": 180000
+    },
+    "Île Privée Méditerranée Aménagée": {
+      "min": 80000,
+      "max": 200000
+    },
+    "Château Bordelais Premier Grand Cru Classé": {
+      "min": 70000,
+      "max": 180000
+    },
+    "Penthouse Signature Tour Eiffel": {
+      "min": 60000,
+      "max": 150000
+    },
+    "Domaine Provençal d'Exception": {
+      "min": 50000,
+      "max": 120000
+    },
+    "Résidence d'Exception Côte d'Azur": {
+      "min": 90000,
+      "max": 300000
     }
-  }
+  },
+  "exceptionalTypes": [
+    "Palais Monégasque Front de Mer",
+    "Villa d'Exception Cap d'Antibes",
+    "Hôtel Particulier Paris Prestige",
+    "Île Privée Méditerranée Aménagée",
+    "Château Bordelais Premier Grand Cru Classé",
+    "Penthouse Signature Tour Eiffel",
+    "Domaine Provençal d'Exception",
+    "Résidence d'Exception Côte d'Azur"
+  ]
 }
