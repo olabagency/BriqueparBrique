@@ -228,5 +228,31 @@
         "out": "Théodore disparaît aussi discrètement qu'il est apparu. Ces opportunités ne reviennent pas."
       }
     ]
+  },
+  {
+    "title": "Un marchand d'objets d'exception te contacte",
+    "body": "Sébastien de Morlay est l'un des rares négociants à traiter des pièces valant plusieurs dizaines de millions. Voitures de compétition historiques, toiles de maîtres non répertoriées, bijoux de couronne — son carnet donne accès à un marché totalement invisible. Il ne collabore qu'avec des fortunes installées depuis des décennies.",
+    "excludeFlag": "seen_marchand_exception",
+    "minYear": 45,
+    "choices": [
+      {
+        "label": "Intégrer son cercle ultra-privé",
+        "contact": "marchand_exception",
+        "flag": "seen_marchand_exception",
+        "eff": {
+          "cash": -20,
+          "stress": -10
+        },
+        "out": "Sébastien de Morlay t'ouvre son catalogue secret. Des objets hors de portée du commun des mortels apparaissent désormais dans ta boutique — voitures légendaires, œuvres non répertoriées, joyaux de collection."
+      },
+      {
+        "label": "Décliner — ce niveau ne te concerne pas",
+        "flag": "seen_marchand_exception",
+        "eff": {
+          "stress": 0
+        },
+        "out": "Sébastien comprend et disparaît. Son catalogue restera inaccessible."
+      }
+    ]
   }
 ]

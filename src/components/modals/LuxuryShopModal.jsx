@@ -21,7 +21,7 @@ function applyOverrides(items, overrides) {
 
 export default function LuxuryShopModal({ onClose }) {
   const { state, buyLuxury, sellLuxury } = useGame();
-  const { personalCash = 0, luxuryItems: owned = [] } = state;
+  const { personalCash = 0, luxuryItems: owned = [], contacts = [] } = state;
   const [filterCat, setFilterCat] = useState('Toutes');
   const [tab, setTab] = useState('shop');
   const [overrides, setOverrides] = useState({});
@@ -31,9 +31,12 @@ export default function LuxuryShopModal({ onClose }) {
     return unsub;
   }, []);
 
+  const hasMarchand = contacts.includes('marchand_exception');
   const catalog = applyOverrides(rawCatalog, overrides);
   const ownedIds = owned.map(i => i.id);
-  const filtered = filterCat === 'Toutes' ? catalog : catalog.filter(i => i.category === filterCat);
+  const allFiltered = filterCat === 'Toutes' ? catalog : catalog.filter(i => i.category === filterCat);
+  const filtered = allFiltered.filter(i => !i.locked || hasMarchand);
+  const lockedFiltered = hasMarchand ? [] : allFiltered.filter(i => !!i.locked);
 
   return (
     <Modal title="✨ Boutique luxe" onClose={onClose} wide>
@@ -152,6 +155,42 @@ export default function LuxuryShopModal({ onClose }) {
               );
             })}
           </div>
+
+          {lockedFiltered.length > 0 && (
+            <div style={{ marginTop: 18 }}>
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10,
+                padding: '8px 12px',
+                background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+                borderRadius: 10, border: '1px solid #b8860b',
+              }}>
+                <span style={{ fontSize: 16 }}>👑</span>
+                <div>
+                  <div style={{ fontSize: 11, fontWeight: 800, color: '#b8860b', letterSpacing: '.08em', textTransform: 'uppercase' }}>Collection d'exception</div>
+                  <div style={{ fontSize: 10, color: '#888', marginTop: 1 }}>Accès réservé · Déblocable via Sébastien de Morlay (an 45)</div>
+                </div>
+                <span style={{ marginLeft: 'auto', fontSize: 18 }}>🔒</span>
+              </div>
+              <div
+                className="luxury-grid"
+                style={{ filter: 'blur(3px) grayscale(0.7)', opacity: 0.55, pointerEvents: 'none', userSelect: 'none' }}
+              >
+                {lockedFiltered.map(item => (
+                  <div className="luxury-card" key={item.id} style={{ border: '1.5px solid #b8860b' }}>
+                    <div className="luxury-card-icon">{item.icon}</div>
+                    <div className="luxury-card-body">
+                      <div className="luxury-card-name">{item.name}</div>
+                      <div className="luxury-card-brand">{item.brand}</div>
+                      <div className="luxury-card-desc">{'█'.repeat(Math.min(item.description?.length ?? 30, 40))}</div>
+                    </div>
+                    <button className="luxury-card-buy" disabled style={{ background: '#b8860b' }}>
+                      🔒 {fmtCash(item.price)}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </>
       )}
     </Modal>

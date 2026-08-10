@@ -21,6 +21,7 @@ const ALL_CONTACTS = [
   { id: 'architecte_interieur',   emoji: '🎨', label: 'Architecte d\'intérieur',    desc: '+15% sur les gains de rénovation',        minYear: 30 },
   { id: 'promoteur',              emoji: '🏗️', label: 'Promoteur immobilier',       desc: '+12k€/an de revenus passifs',             minYear: 30 },
   { id: 'chasseur_exception',     emoji: '💎', label: 'Chasseur d\'exception',      desc: 'Accès aux biens >50M€ en exclusivité',    minYear: 40 },
+  { id: 'marchand_exception',     emoji: '👑', label: 'Marchand d\'exception',       desc: 'Boutique luxe ultra-premium débloquée',   minYear: 45 },
 ];
 
 export default function LeftSidebar({ onOpenModal }) {

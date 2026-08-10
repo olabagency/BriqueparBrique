@@ -50,6 +50,7 @@ function generateNarrative(report) {
   if ((contacts ?? []).includes('architecte_interieur')) paras.push(`Camille Rousseau booste tes rénovations — +15 % sur chaque gain de valeur.`);
   if ((contacts ?? []).includes('promoteur')) paras.push(`Marc Delacroix t'a reversé ses commissions — +12k€ en trésorerie.`);
   if ((contacts ?? []).includes('chasseur_exception')) paras.push(`Théodore Kastner surveille le marché ultra-premium pour toi — accès exclusif aux biens >50M€.`);
+  if ((contacts ?? []).includes('marchand_exception')) paras.push(`👑 Sébastien de Morlay t'a ouvert son catalogue secret — des pièces à plusieurs dizaines de millions accessibles en boutique.`);
 
   // Taxes foncières + IR
   if (taxes > 200) paras.push(`🏛️ Les taxes foncières s'élèvent à ${fmtCash(taxes)} — le prix à payer pour un parc de cette envergure.`);
